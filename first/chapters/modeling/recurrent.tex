@@ -1,0 +1,251 @@
+%% TODO 
+%% Elman's temporal XOR example: https://onlinelibrary.wiley.com/doi/epdf/10.1207/s15516709cog1402_1
+%% Minsky's theorem  https://www.dlsi.ua.es/~mlf/nnafmc/pbook/node16.html
+%% Siegelmann and Sontag results: https://reader.elsevier.com/reader/sd/pii/089396599190080F?token=3BB6C8998A5747F205F88497E16A35E12668BE9E0961223F1B6DF756D111BD3833E569B62DB794C103A71A11C2496066&originRegion=eu-west-1&originCreation=20221115155259
+%% https://www.sciencedirect.com/science/article/pii/S0022000085710136
+
+
+\subsection{Recurrent Neural Networks} \label{sec:rnns}
+Natural languages are beyond the descriptive power of regular language. Thus, finite-state models are not sufficient for natural language modeling.
+Now, we turn to a class of models that is more powerful than finite-state models. 
+
+Recurrent neural networks (RNNs) have been used to process sequential data and time series. 
+In this subsection, we focus on their application to modeling languages.
+
+The most unique characteristic of RNNs is that they take previous outputs as input. Such recurrent formulation endows them with the property of ``unbounded dependency'' (thereby ``unbounded memory'') on the input data, distinguishing them from the Markovian \ngram{} models. 
+
+
+This recurrent formulation requires sharing parameters through time --- by repeatedly applying the same update rule to the hidden state of the model.
+The update rule of RNNs is called \defn{dynamics map}:
+
+\begin{definition}
+A \defn{dynamics map} $f$ is a function of the type $\Rd \times \alphabet \rightarrow \Rd$. 
+\end{definition}
+
+\begin{definition}\label{def:recurrent-neural-language-model}
+A $d$-dimensional \defn{recurrent neural language model} over alphabet $\alphabet$ with dynamics map $f$ is a distribution of the form
+\begin{equation}
+p(\vy) \defeq \prod_{t=1}^T p(y_t \mid \vy_{<t}) = \prod_{t=1}^T \frac{\exp\left(\embedSymt^{\top} \vht + \biasSymt \right) }{\sum_{y' \in \eosalphabet} \exp\left(\embedSymPrime^{\top} \vht+ \biasSymPrime\right)} 
+\end{equation}
+where $\eosalphabet \defeq \alphabet \cup \{\eos\}$ and $\embedSymt, \vht \in \Rd$ and $\biasSymt \in \R$.
+The hidden state is recurrently updated according to the dynamics map as follows:
+\begin{align}
+    \vhzero &= \mathbf{0} \\
+    \vht    &= f(\vhtminus, y_{t-1})
+\end{align}
+\end{definition}
+
+
+
+
+\subsection{General Results on Tightness}
+We now prove general results on the tightness of recurrent neural language models, as defined in \Cref{def:recurrent-neural-language-model}.
+The analysis is straightforward and is a translation of the generic results on tightness to the case of the norm of $\vht$.
+\begin{theorem}
+A recurrent neural language model is tight if and only if $||\vht||_2 \leq \cdots$.
+\end{theorem}
+
+
+\subsection{Elman and Jordan Networks}
+Next, we introduce two of the simplest recurrent neural language models.
+We term them Elman language models and Jordan language models, as each is inspired by architectures proposed by \citet{Elman1990} and \citet{Jordan1986}, respectively. 
+The definitions we offer are slightly different than those found in the original works---most notably, both Elman and Jordan construct neural networks for transduction, rather than language modeling
+
+\begin{definition}[Elman Network]
+An \defn{Elman language model} with non-linearity $\sigma$ is a $d$-valued recurrent neural language model over an alphabet $\alphabet$ with the following dynamics map\looseness=-1
+\begin{align}
+\vht &= \sigmoid\left(\rmU \mathhl{\vhtminus} + \rmW \embedSymtminus + \biasVech \right) \\
+\vot &= \sigmoid\left(\rmV \vhtminus + \biasVecy \right)
+\end{align}
+where the $\sigmoid$ is applied element-wise and $\rmU,\rmV,\rmW \in \R^{d \times d}$. 
+\end{definition}
+
+\begin{definition}[Jordan Network]
+A \defn{Jordan language model} with non-linearity $\sigma$ is a $d$-valued recurrent neural language model over an alphabet $\alphabet$ with the following dynamics map\looseness=-1
+\begin{align}
+\vht &= \sigmoid\left(\rmU \mathhl{\votminus} + \rmW \embedSymtminus + \biasVech \right) \\
+\vot &= \sigmoid\left(\rmV \vhtminus + \biasVecy \right)
+\end{align}
+where the $\sigmoid$ is applied element-wise and $\rmU,\rmV,\rmW \in \R^{d \times d}$. 
+\end{definition}
+
+\begin{definition}
+The \defn{Heaviside} function is defined as
+\begin{equation}\label{eq:heaviside}
+H(x) = \begin{cases} 1 & \ifcondition x > 0 \\
+0 & \otherwisecondition
+\end{cases}
+\end{equation}
+\end{definition}
+
+
+\begin{lemma}
+The distribution represented by a $d$-dimensional Jordan network with a Heaviside non-linearity $H$ is regular.
+\end{lemma}
+\begin{proof}
+We construct a deterministic probabilistic FSA that represents the same distribution.
+First, we note that, by the definition of the Heaviside function (\Cref{eq:heaviside}) every $\vht \in \{0, 1\}^d$. 
+We construct a set of $2^d$ states $\states$, each of which is associated with a binary vector. 
+Now, for every state $q \in \states$, add a transition $q \xrightarrow[]{a / w} q'$ where $q' = f(q, w)$ and 
+\ryan{add definition}
+\end{proof}
+
+\begin{example}
+\ryan{Tianyu, can you write down a simple example?}
+\end{example}
+
+\begin{example}
+\ryan{Tianyu, can you write down a more complicated example? I want this example to express a distribution that would require an exponential number of states for a PFSA.}
+\end{example}
+
+\begin{lemma}
+Any regular language can be encoded as an Jordan network.
+\end{lemma}
+
+
+\begin{theorem}
+Simple recurrent neural language models are as expressed as probabilistic FSAs.\ryan{I think we might need deterministic for this to be true}
+\end{theorem}
+ 
+
+\paragraph{A Motivating Example.}
+The need for memory in neural networks arises especially when we are dealing with temporal problems. The recurrence enables the neural networks to model patterns that repeats overtime. 
+
+\begin{example}[Relative temporal relations]
+    
+    
+\end{example}
+\ryan{Tianyu, can you add the XOR example here.}
+
+\paragraph{Tightness of Elman Networks.}
+\Ryan{Example: Exhibit a non-tight language model}
+
+\Ryan{Theorem: Any Elman network with a bounded activation function is tight}
+
+
+\subsubsection{Analysis: The Vanishing/Exploding Gradient Problem}
+The vanishing and exploding gradient are common problems in training RNNs with backpropagation. 
+
+Taking the Elman language model as an example, 
+recall the hidden state update of recurrent neural networks:
+\begin{align}
+    \vhzero &= \mathbf{0} \\
+    \vht    &= \func(\vhtminus, y_{t-1}) = \sigmoid \left( \rmU \vhtminus + \rmW \embedSymtminus + \biasVech \right)
+\end{align}
+
+The step-wise gradient for one step of hidden state update is:
+\begin{align}
+    \frac{\partial \vht}{\partial \vhtminus} &= \frac{\partial \func(\vhtminus, y_{t-1})}{\partial \vhtminus} \\
+    &= \diag{ \sigmoid^\prime \left( \rmU \vhtminus + \rmW \embedSymtminus + \biasVech \right)} \rmU
+\end{align}
+
+The problems appear when the input sequence grows longer. 
+By applying the chain rule, we obtain the effect of $\vhone$ on $\vhT$: 
+\begin{align}
+    \frac{\partial \vhT}{\partial \vhone} 
+    &= \prod_{t=1}^{T} \frac{\partial \vht}{\partial \vhtminus} \\
+    &= \prod_{t=1}^{T} \diag{\sigmoid^\prime \left( \rmU \vhtminus + \rmW \embedSymtminus + \biasVech \right)} \rmU
+\end{align}
+
+We denote $\norm{\rmU}$ as the $\normltwo$ norm of $\rmU$. 
+The vanishing gradient problem appears when $\norm{\rmU} < 1$:
+\begin{align}
+   \norm{\frac{\partial \vhT}{\partial \vhone}}
+    &\le \prod_{t=1}^{T} \norm{\frac{\partial \vht}{\partial \vhtminus}} \\
+    &\le \norm{\rmU}^T \prod_{t=1}^{T} \norm{\diag{\sigmoid^\prime \left( \rmU \vhtminus + \rmW \embedSymtminus + \biasVech \right)}} 
+\end{align}
+
+$\norm{\rmU} < 1$ is the \emph{sufficient} condition for vanishing gradient. The term $\norm{\rmU}^T$ exponentially shrinks to $0$ when $\norm{\rmU} < 1$, which results in a vanishing gradient. 
+
+
+The proof is a bit different for exploding gradient. A weaker result can be derived by inverting the proof for vanishing gradient:
+
+$\norm{\rmU} \geq 1$ is the \emph{necessary} condition for exploding gradient. Since otherwise, the gradient would vanish. 
+
+
+\paragraph{Why is vanishing gradient a problem?} 
+Gradient signals are lost for faraway inputs, since they are far smaller in scale than the signals for nearby inputs. 
+Gradient signals could also be rounded off to zero due to the finite float precision. 
+
+\paragraph{Why is exploding gradient a problem?} 
+A gradient that is too large in scale could lead to $\textnormal{NaN}$ updates when training an RNN. 
+
+
+The vanishing/exploding gradient problem can be alleviated by some tricks during training. 
+\begin{itemize}
+    \item Gradient clipping. Clipping gradients to some customized range. 
+    \item Gradient normalization. Normalizing gradients by their norm.
+    \item \ldots
+\end{itemize}
+
+
+It also motivates some RNN variants with more stable gradients on long sequence inputs, such as LSTM and GRU. 
+
+
+\subsubsection{Analysis: Thresholding Activations}
+One fruitful manner to analyze the expressivity of recurrent neural networks is by making simplifying assumptions on the non-linear activations.
+A common simplification that goes back to the 1960s is the thresholding sigmoid, which we define below.
+\begin{definition}[Thresholding Sigmoid]
+$$
+    \sigma_{\textnormal{T}}(x)=
+    \begin{cases}
+    0 &  \ifcondition x  \le 0 \\
+    1 &  \ifcondition x  > 0
+    \end{cases}
+$$
+\end{definition}
+In words, the thresholding function maps every real value to a $0$ or to a $1$, depending on whether it is greater than or less than zero. 
+
+Here we give the definition of the thresholding Elman network, 
+\begin{definition}[Thresholding Elman Network]
+A \defn{Thresholding Elman network} is an Elman network with thresholding sigmoid $ \sigma_{\textnormal{T}}$ as the non-linearity. 
+\end{definition}
+
+We now give a variant of a classic theorem originally due to \citet{Minsky1954} but with a probabilistic twist.
+
+
+\begin{theorem}
+Let $\wfsa = \wfsatuple$\ryan{Insert definition} be a tight probabilistic deterministic finite-state automaton.
+Then, there exists a thresholding Elman network\ryan{This should be introduced} with a hidden state of size $|\alphabet||\states|$ that encodes the same distribution as $\wfsa$.
+\end{theorem}
+\begin{proof}
+We give proof by construction.
+Each hidden state lives in $\vh \in \mathbb{B}^{|\alphabet||\states|}$. \ryan{macro the boolean set} due to the thresholding function.
+Let $f : \states \times \alphabet \rightarrow [|\states||\alphabet|]$ be a bijection.
+\Ryan{Mention the semantics}
+
+The matrix\ryan{Maybe give it a name} $U$ lives in $\R^{|\alphabet||\states| \times |\alphabet||\states|}$.
+Let $U_{ik} = 1$ if $i = f(q, b)$ and $k = f(p, a)$ and there exists a state $p$ such that $p\xrightarrow[b]{q}$ is a transition in $\automaton$; otherwise, let $U_{ik} = -1$. 
+Because $a$ is free, we have that each row has $|\alphabet|$ entries that are $1$; the rest are $-1$. 
+The matrix $V$ lives in $\R^{|\alphabet||\states| \times |\alphabet|}$.
+Let $V_{ik} = 1$ 
+
+
+
+\end{proof}
+
+\subsection{Analysis: Saturated Activations}
+
+
+
+\begin{definition}[Saturated Sigmoid]
+$$
+\sigma(x)=
+\begin{cases}
+0 &  \ifcondition x  \le 0  \\
+x &  \ifcondition 0 < x \le  1 \\
+1 &  \ifcondition x  > 1 
+\end{cases}
+$$
+\end{definition}
+
+
+\begin{lemma}
+Consider an 
+\end{lemma}
+
+
+
+\subsubsection{Long Short-term Memory}
+
+\subsubsection{Gated Recurrent Units}

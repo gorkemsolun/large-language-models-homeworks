@@ -1,0 +1,129 @@
+The previous chapter introduced a formal definition of a language and of a language model as a distribution over strings.
+We now delve into the question of how we can learn a language model from finite data.
+
+\paragraph{A note on terminology.}
+Unfortunately, we will again encounter some ambiguous terminology.
+%We defined a language model simply as some valid discrete probability distribution (or probability space) over a set of finite strings or sentences.
+In \cref{sec:lm-tightness}, we explicitly define a language model as a valid probability distribution over $\kleene{\str}$, the Kleene closure of some alphabet $\alphabet$, which means that $\sum_{\str \in \kleene{\alphabet}} \pLM\left(\str\right) = 1$. 
+As we will see later, this means that the model is \emph{tight}, whereas it is \emph{non-tight} if $\sum_{\str \in \kleene{\alphabet}} \pLM\left(\str\right) < 1$. 
+% \ryan{reference previous section, we defined a language model as a valid probability distribution over the $\kleene{\alphabet}$, the Kleene closure of some alphabet $\alphabet$.}
+Definitionally, then, all language models are tight.
+However, it is standard in the literature to refer to many non-tight language models as language models well.
+We pardon in advance the ambiguity that this introduces.
+Over the course of the notes, we attempt to stick to the convention that the term ``language model'' without qualification only refers to a tight language model whereas a ``non-tight language model'' is used to refer to a language model in the more colloquial sense.
+Linguistically, tight is acting as a non-intersective adjective.
+Just as in English, where a fake gun is not a gun, so too in our course notes a non-tight language model is not a language model.
+%That is, we will somewhat irresponsibly refer to any (parametrized) computational model of language as a language model as well.
+This distinction does in fact matter.
+On one hand, we can prove that many language models whose parameters are estimated from data, e.g., a finite-state language model estimated by means of maximum-likelihood estimation, are, in fact, tight.
+On the other hand, we can show that this is \emph{not} true in general, i.e., \emph{not} language models estimated from data will be tight.
+For instance, a recurrent neural network language model estimated through gradient descent may not be tight \citep{Chen2018}.
+%(e.g., a recurrent neural network or an \ngram{} model) are \emph{not} strictly language models as we have defined them in \cref{def:language-model}.
+
+\subsection{The distinguished symbols $\bos$ and $\eos$.}
+
+We will continue with the assumption that we are modeling distribution over $\kleene{\alphabet}$, the Kleene closure of an alphabet $\alphabet$.
+As we will see later, we will often define language models in an \emph{autoregressive} way, where the probability distribution over sentences will be broken into a sequence of conditional distributions over the next possible symbol given the previous symbols.
+To be able to define the distribution over the first symbol in a sentence (given no context) as well as to be able to \emph{finish} a sentence without generating symbols in perpetuity, we augment the alphabet of symbols $\alphabet$ with two special symbols not in the original alphabet.
+% However, to make the modeling more practical, we augment the alphabet $\alphabet$ with two special symbols.
+\ryan{This is a poor way of putting it. It isn't about practicality. It's about the fact that we seek to estimate an autoregressive model, so it's necessary. \response{anej} Is this better?}
+
+These are the \defn{\underline{b}eginning \underline{o}f \underline{s}entence} ($\bos$) and \defn{\underline{e}nd \underline{o}f \underline{s}entence} ($\eos$) symols.
+For a string $\stry = \sym_1 \cdots \sym_\strlen$, we will suggestively denote $\sym_{0} \defeq \bos$ and $\sym_{\strlen + 1} \defeq \eos$ (even though $\bos, \eos \notin \alphabet$!).
+They will prove useful when \emph{modeling} strings with computational models,\ryan{We should do a search-and-replace?} as we will see shortly.
+Informally, you can think of the $\bos$ symbol as marking the beginning of the string, and the $\eos$ symbol as denoting the end of the string (or even terminating its generation, as we will see later).
+Most of the time when working with computational models, we will augment $\alphabet$ with $\eos$: we define the augmented alphabet as $\eosalphabet \defeq \alphabet \cup \{\eos\}$ and assume that any computational model $\pM$ works over the augmented alphabet $\eosalphabet$. 
+
+\subsection{Normalization of Language Models}
+
+% A language model is therefore simply a probability distribution over $\kleene{\alphabet}$---it assigns any possible string its probability.
+Given a language model $\pLM$, we can write for $\str = \sym_1 \ldots \sym_\strlen \in \kleene{\alphabet}$
+\begin{equation}
+    \pLM\left(\str\right) = \prod_{\idx = 1}^{\strlen}\pLM\left(\sym_\idx \mid \str_{<\idx}\right)
+\end{equation}
+using the \emph{chain rule} of probability.
+
+When specifying $\pM$, we have two fundamental options.
+Depending on whether we model $\pM\left(\str\right)$ for each string $\str \in \kleene{\eosalphabet}$ \emph{directly} or we model \emph{individual} conditional probabilities $\pM\left(\sym_\idx \mid \str_{<\idx}\right)$ we distinguish \emph{globally} and \emph{locally} normalized models.
+
+\begin{definition}  \label{def:globally-normalized-model}
+    In a \defn{globally normalized model} the probability $\pM\left(\str\right)$ is modeled as 
+    \begin{equation} \label{eq:globally-normalized-model}
+        \pM\left(\str\right) \defeq \softmax\left(\scoref\left(\str\right)\right) = \frac{\exp\left[\scoref\left(\str\right)\right]}{\sum_{\str' \in \kleene{\eosalphabet}}\exp\left[\scoref\left(\str'\right)\right]},
+    \end{equation}
+    where $\scoref$ is some real-valued scoring function that determines the probability of that string given by $\pM$ through the $\softmax$ function.
+    The denominator $\normConstant_G \defeq \sum_{\str' \in \kleene{\eosalphabet}}\exp\left[\scoref\left(\str'\right)\right]$ is called the \defn{normalization constant}.
+\end{definition}
+Notice that the normalization constant is computed by summing over a countably infinite set of all possible strings. 
+This means that the sum can in general \emph{diverge} and the quantity in \cref{eq:globally-normalized-model} may not be defined. 
+This motivates the following definition.
+\begin{definition}[Normalizable model]
+    We say that a globally normalized model is \defn{normalizable} if the quantity $\normConstant_G$ in \cref{eq:globally-normalized-model} is finite.
+\end{definition}
+
+Net, we define locally-normalized models.
+\begin{definition} \label{def:locally-normalized-model}
+    In a \defn{locally normalized model} (also called an \defn{autoregressive model}) the probability $\pM\left(\str\right)$ is modeled using a sequence of \emph{conditional} distributions as
+    \begin{align} \label{eq:locally-normalized-model}
+        \pM\left(\str\right) \nonumber
+        \defeq \prod_{\idx = 1}^{\strlen + 1}\pM\left(\sym_\idx\mid\str_{<\idx}\right) 
+        &\defeq \prod_{\idx = 1}^{\strlen + 1} \softmax\left(\scoref\left(\sym_\idx \mid \str_{<\idx}\right)\right) \\ 
+        &= \prod_{\idx = 1}^{\strlen + 1}\frac{\exp{\left[\scoref\left(\sym_\idx, \str_{<\idx}\right)\right]}}{\sum_{\sym_\idx' \in \eosalphabet}\exp{\left[\scoref\left(\sym_\idx', \str_{<\idx}\right)\right]}},
+    \end{align}
+    where we overload $\scoref$ to be some real-valued scoring function that defines the probability of the next symbol $\sym$ \emph{given} the context $\str_{<\idx}$ through the $\softmax$ function.
+    Locally normalized models define multiple normalization constants $\normConstant_L^\idx \defeq \sum_{\sym_\idx' \in \eosalphabet}\exp{\left[\scoref\left(\sym_\idx', \str_{<\idx}\right)\right]}$.
+\end{definition}
+
+The names naturally come from the way the distributions in the two families are normalized: whereas globally normalized models are normalized by summing over the entire (infinite) space of strings, locally normalized models define a sequence of \emph{conditional distributions} and make use of the chain rule of probability to define the joint probability of a whole string.
+
+\Anej{Add examples of a locally and globally normalized model (prefix tree-like in NLP slides}
+
+As mentioned, if a model is globally normalized, its normalization constant might not be finite.
+Even if it is finite, however, the fact that $\kleene{\eosalphabet}$ is \emph{infinite} means that we cannot generally compute $\normConstant_G$ in a \emph{tractable} way.
+In fact, there are no general-purpose algorithms for this.
+Because of that, locally normalized models which specify distributions over strings $\pdens\left(\sym_1 \ldots \sym_\strlen\right)$ in terms of their conditional probabilities $\pdens(\sym_\idx \mid \str_{<\idx})$ for $\idx \in \left[\strlen\right]$ have become the standard in NLP literature.
+This reduces the problem of having to normalize the distribution over an infinite set $\kleene{\alphabet}$ to the problem of modeling the \emph{next possible symbol} $\sym_\idx$ given the symbols seen so far $\str_{<\idx}$.
+
+All is not lost, however, for globally normalized models.
+By making appropriate assumptions on the distribution $\pLM$, we can sometimes efficiently compute the normalizing constant $\normConstant_G$ as well. 
+An example of such models is finite-state language models, which will introduce in \cref{sec:n-gram-models}.
+
+Using the chain rule of probability, we can easily show the following theorem.
+\begin{theorem} \label{thm:globally-normalized-is-locally-normalized}
+Let $\pM$ be a globally-normalized language model.
+Then there exists a locally-normalized language model $\pM'$ such that $\pM'\left(\str\right) = \pM\left(\str\right)$ for all $\str \in \kleene{\eosalphabet}$.
+\end{theorem}
+\begin{proof}
+    We define the individual conditional probability distributions of the locally normalized-model $\pM'$ as:
+    \begin{equation}
+        \pM'\left(\sym\mid\str\right) = \frac{\pM'\left(\str\sym\right)}{\pM'\left(\str\right)}
+    \end{equation}
+    for $\sym \in \eosalphabet$ and $\str \in \kleene{\eosalphabet}$ wuch that $\pdens\left(\str\right) > 0$.
+    Using axiom $2)$ from the definition of a probability measure (cf. \cref{def:probability-measure}), it is easy to see that the conditional probabilities defined this way indeed define a locally-normalized model.
+\end{proof}
+
+An advantage of globally normalized models is that they, by definition, always define a \emph{valid} probability space over $\eosalphabet$.
+Although this might be counterintuitive at first, the same cannot be said for autoregressive models---in this sense, locally-normalized ``language models'' might not even be language models!
+(This is the issue with the terminology we brought up earlier).
+We explore this issue in much more detail in the next section.
+
+\subsection{A General Framework} \label{sec:general-framework}
+Most of the models we will encounter in the course will be \emph{locally normalized}.
+In fact, many of them will define the conditional probability distribution over the next symbol, $\pM\left(\sym\mid\str\right)$ in a particular way.
+It, therefore, makes sense to discuss this common feature upfront and then reflect on how it is implemented in particular models we will consider later.
+
+We start by associating a real-valued column vector $\embedSym \in \R^\embeddim$ with each $\sym \in \eosalphabet$.
+Additionally, we assume the existence of an \defn{encoding function} $\enc : \kleene{\alphabet} \rightarrow \Rd$ that maps every context $\str \in \kleene{\alphabet}$ to a real-valued vector $\enc\left(\str\right) \in \Rd$ and a real-valued scalar $\biasStr \in \R$. 
+Then, we define the conditional probabilities $\pM\left(\sym\mid\str\right)$ as:
+\begin{align} \label{eq:softmax}
+\pM(\str) \defeq \prod_{\tstep=1}^{\strlen + 1} \pM(\sym_\tstep \mid \str_{<\tstep}) &= \prod_{\tstep=1}^{\strlen + 1} \softmax\left(\embedSymt^{\top} \enc(\str_{<\tstep}) + \biasStr\right) \\
+&= \prod_{\tstep=1}^{\strlen + 1} \frac{\exp\left(\embedSymt^{\top} \enc(\str_{<\tstep}) + \biasStr \right) }{\sum_{\sym' \in \eosalphabet} \exp\left(\embedSymPrime^{\top} \enc(\str_{<\tstep}) + \biasStr\right)} 
+\end{align}
+where $\sym_0 \defeq \bos$ and $\sym_{\strlen + 1} \defeq \eos$.
+
+Intuitively, we want $\embedSym$ and $\enc\left(\str\right)$ to capture the information needed to determine how probable individual symbols $\sym$ are given the context $\str$. 
+This makes these embeddings crucial for accurate language modeling. 
+Indeed, much of the discussion in class will center around how to build good embedding functions and embeddings of individual symbols. 
+% \ryan{Mention that this is a softmax}
+\ryan{Discuss the rule of exp}
+\Ryan{Suggested Proof: Equivariance of the softmax?}

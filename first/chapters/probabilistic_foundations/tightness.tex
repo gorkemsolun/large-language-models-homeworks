@@ -1,0 +1,473 @@
+In this chapter, we will refer to locally-normalized models explicitly as autoregressive models and denote their probabilities with $\pASM$ (``ASM'' for \underline{a}utoregressive \underline{s}equence \underline{m}odel) to make a clear distinction between an actual language model (probability distribution over $\kleene{\alphabet}$) and a sequence of conditional probabilities (c.f. \cref{eq:locally-normalized-model}).
+
+Just like with globally-normalized models, using the chain rule of probability, any language model $\pLM$ can be converted to an autoregressive sequence model using the definition of conditional probability $\pLM\left(\sym_\idx\mid\str_{<\idx}\right) = \frac{\pLM\left(\str_{\leq\idx}\right)}{\pLM\left(\str_{<\idx}\right)}$ and the chain rule of probability to define $\pASM\left(\sym_\idx\mid\str_{<\idx}\right) \defeq \pLM\left(\sym_\idx\mid\str_{<\idx}\right)$.
+The converse, however, is \emph{not} true.
+As alluded to above, can specify conditional distributions $\pASM$ over $\kleene{\eosalphabet}$ such that they do not represent valid probability measures over $\kleene{\alphabet}$ (after taking into account the semantics of $\eos$), i.e., over the set of \emph{finite} strings.
+This means that they ``leak'' some of their probability mass to \emph{infinite} sequences.
+It has been shown that some classes of autoregressive sequence models used in practice have parameter settings in which the generative process terminates with probability $< 1$.
+
+Models whose generative process may fail to terminate are called \defn{non-tight} \citep{Chi1999}:\footnote{Tightness is also called \emph{consistency} in the literature \citep{Booth1973, Chen2018}.} 
+% \leo{The footnote should probably cite booth thompson, who coined the term inconsistency.}
+\begin{definition}
+    A set of conditional probabilities $\pASM\left(\cdot \mid \cdot\right)$ is called \defn{tight} if
+    \begin{equation}
+        % \sum_{\str \in \kleene{\alphabet}} \pASM\left(\str\right) = 
+        \sum_{\str \in \kleene{\alphabet}} \prod_{\idx 
+= 1}^{\strlen + 1}\pASM\left(\sym_\idx\mid\str_{<\idx}\right) = 1.
+    \end{equation}
+    \anej{Do we have $\alphabet$ or $\eosalphabet$ here?}
+\end{definition}
+
+Note that the individual conditional distributions $\pASM\left(\sym \mid \str\right)$ in a non-tight \autoregmodelAcronym still are valid conditional distributions (i.e., they sum to one).
+However, the distribution over all possible strings that they define does not sum to $1$.
+
+To be able to investigate this phenomenon more closely, let us first examine what the conditional probabilities of an \autoregmodel actually define and how they can result in non-tightness. 
+For $\str \in \kleene{\alphabet}$, we define 
+\begin{equation}
+\pdensBar\left(\str\right) \defeq \prod_{\idx=1}^{\strlen+1}\pASM(\sym_\idx\mid\str_{<\idx})=\pASM(\eos\mid\str)\prod_{\idx=1}^{\strlen}\pASM(\sym_\idx\mid \str_{<\idx}).
+\end{equation}
+
+Is $\pdensBar$ a language model, i.e., a distribution over $\kleene{\alphabet}$ (after taking into account the semantics of $\eos$)?
+Certainly, the answer is yes if the \autoregmodelAcronym's conditional probabilities match the conditional probabilities of some known language model $\widetilde{\pLM}$,\footnote{That is, $\widetilde{\pLM}(\rx_\idx=\sym_\idx\mid \rx_1\ldots \rx_{\idx-1}=\str_{<\idx}) = \pASM(\sym_\idx\mid\str_{<\idx})$ whenever the former conditional probability is well-defined under the language model $\widetilde{\pLM}$, i.e., whenever $\sym_\idx \in \eosalphabet$ and $\str_{<\idx}\in\kleene{\alphabet}$ with $\widetilde{\pLM}(\rx_1\ldots \rx_{\idx-1}=\str_{<\idx}) > 0$.} in which case $\pdensBar$ is specifically the language model $\widetilde{\pLM}$ itself, since by the chain rule of probability, $\pdensBar\left(\str\right)=\widetilde{\pLM}\left(\str\right)$ for each $\str\in\kleene{\alphabet}$.
+In this case clearly $\pdensBar\left(\kleene{\alphabet}\right) \defeq \sum_{\str\in\kleene{\alphabet}}\pdensBar\left(\str\right) = \sum_{\str\in\kleene{\alphabet}}\widetilde{\pLM}\left(\str\right) = 1$.  
+Instead $\pdensBar\left(\kleene{\alphabet}\right) < 1$, the \autoregmodelAcronym's conditional probabilities do \emph{not} match the conditional probabilities of any language model $\widetilde{\pLM}$.
+
+To see how it can come to this, we now exhibit such an \autoregmodelAcronym.
+Although the conditional probability distributions $\pASM(\cdot \mid \str_{<\idx})$ each sum to 1 over $\eosalphabet$, they fail to combine into a model $\pdensBar$ that sums to 1 over $\kleene{\alphabet}$ (i.e., a language model).
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{0.7\textwidth}
+        \centering
+        \scalebox{0.91}{
+            \raisebox{-0.65\height}{
+            \footnotesize
+            \begin{tabular}{ll}
+                $\pASM(\syma\mid \bos)$ & 1 \\
+                $\pASM(\syma\mid \syma)$ & 0.7 \\
+                $\pASM(\symb\mid \syma)$ & 0.2 \\ 
+                $\pASM(\eos\mid \syma)$ & 0.1 \\ 
+                $\pASM(\symb\mid \symb)$ & 1 \\ 
+                $\pASM(\eos\mid\eos)$ & 1
+            \end{tabular}}
+            \raisebox{-0.8\height}{
+                \footnotesize
+                \begin{tikzpicture}[minimum size=7mm]
+                    \node[state] (a) {$\syma$};
+                    \node[state,above right=0.5cm and 0.8cm of a] (b) {$\symb$};
+                    \node[state,below right=0.5cm and 0.8cm of a,accepting] (eos) {{$\scriptsize \eos$}};
+                    \node[above left=0.4cm and 0.3cm of a] (dummy) {};
+                    
+                    \path (dummy) edge node {} (a);
+                    \path (a) edge [loop left] node [below] {$\syma/0.7$} (a);
+                    \path (b) edge [loop right] node {$\symb/1$} (b);
+                    \path (eos) edge [loop right] node {$\eos/1$} (eos);
+                    \path (a) edge [bend left] node [above, sloped] {$\syma/0.2$} (b);
+                    \path (a) edge [bend right] node [below, sloped] {$\syma/0.1$} (eos);
+                \end{tikzpicture}
+            }
+        }
+        \caption{Non-tight $2$-gram model.}
+        \label{fig:non-tight-2-gram-example}
+    \end{subfigure}
+    \vspace{5mm}
+    \begin{subfigure}{0.7\textwidth}
+        \centering
+        \scalebox{0.91}{
+        \raisebox{-0.65\height}{
+        \footnotesize
+            \begin{tabular}{ll}
+                $\pASM(\syma\mid \bos)$ & 1 \\
+                $\pASM(\syma\mid \syma)$ & 0.7 \\
+                $\pASM(\symb\mid \syma)$ & 0.2 \\
+                $\pASM(\eos\mid \syma)$ & 0.1 \\
+                $\pASM(\symb\mid \symb)$ & 0.9 \\
+                $\pASM(\eos\mid \symb)$ & 0.1 \\
+                $\pASM(\eos\mid\eos)$ & 1
+            \end{tabular}}
+        
+          \raisebox{-0.8\height}{
+            \footnotesize
+            \begin{tikzpicture}[minimum size=7mm]
+            \node[state] (a) {$\syma$};
+            \node[state,above right=0.5cm and 0.8cm of a] (b) {$\symb$};
+            \node[state,below right=0.5cm and 0.8cm of a,accepting] (eos) {{$\scriptsize \eos$}};
+            \node[above left=0.4cm and 0.3cm of a] (dummy) {};
+            
+            \path (dummy) edge node {} (a);
+            \path (a) edge [loop left] node [below] {$\syma/0.7$} (a);
+            \path (b) edge [loop right] node {$\symb/0.9$} (b);
+            \path (b) edge node [right] {$\symb/0.1$} (eos);
+            \path (eos) edge [loop right] node {$\eos/1$} (eos);
+            \path (a) edge [bend left] node [above, sloped] {$\syma/0.2$} (b);
+            \path (a) edge [bend right] node [below, sloped] {$\syma/0.1$} (eos);
+            \end{tikzpicture}
+        }
+        }
+         \caption{Tight $2$-gram model.}
+         \label{fig:tight-2-gram-example}
+    \end{subfigure}
+    \caption{Tight and non-tight bigram models, expressed as Mealy machines. 
+    Symbols with conditional probability of 0 are omitted.}
+\end{figure}
+
+\begin{example} \label{ex:non-tight-2-gram}
+Consider the bigram model defined in \cref{fig:non-tight-2-gram-example}over the alphabet $\alphabet = \{\syma, \symb\}$.\footnote{The graphical representation of the \autoregmodelAcronym depicts a so-called weighted finite-state automaton, a framework of language models we will introduce shortly. For now, it is not crucial that you understand the graphical representation and you can simply focus on the conditional probabilities specified in the figure.} 
+Under this model, any finite string that contains the symbol \symb{} will have probability 0, since $\pASM(\eos\mid\symb)=\pASM(\syma\mid\symb)=0$. This implies $\pdensBar\left(\kleene{\alphabet}\right) = \sum_{\idx=0}^\infty \pdensBar(\syma^\idx) = \sum_{\idx=0}^\infty (0.7)^\idx \cdot 0.1 = \frac{0.1}{1 - 0.7} = \frac{1}{3} < 1$.
+\end{example}
+
+\begin{example} \label{ex:tight-2-gram}
+On the other hand, in the bigram model in \cref{fig:tight-2-gram-example}, obtained from \cref{ex:non-tight-2-gram} by changing the arcs from the \symb{} state, $\pdensBar\left(\kleene{\alphabet}\right)=1$. 
+We can see that by calculating:
+\begin{align*}
+    \probfunction(\kleene{\alphabet})
+    &=\sum_{n=1}^\infty\sum_{m=0}^\infty \probfunction(\syma^n\symb^m) \\
+    &= \sum_{n=1}^\infty \left(\probfunction(\syma^n)+\sum_{m=1}^\infty \probfunction(\syma^n\symb^m) \right) \\
+    &= \sum_{n=1}^\infty \left(0.1\cdot(0.7)^{n-1} + \sum_{m=1}^\infty (0.7)^{n-1}\cdot 0.2 \cdot (0.9)^{m-1} \cdot 0.1 \right) \\
+    &= \sum_{n=1}^\infty \left(0.1\cdot(0.7)^{n-1} + (0.7)^{n-1}\cdot 0.2 \cdot \frac{1}{1-0.9} \cdot 0.1 \right) \\
+    &= \sum_{n=1}^\infty \left(0.1\cdot(0.7)^{n-1} + 0.2 \cdot (0.7)^{n-1}\right) \\
+    &= \sum_{n=1}^\infty 0.3\cdot (0.7)^{n-1}=\frac{0.3}{1-0.7} = 1.
+\end{align*}
+\end{example}
+
+\cref{ex:non-tight-2-gram} confirms that the autoregressive formulation does not necessarily yield $\pdensBar$ that is a valid distribution over $\kleene{\alphabet}$.
+But if $\pdensBar$ is not a language model, \emph{what} is it?
+It is intuitive to suspect that, in a model with $\pdensBar\left(\kleene{\alphabet}\right)<1$, the remainder of the probability mass ``leaks'' to infinite sequences, i.e., the generative process may continue forever with probability $>0$. 
+This means that, to be able to characterize $\pdensBar$, we will have to be able to somehow take into account infinite sequences.
+We will make this intuition formal below.
+
+Delving a bit deeper, the non-tightness of \cref{ex:non-tight-2-gram} is related to the fact that the conditional probability of $\eos$ is $0$ at some states, in contrast to \cref{ex:tight-2-gram}. 
+However, requiring $\pASM(\sym_\idx=\eos \mid \str_{<\idx}) > 0$ for all prefixes $\str_{<\idx}$ is neither \emph{necessary} nor \emph{sufficient} to ensure tightness. 
+It is not necessary because one can, for example, construct an \autoregmodelAcronym 
+in which $\pASM(\sym_\idx=\eos \mid \str_{<\idx}) = 0.1$ when $\idx$ is even but $= 0$ otherwise.  Such a model generates only odd-length strings but is tight.
+We will postpone non-sufficienty for later, where we will present specific \autoregmodelAcronym{}s under which the conditional probability of $\eos$ is always $>0$, yet are non-tight.
+% It is not sufficient because of the following example, in which $\pASM(\sym_\idx=\eos \mid \str_{<\idx})$ is always positive but decays so rapidly toward $0$ that the generative process might continue forever.
+
+\subsubsection{Defining the probability measure of an \autoregmodelAcronym}
+We now rigorously characterize the kind of distribution induced by an \autoregmodelAcronym, i.e., we investigate what $\pdensBar$ defines. 
+As mentioned earlier, an \autoregmodelAcronym can lose probability mass to the set of infinite sequences, $\alphabet^\infty$. 
+However, $\alphabet^\infty$, unlike $\kleene{\alphabet}$, is \emph{uncountable}, and it is due to this fact that we need to work explicitly with the \emph{measure-theoretic} formulation of probability which we introduced before.
+We already saw the peril of not treating distributions over uncountable sets carefully is necessary in \cref{ex:inf-coin-toss}---the set of all infinite sequences of coin tosses is indeed uncountable.
+
+\paragraph{Including infinite strings.}
+As we saw in \cref{ex:inf-coin-toss}, sampling successive symbols from a non-tight \autoregmodelAcronym has probability $> 0$ of continuing forever. 
+Motivated by that, we hope to regard the \autoregmodelAcronym as defining a probability space over $\samplespace = \kleene{\alphabet} \cup \alphabet^\infty$, i.e., both finite as well as infinite strings, to ``relate'' it to our definition of true language models.
+Notice that we also have to account for the difference in the alphabets: while we would like to characterize language models in terms of strings over the alphabet $\alphabet$, \autoregmodelAcronym{}s work over symbols in $\eosalphabet$.
+% Note that this set $\samplespace$ is uncountable whenever $|\alphabet| \geq 2$.
+
+We now start our journey to discovering what $\pdensBar$ represents.
+Given an \autoregmodelAcronym, we will first need to turn its $\pdensBar$ into a measurable space by defining an appropriate $\sigma$-algebra.  
+This type of distribution is more general than a language model as it works over both finite as well as infinite sequences.
+To distinguish the two, we will expand our vocabulary and explicitly \emph{differentiate} between true language models and non-tight \autoregmodelAcronym{}s.
+We will refer to a distribution over $\kleene{\alphabet} \cup \alphabet^\infty$ as a sequence model.  
+\begin{definition}[Sequence model]
+\label{def:sequence-model}
+A \defn{sequence model} is a probability space over the set $\kleene{\alphabet} \cup \alphabet^\infty$.
+\end{definition}
+Intuitively, and we will make this precise later, the set $\alphabet^\infty\subset\kleene{\alphabet} \cup \alphabet^\infty$ in \cref{def:sequence-model} represents the event where the language model is \defn{non-terminating}, i.e., it attempts to generate an infinitely long sequence. 
+We can then understand language models in a new sense.
+\begin{definition}[Language model]
+\label{def:language-model-eqivalent}
+A \defn{language model} is a probability space over $\kleene{\alphabet}$.
+Equivalently, a language model is a sequence model such that $\probfunction(\alphabet^\infty)=0$.
+\end{definition}
+Now buckle up!
+Our goal through the rest of this section is to rigorously construct a sequence model as in \cref{def:probability-measure} and \cref{def:sequence-model} which encodes the probabilities of an \autoregmodelAcronym. 
+Then, we will use this characterization to formally investigate tightness.
+An outline of what this is going to look like is shown in \cref{fig:asm-prob-measure-pipeline}.
+\begin{figure}
+    \centering
+    \begin{tikzpicture}[auto,
+      % node distance = 12mm,
+      start chain = going right,
+      box/.style = {draw, rounded corners, blur shadow,fill=white, on chain, align=center, minimum height=1cm, minimum width=1.5cm}]
+     \node[box,fill=ETHGray!20] (b1)    {$\eosalphabet^\infty$};      
+     \node[box,fill=ETHGray!20] (b2)   [right = 2cm of b1] {\begin{tabular}{c} Algebra \\ $\left(\eosalphabet^\infty, \overcalC\right)$\end{tabular}};      
+     \node[box,fill=ETHGray!20] (b3)   [right = 4cm of b2] {Pre-measure \\ $\left(\eosalphabet^\infty, \overcalC, \probmeasure_0\right)$};      
+     \node[box,fill=ETHGray!20] (b4)   [below = 4cm of b1, xshift = 1cm] {Measure \\ $\left(\eosalphabet^\infty, \sigma\left(\overcalC\right), \probmeasure\right)$};      
+     \node[box,fill=ETHGray!20] (b5)   [right = 4cm of b4] {Measure (sequence model) \\ $\left(\alphabet^\infty\cup\kleene{\alphabet}, \sigma\left(\calC\right), \probmeasure'\right)$};      
+     \begin{scope}[rounded corners,-{Latex[length=1.8mm, width=1.4mm]}]
+      \path       (b1) edge node[above, align=center, text width = 2cm] {Cylinder sets} (b2);
+      \path       (b2) edge node[above, align=center, text width = 4cm] {Conditional probabilities from $\pASM$} (b3);
+      \path       (b3) edge node[above, sloped, align=center, text width = 4cm] {Carath\'eodory's Extension} (b4);
+      \path       (b4) edge node[above, align=center, text width = 4cm] {Random variable construction} (b5);
+     \end{scope}
+    \end{tikzpicture}
+    \caption{The outline of our measure-theoretic treatment of \autoregmodelAcronym{}s to arrive at a precise characterization of $\pdensBar$. The final box corresponds to the sequence model (probability measure over $\kleene{\alphabet} \cup \alphabet^\infty$) constructed for $\pASM$.}
+    \label{fig:asm-prob-measure-pipeline}
+\end{figure}
+
+Since an \autoregmodelAcronym produces conditional distributions over the augmented alphabet $\eosalphabet$ (first box in \cref{fig:asm-prob-measure-pipeline}) and results in possibly infinite strings, we will first construct a probability space over $\eosalphabet^\infty$, which will naturally induce a sequence model.
+We will start by constructing an algebra over $\samplespace=\eosalphabet^\infty$ for some alphabet $\alphabet$ (second box in \cref{fig:asm-prob-measure-pipeline}). 
+Then, assuming we are given an \autoregmodelAcronym $\pASM$ over $\eosalphabet$, we can associate the algebra with a pre-measure that is consistent with $\pASM$ (third box in \cref{fig:asm-prob-measure-pipeline}). 
+We will make use of the following definition to construct the algebra:
+\begin{definition}
+Given any set $\sH\subseteq\eosalphabet^\idxk$, define its \defn{cylinder set} (of rank $\idxk$) to be
+\begin{equation} \label{eq:cylinder}
+\overC(\sH)\defeq\left\{\str\bomega~:~\str\in \sH, \bomega\in\eosalphabet^\infty\right\}
+\end{equation}
+\end{definition}
+In essence, a cylinder set of rank $\idxk$ is the set of infinite strings that share their $\idxk$-prefix with some string $\str \in \sH\subseteq\eosalphabet^\idxk$.
+In particular, for a length-$\idxk$ string $\str=\sym_1\dotsm \sym_\idxk$, the cylinder set $\overC(\str)\defeq\overC(\{\str\})$ is the set of all infinite strings prefixed by $\str$.\footnote{This type of cylinder set, i.e., one that is generated by a singleton, is also called a \defn{thin cylinder}.} 
+We denote the collection of all rank-$\idxk$ cylinder sets by $\overcalC_\idxk\defeq\left\{\overcalC(\sH)~:~\sH\in\powerset{\eosalphabet^\idxk}\right\}$ and define $\overcalC \defeq \bigcup_{\idxk=1}^\infty\overcalC_\idxk$ to be the collection of all cylinder sets over $\samplespace$.\footnote{Observe that $\overcalC_1\subset\overcalC_2\subset\overcalC_3\subset\dotsm$.} 
+\begin{restatable}{lemma}{eosCylinderIsAlgebra} \label{lem:cylinder-algebra}
+$\overcalC\subseteq\powerset\samplespace$ is an algebra over $\samplespace=\eosalphabet^\infty$.
+\end{restatable}
+\begin{proof}
+First, $\eosalphabet^\infty=\overC(\eosalphabet^\idxk)$ for any $\idxk$, and in particular is a cylinder set of any rank.
+Secondly, given a cylinder set $\overC(\sH)$ of rank $\idxk$, i.e., $\sH\subseteq \eosalphabet^\idxk$, $\setcomplement{\big(\overC(\sH)\big)}=\overC\left(\eosalphabet^\idxk\setminus \sH\right)$. Hence, $\overcalC$ is closed under complements. 
+Finally, notice that the intersection of two cylinder sets of ranks $k_1 \leq k_2$ is another cylinder set of rank $k_2$.0
+Hence, $\overcalC$ is an algebra over $\Omega$.
+\end{proof}
+The first step of \cref{fig:asm-prob-measure-pipeline} is done!
+We are now ready to define the pre-measure $\probfunction_0$ for the cylinder algebra $\overcalC$. 
+Given an \autoregmodel $\pASM$ and any set $\overC(\sH)\in\overcalC$, let
+\begin{align}
+  \probfunction_0(\overC(\sH))\defeq\sum_{\str\in \sH} \pASM(\str) \label{eq:pre-measure}
+\end{align}
+where we have defined\looseness=-1
+\begin{align}
+    \pASM(\str) \defeq \prod_{t=1}^\strlen \pASM(\sym_\tstep\mid \str_{<t}).
+\end{align}
+Note that there is a caveat here since the same cylinder set may admit different $\sH$.\footnote{For example, in the infinite coin toss model, $C(\texttt{\sH})=C(\{\texttt{HH},\texttt{HT}\})$.}
+We address this next and show that $\probfunction_0$ is indeed well defined.
+
+\begin{proposition} \label{prop:pre-measure-well-defined}
+$\probfunction_0$ as defined in \cref{eq:pre-measure} is a well-defined function.
+\end{proposition}
+\begin{proof}
+Suppose a cylinder set can be described by two different prefix sets: $H_1\subseteq\eosalphabet^{k_1}$ and $H_2\subseteq\eosalphabet^{k_2}$. In other words, $\overC(H_1)=\overC(H_2)$. Without loss of generality, assume that $k_1\leq k_2$. Then,
+\begin{subequations}
+\begin{align}
+    \overC(H_2)&=\overC(H_1) \\
+    &= \bigcup_{\vx\in H_1} \overC(\vx) \\
+    &= \bigcup_{\vx\in H_1} \bigcup_{\str \in \eosalphabet^{k_2-k_1}} \overC(\vx\str).
+\end{align}
+\end{subequations}
+All the unions above are disjoint, and hence $H_2=\bigcup_{\str\in\eosalphabet^{k_2-k_1}} \{\vx\str: \vx\in H_1\}$. 
+Then, by the locally-normalizing property of $\pASM$, we have that
+\begin{align}
+    \probfunction_0(\overC(H_1))=\probfunction_0(\overC(H_2)).
+\end{align}
+\end{proof}
+
+\begin{restatable}{lemma}{eosCylinderPremeasure} \label{lem:cylinder-premeasure}
+$\probfunction_0$ is a pre-measure over $\overcalC$.
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:pre-measure-proof}.
+% \end{proof}
+With this, we have successfully completed the first two steps of \cref{fig:asm-prob-measure-pipeline}!
+However, we have only defined a \emph{pre}-measure over the set of \emph{infinite} $\eos$-containing sequences $\eosalphabet^\infty$.
+This does not yet satisfy all the properties we would like from a probability space.
+Because of that, we next \emph{extend} the constructed probability pre-measure $\probfunction_0$ into a valid probability measure $\probfunction$ to arrive to a valid probability space.
+
+To extend $\probfunction_0$ into a measure, we will use Carath\'eodory's theorem:
+\begin{restatable}[Carath\'eodory's Extension Theorem]{theorem}{caratheodory} \label{thm:caratheodory}
+Given an algebra $\eventspaceA$ over some set $\samplespace$ and a probability pre-measure $\probfunction_0:\eventspaceA\to[0,1]$, there exists a probability space $(\samplespace,\eventspace,\probfunction)$ such that $\mathcal{A} \subset \eventspace$ and $\probfunction|_\mathcal{A}=\probfunction_0$. 
+Furthermore, the $\sigma$-algebra $\eventspace$
+depends only on $\eventspaceA$ and is minimal and unique, which we will also denote by $\sigma(\eventspaceA)$, and the probability measure $\probfunction$ is unique.
+\end{restatable}
+% \begin{proof}[Proof Sketch]
+% See \cref{sec:extension-proof}.
+% \end{proof}
+Applying Carath\'eodory's extension theorem to our cylinder algebra $\overcalC$ and pre-measure $\probfunction_0$, we see that there exists a probability space $(\eosalphabet^\infty,\sigma(\overcalC),\probfunction)$ over $\eosalphabet^\infty$ that agrees with the \autoregmodel $\pASM$'s probabilities.
+
+Phew!
+This now gets us to the fourth box in \cref{fig:asm-prob-measure-pipeline} and we only have one step remaining.
+We now have to make sure that the \emph{outcome space} of the defined probability space fits the definition of a sequence model.
+That it, we have to find a way to convert (map) the infinite $\eos$-containing sequences from $\eosalphabet^\infty$ into $\eos$-free finite or possibly infinite strings processed by a sequence model as required by \cref{def:sequence-model}.
+We will achieve this through the use of a \emph{random variable}.
+
+Recall from \cref{def:rv} that a random variable is a mapping between \emph{two} sigma-algebras.
+Since we want our final measure space to work with the outcome space $\alphabet^\infty \cup \kleene{\alphabet}$, we therefore want to construct a $\sigma$-algebra over $\kleene{\alphabet}\cup\alphabet^\infty$ and then map elements from $\eosalphabet^\infty$ to $\kleene{\alphabet}\cup\alphabet^\infty$ to have the appropriate objects. 
+We will do so in a similar fashion as we constructed $(\eosalphabet^\infty,\overcalC)$.
+Given $\sH\subset \alphabet^\idxk$, define a rank-$\idxk$ cylinder set in $\kleene{\alphabet}\cup\alphabet^\infty$ to be
+\begin{align}
+    C(\sH)\defeq\{\str\bomega~:~\str\in \sH, \bomega \in \kleene{\alphabet}\cup\alphabet^\infty\}. \label{eq:rv-cylinder}
+\end{align}
+Notice the major change from \cref{eq:cylinder}: the suffixes $\bomega$ of the elements in $C\left(\sH\right)$ now come from $\kleene{\alphabet}\cup\alphabet^\infty\}$ rather than $\eosalphabet^\infty$.
+This means that they both do not contain $\eos$ and that they (and thus, elements of $C\left(\sH\right)$ can also be finite.
+Let $\calC_\idxk$ be the set of all rank-$\idxk$ cylinder sets.
+Define $\calC \defeq \cup_{\idxk=1}^\infty \calC_\idxk$.
+Then, $\sigma\left(\calC\right)$ is a $\sigma$-algebra by the same reasoning as in \cref{lem:cylinder-algebra} and \cref{thm:caratheodory}.
+We can now define the following random variable
+\begin{align}\label{eq:rv}
+\rx(\bomega) = \begin{cases}
+\bomega_{<\idxk} & \textbf{if } \text{$k$ is the first $\eos$ in } \bomega,   \\
+\bomega & \textbf{otherwise} \text{     (}\textbf{if } \eos \notin \bomega\text{)}
+\end{cases}
+\end{align}
+given any $\bomega\in \eosalphabet^\infty$.
+The proposition below shows that $\rx$ is well-defined.
+\begin{restatable}{proposition}{rvMeasurable}
+The function $\rx:(\eosalphabet^\infty,\sigma(\overcalC))\to(\kleene{\alphabet}\cup\alphabet^\infty, \sigma(\calC))$
+defined in \cref{eq:rv} is a measurable mapping.
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:rv-proof}.
+% \end{proof}
+
+$\rx$ intuitively ``cuts out'' the first stretch of $\bomega$ before the first $\eos$ symbol (where an \autoregmodelAcronym would stop generating) or leaves the sequence intact if there is no termination symbol $\eos$.
+One can check that $\pushfwdMeasure$, defined using $\probfunction$, is indeed a probability measure on $(\kleene{\alphabet}\cup\alphabet^\infty, \sigma(\calC))$ and hence $(\kleene{\alphabet}\cup\alphabet^\infty, \sigma(\calC), \pushfwdMeasure)$ is a probability space. 
+We have therefore arrived at the final box of \cref{fig:asm-prob-measure-pipeline} and shown that, given any \autoregmodel, we can construct an associated sequence model as defined in \cref{def:sequence-model}!
+In other words, given an \autoregmodelAcronym $\pASM$, we have constructed a sequence model $\pSM$ (a probability space over $\alphabet^\infty \cup \kleene{\alphabet}$ where the probabilities assigned to (infinite) strings by $\pSM$ agree with $\pASM$.
+
+\subsubsection{Interpreting the constructed probability space}
+Under the formulation of a probability space together with a random variable, useful probability quantities arise naturally and intuitively. 
+
+Consider, for example, the probability of a single finite string $\str \in \kleene{\alphabet}$, $\pushfwdMeasure\left(\str \right)$.
+By definition of $\rx$, this equals
+\begin{align}
+\pushfwdMeasure\left(\str \right) &= \pushfwdMeasure\left(\rx = \str \right) \\
+&= \probfunction\left(\inv{\rx}\left(\str\right)\right) \\
+&= \probfunction\left(\text{All the sequences $\bomega\in \eosalphabet^\infty$ which map to $\str$.}\right)
+\end{align}
+All the sequences $\bomega\in \eosalphabet^\infty$ which map to $\str$ are sequences of the form $\bomega = \str \eos \bomega'$ for $\bomega' \in \eosalphabet^\infty$---this is exactly the cylinder $\overC\left(\str\eos\right)$!
+By the definition of the probability space $\left(\eosalphabet, \sigma\left(\overC\right), \probfunction\right)$, this is 
+\begin{equation}
+\probfunction\left(\overC\left(\str\eos\right)\right) = \sum_{\strPrime \in \overC\left(\str\eos\right)} \pASM\left(\strPrime\right) = \pASM\left(\str \eos\right)
+\end{equation}
+and as before $\pASM\left(\str \eos\right) = \prod_{\tstep = 1}^{\strlen}\pASM\left(\sym_\tstep\mid\str_{<\tstep}\right)\pASM\left(\eos\mid \str\right)$.
+
+Altogether, this means that, given a finite string $\str\in\kleene{\alphabet}$, we intuitively have
+\begin{equation}
+\pushfwdMeasure(\rx=\str) =\pASM(\eos \mid \str)\pASM(\str).\label{eq:prob-finite-string}
+\end{equation}
+Additionally, as we will show in the next section, the probability of the set of infinite strings $\pushfwdMeasure(\rx \in \alphabet^{\infty})$ is the probability of generating an infinite string.\footnote{An important detail left out in this discussion is that both the singleton set $\{\str\}$ and $\alphabet^\infty$ need to be measurable in $(\kleene{\alphabet}\cup\alphabet^\infty, \sigma(\calC))$ for the above to make sense.
+This is addressed by \cref{prop:rv-singleton-measurable} and \cref{prop:rv-infinite-measurable}.}
+
+\subsubsection{Deriving $\eos$}
+As an aside, the preceding section allows us to motivate the $\eos$ token in \autoregmodel as a construct that emerges naturally.
+Specifically, for any $\str \in \kleene{\alphabet}$, rearranging \cref{eq:prob-finite-string}:
+\begin{subequations}
+\begin{align}
+\pASM(\eos \mid \str) &= \frac{\pushfwdMeasure(\rx = \str)}{\pASM(\str)}  \\
+    &= \frac{\pushfwdMeasure(\rx = \str)}{\pushfwdMeasure(\rx \in C({\str}))} \\
+    &= \pushfwdMeasure(\rx = \str \mid \rx \in C({\str}))
+\end{align}
+\end{subequations}
+where we have used $\pASM(\str) = \probfunction(\overC(\str)) = \probfunction(\rx^{-1}(C(\str))) = \pushfwdMeasure(\rx\in C(\str))$.
+This means that the $\eos$ probability in an \autoregmodel emerges as the conditional probability that, given that we must generate a string with a prefix $\str \in \kleene{\alphabet}$, the string is \emph{exactly} $\str$, i.e., that generation ends there.
+
+
+\subsection{Characterizing Tightness} \label{sec:tightness}
+Now that we have derives a measure-theoretic formalization of the probability space induced by locally-normalized models, we can use it to provide an exact characterization of tightness in \autoregmodel{}s. 
+First, we consider the event
+\begin{align}
+\sA_\idxk\defeq\{\bomega\in\eosalphabet^\infty:\omega_\idxk=\eos\} \label{eq:term-at-k}
+\end{align}
+in the probability space $(\eosalphabet^\infty,\sigma(\overcalC),\probfunction)$. 
+Intuitively, $\sA_\idxk$ is the event that an $\eos$ symbol appears at position $k$ in the string.
+Note that under this definition the $\sA_\idxk$ are not disjoint.
+For example, the string $\bomega = \syma\symb\,\eos\,\symc\,\eos\, \symd\symd\symd\symd\dotsm$ lives in the intersection of $\sA_3$ and $\sA_5$ since $\eos$ appears at both position 3 and position 5. 
+Using \cref{eq:term-at-k}, we can express the event consisting of all finite strings as 
+\begin{equation}
+\bigcup_{\idxk=1}^\infty \sA_\idxk.
+\end{equation}
+It follows that we can express the event of an infinite string as 
+\begin{equation}
+    \setcomplement{\left(\bigcup_{\idxk=1}^\infty \sA_\idxk\right)}=\bigcap_{\idxk=1}^\infty \setcomplement{\sA_\idxk}.
+\end{equation} 
+Thus, using the random variable $\rx$, we can express the probability of generating an infinite string as
+\begin{subequations}
+    \begin{align}
+    \pushfwdMeasure(\rx\in \alphabet^\infty)&=\probfunction(\rx^{-1} (\alphabet^\infty))  \\
+ &=\probfunction\left(\bigcap_{\idxk=1}^\infty \setcomplement{\sA_\idxk}\right).
+\end{align}
+\end{subequations}
+Hence, we can now restate and formalize the notion of tightness.
+\begin{definition}
+A sequence model is said to be \defn{tight} if $\pushfwdMeasure(\rx\in\alphabet^\infty) = 0$, in which case it is also a language model.
+Otherwise, we say that it is \defn{non-tight}.
+\end{definition}
+
+Note that the definition of $\sA_\idxk$ only uses a string's $\idxk$-prefix, and hence is a cylinder set of rank $\idxk$. 
+Recalling that the cylinder sets are measurable and so are the sets countably generated by them, we see that both the event consisting of all finite strings and the event consisting of all infinite strings are measurable.
+Thus, $\probfunction\left(\cup_{\idxk=1}^\infty \sA_\idxk\right)$ and $\probfunction\left(\cap_{\idxk=1}^{\infty} \setcomplement{\sA_\idxk}\right)$ are well defined.
+
+\subsubsection{A Lower Bound Result}
+We have characterized tightness in terms of the probability of a specific event $\probfunction\left(\cap_{k=1}^{\infty} \setcomplement{\sA_\idxk}\right)$, a quantity we now seek to determine.
+\begin{restatable}{lemma}{durrettConditional} \label{lem:durrett-435}
+If $\sum_{\idx=2}^\infty \probfunction\left(\sA_\idx\mid \cap_{m=1}^{\idx-1}\setcomplement{\sA_\idxm}\right)=\infty$, then
+$\probfunction\left(\cap_{\idxm=1}^\infty \setcomplement{\sA_\idxm}\right)=0$.
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:termination-proof}.
+% \end{proof}
+
+Using \cref{lem:durrett-435}, we can derive the following useful condition of tightness of a language model. Specifically, it applies when the probability of $\eos$ is lower bounded by a function that depends only on the \emph{length} and not the \emph{content} of the prefix.
+\begin{restatable}{proposition}{divergentLowerBound} \label{prop:div-implies-tight}
+    If $\pASM(\eos\mid\str)\geq \func(\tstep)$ for all $\str\in\alphabet^\tstep$ and for all $\tstep$ and $\sum_{\tstep=1}^\infty \func(\tstep)=\infty$, then $\probfunction(\cap_{\idxk=1}^\infty \setcomplement{\sA_\idxk})=0$. In other words, $\pASM$ is tight.
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:div-implies-tight-proof}.
+% \end{proof}
+
+\subsubsection{The Borel--Cantelli Lemmata}
+It turns out that \cref{prop:div-implies-tight} admits a converse statement in which we can prove a similar property of $\pASM$ by assuming that the model is tight.
+To show this result, we will use a fundamental inequality from probability theory---the Borel--Cantelli lemmata. 
+The Borel--Cantelli lemmata are useful for our purposes because they relate the probability measure of sets of the form $\bigcap_{\idx=0}^\infty \sA_\idx$ or $\bigcup_{\idx=0}^\infty \sA_\idx$ to a series $\sum_{\idx=0}^\infty p_\idx$.
+We will only state the lemmata here without supplying their proofs;\footnote{See \S2.3 in \citet{Durrett2019} or \S4 in \citet{Billingsley1986} instead.} however, we point out that \cref{lem:durrett-435} can be viewed as a parallel statement to the Borel--Cantelli lemmata and one can prove the lemmata using a very similar proof (cf. proof of Theorem 2.3.7 in \citealp{Durrett2019}).
+
+Concretely, given a sequence of events $\{\sA_\idx\}_{\idx=1}^\infty$ in some probability space, the Borel--Cantelli lemmata are statements about the event
+\begin{equation} \label{eq:defn-io}
+    \{\sA_\idx \text{ i.o.}\}\defeq\bigcap_{\idxm=1}^\infty\bigcup_{\idx=\idxm}^\infty \sA_\idx
+\end{equation}
+where i.o. stands for ``infinitely often.''
+Intuitively, $\{\sA_\idx \text{ i.o.}\}$ is the set of outcomes that appear in infinitely many sets in the collection $\{\sA_\idx\}_{\idx=1}^\infty$---they are the events that always remain in the union of an infinite family of sets no matter how many of the leading ones we remove (hence the name).
+We will not use Borel--Cantelli directly, but they offer a probabilistic proof of a key result (\cref{cor:durrett-434}) which will in turn lead to the desired statement about tightness.
+We formally state the first and second Borel--Cantelli lemmata below.
+\begin{lemma}[Borel--Cantelli I] \label{thm:bc1}
+If $\sum_{\idx=1}^\infty\probfunction(\sA_\idx) < \infty$, then $\probfunction(\sA_\idx \text{ i.o.})=0$.
+\end{lemma}
+
+\begin{lemma}[Borel--Cantelli II] \label{thm:bc2}
+Assume $\{\sA_\idx\}$ is a sequence of independent events, then $\sum_{\idx=1}^\infty \probfunction(\sA_\idx) = \infty \Rightarrow \probfunction(\sA_\idx \text{ i.o.})=1$.
+\end{lemma}
+
+Using the Borel--Cantelli lemmata, we can prove the following useful fact.
+\begin{restatable}{corollary}{durrettSequence}
+\label{cor:durrett-434}
+Given a sequence $\{p_\idx\}$ where $p_\idx\in[0,1)$. Then,
+\begin{equation}
+    \prod_{\idx=1}^\infty (1-p_\idx) = 0 \Longleftrightarrow \sum_{\idx=1}^\infty p_\idx=\infty.
+\end{equation}
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:durrett-434-proof}.
+% \end{proof}
+
+We now turn to proving a more general version of \cref{prop:div-implies-tight}, which would imply its converse. 
+First, we define the following quantity
+\begin{align}\label{eq:ptildeeos-set}
+\pdensTildeEOS(\tstep)\defeq\probfunction(\sA_\tstep\mid \setcomplement{\sA_1}\cap \dotsm \cap \setcomplement{\sA_{\tstep-1}})
+\end{align}
+which can be viewed as the \eos probability at step $\tstep$, given that \eos was not generated at any earlier step. 
+% In \cref{eq:weighted-eos} in \cref{sec:div-implies-tight-proof}, we show that, 
+One can also show that, when $\pdensTildeEOS(\tstep)$ is defined, it has the same value as
+\begin{align}\label{eq:ptildeeos}
+\pdensTildeEOS(\tstep)=\frac{
+    \sum_{\bomega\in \alphabet^{\tstep-1}} \pASM(\bomega)\pASM(\eos\mid\bomega)}
+    {\sum_{\bomega\in \alphabet^{\tstep-1}} \pASM(\bomega)\phantom{\pASM(\eos\mid\bomega)}},
+\end{align}
+which one can see as the weighted average probability of terminating at a string of length $\tstep$.
+
+We can now completely characterize the tightness of an \autoregmodelAcronym with the following theorem.
+\begin{restatable}{theorem}{lmTightMain} \label{prop:lm-tight-main}
+An \autoregmodel is tight if and only if $\pdensTildeEOS(\tstep)=1$ for some $\tstep$ or $\sum_{\tstep=1}^\infty \pdensTildeEOS(t)=\infty$.
+\end{restatable}
+% \begin{proof}
+% See \cref{sec:lm-tight-main-proof}.  The proof uses \cref{cor:durrett-434}, which accounts for the form of the condition.
+% \end{proof}
+The first condition intuitively says that there exists a step $\tstep$ at which the \autoregmodelAcronym will stop with probability 1.
+If the first case of the condition does not hold, the second case can be checked since its summands will be well-defined (the conditional probabilities in \cref{eq:ptildeeos} will not divide by $0$).
+We remark that \cref{prop:lm-tight-main} is a generalization of \cref{prop:div-implies-tight} since if $\pdensTildeEOS(\tstep)$ is lower-bounded by $f(\tstep)$ whose series diverges, its own series would also diverge. 
+However, since $\pdensTildeEOS(\tstep)$ involves the computation of a partition function in its denominator, it is most likely intractable to calculate \citep{Lin2021, Lin2022}. 
+Hence, \cref{prop:div-implies-tight} will be the main tool for determining tightness when we explore concrete language modeling frameworks later.
+                
+% Applying \cref{prop:div-implies-tight}, we see that (1) the \autoregmodel in \cref{ex:non-tight-rnn} is non-tight, because the series $\sum_{\tstep=1}^\infty \frac{1}{e^\tstep+1}$ is convergent, and (2) the \autoregmodel in \cref{ex:tight-rnn} is tight, since the series $\sum_{\tstep=1}^\infty \frac{1}{\tstep+1}$ is divergent.
+
+We have now very thoroughly defined the notion of language model tightness and provided sufficient and necessary conditions for an \autoregmodel or a sequence model to be tight.
+In the next sections, we start our exploration of concrete computational models of language, from the very simple and historically important finite-state language models, their neural variants, to the modern Transformer architectures.
+For each of them, we will also individually discuss their tightness results and conditions.

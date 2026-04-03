@@ -1,0 +1,6 @@
+Pretrained language models are used in a wide range of NLP tasks. When the model size becomes larger and larger, it is more and more difficult to tune the model with limited size of annotated data. 
+Overfitting easily happens, and the cost of model tuning is quite expensive.
+Thus, to avoid above issues, various parameter-efficient tuning methods are proposed.
+%
+In the following sections, we will first introduce \textbf{partially fine-tuning} \index{fine-tuning} techniques. They are simple but effective, which is widely used in Transformer model tuning.
+Besides selecting part of parameters for tuning, another line of work explores how to keep the model frozen, and add extra tuned parameters. These newly added and tuned modules are called \textbf{adapters}.

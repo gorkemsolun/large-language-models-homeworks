@@ -1,0 +1,38 @@
+\section{Prompt Engineering}
+Given a task, multiple prompts can work. However, finding the most effective prompts is desired in order to unlock the full potential of the LM. \textit{Prompt Engineering} is the process of designing a prompting function $f_{\text{prompt}}(\bm{x})$ that results in the most effective performance for the given task.
+
+\subsection{Manual Prompts}
+The most straightforward yet somewhat effective technique is to design the prompts for a given task manually. Since the number of required prompts is usually very less (1 to 8 depending on the task and the input sequence memory), designing manual prompts gives more control and flexibility to the user. 
+
+\subsection{Automated Prompts}
+While the strategy of manually creating prompts is intuitive and allows for solving various tasks with some degree of accuracy, there are several problems with this approach: creating and experimenting with these prompts is an art that takes time and experience, especially for more complicated tasks like multi-step reasoning, and even experienced prompt designers may fail to find optimal prompts manually \citep{jiang-etal-2020-know}.
+Searching for automated prompts can be further divided into \textit{discrete prompts} or \textit{continuous prompts}.
+
+\subsubsection{Discrete prompts}
+Discrete prompts (also sometimes known as \textit{hard prompts}), as the name suggests, automatically search for prompts in a discrete space, i.e. the prompts are usually text strings corresponding to natural language. Various methods have been proposed in this line of work and we explore a few approaches here. 
+\newline
+\citet{jiang-etal-2020-know} introduced a \textit{mining-based} approach that automatically identifies templates from a given set of training inputs $\bm{x}$ and outputs $\bm{y}$. This approach searches for strings in a large text corpus, such as Wikipedia, that contain both $\bm{x}$ and $\bm{y}$, and identifies the middle words or dependency paths between them that can be used as templates, e.g. in the form of ``\texttt{[X]} middle words \texttt{[Z]}".  
+\newline
+\textit{Paraphrasing} methods involve taking an original prompt and creating various alternative prompts to use as training data. These methods include translating the prompt into another language and back \citep{jiang-etal-2020-know}, using a thesaurus to replace words \citep{yuan2021bartscore}, or using a neural prompt rewriter designed to improve the accuracy of systems that use the prompt \citep{haviv-etal-2021-bertese}.
+\newline
+Treating prompts as generation tasks is an obvious choice and \citet{gao2021making} used the pre-trained T5 model for the template search process. \citet{bendavid2021pada} further extended it and proposed a domain adaptation algorithm that trains T5 to generate unique domain-relevant features. 
+\newline
+Other popular approaches involve \textit{gradient-based} search that finds sequences that trigger the LM to generate desired output and use that as prompts \citep{DBLP:conf/emnlp/WallaceFKGS19}. \textsc{AUTO PROMPT} \citep{autoprompt:emnlp20} creates a prompt based on a template that combines the original input $\bm{x}$ with trigger tokens (trigger tokens use the gradient-based method as shown in \citep{DBLP:conf/emnlp/WallaceFKGS19}) and the LM predictions for the prompt is then converted to class probabilities by marginalizing over a set of associated label tokens. 
+
+\subsubsection{Continuous prompts}
+%\mrinmaya{We can state that this is no longer a zero-shot inference approach but a parameter efficient finetuning approach.}
+Prompt construction aims to enable an LM to perform a specific task effectively, and it is not imperative for the prompt to be limited to natural language that can be interpreted by humans. Therefore, some approaches focus on \textit{continuous prompts} (also sometimes known as \textit{soft prompts}) that prompt the model directly in its embedding space.
+
+One such approach is \textit{Prefix Tuning} \citep{li2021prefix} that prepends a sequence of continuous task-specific vectors to the input while keeping the LM parameters frozen. Mathematically, this consists of optimizing over the following log-likelihood objective given a trainable prefix matrix $M_{\phi}$ and a fixed pre-trained LM parameterized by $\theta$.
+\begin{equation}
+\label{eq:prefix-tuning}
+    \max_{\phi} \log P(\bm{y}|\bm{x}; \theta; \phi) = \max_{\phi} \sum_{y_i} \log P(y_i | h_{< i}; \theta; \phi) 
+\end{equation}
+%\mrinmaya{Write down what is $M_\phi$ as a set?}
+% \gn{Could we write this more formally using equations?}
+In Eq.~\ref{eq:prefix-tuning}, $h_{<i} = [h_{<i}^{(1)}; \cdots; h_{<i}^{(n)}]$ is the concatenation of all neural network layers at time step $i$. It is copied from $M_{\phi}$ directly if the corresponding time step is within the prefix ($h_i$ is $M_{\phi}[i]$), otherwise it is computed using the pre-trained LM. 
+
+However, it will be more interesting to combine the discrete prompts with continuous approaches as prefix tuning might be very sensitive to the changes. \citet{zhong2021optiprompt} takes the advantage of the hybrid approach by first defining a template using \textsc{AutoPrompt}~\citep{autoprompt:emnlp20}'s (a discrete search method), initialize virtual tokens based on this discovered prompt, then fine-tune the embeddings to increase the performance. Similarly, \citet{liu2021ptuning} propose ``P-tuning", where continuous prompts are learned by inserting trainable variables into the embedded input. \citet{han2021ptr} further propose prompt tuning with rules (PTR) where logic rules create the templates alongside the virtual tokens whose embedding comes from the pre-trained LM. 
+
+
+%\mrinmaya{Maybe have a paragraph on tuning a language model with prompts.}

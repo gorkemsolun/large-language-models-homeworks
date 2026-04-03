@@ -1,0 +1,46 @@
+\section{Training on one task to solve other tasks}
+
+%\Andreas{Proposed outline: Start broadly in motivating transfer learning and its ties to transfer of learning. Then talk about early ideas of transfer in machine learning. Formalize what transfer learning means. Then move on to modern day transfer learning using large language models, and why (large $\rightarrow$ good) language models are particularly suitable for transfer learning.}
+
+Transfer learning is the idea of using knowledge gained from training on one task in order to solve other tasks. It takes inspiration from the concept of ``transfer of learning'' in psychology,
+%(although the ties in terms of practical transfer mechanisms are currently few), 
+which is the phenomenon of a person being able to apply some skill or piece of knowledge they have already acquired to a new situation or context. For instance, a person hoping to learn Swiss German will probably be more efficient in their learning trajectory if they have already acquired knowledge of other related languages, like say Dutch or English. Transfer is believed to be an integral part of the human learning process,
+% \footnote{.} 
+%although to what extent and how transfer should be conceptualized and isolated remains under debate \citep{Helfenstein2005TransferR}.
+thereby begging the question, can machine learning models benefit from similar transfer-related effects?
+Transfer of learning benefits is in fact one of the main reasons for the strong focus on mathematics in a typical school curricula -- it strengthens the student in their ability to apply problem solving, reasoning and several other skills more broadly \citep{hohensee2021transfer}.
+ 
+The idea of transfer learning in neural networks actually dates all the way back to the 70s.
+\citet{bozinovski1976influence} first posed the question of transfer learning as follows: Consider a neural network $\func_\params$ that has been trained on a first supervised learning task. Next, it is provided a second supervised learning task with an accompanying train and test split of data. The parameters (or memory) $\params$ of the network are then updated through some learning algorithm on the train set. Now, is it possible that learning on the first task allows learning on the second task with a smaller (positive transfer learning) or larger (negative transfer learning) set of training data, compared to the case of no previous learning? \citet{bozinovski1976influence} provided a geometrical model, along with empirical evidence, showing that such was indeed the case.
+%Through a geometrical set of conditions, the details of which we omit here, he was able to show theoretically that so was indeed the case. 
+
+Years later, when neural networks had again started to gain traction within the AI community, a seminal work by \citet{pratt1992} introduced the discriminability-based transfer (DBT) algorithm. DBT went beyond simply using the very same network that had been trained on the first task as an initialized network on the second task, 
+%initializing the parameters of the second network with the parameters obtained by training on the first task, and worked 
+by additionally scaling the parameters of the network according to how well they fit the training data of the second task. It was able to achieve the same asymptotic performance as that of randomly initialized networks with fewer training epochs, across several different tasks. 
+
+%Transfer learning has experienced much success in recent years, not least via large language models.
+%While it took much longer until any tangible practical use of transfer learning could be demonstrated, t
+The core idea remains more or less the same today. As we will see however, it is not even necessary to update the parameters of the network in order to achieve positive effects of transfer learning with large language models. Indeed, a recent and very effective trend in transfer learning with large language models is that of demonstrating a new task with a set of examples in the context window of an already trained language model, which nudges the language model into generating text according to the specifications of that new task. This is typically referred to as \defn{prompting} \index{prompting} in the context of NLP (also, modulo context and some nuances, called ``in-context learning'' or ``few-shot learning''), and we will discuss it in depth in \Cref{sec:prompting}. Going beyond \citeposs{bozinovski1976influence} original definition, we want to encapsulate such forms of transfer learning as well. However, in this course we consider only the case in which the first learning task is that of language modeling. We arrive at the following operational definition.
+%To encapsulate such forms of transfer learning, we consider a more general operational definition than \citeposs{bozinovski1976influence} original one, as follows:
+\clearpage
+
+\begin{definition}[Transfer learning for language models]
+Consider a language model $\pLM(\str; \params)$ over $\kleene{\alphabet}$ trained on corpus $\dataset = \{ \str^{(\idx)} \mid \str^{(\idx)} \in \alphabet \}_{\idx=1}^{\setsize}$. Next, consider a target task $\task$, posed as learning a function $\func: \lang \mapsto \hiddspace$, for some input space $\lang\subseteq\kleene{\alphabet}$ and output space $\hiddspace$. We say that transfer learning occurs if 
+%the parameters $\params$ allows for more efficient learning of $\func$ compared to a randomly initialized set of parameters $\params'$.
+parameterizing $\func$ as $\func_{\hat{\params}}$, with $\hat{\params} \subseteq \params$, 
+%\andreas{We could change subset to a mapping, so that we also encapsulate the case of \citet{pratt1992}. Any thoughts?} 
+allows for more efficient learning of $\task$ compared to initializing $\func$ as $\func_{\params'}$, with $\params'$ being some set of parameters that are sampled randomly from some distribution.
+
+%=\{\mathcal Y, f(x)\}$, with feature space $\mathcal X$ and output space $\mathcal Y$ and training data $\dataset$
+\end{definition}
+
+Note that $\task$ can be any task, as long as it takes a language $\lang$ as input. The above definition is intentionally left open in what we mean by ``efficient learning'', and it does not necessarily involve training in the traditional sense of updating the parameters to minimize some loss function. We typically measure efficiency in terms of number of training samples and/or number of training iterations, \emph{ceteris paribus}. 
+
+Now that we have formalized what we mean by transfer learning, we can introduce some related terminology that will be used in this and later chapters: The network trained on the source task (in our case language modeling) is called a \defn{pretrained model}, \index{pretrained model} and we refer to the learning process of that model as \defn{pretraining}. The process of updating the weights of a pretrained model for a new target task is called \defn{fine-tuning}.
+Fine-tuning does not encapsulate all forms of transfer learning, as our definition does not necessitate updating the parameters of the language model.
+\index{fine-tuning} \index{pretraining}
+%Applying transfer learning to learn multiple tasks with an underlying model that shares a set of parameters across the tasks is called \defn{multi-task learning}.
+A related concept to transfer learning is \defn{multi-task learning}, which is the idea of sharing learned information across multiple tasks. In contrast to transfer learning, the tasks are learned jointly rather than sequentially.
+It has become common in recent years to evaluate models on multiple tasks in order to test their multi-task learning abilities. See for instance DecaNLP \citep{McCann2018decaNLP}. %\defn{multi-task learning}
+
+Language modeling is a particularly suitable task for transfer learning since it is very easy to scale up language modeling data. We only require some corpus of text that approximately captures the domain we want to model. Since the input space of language modeling is the same as the output space it does not require any expensive labeling — it is a \defn{self-supervised} task. In the next sections, we will study a few particular instances and variations of language modeling-based transfer learning, starting with ELMo. \index{self-supervision}

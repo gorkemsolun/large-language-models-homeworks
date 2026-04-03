@@ -1,0 +1,221 @@
+\newcommand{\paramspace}{{\color{MacroColor}\Theta}}
+\newcommand{\modelparams}{{\color{MacroColor}\vtheta}}
+\newcommand{\model}{{\color{MacroColor}\pM^\vtheta}}
+\newcommand{\loglike}{{\color{MacroColor}\mathcal{L}}}
+\newcommand{\vthetamle}{{\color{MacroColor}\modelparams{\mathrm{MLE}}}}
+\newcommand{\corpus}{{\color{MacroColor}\mathcal{D}}}
+\newcommand{\corpustrain}{{\color{MacroColor}\mathcal{D}_{\scaleto{\text{train}}{4pt}}}}
+\newcommand{\corpustest}{{\color{MacroColor}\mathcal{D}_{\scaleto{\text{test}}{4pt}}}}
+\newcommand{\corpusval}{{\color{MacroColor}\mathcal{D}_{\scaleto{\text{val}}{4pt}}}}
+\newcommand{\calX}{{\color{MacroColor}\mathcal{X}}}
+\newcommand{\ent}{{\color{MacroColor}\mathrm{H}}}
+\newcommand{\objective}{{\color{MacroColor}O}}
+\newcommand{\loss}{{\color{MacroColor}\ell}}
+
+
+
+The \defn{language modeling task} refers to any attempt to estimate the parameters\footnote{Most of this course focuses on the parametric case, i.e., where $\pLM$ is governed by a set of parameters $\vtheta$. 
+However, we will briefly touch upon various non-parametric language models.\looseness=-1}\ryan{We don't have time for this, but I am thinking the Bayesian non-parametric ones and the nearest neighbor ones.\response{clara} do you want that done in this chapter or at some other point? \response{ryan} a new section, I think. Not sure where, though. Maybe after the transformer section?
+\response{clara} ok, keeping this here as a reminder} of $\pM$ from data $\corpus = \{ \vy^{(n)}\}_{n=1}^{N}$, which we assume was generated according to the distribution $\pLM$. 
+We will now outline the general learning framework in which we will operate for most of the course.\looseness=-1
+
+
+Formally, consider a model $\pM$ with parameters $\vtheta\in \paramspace$, where $\paramspace$ is the space of all possible values that $\modelparams$ can take on. 
+As a concrete example, $\modelparams$ could be the conditional probabilities in a simple, standard \ngram model for a given prefix of size $n-1$, i.e., $\modelparams$ is $n-1$ simplices of size $|\alphabet|$.\footnote{One might be attempted to assume we only need $|\alphabet|-1$ parameter per simplex, but we each condition is over $\alphabet \cup \{\eos\}$.}
+As another example, $\modelparams$ could be the weights of a neural network; the set $\paramspace$ would then cover all possible valid weight matrices that could parameterize our model. Next, consider a corpus of data $\corpus = \{ \vy^{(n)}\}_{n=1}^{N}$. Critically, we make the following assumption about this data:
+\begin{assumption}
+The samples $\vy^{(n)}$ in our dataset $\corpus = \{ \vy^{(n)}\}_{n=1}^{N}$ are generated independently and identically-distributed (i.i.d.) by some unknown distribution $\pLM$.\ryan{We need to discuss what this assumption means, e.g., that we don't learn discourse structure. And, it can be overcome by chunking the data into paragraphs or something.
+\response{clara} ok, given all the other points about data scattered throughout this section, perhaps we should make a dedicated subsection (either before talking about MLE since the iid part is required for it, or immediately after the objective section). Thoughts?}
+\end{assumption}
+
+\noindent The question of interest is then: How do we go about choosing the best parameters $\vtheta\in\paramspace$ for our model $\pM$ to serve as an approximation of $\pLM$ when we only have observed data $\corpus$ to measure the quality of this approximation? 
+Such a learing problem is often treated as an optimization problem. 
+Here we will discuss the various components of this optimization problem, e.g., the objective, including regularization, and the algorithm used to perform the optimization.
+Note that the learning paradigm for fine-tuning a language model for a downstream task will be covered later in the course. 
+
+
+\subsection{Language Modeling Objectives}
+
+As is the case in many machine learning problems, we can cast our problem as the search for model parameters $\vtheta^\star \in \paramspace$ such that the model induced by those parameters maximizes a chosen objective, or alternatively, minimizes some loss $\loss: \paramspace \rightarrow \mathbb{R}_{\geq 0}$.\clara{could also explicitly make $\loss$ a function of $\corpus$. Thoughts?} This objective (or loss) can be used to measure the ``goodness'' of the resulting model. 
+In simple math, we search for the solution: 
+\begin{equation}
+\vtheta^\star \defeq \argmin_{\vtheta \in \paramspace} \loss(\vtheta)
+\label{eq:opt}
+\end{equation}\ryan{also, I would include the sum over the data in this. We need to introduce the i.i.d. assumption ss an assumption in the assumption environment as well.\response{clara} ok will add i.i.d. thing. But I think it makes more sense to define the objective in terms of a dataset}
+\noindent Note that in this course, we consider $\loss$ that are defined in terms of our chosen data $\corpus$. 
+
+\subsubsection{Maximum Likelihood}\label{sec:standard-objective}
+The standard objective in language modeling can be derived from the principle of maximum likelihood.  
+\begin{principle}[Maximum Likelihood]
+The optimal parameters for a model are those that maximize the likelihood of observing the given data according to that model. 
+\end{principle}
+\noindent where the likelihood of the dataset $\corpus = \{ \vy^{(n)}\}_{n=1}^{N}$ under a distribution $\pM$ parameterized by $\vtheta$ is formally the joint probability of all $\vy^{(n)}$ according to this distribution:
+\begin{equation}\label{eq:mle}
+    L(\vtheta) = \prod_{n=1}^{N} \pM(\vy^{(n)}; \vtheta).
+\end{equation}\clara{better way to denote a distribution $\pM$ parameterized by $\vtheta$? \response{clem} can we move the M and LM to a superscript in the whole script so we can have $\paramspace$ as a subscript? not even sure that'd be better than this tbh}
+Note that typically we optimize $\gL = \log L$ rather than $L$ directly, i.e., we set $\loss=-\gL$; this transformation does not alter the solution to \cref{eq:opt} due to the monotonic nature of $\log$, but it can help ensure numerical stability given the finite precision of the computing frameworks that we employ. Further, most of the models that we'll encounter follow a local-normalization (or autoregressive) scheme, as given in \cref{def:locally-normalized-model}. Taken together, this means the log-likelihood of the dataset $\corpus$ can be rewritten as 
+\begin{equation}\label{eq:mle_decomp}
+    \gL(\vtheta) = \sum_{n=1}^{N}\sum_{t=1}^T \log\pM(y_t^{(n)}\mid \vy_{<t}^{(n)}; \vtheta).
+\end{equation}
+%We call the set of parameters that maximize \cref{eq:mle} the MLE estimate $\boldsymbol\theta_{\text{MLE}}$ 
+
+Conveniently, the use of $\gL$ as the language modeling objective does not require explicitly labeled data; the tokens in the text itself are our ground-truth labels.  For this reason, language model estimation under the log-likelihood objective is often referred to as \defn{self-supervised}. The lack of a need of explicitly labeled data is one of the main reasons that the NLP community has been able to create larger and larger models. Yet it may also be a cause of some of their empirically observed pathologies: most of the data does not go through the same vetting process as it would have been if labeled. Consequently, we might expect  the percentage of low-quality data used to estimate these language models to be higher than in other NLP tasks.
+
+\subsubsection{Equivalent Objectives}
+Notably, using $-\gL$ as our loss during parameter estimation is equivalent to using a number of other loss functions.  
+For example, the cross-entropy between two distributions $p_1$ and $p_2$ with support $\gY$ is defined as
+\begin{equation}\label{eq:cross-ent}
+    \ent(p_1, p_2) = \sum_{\vy\in\gY}p_1(\vy)\log p_2(\vy) 
+\end{equation}
+Let $p_1 = \widehat{\pLM}$ be our representation of the ground truth distribution and $p_2 = \pM$ be our model with parameters $\modelparams$. 
+If we let $\widehat{\pLM}$ be the empirical distribution, represented as a one-hot encoding of the text,\clara{do we need to describe what this looks like?} then finding model parameters that minimize \cref{eq:cross-ent} is equivalent to finding model parameters that minimize $-\gL$.\footnote{Under the standard practice of taking $0\log(0) = 0$, the only elements of $\gY$ that make a nonzero contribution to $\ent(p_1, p_2)$ are sequences in the support of $p_1$. Thus, when $p_1$ is the one-hot encoding of $\corpus$, then summing over $\gY$ is equivalent to summing over $\corpus$, the only elements with nonzero probability under $p_1$.} A similar property is true of the $\mathrm{KL}$ divergence between two distributions $p_1$ and $p_2$:
+\begin{equation}\label{eq:kl}
+    \mathrm{KL}(p_1\mid\mid p_2) = \sum_{\vy\in\gY}p_1(\vy)\log p_2(\vy)  - p_1(\vy)\log p_1(\vy)
+\end{equation}
+which, in words, is a measure of the distributions' difference.  Again, let's take $p_1$ to be our one-hot encoding of the text and $p_2$ to be our model.  When $\loss(\modelparams) =\mathrm{KL}(p_1\mid\mid p_2)$, the $p_1(\vy)\log p_1(\vy)$ term is constant with respect to model parameters $\modelparams$, which should only affect values of $p_2$, making it likewise equivalent to using $\gL$ as our objective. 
+
+The equivalence of all of these objectives provides intuition about our many goals when learning $\pM$: (1) we want a close (w.r.t. a given metric) approximation of the data-generating distribution, and (2) this approximation should place high probability on samples of real language data.\clara{more to say here?}
+
+Yet optimizing model parameters for these equivalent objectives has potential downsides as well. A closer inspection of \cref{eq:kl} reveals that $p_2$ must put probability mass on \emph{all} samples $\vy$ in the support of $p_1$; otherwise, it is assigned a divergence of $\infty$ \clem{i think something like "the KL goes to infinity for a particular sample when $p_1$ assigns it probability mass and $p_2$ does not." might be clearer\response{clara} tried to reword. is it better now?}. Since the model is not explicitly penalized for extraneous coverage, it will instead resort to placing mass over all of $\Sigma^*$ to avoid such gaps; this is sometimes referred to as \emph{mean-seeking} behavior. In practice, this means that sequences of tokens that one might qualitatively describe as gibberish are assigned nonzero probability by $\pM$. It is unclear whether this is a desirable property under a language model. While perhaps useful when using such a model to assign probabilities to strings---in which case we might not want to write off any string as completely improbable---it could prove problematic when generating text from these models, a topic covered later in this course. 
+
+Separately, the autoregressive nature of the standard maximum likelihood objective does not allow the model to make full use of both sides of context when producing the probability distribution over a token. While this setup might be more realistic when using a language model for tasks such as generation---for which we may want to generate outputs sequentially to mimic human language production---access to both sides of the context could be critical when using the model for tasks such as acceptability judgments or classification. These reasons motivate the use of other objectives for choosing parameters. 
+
+
+\subsubsection{Masked Language Modeling}
+Masked language modeling, is an objective derived from the \citep{cloze} task in psychology. 
+In a masked-language modeling setup, the goal is to predict the omitted token from a piece of text that constitutes a logical and coherent completion. For example, in the piece of text
+\begin{example}
+The students \texttt{[MASK]} to learn about language models.
+\end{example}
+\noindent we  predict \textit{want} or \textit{like} with high probability for the \texttt{[MASK]} position. The goal of masked language modeling is to approximate the probability distribution over tokens in our vocabulary as the original token at a given masked position. %that can  masked positions. 
+Similarly to the standard language modeling objective, we can choose model parameters by optimizing for the log-likelihood of a dataset $\corpus$. Albeit in this case, the words at a percentage of randomly-chosen positions in $\corpus$ are replaced with  \texttt{[MASK]} and the model is given \emph{both} sides of context around the masked token in order to make its prediction: 
+\begin{equation}\label{eq:mlm}
+    \gL_{\texttt{MLM}}(\modelparams) = \sum_{n=1}^{N}\sum_{t=1}^T \log\pMLM(y_t^{(n)}\mid \vy_{<t}^{(n)}, \vy_{>t}^{(n)}; \modelparams)\mathbbm{1}\{y_t^{(n)}\! = \! \texttt{[MASK]}\}
+\end{equation}
+As mentioned in \cref{sec:lm-tightness}, a masked language model is not a valid language model in the sense of \cref{def:language-model} because it does not provide a valid distribution over $\Sigma^*$. 
+Yet, masked language models have become increasingly popular as base models for fine-tuning on downstream tasks, particularly since the advent of BERT \citep{devlin-etal-2019-bert}.\clara{more to say here?}
+
+\subsubsection{Other Divergence Measures}
+From a given hypothesis space (described by $\paramspace$), the distribution  that  minimizes a given divergence measure with $\pLM$ exhibits certain properties with respect to how probability mass is spread over the support of that distribution. For example, the model $\pM$ that minimizes $\mathrm{KL}(\pLM \mid\mid \pM)$ exhibits \emph{mean-seeking} behavior, as discussed in \cref{sec:standard-objective}. These properties  have been studied in depth by a number of works \citep{minka_divergence,theis_note_2016,huszar_how_2015,labeau-cohen-2019-experimenting}. 
+The implication of these findings is that, depending on the use case for the model, other divergence measures may be better suited as a learning objective. For example, prior work has noted frequency biases in models estimated using the standard log-likelihood objective, i.e., these models exhibit an inability to accurately represent the tails of probability distributions \citep{gong_frequency,wei-etal-2021-frequency}. This is particularly relevant in the case of language modeling, as token-usage in natural language tends to follow a power-law distribution \citep{zipf}. 
+Consequently, when we care particularly about accurately estimating the probability of rare words, we may wish to instead use a loss function that prioritizes good estimation of probability distribution tails.  On the other hand, in the case of language generation, we may desire models that only assign probability mass to outputs that are highly-likely according to $\pLM$, even if this means assigning probabilities of $0$ to some outcomes possible under $\pLM$. In other words, we want a model with \emph{mode-seeking} behavior, which is characteristic of models trained to minimize $\KL(\pM \mid\mid \pLM)$.
+
+Many other divergence measures---such as general power divergences, reverse $\KL$ divergence, and total variation distance---are not stable loss functions for training neural models.\todo{need to finish this section... perhaps talk about relationship of reverse KL and reinforcement learning?} 
+
+
+%\Clem{My understanding with dropout is that it realizes an ensemble over possible networks in which the weights are shared. For that reason, you would normally have to average over these networks weighted by their probability to produce a prediction. This is expensive, so a shortcut involves re-scaling each weight by its probability of being active. \citep{Goodfellow-et-al-2016} ch.7 p. 259-260}
+
+
+\subsection{Parameter Estimation}
+Given an objective $\loss$ and a parameter space $\paramspace$ from which to choose model parameters, we are now tasked with \emph{finding} the parameters $\modelparams^\star$, i.e., solving \cref{eq:opt}. For the class of models that we consider (those parameterized by large neural networks), finding an exact solution analytically would be impractical, if not impossible. Thus, we must resort to numerical methods, where we find approximately optimal parameters by iterating over solutions. This is known as \defn{parameter estimation}, or more colloquially as \defn{training} our model.  \clem{are u saying the objective is not convex/concave, so local optima are the best we can hope for?\response{clara} I don't think this implies that. Just that there isnt a closed form solution} 
+
+Here we will review the various components of training a language model from start to finish. However, note that many of the techniques used for training language models are generally applicable machine learning techniques, e.g., gradient-descent algorithms. We assume basic knowledge of such techniques and largely focus on methods that are specific to training language models.
+
+
+\subsubsection{Data Splitting}
+In any machine learning setting, evaluating a model based solely on its performance on the data on which its parameters were estimated may give a false sense of model quality. While we can construct a model that performs arbitrarily well on a given dataset, our goal is to build a model that generalizes to unseen data.  Thus, it is important to measure the final performance of a model on data  that has had no influence on the choice of model parameters. 
+
+This practice can be accomplished simply by splitting the data into several sets. The two basic sets are a training set $\corpustrain$ and test set $\corpustest$; as the names imply, the training set is used during parameter estimation while the test set is used for evaluating final performance. The training set can be further divided to produce a validation set $\corpusval$. Typically, $\corpusval$ is not used to define the objective for which parameters are optimized. Rather, it serves as a check during training for the generalization abilities of a model, i.e., to see whether the model has started overfitting to the training data. The validation set can be used, e.g., to determine when to stop training.\todo{polish this}
+
+\subsubsection{Parameter Initialization}
+Our search for (approximately) optimal model parameters must start from some point in the parameter space, which we denote as $\modelparams_0$. Ideally, starting from any point would lead us to the same solution, or at least to solutions of similar quality. Unfortunately, this is not the case: both training dynamics and the performance of the final model can depend quite heavily on the chosen initialization strategy, and can even have high variance between different runs of the same strategy. A poor initial starting point  may lead to models that take longer to train and/or may lead our learning algorithm to converge to sub-optimal solutions \citep{Dodge2020FineTuningPL,sellam2022the}. This can be the case even when only estimating the final layer of a network, e.g., when building a classifier by appending a new layer to a pretrained model---a recent, widely-adopted practice in NLP \citep{Dodge2020FineTuningPL}. 
+
+%. From the Bayesian perspective, improved weight initialization can be viewed as starting with a better prior, which leads to a more accurate posterior and thus better generalization ability. 
+
+Perhaps the simplest approach is to randomly initialize all parameters, e.g., using a uniform or normal random variable generator. The parameters of these generators (mean, standard deviation, bounds) are considered hyperparameters of the learning algorithm. Subsequent methods have iterated on this strategy to develop methods that take into account optimization dynamics or model architectures. For example, \cite{pmlr-v9-glorot10a} proposed Xavier init, which keeps the variance of the input and output of all layers within a similar range in order to prevent vanishing or exploding gradients; \cite{he_initialization} proposed a uniform initialization strategy specifically designed to work with ReLU activation units. While most deep learning libraries use thoughtfully-selected initialization strategies for neural networks, it is important to internalize the variance in performance that this can cause.\clara{what more can be said here?}
+%
+
+
+\subsubsection{Numerical Optimization}
+From a starting point $\modelparams_0 \in \paramspace$ chosen according to our initialization strategy, we want to find $\modelparams^\star$ in an efficient manner. 
+ This is where numerical optimization algorithms come into play. 
+A numerical optimization algorithm can be thought of as a search algorithm: given parameters $\modelparams_t$ at time $t$, we want to find a $\modelparams_{t+1}$ that further optimizes our objective $\loss$. Ideally, after a sufficient number of iterations, we will reach $\modelparams^\star$ using this approach. 
+To this end, we require a precise method for choosing how to move within $\paramspace$ in order to find our next set of parameters. 
+
+The basic algorithm for searching the parameter space for $\modelparams^\star$ follows a simple formula: starting from $\modelparams_0 \in \paramspace$, we iteratively compute $\modelparams_1, \modelparams_2, \ldots$ as
+\begin{equation}
+\modelparams_{t + 1} = \modelparams_t + \text{update magnitude} \times \text{update direction}.
+\end{equation}
+where the update added to $\modelparams_t$ to obtain $\modelparams_{t+1}$ is intended to move us closer to $\modelparams^\star$. Once some pre-defined desideratum has been met, e.g., the score under our objective is not improving in subsequent iterations, we stop and return the current set of parameters. We can express the general structure of these algorithms using the following pseudocode:
+
+\newcommand{\desiderata}{S}
+\newcommand{\learningrate}{\boldsymbol\eta}
+\newcommand{\updatedir}{U}
+\begin{algorithm}\label{alg:param-opt}
+\textbf{Input:} $\loss$ objective\\
+\hspace*{3.2em} $\modelparams_0$ initial parameters \\
+\hspace*{3.2em} $\learningrate\!$ learning rate \\
+\hspace*{3.2em} $\desiderata \!: \loss \times \paramspace \times \paramspace \rightarrow \{\mathrm{True}, \mathrm{False}\}$ stopping criterion \\
+\hspace*{3.2em} $\updatedir\!: \loss \times \paramspace \rightarrow \paramspace$ update direction for our parameters
+\begin{algorithmic}[1]
+\caption{Basic steps for parameter optimization. }
+    \For{$t = 0, \cdots, T$}
+        \State{$\modelparams_{t + 1} \gets \modelparams_t + \learningrate_{t} \cdot \updatedir(\loss, \modelparams_t)$}
+       \If{$\desiderata(\loss, \modelparams_t, \modelparams_{t-1})$}
+            \State \textbf{break}
+       \EndIf
+    \EndFor
+    \State \Return $\modelparams_{t}$
+\end{algorithmic}
+\end{algorithm}
+
+Many of the numerical optimization techniques in machine learning are gradient-based, i.e., we use the gradient of the objective with respect to current model parameters (denoted as $\nabla_{\modelparams_t} O({\modelparams_t})$) to determine our update direction. Standard vanilla gradient descent takes the form of \cref{alg:param-opt} when $\updatedir = \nabla_\modelparams \loss(\modelparams)$, $\learningrate = c\cdot \mathbf{1}$ for some constant $c$ and $\desiderata(\loss, \modelparams_t, \modelparams_{t-1}) = \mathbbm{1}\{| \loss(\modelparams_t) - \loss( \modelparams_{t-1})| < \epsilon\}$\clara{not sure whether to use indicator variable here or just the expression on its own} for user-chosen $\epsilon$. 
+Modern training frameworks rely on backpropagation---also known as reverse-mode automatic differentiation \citep{griewank2008evaluating}\clara{would you like other citations? Bauer?}---to compute gradients efficiently (and, as the name implies, automatically!). 
+In fact, gradient computations can be implemented such that they have the same complexity as function evaluation. We do not provide a formal discussion of backpropagation here but see \citet{griewank2008evaluating} for this material.\clara{@Ryan, do you want an explicit mention of the NLP course?}
+
+Perhaps the most widely employed optimization algorithms are variations of stochastic gradient descent (SGD), such as mini-batch gradient descent. Vanilla gradient descent requires computation of $\loss$, which is based on  the entire dataset $\corpustrain$, in order to determine the direction in which to move parameters $\updatedir$. This is an incredibly expensive computation. Rather, we can instead base $\updatedir$ off of a randomly selected subset of the data. Indeed, in expectation, $\nabla_\modelparams(\modelparams, \corpus)$ should have the same value when $\corpus = \corpustrain$ and when $\corpus = \corpus' \subset\corpustrain$. Therefore, an optimization algorithm would likely take much less time to converge if allowed to rapidly compute estimates of the gradient rather than slowly computing the exact gradient at each step.\todo{finish section on stochastic gradient descent; optimization algs are for NNs in general (not really LM specific ones) but perhaps there are ones for when output dim is large?} 
+
+
+
+\subsubsection{Teacher Forcing}
+A language model uses prior context in order to make prediction about the distribution over the next token. During training, we are faced with a choice: we could either use the model's token predictions from the previous time step (e.g., the most probable token) as the prior context or use the ground-truth prior context from our data. The latter method is often referred to as \defn{teacher forcing}: Even if our model messes up at one step of prediction, we intervene and provide the correct answer for it to make subsequent predictions with.
+
+Intuitively, we might want our model to able to accurately predict an entire sequence of tokens on its own. However, using previous model outputs  in order to make subsequent predictions can lead to serious instability during training, especially if implemented from the start of training. Further, from a theoretical perspective, training with the maximum likelihood objective mandates that we should use the teacher-forcing approach since likelihood is defined with respect to the ground-truth context. 
+Yet this form of guidance can manifest in downstream language modeling tasks, such as generation. Since the model does not get exposure to its own generations during training, small errors in predictions can compound, leading to degenerate text. This problem is known as \defn{exposure bias}. 
+
+Methods for alleviating exposure bias have been proposed, such as scheduled sampling \cite{bengio_scheduled_sampling}: after an initial period of training with teacher forcing, some percentage of the models predictions are conditioned on prior model outputs, rather than the ground-truth context. Yet there are both theoretical and computational issues with such approaches \cite{huszar_how_2015}, which we do not touch on here.
+
+
+
+
+
+\subsubsection{Early Stopping}
+As previously discussed, performance on $\corpustrain$ is not always the best indicator of model performance. Rather, even if our  objective continues to increase as we optimize over model parameters, performance on held-out data, i.e., $\corpustest$ or even $\corpusval$, may suffer as the model starts to overfit to the training data. This phenomenon inspires a practice called \defn{early stopping}, where we stop updating model parameters before reaching  (approximately) optimal model parameter values w.r.t.  $\corpustrain$. Instead, we base our stopping criterion $\desiderata$ off of model performance on $\corpusval$ as a quantification of generalization performance, a metric other than that which model parameters are optimized for, or just a general slow down in model improvement on the training objective. 
+
+Early stopping can be viewed as a regularization technique, in that it sacrifices better training performance for better generalization performance. As with many regularization techniques, early stopping can have adverse effects as well. Recent work suggests that many models may have another period of learning after an initial period of plateauing train/validation set performance. Indeed, a sub-field has recently emerged studying the ``grokking'' phenomenon, when validation set performance suddenly improves from mediocre to near perfect after a long period in which it appears that model learning has ceased, or even that the model has overfit to the training data. Thus, it is unclear whether early stopping is always a good practice.\clara{more to say here?}
+%discuss overfitting vs learning more subtle characteristics of data
+
+
+\subsection{Regularization Techniques}
+Our goal during learning is to produce a model $\pM$ that generalizes beyond the observed data; a model that perfectly fits the training data but produces unrealistic estimates for a new datapoint is of little use.   
+Exactly fitting the empirical distribution is therefore perhaps not an ideal goal. It can lead to \defn{overfitting}, which we informally define as the situation when a model uses spurious relationships between inputs and target variables observed in training data in order to make predictions. While this behavior decreases training loss, it generally harms the model's ability to perform on unseen data, for which such spurious relationships likely do not hold.
+
+
+To prevent overfitting, we can apply some form of regularization. 
+\begin{principle}[Regularization]
+    Regularization is a modification to a learning algorithm that is intended to increase a model's generalization performance, perhaps at the cost of training performance.\footnote{Adapted from \citet{Goodfellow-et-al-2016}, Ch. 7.}
+\end{principle}
+ There are many ways of implementing regularization, such as adding a penalty to the  loss function to reflect a prior belief that we may have about the values model parameters should take on \cite{hastie01statisticallearning,bishop}.
+Here we specifically consider the forms of regularization often used in the training of language models. 
+Most fall into two categories: the introduction of  noise into the optimization process to ensure a model's robustness to yet unseen inputs---e.g., by randomly omitting certain computations---or the addition of a term to our loss that reflects biases we would like to impart on our model. This is by no means a comprehensive discussion of regularization techniques, for which we refer the reader to Ch.7 of \citet{Goodfellow-et-al-2016}.
+
+
+\subsubsection{Weight Decay}
+
+A bias that we may wish to impart on our model is that not all the variables available to the model may be necessary for an accurate prediction. Rather, we hope for our model to learn the simplest mapping from inputs to target variables, as this is likely the function that will be most robust to statistical noise.\footnote{This philosophy can be derived from Occam's Razor, i.e., the principle that one should search for explanations constructed using the smallest possible set of elements.} This bias can be operationalized using regularization techniques such as weight decay \citep{Goodfellow-et-al-2016}---also often referred to as $\ell_2$ regularization. In short, a penalty for the $\ell_2$ norm of $\modelparams$ is added to $\loss$. This should in theory discourage the learning algorithm from assigning high values to model parameters corresponding to variables with  only a noisy relationship with the output, instead assigning them a value close to 0 that reflects the a non-robust relationship. 
+
+%\clem{Idk about high variance here. From \cite{Goodfellow-et-al-2016} ch.7 p.229-230: "Only directions along which the parameters contribute signiﬁcantly to reducingthe objective function are preserved relatively intact. In directions that do notcontribute to reducing the objective function, a small eigenvalue of the Hessiantells us that movement in this direction will not signiﬁcantly increase the gradient."}
+
+\subsubsection{Entropy Regularization} 
+One sign of overfitting in  a language model $\pM$ is that it places effectively all of its probability mass on a single token.\footnote{The softmax used to transform model outputs into a probability distribution naturally serves as somewhat of a regularizer against this behavior, since it maps to the interior of the probability simplex, i.e., no class can be assigned a probability of $0$. } Rather, we may want the distributions output by our model to generally have higher entropy, i.e., following the principle of maximum entropy: ``the probability distribution which best represents the current state of knowledge about a system is the one with largest entropy, in the context of precisely stated prior data'' \cite{jaynes}. Several regularization techniques, which we refer to as \defn{entropy regularizers}, explicitly penalize the model for low entropy distributions. 
+
+Label smoothing \citep{label_smoothing} and the confidence penalty \citep{confidence_penalty} add terms to $\loss$ to penalize the model for outputting peaky distributions. Explicitly, label smoothing reassigns a portion of probability mass in the reference distribution from the ground truth token to all other tokens in the vocabulary. It is equivalent to adding a term $\mathrm{KL}(u \mid\mid \pM)$ to $\loss$, where $u$ is the uniform distribution. The confidence penalty regularizes against low entropy distribution by adding a term $\ent(\pM)$ to $\loss$ that encourage high entropy in model outputs.
+
+
+\subsubsection{Dropout}
+
+Regularization also encompasses methods that expose a model to noise that can occur in the data. The motivation behind such methods is both to penalize a model for being overly dependent on any given input for making predictions. %, and to hopefully prevent the model from latching onto spurious but inconsistent correlations.\clara{doesnt flow here right now. but out of logical ordering} 
+Dropout does this explicitly by randomly ``dropping''  variables from a computation in the network. 
+
+More formally, consider a model defined as a series of computational nodes, where any given node is the product of the transformation of previous nodes. When dropout is applied to the module that contains that node, then the node is zeroed out with some percentage chance, i.e., it is excluded in all functions that may make use of it to compute the value of future nodes. In this case, the model will be penalized if it relied completely on the value of that node for any given computation in the network. Dropout can be applied to most variables within a model, e.g., the inputs to the model itself, the inputs to the final linear projection in a feed-forward layer, or the summands in the attention head of a Transformer. 
+Note that at inference time, all nodes are used to compute the model's output.\footnote{Some form of renormalization is typically performed to account for the fact that model parameters are learned with only  partial availability of variables. Thus when all variables are used in model computations, the scale of the output will (in expectation) be larger than during training, potentially leading to poor estimates.}

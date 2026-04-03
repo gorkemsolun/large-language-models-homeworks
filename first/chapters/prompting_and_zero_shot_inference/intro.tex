@@ -1,0 +1,41 @@
+\section{What is prompting}
+In a traditional supervised learning setting, an output $\bm{y}$ is generated given the input $\bm{x}$ and the model parameters $\theta$ using the modeling objective $P(y|x;\theta)$. However, for many tasks, the supervised data is unavailable making the training process difficult/impossible. 
+Prompting enables models to circumvent the training issue by learning an LM that models the probability $P(\bm{x};\theta)$ of text $\bm{x}$ itself, and using this probability to predict $\bm{y}$, reducing or obviating the need for large supervised datasets. In other words, prompting is non-invasive: it does not introduce large amounts of additional parameters or require direct inspection of a model’s representations. It can be thought of as a lower bound on what the model “knows” and can be used to extract information from LM. 
+
+\paragraph{How to prompt?}
+To prompt an LM, it is important to map the input $\bm{x}$ to a prompt $\bm{x}'$. A prompting function $f_{\text{prompt}}(\cdot)$ is applied to modify the input text $\bm{x}$ into a prompt $\bm{x}' = f_{\text{prompt}}(\bm{x})$ (example provided in Table \ref{tab:prompt}). Next, a template is defined that consists of two slots: an input slot \texttt{[X]} for input $\bm{x}$ and an answer slot \texttt{[Z]} for any generated answer $\bm{z}$ that may or may not be mapped into $\bm{y}$ depending on the use case. Next, the highest-scoring $\hat{\bm{z}}$ that maximizes the score of the LM is taken ($\bm{z}$ can take all possible values from the vocabulary for generation tasks but can also be modified for controlled classification/generation tasks). 
+
+A function $f_{\text{fill}}(\bm{x'}, \bm{z})$ fills in the location $\texttt{[Z]}$ in prompt $\bm{x}'$ with the potential answer $\bm{z}$ by searching over the set of all potential answers by calculating the probability of their corresponding filled prompts using a pre-trained LM $P(\cdot;\theta)$. 
+\begin{equation}
+    \hat{\bm{z}} = \underset{\bm{z} \in \mathcal{Z}}{\text{search}} \, P(f_{\text{fill}}(\bm{x'}, \bm{z}); \theta).
+\end{equation}
+This search function could be an \textit{argmax} search that searches for the highest-scoring output or various \textit{sampling} techniques that randomly generate outputs following the probability distribution of the LM. 
+
+\begin{table*}[!t]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.2}
+% \begin{tabular}{p{1.8cm}cp{5.8cm}p{5.2cm}}
+\begin{tabular}{m{1.8cm}cm{4.8cm}m{6.6cm}}
+
+\toprule
+\textbf{Name} & \textbf{Notation} & \textbf{Example} & \textbf{Description} \\ 
+\midrule
+Input & $\bm{x}$ & I love this movie. & One or multiple texts \\
+Output  & $\bm{y}$   & \texttt{++} (very positive) &  Output label or text   \\
+\midrule
+Prompting Function  & $f_{\text{prompt}}(\bm{x})$ & \texttt{[X]} Overall, it was a \texttt{[Z]} movie.                      & A function that converts the input into a specific form by inserting the input $\bm{x}$ and adding a slot \texttt{[Z]} where answer $\bm{z}$ may be filled later.
+\\
+\midrule
+Prompt   & $\bm{x}'$       & I  love  this  movie.    Overall,  it  was  a \texttt{[Z]} movie. & A text where \texttt{[X]} is instantiated by input $\bm{x}$ but answer slot \texttt{[Z]} is not. \\
+Filled Prompt     &  $f_{\text{fill}}(\bm{x'}, \bm{z})$      & I  love  this  movie.    Overall,  it  was  a bad movie. & A prompt where slot \texttt{[Z]} is filled with any answer. \\
+Answered Prompt    & $f_{\text{fill}}(\bm{x'}, \bm{z}^{*})$       & I  love  this  movie. Overall, it was a good movie. & A prompt where slot \texttt{[Z]} is filled with a true answer. 
+%A text where \texttt{[X]} is instantiated by input $\bm{x}$ but answer slot \texttt{[Z]} is not. 
+\\
+\midrule
+Answer    & $\bm{z}$   & ``good'', ``fantastic'', ``boring''    & A token,  phrase, or sentence that fills \texttt{[Z]} \\
+\bottomrule
+\end{tabular}
+\caption{\label{tab:prompt} Terminology and notation of prompting methods. $\bm{z}^*$ represents answers that correspond to true output $\bm{y}^*$. The table is taken from \cite{liu2023pre}.
+}
+\end{table*}

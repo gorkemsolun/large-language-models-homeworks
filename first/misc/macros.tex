@@ -1,0 +1,949 @@
+% highlighting in mathmode
+\newcommand{\mathhl}[2][yellow]{\mathchoice%
+  {\colorbox{#1}{$\displaystyle#2$}}%
+  {\colorbox{#1}{$\textstyle#2$}}%
+  {\colorbox{#1}{$\scriptstyle#2$}}%
+  {\colorbox{#1}{$\scriptscriptstyle#2$}}}%
+
+
+\newcommand{\defn}[1]{\textbf{#1}}
+
+% citeposs
+\newcommand{\citeposs}[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+
+% probability and statistics
+\newcommand{\vbeta}{{\color{MacroColor}\boldsymbol{\beta}}}
+\newcommand{\valpha}{{\color{MacroColor}\boldsymbol{\alpha}}}
+\newcommand{\vgamma}{{\color{MacroColor}\boldsymbol{\gamma}}}
+\newcommand{\ptheta}{{\color{MacroColor}p_{\vtheta}}}
+\newcommand{\inv}[1]{{\color{MacroColor}#1^{-1}}}
+\newcommand{\hidd}[1]{{\color{MacroColor}y_{#1}}}
+\newcommand{\obs}[1]{{\color{MacroColor}x_{#1}}}
+\newcommand{\hidds}{{\color{MacroColor}\mathbf{Y}}}
+\newcommand{\obss}{{\color{MacroColor}\mathbf{X}}}
+\newcommand{\hiddspace}{{\color{MacroColor}\mathcal{Y}}}
+\newcommand{\obsspace}{{\color{MacroColor} \mathcal{X}}}
+\newcommand{\transm}{{\color{MacroColor}\bT}}
+\newcommand{\emissm}{{\color{MacroColor}\bE}}
+\newcommand{\weights}{{\color{MacroColor}\bw}}
+\newcommand{\featuref}{{\color{MacroColor} \mathbf{f}}}
+\newcommand{\params}{{\color{MacroColor}\boldsymbol{\theta}}}
+\newcommand{\paramslstmforward}{{\color{MacroColor}\overrightarrow{\boldsymbol{\theta}}}}
+\newcommand{\paramslstmbackward}{{\color{MacroColor}\overleftarrow{\boldsymbol{\theta}}}}
+\newcommand{\paramselmo}{{\color{MacroColor}\boldsymbol{\theta'}}}
+\newcommand{\pathval}{{\color{MacroColor}\mathrm{R}}}
+\newcommand{\valueset}{{\color{MacroColor}\mathrm{V}}}
+\newcommand{\expectation}{{\color{MacroColor}\mathbb{E}}}
+\newcommand{\pdens}{{\color{MacroColor} p}}
+\newcommand{\pdensBar}{{\color{MacroColor} \bar{\pdens}}}
+\newcommand{\pdensTildeEOS}{{\color{MacroColor} \tilde{\pdens}_\eos}}
+\newcommand{\qdens}{{\color{MacroColor} q}}
+\newcommand{\loglikelihood}{{\color{MacroColor} \ell\ell}}
+\newcommand{\samplespace}{{\color{MacroColor} \Omega}}
+\newcommand{\eventspace}{{\color{MacroColor} \mathcal{F}}}
+\newcommand{\eventspaceA}{{\color{MacroColor} \mathcal{A}}}
+\newcommand{\probmeasure}{{\color{MacroColor} \mathbb{P}}}
+\newcommand{\probfunction}{{\color{MacroColor} \mathbb{P}}}
+\newcommand{\pushfwdMeasure}{{\color{MacroColor} \mathbb{P}_\text{p}}}
+\newcommand{\probtuple}{{\color{MacroColor}\left(\samplespace, \eventspace, \probfunction\right)}}
+\newcommand{\bomega}{{\color{MacroColor} \bm{\omega}}}
+\newcommand{\overC}{{\color{MacroColor} \overline{C}}}
+\newcommand{\overcalC}{{\color{MacroColor} \overline{\mathcal{C}}}}
+\newcommand{\calC}{{\color{MacroColor} \mathcal{C}}}
+\newcommand{\strCount}{{\color{MacroColor} C}}
+\newcommand{\task}{{\color{MacroColor}\mathcal{T}}}
+
+% math
+\newcommand{\ind}[1]{\mathbbm{1} \left\{ #1 \right\}}
+\newcommand{\lambdamax}{{\color{MacroColor}\lambda_{\text{max}}}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\fieldd}{{\color{MacroColor} \mathbb{F}^d}}
+\newcommand{\field}{{\color{MacroColor} \mathbb{F}}}
+\newcommand{\R}{{\color{MacroColor} \mathbb{R}}}
+\newcommand{\Rplus}{{\color{MacroColor} \mathbb{R}_{+}}}
+\newcommand{\Rnonnegative}{{\color{MacroColor} \mathbb{R}_{\geq 0}}}
+\newcommand{\Rminus}{{\color{MacroColor} \mathbb{R}_{-}}}
+\newcommand{\sigalgebra}{{\color{MacroColor} \sigma\text{-}\text{algebra}}}
+\newcommand{\func}{{\color{MacroColor} f}}
+\newcommand{\vfunc}{{\color{MacroColor} \mathbf{f}}}
+\newcommand{\diag}[1]{{\color{MacroColor} \mathrm{diag}\left(#1\right)}}
+\newcommand{\norm}[1]{{\color{MacroColor} \left\lVert #1 \right\rVert}}
+
+% general formal language theory macros
+\newcommand{\alphabet}{{\color{MacroColor} \Sigma}}
+\newcommand{\stackalphabet}{{\color{MacroColor} \Gamma}}
+\newcommand{\oalphabet}{{\color{MacroColor} \Delta}}
+\newcommand{\outalphabet}{\oalphabet}
+\newcommand{\eosalphabet}{{\color{MacroColor} \overline{\alphabet}}}
+\newcommand{\lang}{{\color{MacroColor} L}}
+\newcommand{\kleene}[1]{{\color{MacroColor}#1^*}}
+\newcommand{\rankedalphabet}{{\color{MacroColor} \left(\alphabet, \arity)\right}}
+\newcommand{\regex}{{\color{MacroColor} \alpha}}
+
+% strings and symbols
+\newcommand{\str}{{\color{MacroColor}\boldsymbol{y}}}
+\newcommand{\strlen}{{\color{MacroColor}T}}
+\newcommand{\strs}{{\color{MacroColor}\boldsymbol{s}}}
+\newcommand{\strx}{{\color{MacroColor}\boldsymbol{x}}}
+\newcommand{\stry}{{\color{MacroColor}\boldsymbol{y}}}
+\newcommand{\strz}{{\color{MacroColor}\boldsymbol{z}}}
+\newcommand{\sym}{{\color{MacroColor}y}}
+\newcommand{\syma}{{\color{MacroColor}a}}
+\newcommand{\symb}{{\color{MacroColor}b}}
+\newcommand{\symc}{{\color{MacroColor}c}}
+\newcommand{\symd}{{\color{MacroColor}d}}
+%\newcommand{\stringsum}{\xi}
+%\newcommand{\stringsum}[1]{\xi_{1}}
+
+\usepackage{relsize}
+\newcommand{\defeq}[0]{\mathrel{\stackrel{\textnormal{\tiny def}}{=}}}
+
+\newcommand{\set}[1]{{\color{MacroColor}\left\{ #1 \right\}}}
+\newcommand{\powerset}[1]{{\color{MacroColor}\mathcal{P}{\left(#1\right)}}}
+\newcommand{\setcomplement}[1]{{\color{MacroColor}#1^{\textsf{c}}}}
+\newcommand{\binv}[1]{{\color{MacroColor}\left(#1\right)^{-1}}}
+
+\newcommand{\TODO}[1]{{\color{red} TODO: #1 }}
+
+% Indexing, sizes
+\newcommand{\bigo}{{\color{MacroColor} \mathcal{O}}}
+\newcommand{\idx}{{\color{MacroColor} n}}
+\newcommand{\idxi}{{\color{MacroColor} i}}
+\newcommand{\idxj}{{\color{MacroColor} j}}
+\newcommand{\idxk}{{\color{MacroColor} k}}
+\newcommand{\idxm}{{\color{MacroColor} m}}
+\newcommand{\setsize}{{\color{MacroColor} N}}
+\newcommand{\nsamples}{{\color{MacroColor} N}}
+\newcommand{\seqlength}{{\color{MacroColor} L}}
+\newcommand{\othseqlength}{{\color{MacroColor} M}}
+\newcommand{\nstates}{{\color{MacroColor} |\states|}}
+\newcommand{\tstep}{{\color{MacroColor} t}}
+\newcommand{\finaltstep}{{\color{MacroColor} T}}
+
+% NLP
+\newcommand{\pM}{{\color{MacroColor} p_{\scaleto{\text{M}}{4pt}}}}
+\newcommand{\pLM}{{\color{MacroColor} p_{\scaleto{\text{LM}}{4pt}}}}
+\newcommand{\pLMB}{{\color{MacroColor} p_{\scaleto{\text{LMB}}{4pt}}}}
+\newcommand{\pSM}{{\color{MacroColor} p_{\scaleto{\text{SM}}{4pt}}}}
+\newcommand{\pMLM}{{\color{MacroColor} p_{\scaleto{\texttt{MLM}}{4pt}}}}
+\newcommand{\pASM}{{\color{MacroColor} p_{\scaleto{\text{ASM}}{4pt}}}}
+\newcommand{\bos}{{\color{MacroColor}\textsc{bos}}}
+\newcommand{\eos}{{\color{MacroColor}\textsc{eos}}}
+\newcommand{\ngr}{{\color{MacroColor} \textit{n}}}
+\newcommand{\ngram}{{\color{MacroColor} \textit{n}-gram}}
+\newcommand{\normConstant}{{\color{MacroColor} Z}}
+\newcommand{\featurespacedim}{{\color{MacroColor} d}}
+\newcommand{\embeddim}{{\color{MacroColor} d}}
+\newcommand{\scoref}{{\color{MacroColor} \func}}
+
+% strings denotation, embeddings
+\newcommand{\embedding}{{\color{MacroColor} \ve}}
+\newcommand{\embedSym}{{\color{MacroColor} \ve_\sym}}
+\newcommand{\embedStr}{{\color{MacroColor} \ve_\str}}
+\newcommand{\embedSymt}{{\color{MacroColor} \ve_{\sym_\tstep}}}
+\newcommand{\embedSymtminus}{{\color{MacroColor} \ve_{\sym_{\tstep-1}}}}
+\newcommand{\embedSymPrime}{{\color{MacroColor} \ve_{\sym'}}}
+\newcommand{\symlt}{{\color{MacroColor} \sym_{<\tstep}}}
+\newcommand{\symPrime}{{\color{MacroColor} \sym'}}
+\newcommand{\strPrime}{{\color{MacroColor} \str'}}
+\newcommand{\bias}{{\color{MacroColor} \vb}}
+\newcommand{\biasSym}{{\color{MacroColor} b_\sym}}
+\newcommand{\biasSymt}{{\color{MacroColor} b_{\sym_\tstep}}}
+\newcommand{\biasSymtminus}{{\color{MacroColor} b_{\sym_{\tstep-1}}}}
+\newcommand{\biasSymPrime}{{\color{MacroColor} b_{\symPrime}}}
+\newcommand{\biasStr}{{\color{MacroColor} b_\str}}
+\newcommand{\biasStrPrime}{{\color{MacroColor} b_{\strPrime}}}
+\newcommand{\biasVech}{{\color{MacroColor} \vb_{h}}}
+\newcommand{\biasVecy}{{\color{MacroColor} \vb_{y}}}
+
+
+% hidden states
+\newcommand{\vhzero}{{\color{blue} \vh_0}}
+\newcommand{\vhone}{{\color{blue} \vh_1}}
+\newcommand{\vht}{{\color{blue} \vh_t}}
+\newcommand{\vhT}{{\color{blue} \vh_T}}
+\newcommand{\vhtminus}{{\color{blue} \vh_{t-1}}}
+\newcommand{\vhTminus}{{\color{blue} \vh_{T-1}}}
+
+% output vectors
+\newcommand{\vot}{{\color{blue} \vo_{t}}}
+\newcommand{\votminus}{{\color{blue} \vo_{t-1}}}
+
+% model names
+\newcommand{\autoregmodel}{autoregressive sequence model\xspace}
+\newcommand{\autoregmodelAcronym}{ASM\xspace}
+
+% data structures
+\newcommand{\queue}{{\color{MacroColor}\textsf{queue}}}
+\newcommand{\stack}{{\color{MacroColor}\textsf{stack}}}
+\newcommand{\inblock}{{\color{MacroColor}\textsf{in-block}}}
+
+% graphs
+\newcommand{\graph}{\color{MacroColor} \mathcal{G}}
+\newcommand{\scc}{\color{MacroColor} \mathcal{S}}
+
+% semirings
+\newcommand{\semiring}{{\color{MacroColor} \mathcal{W}}}
+\newcommand{\semiringtuple}{{\color{MacroColor}\left(\semiringset, \oplus, \otimes, \zero, \one \right)}}
+\newcommand{\closedsemiringtuple}{{\color{MacroColor} \left(\semiringset, \oplus, \otimes, \zero, \one, \kleene{} \right)}}
+\newcommand{\semiringset}{{\color{MacroColor} A}}
+\newcommand{\zero}{{\color{MacroColor}\textbf{0}}}
+\newcommand{\one}{{\color{MacroColor}\textbf{1}}}
+\newcommand{\matrixsemiringset}{{\color{MacroColor} \mathbf{M}_{D}\left( \semiring \right) }}
+\newcommand{\booleansemiring}{{\color{MacroColor}\left(\set{0, 1}, \vee, \wedge, \textsc{true}, \textsc{false} \right)}}
+\newcommand{\tropicalsemiring}{{\color{MacroColor}\left(\Rplus, \min, +, \infty, 0 \right)}}
+\newcommand{\probabilitysemiring}{{\color{MacroColor}\left(\left[0, 1\right], +, \times, 0, 1 \right)}}
+\newcommand{\realssemiring}{{\color{MacroColor}\left(\R, +, \times, 0, 1 \right)}}
+\newcommand{\positiverealssemiring}{{\color{MacroColor}\left(\Rplus, +, \times, 0, 1 \right)}}
+\newcommand{\nonnegativerealssemiring}{{\color{MacroColor}\left(\Rnonnegative, +, \times, 0, 1 \right)}}
+
+% automaton
+\newcommand{\automaton}{{\color{MacroColor} \mathcal{A}}}
+\newcommand{\wfsa}{{\color{MacroColor} \automaton}}
+\newcommand{\transducer}{{\color{MacroColor} \mathcal{T}}}
+\newcommand{\wfst}{{\color{MacroColor} \transducer}}
+\newcommand{\detautomaton}{{\color{MacroColor} \automaton_{\textsc{det}}}}
+\newcommand{\pushedautomaton}{{\color{MacroColor} \automaton_{\textsc{push}}}}
+\newcommand{\minautomaton}{{\color{MacroColor} \automaton_{\textsc{min}}}}
+\newcommand{\epsautomaton}{{\color{MacroColor} \automaton_{\neg\varepsilon}}}
+\newcommand{\trimautomaton}{{\color{MacroColor} \automaton_{\textsc{trim}}}}
+\newcommand{\unionautomaton}{{\color{MacroColor} \automaton_{\textsc{union}}}}
+\newcommand{\complementautomaton}{{\color{MacroColor} \automaton_{\textsc{c}}}}
+\newcommand{\intersectautomaton}{{\color{MacroColor} \automaton_{\textsc{intersect}}}}
+\newcommand{\epsonlyautomaton}{{\color{MacroColor} \automaton_{\varepsilon}}}
+\newcommand{\closure}{{\color{MacroColor} \kappa}}
+\newcommand{\stateq}{{\color{MacroColor} q}}
+\newcommand{\statep}{{\color{MacroColor} p}}
+\newcommand{\stater}{{\color{MacroColor} r}}
+\newcommand{\states}{{\color{MacroColor} Q}}
+\newcommand{\stackstates}{{\color{MacroColor} Z}}
+\newcommand{\trans}{{\color{MacroColor} \delta}}
+\newcommand{\projectstates}{{\color{MacroColor} \mathcal{E}_{\states}}}
+\newcommand{\outarcs}{{\color{MacroColor} \mathcal{E}}}
+\newcommand{\inarcs}{{\color{MacroColor} \inv{\mathcal{E}}}}
+% \NewDocumentCommand{\outarcs}{g}{
+%     {\color{MacroColor} \mathcal{E} \IfNoValueTF{#1}{}{ \left( #1 \right)}}
+% }
+% \NewDocumentCommand{\inarcs}{g}{
+%     {\color{MacroColor} \inv{\mathcal{E}} \IfNoValueTF{#1}{}{ \left( #1 \right)}}
+% }
+\newcommand{\prevq}{{\color{MacroColor} p }}
+\newcommand{\nextq}{{\color{MacroColor} n }}
+\newcommand{\weight}{{\color{MacroColor} \textnormal{w}}}
+\newcommand{\innerweight}{{\color{MacroColor} \weight_{\text{I}}}}
+\newcommand{\apath}{{\color{MacroColor} \boldsymbol \pi}}
+\newcommand{\pathlen}{{\color{MacroColor} N}}
+\newcommand{\paths}{{\color{MacroColor} \Pi}}
+\newcommand{\initial}{{\color{MacroColor} I}}
+\newcommand{\final}{{\color{MacroColor} F}}
+\newcommand{\initf}{{\color{MacroColor} \lambda}}
+\newcommand{\finalf}{{\color{MacroColor} \rho}}
+\newcommand{\initfVect}{{\color{MacroColor} \overrightarrow{\initf}}}
+\newcommand{\finalfVect}{{\color{MacroColor} \overrightarrow{\finalf}}}
+\newcommand{\qinit}{{\color{MacroColor} q_{\initial}}}
+\newcommand{\qfinal}{{\color{MacroColor} q_{\final}}}
+\newcommand{\sempty}{{\color{MacroColor} z_{\textit{0}}}}
+\newcommand{\strone}{{\color{MacroColor} \infty}}
+\newcommand{\strsemiring}{{\color{MacroColor} \mathcal{S}}}
+\newcommand{\kleenesemiring}{{\color{MacroColor} \mathcal{K}}}
+\newcommand{\transMtx}{{\color{MacroColor} \mT}}
+
+% \newcommand{\initpowerstate}{{\color{MacroColor} \{I\}}}
+\newcommand{\discover}[1]{{\color{MacroColor} d \left[ #1 \right]}}
+\newcommand{\finish}[1]{{\color{MacroColor} f \left[ #1 \right]}}
+
+% removed alphabet from this
+\newcommand{\fsatuple}{{\color{MacroColor} \left( \alphabet, \states, \initial, \final, \trans \right)}}
+\newcommand{\wfsatuple}{{\color{MacroColor} \left( \alphabet, \states, \trans, \initf, \finalf \right)}}
+\NewDocumentCommand\dfatuple{g}{%
+    {\color{MacroColor} \IfNoValueTF{#1}{\left( \alphabet, \states, \qinit, \final, \trans \right)}{\left( \alphabet, \states{#1}, \qinit{#1}, \final{#1}, \trans{#1} \right)}}%
+}
+% \newcommand{\fsatuple}{\left( \states, \alphabet, \initial, \final, \trans \right)}
+\newcommand{\dist}[2]{{\color{MacroColor} d \left[ #1, #2 \right]}}
+\newcommand{\reverse}[1]{{\color{MacroColor} \overleftarrow{#1}}}
+\newcommand{\edgenoweight}[3]{#1 \xrightarrow{#2} #3}
+\newcommand{\edge}[4]{{\color{MacroColor}#1 \xrightarrow{#2 / #3} #4}}
+\newcommand{\uwedge}[3]{{\color{MacroColor}#1 \xrightarrow{#2} #3}}
+% \newcommand{\wfsttuple}{\left( \alphabet, \oalphabet, \states, \initial, \final, \trans, \initf, \finalf \right)}
+\NewDocumentCommand\wfsttuple{g}{%
+    {\color{MacroColor} \IfNoValueTF{#1}{\left( \alphabet, \oalphabet, \states, \initial, \final, \trans, \initf, \finalf \right)}{\left( \alphabet{#1}, \oalphabet{#1}, \states{#1}, \initial{#1}, \final{#1}, \trans{#1}, \lambda{#1}, \rho{#1} \right)}}%
+}
+\newcommand{\forwardweight}[1]{{\color{MacroColor} \boldsymbol{\alpha}_{#1}}}
+\newcommand{\backwardweight}[1]{{\color{MacroColor} \boldsymbol{\beta}_{#1}}}
+\newcommand{\distance}{{\color{MacroColor} \Delta}}
+\newcommand{\potentialfunction}{{\color{MacroColor} \Psi}}
+\newcommand{\powerstate}{{\color{MacroColor} \mathcal{Q}}}
+\newcommand{\initpowerstate}{{\color{MacroColor} \mathcal{Q}_{\initial}}}
+\newcommand{\mitr}[3]{{\color{MacroColor} #1_{#3}^{\left(#2\right)}}}
+
+\NewDocumentCommand{\resid}{gm}{
+    \ensuremath{{\color{MacroColor} r_{\IfNoValueTF{#1}{}{#1}} \left( #2 \right)}}
+}
+\newcommand{\yield}{{\color{MacroColor}\mathrm{s}}}
+\newcommand{\arity}{{\color{MacroColor}\textsf{arity}}}
+\newcommand{\topo}{{\color{MacroColor}\textsf{topo}}}
+\newcommand{\rtopo}{{\color{MacroColor}\textsf{rtopo}}}
+\newcommand{\copycmd}{{\color{MacroColor}\textsf{copy}}}
+\newcommand{\tablefill}{{\color{MacroColor}\textsf{table-filling}}}
+
+\newcommand{\partitionP}{{\color{MacroColor} \mathbf{\mathcal{P}}}}
+\newcommand{\partitionQ}{{\color{MacroColor} \mathbf{\mathcal{Q}}}}
+\newcommand{\partitionR}{{\color{MacroColor} \mathbf{\mathcal{R}}}}
+\newcommand{\partitionX}{{\color{MacroColor} \mathbf{\mathcal{X}}}}
+\newcommand{\refinementof}{{\color{MacroColor}\preccurlyeq}}
+\newcommand{\refinementoff}{{\color{MacroColor} \preccurlyeq_f}}
+\newcommand{\refinementoffplus}{{\color{MacroColor} \preccurlyeq_f^+}}
+\newcommand{\splitpart}{{\color{MacroColor} \textsf{split}}}
+\newcommand{\splitpartfaster}{{\color{MacroColor} \textsf{split-modified}}}
+\newcommand{\finv}{{\color{MacroColor} f^{-1}}}
+\newcommand{\Requivalence}{{\color{MacroColor} R_{\lang}}}
+\newcommand{\prefix}[1]{{\color{MacroColor} P_{#1}}}
+\newcommand{\eqclass}[1]{{\color{MacroColor} \left[#1\right]}}
+% \newcommand{\eqclass}[1]{{\color{MacroColor} \bar{#1}}}
+\newcommand{\nerodeeq}{{\color{MacroColor} \sim_{\lang}}}
+\newcommand{\stateeq}{{\color{MacroColor} \sim_{\trans}}}
+
+% formal power series
+\newcommand{\fps}{{\color{MacroColor} r}}
+% \newcommand{\fpscoef}[2]{{\color{MacroColor} \left( #1, #2 \right)}}
+\newcommand{\fpscoef}[2]{{\color{MacroColor} #1_{#2}}}
+\newcommand{\fpss}{{\color{MacroColor} \semiring \langle \langle \kleene{\alphabet} \rangle \rangle}}
+\newcommand{\finitefpss}{{\color{MacroColor} \semiring \langle \kleene{\alphabet} \rangle}}
+
+
+% grammars
+\newcommand{\grammar}{{\color{MacroColor} \mathfrak{G}}}
+\newcommand{\nonterm}{{\color{MacroColor} \mathcal{N}}}
+\newcommand{\rules}{{\color{MacroColor} \mathcal{P}}}
+\newcommand{\arule}{{\color{MacroColor} p}}
+\newcommand{\start}{{\color{MacroColor} \NT{S}}}
+% \newcommand{\cfgtuple}{(\nonterm, \alphabet, \start, \rules)}
+\NewDocumentCommand\cfgtuple{g}{%
+    {\color{MacroColor} \IfNoValueTF{#1}{\left( \nonterm, \alphabet, \start, \rules \right)}{\left( \nonterm{#1}, \alphabet{#1}, \start{#1}, \rules{#1} \right)}}%
+}
+\NewDocumentCommand{\derivation}{gg}{{\color{MacroColor} \mathcal{D}\IfNoValueTF{#1}{}{_{#1}}\IfNoValueTF{#2}{}{(#2)}}}
+\newcommand{\tree}{{\color{MacroColor}\boldsymbol{d}}}
+\newcommand{\treeyield}[1]{{\color{MacroColor} \str(#1)}}
+\newcommand{\production}[2]{{\color{MacroColor} #1 \rightarrow #2}}
+\newcommand{\wproduction}[3]{{\color{MacroColor} #1 \xrightarrow {#3} #2}}
+\newcommand{\derives}[2]{{\color{MacroColor} #1 \overset{*}{\Rightarrow} #2}}
+\newcommand{\wcfgtuple}{(\nonterm, \alphabet, \start, \rules, \semiring)}
+\newcommand{\desc}[1]{\textsf{descendant}(#1)}
+\newcommand{\children}[1]{\textsf{children}(#1)}
+\newcommand{\depth}[1]{\textsf{depth}(#1)}
+\newcommand{\height}[1]{\textsf{height}(#1)}
+\newcommand{\property}{{\color{MacroColor} P}}
+\newcommand{\class}{{\color{MacroColor} \mathcal C}}
+\newcommand{\treeroot}{{\color{MacroColor} \rho}}
+\newcommand{\NT}[1]{{\color{MacroColor} \mathrm{#1}}}
+\newcommand{\NTA}{\NT{A}}
+\newcommand{\NTB}{\NT{B}}
+\newcommand{\NTC}{\NT{C}}
+\newcommand{\NTX}{\NT{X}}
+\newcommand{\NTY}{\NT{Y}}
+\newcommand{\NTZ}{\NT{Z}}
+\newcommand{\transform}{{\color{MacroColor} \mathcal{T}}}
+\newcommand{\productionWeight}{{\color{MacroColor} w}}
+
+% NNs
+\newcommand{\enc}{{\color{MacroColor} {\small \textsf{enc}}}}
+\newcommand{\mlp}{{\color{MacroColor} {\small \textsf{MLP}}}}
+\newcommand{\Rd}{{\color{MacroColor} \mathbb{R}^d}}
+\newcommand{\hiddenelmo}[1]{{\color{MacroColor} \vh_{#1}^{\text{LM}}}}
+\newcommand{\hiddenlstmforward}[1]{{\color{MacroColor} \overrightarrow{\vh}_{#1}^{\text{LM}}}}
+\newcommand{\hiddenlstmbackward}[1]{{\color{MacroColor} \overleftarrow{\vh}_{#1}^{\text{LM}}}}
+\newcommand{\layer}{{\color{MacroColor} L}}
+\newcommand{\layeridx}{{\color{MacroColor} l}}
+
+\let\rfb\reflectbox
+\newcommand{\uglyfrac}[2]{\rfb{\nicefrac{\rfb{#1}}{\ \rfb{#2}}}}
+%\def\uglyfrac#1#2{\leavevmode\hbox{${}_{\rm#2}{\mkern-2mu\backslash\mkern-2mu}^{\rm#1}$}}
+%\def\uglyfrac#1#2{\leavevmode\lower.4ex\hbox{\fontsize{7}{7}\selectfont #2}\kern-.2em
+%   $\backslash$\kern-.2em\raise.9ex\hbox{\fontsize{7}{7}\selectfont #1}}
+%\newcommand{\muglyfrac}[2]{\uglyfrac{\ensuremath{#1}}{\ensuremath{#2}}}
+%\newcommand{\lc}[2]{{\color{MacroColor} \nicefrac{#1}{#2}}}
+%\newcommand{\lc}[2]{{\color{MacroColor} \left( \underset{#2}{\phantom{}} {\smallsetminus} \overset{#1}{\phantom{.}} \right)}}
+%\newcommand{\lc}[2]{{\color{MacroColor} \uglyfrac{#2}{#1} }}
+\newcommand{\lc}[2]{{\color{MacroColor} #1\mathtosmaller{\setminus}#2 }}
+\newcommand{\negterm}[1]{{\color{MacroColor} {\raise.17ex\hbox{$\scriptstyle\sim$}} #1}}
+\newcommand{\lcrules}{{\color{MacroColor} \rules_{\mathtosmaller{\setminus}}}}
+\newcommand{\lcnonterm}{{\color{MacroColor} \nonterm_{\mathtosmaller{\setminus}}}}
+\newcommand{\lcmap}{{\color{MacroColor} \mu}}
+
+% algorithm names
+\newcommand{\ifcondition}{\textnormal{if }}
+\newcommand{\otherwisecondition}{\textnormal{otherwise }}
+\newcommand{\forward}{{\color{MacroColor} \text{forward}}}
+\newcommand{\backward}{{\color{MacroColor} \text{backward}}}
+\newcommand{\pathsum}{{\color{MacroColor} \text{pathsum}}}
+\newcommand{\viterbi}{{\color{MacroColor} \text{Viterbi}}}
+\newcommand{\dijkstra}{{\color{MacroColor} \text{Dijkstra}}}
+\newcommand{\fixedpoint}{{\color{MacroColor} \text{FixedPoint}}}
+\newcommand{\gaussjordan}{{\color{MacroColor} \text{GaussJordan}}}
+\newcommand{\floydwarshall}{{\color{MacroColor} \text{FloydWarshall}}}
+\newcommand{\bellmanford}{{\color{MacroColor} \text{BellmanFord}}}
+\newcommand{\gaussjordandiff}{{\color{MacroColor} \text{GaussJordanDifference}}}
+\newcommand{\determinization}{{\color{MacroColor} \text{Determinize}}}
+\newcommand{\moore}{{\color{MacroColor} \text{Moore}}}
+\newcommand{\minconstruction}{{\color{MacroColor} \text{BlockFSAConstruction}}}
+\newcommand{\partitionrefinement}{{\color{MacroColor} \text{PartitionRefinement}}}
+\newcommand{\naivepartitionrefinement}{{\color{MacroColor} \text{Na{\"i}vePartitionRefinement}}}
+\newcommand{\moorepartition}{{\color{MacroColor} \text{MoorePartition}}}
+\newcommand{\hopcroft}{{\color{MacroColor} \text{Hopcroft}}}
+\newcommand{\hopcroftfast}{{\color{MacroColor} \text{FastHopcroft}}}
+\newcommand{\partitionminimization}{{\color{MacroColor} \text{PartitionRefinementMinimization}}}
+\newcommand{\weighteddeterminization}{{\color{MacroColor} \text{WeightedDeterminize}}}
+\newcommand{\naiveintersection}{{\color{MacroColor} \text{Na{\"i}veIntersect}}}
+\newcommand{\filteredintersection}{{\color{MacroColor} \text{$\epsilon$-filterIntersect}}}
+\newcommand{\intersection}{{\color{MacroColor} \text{Intersect}}}
+\newcommand{\lehmann}{{\color{MacroColor} \text{Lehmann}}}
+\newcommand{\decomposedlehmann}{{\color{MacroColor} \text{DecomposedLehmann}}}
+\newcommand{\sccfsa}{{\color{MacroColor} \text{SccFsa}}}
+\newcommand{\dfs}{{\color{MacroColor} \text{DepthFirstSearch}}}
+\newcommand{\toposort}{{\color{MacroColor} \text{TopologicalSort}}}
+\newcommand{\dfsrec}{{\color{MacroColor} \text{DepthFirstSearchRecursion}}}
+\newcommand{\kosaraju}{{\color{MacroColor} \text{Kosaraju}}}
+\newcommand{\accessibility}{{\color{MacroColor} \text{Accessible}}}
+\newcommand{\trim}{{\color{MacroColor} \text{Trim}}}
+\newcommand{\testtwins}{{\color{MacroColor} \text{TestTwinsProperty}}}
+\newcommand{\acyclicwcfg}{{\color{MacroColor} \text{AcyclicTreesum}}}
+\newcommand{\fixedpointcfg}{{\color{MacroColor} \text{FixedPointGrammar}}}
+\newcommand{\cycleidentity}{{\color{MacroColor} \text{CycleIdentity}}}
+\newcommand{\acceptance}{{\color{MacroColor} \text{Acceptance}}}
+\newcommand{\epsremoval}{{\color{MacroColor} \varepsilon\text{-}\text{removal}}}
+\newcommand{\weightpushing}{{\color{MacroColor} WeightPush}}
+\newcommand{\unweightedminimization}{{\color{MacroColor} \text{UnweightedMinimization}}}
+\newcommand{\separateterminals}{{\color{MacroColor} \text{SeparateTerminals}}}
+\newcommand{\nullaryremoval}{{\color{MacroColor} \text{RemoveNullary}}}
+\newcommand{\makeunarywfsa}{{\color{MacroColor} \text{MakeUnaryWFSA}}}
+\newcommand{\wfsatowcfg}{{\color{MacroColor} \text{WeightedAutomatonConversion}}}
+\newcommand{\unaryremoval}{{\color{MacroColor} \text{RemoveUnary}}}
+\newcommand{\trimcfg}{{\color{MacroColor} \text{TrimCFG}}}
+\newcommand{\weightedunfold}{{\color{MacroColor} \text{WeightedUnfold}}}
+\newcommand{\weightedfold}{{\color{MacroColor} \text{WeightedFold}}}
+\newcommand{\binarize}{{\color{MacroColor} \text{Binarize}}}
+\newcommand{\union}{{\color{MacroColor} \text{Union}}}
+\newcommand{\complementation}{{\color{MacroColor} \text{Complementation}}}
+
+% pushdown
+\newcommand{\pdatuple}{\left( \states, \alphabet, \stackalphabet,  \initial, \stackstates, \final, \trans  \right)}
+\newcommand{\wpdatuple}{\left( \states, \alphabet, \stackalphabet, \initial, \final, \trans , \initf, \finalf  \right)}
+\newcommand{\pdatupleNorm}{\left( \states, \alphabet, \stackalphabet, \qinit, \sempty, \qfinal, \trans  \right)}
+% \newcommand{\stack}{\color{MacroColor} \boldsymbol{\sigma}}
+\newcommand{\stackseq}{\color{MacroColor} \boldsymbol{\gamma}}
+\newcommand{\pushdown}{\color{MacroColor} \mathfrak{P}}
+\newcommand{\bottomup}{\color{MacroColor} \textsf{bottomup}}
+\newcommand{\topdown}{\color{MacroColor} \textsf{topdown}}
+\newcommand{\shift}{\textsc{shift}}
+\newcommand{\reduce}{\textsc{reduce}}
+\newcommand{\pdaEdge}[6]{\color{MacroColor} \edge{#2}{#3, #5 \rightarrow #6}{#1}{#4}}
+\newcommand{\pdaEdgenoweight}[5]{\color{MacroColor} \edgenoweight{#1}{#2, #4 \rightarrow #5}{#3}
+}
+\newcommand{\arun}{\apath}
+\newcommand{\runs}{\paths}
+\newcommand{\prevs}[1]{{\color{MacroColor} W_q \left( #1 \right) }}
+\newcommand{\nexts}[1]{{\color{MacroColor} W_n \left( #1 \right) }}
+
+% tree automata
+% \newcommand{\fstatuple}{\left( \states, \alphabet, \initial, \final, \trans)  \right}
+% % \newcommand{\wfstatuple}{\left( \states, \alphabet, \initial, \final, \trans, \initf, \finalf)  \right}
+\NewDocumentCommand\fstatuple{g}{%
+    {\color{MacroColor} \IfNoValueTF{#1}{\left( \alphabet, \states, \initial, \final, \trans \right)}{\left( \alphabet{#1}, \states{#1}, \initial{#1}, \final{#1}, \trans{#1} \right)}}%
+}
+\NewDocumentCommand\wfstatuple{g}{%
+    {\color{MacroColor} \IfNoValueTF{#1}{\left( \alphabet, \states, \initial, \final, \trans, \initf, \finalf \right)}{\left( \alphabet, \states{#1}, \initial{#1}, \final{#1}, \trans{#1}, \lambda{#1}, \rho{#1} \right)}}%
+}
+
+\newcommand{\curlyarrow}{{\color{MacroColor} \mathrel{\leadsto}}}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\expandLater}[1]{}
+
+
+% Bolded characters
+
+% \def\ba{{{\color{MacroColor} \textbf{a}}}}
+% \def\bb{{{\color{MacroColor} \textbf{b}}}}
+% \def\bc{{{\color{MacroColor} \textbf{c}}}}
+% \def\bd{{{\color{MacroColor} \textbf{d}}}}
+% \def\be{{{\color{MacroColor} \textbf{e}}}}
+% \def\bf{{{\color{MacroColor} \textbf{f}}}}
+% \def\bg{{{\color{MacroColor} \textbf{g}}}}
+% \def\bh{{{\color{MacroColor} \textbf{h}}}}
+% \def\bu{{{\color{MacroColor} \textbf{i}}}}
+% \def\bj{{{\color{MacroColor} \textbf{j}}}}
+% \def\bk{{{\color{MacroColor} \textbf{k}}}}
+% \def\bl{{{\color{MacroColor} \textbf{l}}}}
+% \def\bm{{{\color{MacroColor} \textbf{m}}}}
+% \def\bn{{{\color{MacroColor} \textbf{n}}}}
+% \def\bo{{{\color{MacroColor} \textbf{o}}}}
+% \def\bp{{{\color{MacroColor} \textbf{p}}}}
+% \def\bq{{{\color{MacroColor} \textbf{q}}}}
+% \def\br{{{\color{MacroColor} \textbf{r}}}}
+% \def\bs{{{\color{MacroColor} \textbf{s}}}}
+% \def\bt{{{\color{MacroColor} \textbf{t}}}}
+% \def\bu{{{\color{MacroColor} \textbf{u}}}}
+% \def\bv{{{\color{MacroColor} \textbf{v}}}}
+% \def\bw{{{\color{MacroColor} \textbf{w}}}}
+% \def\bx{{{\color{MacroColor} \textbf{x}}}}
+% \def\by{{{\color{MacroColor} \textbf{y}}}}
+% \def\bz{{{\color{MacroColor} \textbf{z}}}}
+
+
+%%%% ICML template
+\def\ceil#1{\lceil #1 \rceil}
+\def\1{\mathbf{1}}
+\newcommand{\dataset}{{\color{MacroColor}\mathcal{D}}}
+\newcommand{\train}{{\color{MacroColor}\mathcal{D_{\mathrm{valid}}}}}
+\newcommand{\valid}{{\color{MacroColor}\mathcal{D_{\mathrm{valid}}}}}
+\newcommand{\test}{{\color{MacroColor}\mathcal{D_{\mathrm{test}}}}}
+
+\def\eps{{\color{MacroColor} \varepsilon}}
+
+
+% Random variables
+\def\reta{{{\color{MacroColor} \textnormal{\eta}}}}
+\def\ra{{{\color{MacroColor} \textnormal{a}}}}
+\def\rb{{{\color{MacroColor} \textnormal{b}}}}
+\def\rc{{{\color{MacroColor} \textnormal{c}}}}
+\def\rd{{{\color{MacroColor} \textnormal{d}}}}
+\def\re{{{\color{MacroColor} \textnormal{e}}}}
+\def\rf{{{\color{MacroColor} \textnormal{f}}}}
+\def\rg{{{\color{MacroColor} \textnormal{g}}}}
+\def\rh{{{\color{MacroColor} \textnormal{h}}}}
+\def\ri{{{\color{MacroColor} \textnormal{i}}}}
+\def\rj{{{\color{MacroColor} \textnormal{j}}}}
+\def\rk{{{\color{MacroColor} \textnormal{k}}}}
+\def\rl{{{\color{MacroColor} \textnormal{l}}}}
+% rm is already a command, just don't name any random variables m
+\def\rn{{{\color{MacroColor} \textnormal{n}}}}
+\def\ro{{{\color{MacroColor} \textnormal{o}}}}
+\def\rp{{{\color{MacroColor} \textnormal{p}}}}
+\def\rq{{{\color{MacroColor} \textnormal{q}}}}
+\def\rr{{{\color{MacroColor} \textnormal{r}}}}
+\def\rs{{{\color{MacroColor} \textnormal{s}}}}
+\def\rt{{{\color{MacroColor} \textnormal{t}}}}
+\def\ru{{{\color{MacroColor} \textnormal{u}}}}
+\def\rv{{{\color{MacroColor} \textnormal{v}}}}
+\def\rw{{{\color{MacroColor} \textnormal{w}}}}
+\def\rx{{{\color{MacroColor} \textnormal{x}}}}
+\def\ry{{{\color{MacroColor} \textnormal{y}}}}
+\def\rz{{{\color{MacroColor} \textnormal{z}}}}
+\def\reps{{{\color{MacroColor} \eps}}}
+
+% Random vectors
+\def\rvepsilon{{{\color{MacroColor} \boldsymbol{\epsilon}}}}
+\def\rvtheta{{{\color{MacroColor} \boldsymbol{\theta}}}}
+\def\rva{{{\color{MacroColor} \mathbf{a}}}}
+\def\rvb{{{\color{MacroColor} \mathbf{b}}}}
+\def\rvc{{{\color{MacroColor} \mathbf{c}}}}
+\def\rvd{{{\color{MacroColor} \mathbf{d}}}}
+\def\rve{{{\color{MacroColor} \mathbf{e}}}}
+\def\rvf{{{\color{MacroColor} \mathbf{f}}}}
+\def\rvg{{{\color{MacroColor} \mathbf{g}}}}
+\def\rvh{{{\color{MacroColor} \mathbf{h}}}}
+\def\rvu{{{\color{MacroColor} \mathbf{i}}}}
+\def\rvj{{{\color{MacroColor} \mathbf{j}}}}
+\def\rvk{{{\color{MacroColor} \mathbf{k}}}}
+\def\rvl{{{\color{MacroColor} \mathbf{l}}}}
+\def\rvm{{{\color{MacroColor} \mathbf{m}}}}
+\def\rvn{{{\color{MacroColor} \mathbf{n}}}}
+\def\rvo{{{\color{MacroColor} \mathbf{o}}}}
+\def\rvp{{{\color{MacroColor} \mathbf{p}}}}
+\def\rvq{{{\color{MacroColor} \mathbf{q}}}}
+\def\rvr{{{\color{MacroColor} \mathbf{r}}}}
+\def\rvs{{{\color{MacroColor} \mathbf{s}}}}
+\def\rvt{{{\color{MacroColor} \mathbf{t}}}}
+\def\rvu{{{\color{MacroColor} \mathbf{u}}}}
+\def\rvv{{{\color{MacroColor} \mathbf{v}}}}
+\def\rvw{{{\color{MacroColor} \mathbf{w}}}}
+\def\rvx{{{\color{MacroColor} \mathbf{x}}}}
+\def\rvy{{{\color{MacroColor} \mathbf{y}}}}
+\def\rvz{{{\color{MacroColor} \mathbf{z}}}}
+\def\rveps{{{\color{MacroColor} \boldsymbol{\reps}}}}
+
+% Elements of random vectors
+\def\erva{{{\color{MacroColor} \textnormal{a}}}}
+\def\ervb{{{\color{MacroColor} \textnormal{b}}}}
+\def\ervc{{{\color{MacroColor} \textnormal{c}}}}
+\def\ervd{{{\color{MacroColor} \textnormal{d}}}}
+\def\erve{{{\color{MacroColor} \textnormal{e}}}}
+\def\ervf{{{\color{MacroColor} \textnormal{f}}}}
+\def\ervg{{{\color{MacroColor} \textnormal{g}}}}
+\def\ervh{{{\color{MacroColor} \textnormal{h}}}}
+\def\ervi{{{\color{MacroColor} \textnormal{i}}}}
+\def\ervj{{{\color{MacroColor} \textnormal{j}}}}
+\def\ervk{{{\color{MacroColor} \textnormal{k}}}}
+\def\ervl{{{\color{MacroColor} \textnormal{l}}}}
+\def\ervm{{{\color{MacroColor} \textnormal{m}}}}
+\def\ervn{{{\color{MacroColor} \textnormal{n}}}}
+\def\ervo{{{\color{MacroColor} \textnormal{o}}}}
+\def\ervp{{{\color{MacroColor} \textnormal{p}}}}
+\def\ervq{{{\color{MacroColor} \textnormal{q}}}}
+\def\ervr{{{\color{MacroColor} \textnormal{r}}}}
+\def\ervs{{{\color{MacroColor} \textnormal{s}}}}
+\def\ervt{{{\color{MacroColor} \textnormal{t}}}}
+\def\ervu{{{\color{MacroColor} \textnormal{u}}}}
+\def\ervv{{{\color{MacroColor} \textnormal{v}}}}
+\def\ervw{{{\color{MacroColor} \textnormal{w}}}}
+\def\ervx{{{\color{MacroColor} \textnormal{x}}}}
+\def\ervy{{{\color{MacroColor} \textnormal{y}}}}
+\def\ervz{{{\color{MacroColor} \textnormal{z}}}}
+
+% Random matrices
+\def\rmA{{{\color{MacroColor} \mathbf{A}}}}
+\def\rmB{{{\color{MacroColor} \mathbf{B}}}}
+\def\rmC{{{\color{MacroColor} \mathbf{C}}}}
+\def\rmD{{{\color{MacroColor} \mathbf{D}}}}
+\def\rmE{{{\color{MacroColor} \mathbf{E}}}}
+\def\rmF{{{\color{MacroColor} \mathbf{F}}}}
+\def\rmG{{{\color{MacroColor} \mathbf{G}}}}
+\def\rmH{{{\color{MacroColor} \mathbf{H}}}}
+\def\rmI{{{\color{MacroColor} \mathbf{I}}}}
+\def\rmJ{{{\color{MacroColor} \mathbf{J}}}}
+\def\rmK{{{\color{MacroColor} \mathbf{K}}}}
+\def\rmL{{{\color{MacroColor} \mathbf{L}}}}
+\def\rmM{{{\color{MacroColor} \mathbf{M}}}}
+\def\rmN{{{\color{MacroColor} \mathbf{N}}}}
+\def\rmO{{{\color{MacroColor} \mathbf{O}}}}
+\def\rmP{{{\color{MacroColor} \mathbf{P}}}}
+\def\rmQ{{{\color{MacroColor} \mathbf{Q}}}}
+\def\rmR{{{\color{MacroColor} \mathbf{R}}}}
+\def\rmS{{{\color{MacroColor} \mathbf{S}}}}
+\def\rmT{{{\color{MacroColor} \mathbf{T}}}}
+\def\rmU{{{\color{MacroColor} \mathbf{U}}}}
+\def\rmV{{{\color{MacroColor} \mathbf{V}}}}
+\def\rmW{{{\color{MacroColor} \mathbf{W}}}}
+\def\rmX{{{\color{MacroColor} \mathbf{X}}}}
+\def\rmY{{{\color{MacroColor} \mathbf{Y}}}}
+\def\rmZ{{{\color{MacroColor} \mathbf{Z}}}}
+
+% Elements of random matrices
+\def\ermA{{{\color{MacroColor} \textnormal{A}}}}
+\def\ermB{{{\color{MacroColor} \textnormal{B}}}}
+\def\ermC{{{\color{MacroColor} \textnormal{C}}}}
+\def\ermD{{{\color{MacroColor} \textnormal{D}}}}
+\def\ermE{{{\color{MacroColor} \textnormal{E}}}}
+\def\ermF{{{\color{MacroColor} \textnormal{F}}}}
+\def\ermG{{{\color{MacroColor} \textnormal{G}}}}
+\def\ermH{{{\color{MacroColor} \textnormal{H}}}}
+\def\ermI{{{\color{MacroColor} \textnormal{I}}}}
+\def\ermJ{{{\color{MacroColor} \textnormal{J}}}}
+\def\ermK{{{\color{MacroColor} \textnormal{K}}}}
+\def\ermL{{{\color{MacroColor} \textnormal{L}}}}
+\def\ermM{{{\color{MacroColor} \textnormal{M}}}}
+\def\ermN{{{\color{MacroColor} \textnormal{N}}}}
+\def\ermO{{{\color{MacroColor} \textnormal{O}}}}
+\def\ermP{{{\color{MacroColor} \textnormal{P}}}}
+\def\ermQ{{{\color{MacroColor} \textnormal{Q}}}}
+\def\ermR{{{\color{MacroColor} \textnormal{R}}}}
+\def\ermS{{{\color{MacroColor} \textnormal{S}}}}
+\def\ermT{{{\color{MacroColor} \textnormal{T}}}}
+\def\ermU{{{\color{MacroColor} \textnormal{U}}}}
+\def\ermV{{{\color{MacroColor} \textnormal{V}}}}
+\def\ermW{{{\color{MacroColor} \textnormal{W}}}}
+\def\ermX{{{\color{MacroColor} \textnormal{X}}}}
+\def\ermY{{{\color{MacroColor} \textnormal{Y}}}}
+\def\ermZ{{{\color{MacroColor} \textnormal{Z}}}}
+
+% Vectors
+\def\vzero{{{\color{MacroColor} \mathbf{0}}}}
+\def\vone{{{\color{MacroColor} \mathbf{1}}}}
+\def\vmu{{{\color{MacroColor} \boldsymbol{\mu}}}}
+\def\vtheta{{{\color{MacroColor} \boldsymbol{\theta}}}}
+\def\vphi{{{\color{MacroColor} \boldsymbol{\phi}}}}
+\def\va{{{\color{MacroColor} \mathbf{a}}}}
+\def\vb{{{\color{MacroColor} \mathbf{b}}}}
+\def\vc{{{\color{MacroColor} \mathbf{c}}}}
+\def\vd{{{\color{MacroColor} \mathbf{d}}}}
+\def\ve{{{\color{MacroColor} \mathbf{e}}}}
+\def\vf{{{\color{MacroColor} \mathbf{f}}}}
+\def\vg{{{\color{MacroColor} \mathbf{g}}}}
+\def\vh{{{\color{MacroColor} \mathbf{h}}}}
+\def\vi{{{\color{MacroColor} \mathbf{i}}}}
+\def\vj{{{\color{MacroColor} \mathbf{j}}}}
+\def\vk{{{\color{MacroColor} \mathbf{k}}}}
+\def\vl{{{\color{MacroColor} \mathbf{l}}}}
+\def\vm{{{\color{MacroColor} \mathbf{m}}}}
+\def\vn{{{\color{MacroColor} \mathbf{n}}}}
+\def\vo{{{\color{MacroColor} \mathbf{o}}}}
+\def\vp{{{\color{MacroColor} \mathbf{p}}}}
+\def\vq{{{\color{MacroColor} \mathbf{q}}}}
+\def\vr{{{\color{MacroColor} \mathbf{r}}}}
+\def\vs{{{\color{MacroColor} \mathbf{s}}}}
+\def\vt{{{\color{MacroColor} \mathbf{t}}}}
+\def\vu{{{\color{MacroColor} \mathbf{u}}}}
+\def\vv{{{\color{MacroColor} \mathbf{v}}}}
+\def\vw{{{\color{MacroColor} \mathbf{w}}}}
+\def\vx{{{\color{MacroColor} \mathbf{x}}}}
+\def\vy{{{\color{MacroColor} \mathbf{y}}}}
+\def\vz{{{\color{MacroColor} \mathbf{z}}}}
+
+% Elements of vectors
+\def\evalpha{{{\color{MacroColor} \alpha}}}
+\def\evbeta{{{\color{MacroColor} \beta}}}
+\def\evepsilon{{{\color{MacroColor} \epsilon}}}
+\def\evlambda{{{\color{MacroColor} \lambda}}}
+\def\evomega{{{\color{MacroColor} \omega}}}
+\def\evmu{{{\color{MacroColor} \mu}}}
+\def\evpsi{{{\color{MacroColor} \psi}}}
+\def\evsigma{{{\color{MacroColor} \sigma}}}
+\def\evtheta{{{\color{MacroColor} \theta}}}
+\def\eva{{{\color{MacroColor} a}}}
+\def\evb{{{\color{MacroColor} b}}}
+\def\evc{{{\color{MacroColor} c}}}
+\def\evd{{{\color{MacroColor} d}}}
+\def\eve{{{\color{MacroColor} e}}}
+\def\evf{{{\color{MacroColor} f}}}
+\def\evg{{{\color{MacroColor} g}}}
+\def\evh{{{\color{MacroColor} h}}}
+\def\evi{{{\color{MacroColor} i}}}
+\def\evj{{{\color{MacroColor} j}}}
+\def\evk{{{\color{MacroColor} k}}}
+\def\evl{{{\color{MacroColor} l}}}
+\def\evm{{{\color{MacroColor} m}}}
+\def\evn{{{\color{MacroColor} n}}}
+\def\evo{{{\color{MacroColor} o}}}
+\def\evp{{{\color{MacroColor} p}}}
+\def\evq{{{\color{MacroColor} q}}}
+\def\evr{{{\color{MacroColor} r}}}
+\def\evs{{{\color{MacroColor} s}}}
+\def\evt{{{\color{MacroColor} t}}}
+\def\evu{{{\color{MacroColor} u}}}
+\def\evv{{{\color{MacroColor} v}}}
+\def\evw{{{\color{MacroColor} w}}}
+\def\evx{{{\color{MacroColor} x}}}
+\def\evy{{{\color{MacroColor} y}}}
+\def\evz{{{\color{MacroColor} z}}}
+
+% Matrix
+\def\mA{{{\color{MacroColor} \mathbf{A}}}}
+\def\mB{{{\color{MacroColor} \mathbf{B}}}}
+\def\mC{{{\color{MacroColor} \mathbf{C}}}}
+\def\mD{{{\color{MacroColor} \mathbf{D}}}}
+\def\mE{{{\color{MacroColor} \mathbf{E}}}}
+\def\mF{{{\color{MacroColor} \mathbf{F}}}}
+\def\mG{{{\color{MacroColor} \mathbf{G}}}}
+\def\mH{{{\color{MacroColor} \mathbf{H}}}}
+\def\mI{{{\color{MacroColor} \mathbf{I}}}}
+\def\mJ{{{\color{MacroColor} \mathbf{J}}}}
+\def\mK{{{\color{MacroColor} \mathbf{K}}}}
+\def\mL{{{\color{MacroColor} \mathbf{L}}}}
+\def\mM{{{\color{MacroColor} \mathbf{M}}}}
+\def\mN{{{\color{MacroColor} \mathbf{N}}}}
+\def\mO{{{\color{MacroColor} \mathbf{O}}}}
+\def\mP{{{\color{MacroColor} \mathbf{P}}}}
+\def\mQ{{{\color{MacroColor} \mathbf{Q}}}}
+\def\mR{{{\color{MacroColor} \mathbf{R}}}}
+\def\mS{{{\color{MacroColor} \mathbf{S}}}}
+\def\mT{{{\color{MacroColor} \mathbf{T}}}}
+\def\mU{{{\color{MacroColor} \mathbf{U}}}}
+\def\mV{{{\color{MacroColor} \mathbf{V}}}}
+\def\mW{{{\color{MacroColor} \mathbf{W}}}}
+\def\mX{{{\color{MacroColor} \mathbf{X}}}}
+\def\mY{{{\color{MacroColor} \mathbf{Y}}}}
+\def\mZ{{{\color{MacroColor} \mathbf{Z}}}}
+\def\mBeta{{{\color{MacroColor} \boldsymbol{\beta}}}}
+\def\mPhi{{{\color{MacroColor} \boldsymbol{\Phi}}}}
+\def\mLambda{{{\color{MacroColor} \boldsymbol{\Lambda}}}}
+\def\mSigma{{{\color{MacroColor} \boldsymbol{\Sigma}}}}
+
+% % Tensor
+% \DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
+% \SetMathAlphabet{\mathsfit}{bold}{\encodingdefault}{\sfdefault}{bx}{n}
+% \newcommand{\tens}[1]{\mathbf{\mathsfit{#1}}}
+% \def\tA{{\tens{A}}}
+% \def\tB{{\tens{B}}}
+% \def\tC{{\tens{C}}}
+% \def\tD{{\tens{D}}}
+% \def\tE{{\tens{E}}}
+% \def\tF{{\tens{F}}}
+% \def\tG{{\tens{G}}}
+% \def\tH{{\tens{H}}}
+% \def\tI{{\tens{I}}}
+% \def\tJ{{\tens{J}}}
+% \def\tK{{\tens{K}}}
+% \def\tL{{\tens{L}}}
+% \def\tM{{\tens{M}}}
+% \def\tN{{\tens{N}}}
+% \def\tO{{\tens{O}}}
+% \def\tP{{\tens{P}}}
+% \def\tQ{{\tens{Q}}}
+% \def\tR{{\tens{R}}}
+% \def\tS{{\tens{S}}}
+% \def\tT{{\tens{T}}}
+% \def\tU{{\tens{U}}}
+% \def\tV{{\tens{V}}}
+% \def\tW{{\tens{W}}}
+% \def\tX{{\tens{X}}}
+% \def\tY{{\tens{Y}}}
+% \def\tZ{{\tens{Z}}}
+
+
+% Graph
+\def\gA{{{\color{MacroColor} \mathcal{A}}}}
+\def\gB{{{\color{MacroColor} \mathcal{B}}}}
+\def\gC{{{\color{MacroColor} \mathcal{C}}}}
+\def\gD{{{\color{MacroColor} \mathcal{D}}}}
+\def\gE{{{\color{MacroColor} \mathcal{E}}}}
+\def\gF{{{\color{MacroColor} \mathcal{F}}}}
+\def\gG{{{\color{MacroColor} \mathcal{G}}}}
+\def\gH{{{\color{MacroColor} \mathcal{H}}}}
+\def\gI{{{\color{MacroColor} \mathcal{I}}}}
+\def\gJ{{{\color{MacroColor} \mathcal{J}}}}
+\def\gK{{{\color{MacroColor} \mathcal{K}}}}
+\def\gL{{{\color{MacroColor} \mathcal{L}}}}
+\def\gM{{{\color{MacroColor} \mathcal{M}}}}
+\def\gN{{{\color{MacroColor} \mathcal{N}}}}
+\def\gO{{{\color{MacroColor} \mathcal{O}}}}
+\def\gP{{{\color{MacroColor} \mathcal{P}}}}
+\def\gQ{{{\color{MacroColor} \mathcal{Q}}}}
+\def\gR{{{\color{MacroColor} \mathcal{R}}}}
+\def\gS{{{\color{MacroColor} \mathcal{S}}}}
+\def\gT{{{\color{MacroColor} \mathcal{T}}}}
+\def\gU{{{\color{MacroColor} \mathcal{U}}}}
+\def\gV{{{\color{MacroColor} \mathcal{V}}}}
+\def\gW{{{\color{MacroColor} \mathcal{W}}}}
+\def\gX{{{\color{MacroColor} \mathcal{X}}}}
+\def\gY{{{\color{MacroColor} \mathcal{Y}}}}
+\def\gZ{{{\color{MacroColor} \mathcal{Z}}}}
+
+% Sets
+\def\sA{{{\color{MacroColor} {A}}}}
+\def\sB{{{\color{MacroColor} {B}}}}
+\def\sC{{{\color{MacroColor} {C}}}}
+\def\sD{{{\color{MacroColor} {D}}}}
+\def\sE{{{\color{MacroColor} {E}}}}
+% Don't use a set called E, because this would be the same as our symbol
+% for expectation.
+\def\sF{{{\color{MacroColor} {F}}}}
+\def\sG{{{\color{MacroColor} {G}}}}
+\def\sH{{{\color{MacroColor} {H}}}}
+\def\sI{{{\color{MacroColor} {I}}}}
+\def\sJ{{{\color{MacroColor} {J}}}}
+\def\sK{{{\color{MacroColor} {K}}}}
+\def\sL{{{\color{MacroColor} {L}}}}
+\def\sM{{{\color{MacroColor} {M}}}}
+\def\sN{{{\color{MacroColor} {N}}}}
+\def\sO{{{\color{MacroColor} {O}}}}
+\def\sP{{{\color{MacroColor} {P}}}}
+\def\sQ{{{\color{MacroColor} {Q}}}}
+\def\sR{{{\color{MacroColor} {R}}}}
+\def\sS{{{\color{MacroColor} {S}}}}
+\def\sT{{{\color{MacroColor} {T}}}}
+\def\sU{{{\color{MacroColor} {U}}}}
+\def\sV{{{\color{MacroColor} {V}}}}
+\def\sW{{{\color{MacroColor} {W}}}}
+\def\sX{{{\color{MacroColor} {X}}}}
+\def\sY{{{\color{MacroColor} {Y}}}}
+\def\sZ{{{\color{MacroColor} {Z}}}}
+
+% Entries of a matrix
+\def\emLambda{{\Lambda}}
+\def\emA{{\color{MacroColor} A}}
+\def\emB{{\color{MacroColor} B}}
+\def\emC{{\color{MacroColor} C}}
+\def\emD{{\color{MacroColor} D}}
+\def\emE{{\color{MacroColor} E}}
+\def\emF{{\color{MacroColor} F}}
+\def\emG{{\color{MacroColor} G}}
+\def\emH{{\color{MacroColor} H}}
+\def\emI{{\color{MacroColor} I}}
+\def\emJ{{\color{MacroColor} J}}
+\def\emK{{\color{MacroColor} K}}
+\def\emL{{\color{MacroColor} L}}
+\def\emM{{\color{MacroColor} M}}
+\def\emN{{\color{MacroColor} N}}
+\def\emO{{\color{MacroColor} O}}
+\def\emP{{\color{MacroColor} P}}
+\def\emQ{{\color{MacroColor} Q}}
+\def\emR{{\color{MacroColor} R}}
+\def\emS{{\color{MacroColor} S}}
+\def\emT{{\color{MacroColor} T}}
+\def\emU{{\color{MacroColor} U}}
+\def\emV{{\color{MacroColor} V}}
+\def\emW{{\color{MacroColor} W}}
+\def\emX{{\color{MacroColor} X}}
+\def\emY{{\color{MacroColor} Y}}
+\def\emZ{{\color{MacroColor} Z}}
+\def\emSigma{{\color{MacroColor} \Sigma}}
+
+% entries of a tensor
+% Same font as tensor, without \mathbf wrapper
+\newcommand{\etens}[1]{\mathsfit{#1}}
+\def\etLambda{{\etens{\Lambda}}}
+\def\etA{{\etens{A}}}
+\def\etB{{\etens{B}}}
+\def\etC{{\etens{C}}}
+\def\etD{{\etens{D}}}
+\def\etE{{\etens{E}}}
+\def\etF{{\etens{F}}}
+\def\etG{{\etens{G}}}
+\def\etH{{\etens{H}}}
+\def\etI{{\etens{I}}}
+\def\etJ{{\etens{J}}}
+\def\etK{{\etens{K}}}
+\def\etL{{\etens{L}}}
+\def\etM{{\etens{M}}}
+\def\etN{{\etens{N}}}
+\def\etO{{\etens{O}}}
+\def\etP{{\etens{P}}}
+\def\etQ{{\etens{Q}}}
+\def\etR{{\etens{R}}}
+\def\etS{{\etens{S}}}
+\def\etT{{\etens{T}}}
+\def\etU{{\etens{U}}}
+\def\etV{{\etens{V}}}
+\def\etW{{\etens{W}}}
+\def\etX{{\etens{X}}}
+\def\etY{{\etens{Y}}}
+\def\etZ{{\etens{Z}}}
+
+% The true underlying data generating distribution
+\newcommand{\pdata}{{\color{MacroColor} p_{\mathrm{data}}}}
+% The empirical distribution defined by the training set
+\newcommand{\ptrain}{{\color{MacroColor} \hat{p}_{\mathrm{data}}}}
+\newcommand{\Ptrain}{{\color{MacroColor} \hat{P}_{\mathrm{data}}}}
+% The model distribution
+\newcommand{\pmodel}{{\color{MacroColor} p_{\rm{model}}}}
+\newcommand{\Pmodel}{{\color{MacroColor} P_{\rm{model}}}}
+\newcommand{\ptildemodel}{{\color{MacroColor} \tilde{p}_{\rm{model}}}}
+% Stochastic autoencoder distributions
+\newcommand{\encoder}{{\color{MacroColor} \text{Enc}}}
+\newcommand{\decoder}{{\color{MacroColor} \text{Dec}}}
+\newcommand{\pencode}{{\color{MacroColor} p_{\rm{encoder}}}}
+\newcommand{\pdecode}{{\color{MacroColor} p_{\rm{decoder}}}}
+\newcommand{\precons}{{\color{MacroColor} p_{\rm{reconstruct}}}}
+
+\newcommand{\laplace}{\mathrm{Laplace}} % Laplace distribution
+
+\newcommand{\E}{{\color{MacroColor} \mathbb{E}}}
+\newcommand{\Ls}{{\color{MacroColor} \mathcal{L}}}
+\newcommand{\N}{{\color{MacroColor} \mathbb{N}}}
+\newcommand{\emp}{{\color{MacroColor} \tilde{p}}}
+\newcommand{\lr}{{\color{MacroColor} \alpha}}
+\newcommand{\reg}{{\color{MacroColor} \lambda}}
+\newcommand{\rect}{{\color{MacroColor} \mathrm{rectifier}}}
+\newcommand{\softmax}{{\color{MacroColor} \mathrm{softmax}}}
+\newcommand{\sigmoid}{{\color{MacroColor} \sigma}}
+\newcommand{\softplus}{{\color{MacroColor} \zeta}}
+\newcommand{\KL}{{\color{MacroColor} D_{\mathrm{KL}}}}
+\newcommand{\Var}{{\color{MacroColor} \mathrm{Var}}}
+\newcommand{\standarderror}{{\color{MacroColor} \mathrm{SE}}}
+\newcommand{\Cov}{{\color{MacroColor} \mathrm{Cov}}}
+% Wolfram Mathworld says L^2 is for function spaces and \ell^2 is for vectors
+% But then they seem to use L^2 for vectors throughout the site, and so does
+% wikipedia.
+\newcommand{\normlzero}{L^0}
+\newcommand{\normlone}{L^1}
+\newcommand{\normltwo}{L^2}
+\newcommand{\normlp}{L^p}
+\newcommand{\normmax}{L^\infty}
+
+\newcommand{\parents}{Pa} % See usage in notation.tex. Chosen to match Daphne's book.
+
+\DeclareMathOperator*{\argmax}{{\color{MacroColor} arg\,max}}
+\DeclareMathOperator*{\argmin}{{\color{MacroColor} arg\,min}}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Tr}{Tr}
