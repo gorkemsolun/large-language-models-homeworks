@@ -1,120 +1,67 @@
-% \documentclass[11pt,fancy,en]{book} % {elegantbook}
-\documentclass[10pt]{book} % {elegantbook}
+\documentclass[a4paper,12pt]{ETHexercise}
 
-\usepackage{misc/llm}
-\input{misc/macros.tex}
+\input{preamble}
+\input{macros}
 
-% Vilém: Trying to match ETH design manual with sans serif, can be turned off
-\title{\bf\fontfamily{phv}\fontsize{24}{30}\selectfont
-Training, Fine-Tuning, Inference and\\ Applications of Large Language Models
-\vspace{1cm}
-}
-\author{
-    \fontfamily{lmss}\selectfont
-    Mrinmaya Sachan, Kumar Shridhar, Wangchunshu Zhou, Peng Cui, Shehzaad Dhuliawala, Yifan Hou,\\
-    \fontfamily{lmss}\selectfont
-    Andreas Opedal, Alessandro Stolfo, Jakub Macina, Vilém Zouhar}
-\date{\fontfamily{lmss}\selectfont ETH Zurich, Switzerland \qquad \today}
+\newtoggle{solution}
 
+\toggletrue{solution}
+%\togglefalse{solution}
+\usepackage{multirow}
+
+\usepackage{soul}% for the underlining 
+\usepackage{frcursive}% for 5
 
 \begin{document}
 
-% turn off margins for the first page
-\newgeometry{margin=0pt}
-% make title inline -Vilém
-{\let\newpage\relax\maketitle}
-% \maketitle
+\lectureheader{Prof. Ryan Cotterell, Prof. Mrinmaya Sachan, Prof. Florian Tram{\`e}r}{}
+{\Large Large Language Models}{Spring 2025}
 
-\vspace{2cm}
+\vspace{5mm}
+\begin{center}
+    {\Huge Assignment 1 \\ \vspace{5mm} \Large Your Name, Your Legi}\\
+\end{center}
 
-\hspace*{-1.2in}
-\includegraphics[width=1.31\linewidth]{misc/cover.pdf}
-\vspace{-5cm}
+\vspace{3cm}
 
-% restore margins
-\restoregeometry
-% remove "2" on the blank page after title -Vilém
-\clearpage
-\thispagestyle{empty}
+\begin{center}
+    {\large \textbf{Collaborators}}
+    \begin{enumerate}
+        \item Collaborator 1 Name, Collaborator 1 Legi
+        \item Collaborator 2 Name, Collaborator 2 Legi
+        \item ...
+    \end{enumerate}
+\end{center}
 
-% \addcontentsline{toc}{chapter}{#0}
-\tableofcontents
+\begin{center}
+    {\large \textbf{Declaration}}
+\end{center}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% CHAPTER Giddy Up %%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Introduction}
-% \section{Introduction}
-Welcome to the class notes on ``Training, Fine-Tuning, Inference and Applications of
-Large Language Models'' for the \href{https://rycolab.io/classes/llm-s23/}{Large Language Models class (263-5354-00L)} at Department of Computer Science, ETH Zurich, Switzerland.
-The lecture is given by Ryan Cotterell, Mrinmaya Sachan, and Florian Tramèr.
+I, \textcolor{ETHGreen}{{\cursive\setul{0.1ex}{}\ul{~~Your Name~~}}}, confirm that I have written this assignment independently, without any direct copying or paraphrasing from other students' work. 
+I have acknowledged everyone I consulted during my research. 
+I understand that while consultation and comparison of solutions are permitted, the final written submission must be my own work.
 
-This part of the class focuses on the practical aspects of implementing large language models, their functionalities and applications.
-Many universities are offering similar courses at the moment, e.g., \href{https://stanford-cs324.github.io/winter2022/}{CS324 at Stanford University} and \href{https://self-supervised.cs.jhu.edu/sp2023/}{CS 600.471 at Johns Hopkins University}. 
-Their syllabi may serve as useful future references.
+I am aware that any form of plagiarism is a violation of academic integrity. If it is determined that I have engaged in academic dishonesty, I accept and understand that the university's standard measures for plagiarism will be applied.
 
+By submitting this assignment, I affirm my commitment to academic honesty and integrity.
 
-\chapter{Transfer Learning}
+\newpage
 
-\input{chapters/transfer_learning/general-idea.tex}
-\input{chapters/transfer_learning/elmo.tex}
-\input{chapters/transfer_learning/bert.tex}
+\input{problems/question1}
+\newpage
 
+\input{problems/question2}
+\newpage
 
+\input{problems/question3}
+\newpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% CHAPTER Probabilistic Foundations %%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
- \chapter{Parameter Efficient Fine-Tuning}
-\input{chapters/parameter_efficient_finetuning/general-idea.tex}
-\input{chapters/parameter_efficient_finetuning/partialFT.tex}
-\input{chapters/parameter_efficient_finetuning/adapter.tex}
- \newpage{}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% CHAPTER Modeling Foundations %%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\chapter{Prompting and Zero-shot Inference}\label{sec:prompting}
-\input{chapters/prompting_and_zero_shot_inference/intro}
-\input{chapters/prompting_and_zero_shot_inference/prompt_engineering}
-\input{chapters/prompting_and_zero_shot_inference/zero_and_few_shot}
- \newpage{}
-
-\chapter{Vision Language Models}
-
-\input{chapters/multimodality/intro.tex}
-
-% \section{Vision Language Models}
-\input{chapters/multimodality/vision-language-models.tex}
-
-\chapter{Retrieval-Augmented Generation}
-
-\input{chapters/multimodality/knowledge-enhancement.tex}
-
-\input{chapters/additional_topics/rlhf.tex}
-
-\chapter{Calibration}
-\input{chapters/calibration/calbration}
-
-% \input{chapters/transfer_learning/scaling_laws.tex}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%%%%%% END %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%%%%%% INDEX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\printindex
-
-%% IF elegantbook
-% \addbibresource{main.bib}
-% \bibliographystyle{acl_natbib}
-% \printbibliography
-%% ELSE
-\bibliography{misc/reference}
-\bibliographystyle{misc/acl_natbib}
+\input{problems/question4}
+\newpage
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

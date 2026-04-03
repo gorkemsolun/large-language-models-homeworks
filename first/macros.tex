@@ -1,0 +1,1452 @@
+\newcommand{\mymacro}[1]{{\color{MacroColor} #1}}
+% \newcommand{\mymacro}[1]{{#1}}
+
+
+\newcommand{\ethz}{\emoji[emojis]{balloon}}
+
+% highlighting in mathmode
+\newcommand{\mathhl}[2][yellow!80]{\mathchoice%
+    {\colorbox{#1}{$\displaystyle#2$}}%
+    {\colorbox{#1}{$\textstyle#2$}}%
+    {\colorbox{#1}{$\scriptstyle#2$}}%
+    {\colorbox{#1}{$\scriptscriptstyle#2$}}}%
+
+\newcommand{\timestamp}{\ddmmyyyydate\today \,\,- \currenttime h}
+
+\newcommand{\defn}[1]{\textbf{#1}}
+% \newcommand{\paroutline}[2]{[\textit{\textcolor{DiverseMagenta}{#1}}] \textbf{\textcolor{AccentBlue}{#2}}}
+\newcommand{\paroutline}[2]{[\textit{\textcolor{DiverseMagenta}{#1}}] \textcolor{AccentBlue}{#2}}
+
+\newcommand{\anejchange}[1]{\textcolor{ETHRed}{#1}}
+% \newcommand{\anejchange}[1]{{#1}}
+
+\newcommand{\eye}{\mI}
+
+\newcommand{\hidden}{{\mymacro{\boldsymbol{h}}}}
+
+\newcommand{\pfsaRank}{{\mymacro{\mathrm{R}}}}
+
+
+% probability and statistics
+\newcommand{\vbeta}{{\mymacro{\boldsymbol{\beta}}}}
+\newcommand{\valpha}{{\mymacro{\boldsymbol{\alpha}}}}
+\newcommand{\vlambda}{{\mymacro{\boldsymbol{\lambda}}}}
+\newcommand{\veta}{{\mymacro{\boldsymbol{\eta}}}}
+\newcommand{\vgamma}{{\mymacro{\boldsymbol{\gamma}}}}
+\newcommand{\ptheta}{{\mymacro{p_{\vtheta}}}}
+\newcommand{\inv}[1]{{\mymacro{#1^{-1}}}}
+% \newcommand{\leftinv}[1]{{\mymacro{\stackrel{\leftarrow}{\inv{#1}}}}}
+\newcommand{\leftinv}[1]{#1^{\dagger}}
+\newcommand{\hidd}[1]{{\mymacro{y_{#1}}}}
+\newcommand{\obs}[1]{{\mymacro{x_{#1}}}}
+\newcommand{\hidds}{{\mymacro{\mathbf{Y}}}}
+\newcommand{\obss}{{\mymacro{\mathbf{X}}}}
+\newcommand{\hiddspace}{{\mymacro{\mathcal{Y}}}}
+\newcommand{\obsspace}{{\mymacro{ \mathcal{X}}}}
+\newcommand{\transm}{{\mymacro{\bT}}}
+\newcommand{\emissm}{{\mymacro{\bE}}}
+\newcommand{\weights}{{\mymacro{\bw}}}
+\newcommand{\biasScalar}{{\mymacro{ b}}}
+\newcommand{\biasVector}{{\mymacro{ \vb}}}
+\newcommand{\outBias}{{\mymacro{\vu}}}
+\newcommand{\biasVec}{{\mymacro{\biasVector}}}
+\newcommand{\featuref}{{\mymacro{ \mathbf{f}}}}
+
+\newcommand{\pathval}{{\mymacro{\mathrm{R}}}}
+\newcommand{\valueset}{{\mymacro{\mathrm{V}}}}
+\newcommand{\expectation}{{\mymacro{\mathbb{E}}}}
+\newcommand{\pdens}{{\mymacro{ p}}}
+\newcommand{\pdensBar}{{\mymacro{ \bar{\pdens}}}}
+\newcommand{\pdensTildeEOS}{{\mymacro{ \tilde{\pdens}_\eos}}}
+\newcommand{\qdens}{{\mymacro{ q}}}
+\newcommand{\loglikelihood}{{\mymacro{ \ell\ell}}}
+\newcommand{\samplespace}{{\mymacro{ \Omega}}}
+\newcommand{\eventspace}{{\mymacro{ \mathcal{F}}}}
+\newcommand{\eventspaceA}{{\mymacro{ \mathcal{A}}}}
+\newcommand{\probmeasure}{{\mymacro{ \mathbb{P}}}}
+\newcommand{\probfunction}{{\mymacro{ \mathbb{P}}}}
+\newcommand{\pushfwdMeasure}{{\mymacro{ \probfunction_*}}}
+\newcommand{\probtuple}{{\mymacro{\left(\samplespace, \eventspace, \probfunction\right)}}}
+\newcommand{\bomega}{{\mymacro{ \bm{\omega}}}}
+\newcommand{\overC}{{\mymacro{ \overline{C}}}}
+\newcommand{\overcalC}{{\mymacro{ \overline{\mathcal{C}}}}}
+\newcommand{\calC}{{\mymacro{ \mathcal{C}}}}
+\newcommand{\strCount}{{\mymacro{ C}}}
+
+% modeling and parameter estimation
+
+\newcommand{\paramspace}{{\mymacro{\boldsymbol{\Theta}}}}
+\newcommand{\param}{{\mymacro{\theta}}}
+\newcommand{\modelparam}{{\mymacro{\theta}}}
+\newcommand{\params}{{\mymacro{\vtheta}}}
+\newcommand{\modelparams}{{\mymacro{\vtheta}}}
+\newcommand{\modelparamstrue}{{\mymacro{\modelparams^\star}}}
+\newcommand{\modelparamsopt}{{\mymacro{\widehat\modelparams}}}
+\newcommand{\premodel}{{\mymacro{g_{\scaleto{\modelparams}{4pt}}}}} % for neyman-fisher factorization
+\newcommand{\model}{{\mymacro{p_{\scaleto{\modelparams}{4pt}}}}}
+\newcommand{\modelopt}{{\mymacro{p_{\scaleto{\modelparamsopt}{4pt}}}}}
+
+% math
+\newcommand{\ind}[1]{\mathbbm{1} \left\{ #1 \right\}}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+% \DeclarePairedDelimiter\floor{\left\lfloor}{\right\rfloor}
+\newcommand{\floor}[1]{\mymacro{\left\lfloor #1 \right\rfloor}}
+\newcommand{\fieldd}{{\mymacro{ \mathbb{F}^d}}}
+\newcommand{\field}{{\mymacro{ \mathbb{F}}}}
+\newcommand{\vectorspace}{{\mymacro{ \mathbb{V}}}}
+\newcommand{\vspacedim}{{\mymacro{ D}}}
+\newcommand{\Q}{{\mymacro{ \mathbb{Q}}}}
+\newcommand{\R}{{\mymacro{ \mathbb{R}}}}
+\newcommand{\Rex}{{\mymacro{ \overline{\R}}}}
+\newcommand{\Rd}{{\mymacro{ \R^d}}}
+\newcommand{\RD}{{\mymacro{ \R^D}}}
+\newcommand{\RDD}{{\mymacro{ \R^{D \times D}}}}
+\newcommand{\C}{{\mymacro{ \mathbb{C}}}}
+\newcommand{\Z}{{\mymacro{ \mathbb{Z}}}}
+\newcommand{\B}{{\mymacro{ \mathbb{B}}}}
+\newcommand{\BD}{{\mymacro{ \B^D}}}
+\newcommand{\BDD}{{\mymacro{ \B^{D \times D}}}}
+\newcommand{\Bset}{{\mymacro{ \set{0, 1}}}}
+\newcommand{\Rplus}{{\mymacro{ \mathbb{R}_{+}}}}
+\newcommand{\Rnonnegative}{{\mymacro{ \mathbb{R}_{\geq 0}}}}
+\newcommand{\Rminus}{{\mymacro{ \mathbb{R}_{-}}}}
+\newcommand{\sigalgebra}{{\mymacro{ \sigma\text{-}\text{algebra}}}}
+\newcommand{\func}{{\mymacro{ f}}}
+\newcommand{\funcg}{{\mymacro{ g}}}
+\newcommand{\vfunc}{{\mymacro{ \mathbf{f}}}}
+\newcommand{\hatvfunc}{{\mymacro{ \hat{\mathbf{f}}}}}
+\newcommand{\vfuncg}{{\mymacro{ \mathbf{g}}}}
+\newcommand{\diag}[1]{{\mymacro{ \mathrm{diag}\!\left(#1\right)}}}
+\newcommand{\norm}[1]{{\mymacro{ \left\lVert #1 \right\rVert}}}
+\newcommand{\normsubone}[1]{\mymacro{ \left\lVert #1 \right\rVert_{1}}}
+\newcommand{\normsubtwo}[1]{\mymacro{ \left\lVert #1 \right\rVert_{2}}}
+\newcommand{\normsubinf}[1]{\mymacro{ \left\lVert #1 \right\rVert_{\infty}}}
+\newcommand{\relation}{{\mymacro{ R}}}
+\newcommand{\equivClass}[1]{{\mymacro{ \left[#1\right]}}}
+\newcommand{\eval}{{\mymacro{ \lambda}}}
+\newcommand{\evecv}{{\mymacro{ \vv}}}
+\newcommand{\evecu}{{\mymacro{ \vu}}}
+\newcommand{\lambdamax}{{\mymacro{\lambda_{\text{max}}}}}
+\newcommand{\evalmax}{{\mymacro{\eval_{\text{max}}}}}
+\newcommand{\ordering}{{\mymacro{ n}}}
+\newcommand{\inner}[2]{{\mymacro{ #1^\top #2}}}
+\newcommand{\innerProd}[2]{{\mymacro{ \langle #1, #2 \rangle }}}
+\newcommand{\basisVect}{{\mymacro{ \ve}}}
+\newcommand{\perm}{{\mymacro{ \pi}}}
+
+% general formal language theory macros
+\newcommand{\alphabet}{{\mymacro{ \Sigma}}}
+\newcommand{\alphabetchar}{{\mymacro{ \Sigma_0}}}
+\newcommand{\alphabettree}{{\mymacro{ \mathcal{T}}}}
+\newcommand{\alphabetmerge}{\mymacro{ \Upsilon_{\alphabet}}}
+\newcommand{\stackalphabet}{{\mymacro{ \Gamma}}}
+\newcommand{\botstackalphabet}{{\mymacro{\stackalphabet_{\bot}}}}
+\newcommand{\oalphabet}{{\mymacro{ \Delta}}}
+\newcommand{\outalphabet}{\oalphabet}
+\newcommand{\eosalphabet}{{\mymacro{ \overline{\alphabet}}}}
+\newcommand{\lang}{{\sL}}
+\newcommand{\langFun}[1]{\lang\left(#1\right)}
+\newcommand{\kleene}[1]{{\mymacro{#1^*}}}
+\newcommand{\kleeneplus}[1]{{\mymacro{#1^+}}}
+\newcommand{\rankedalphabet}{{\mymacro{ \left(\alphabet, \arity)\right}}}
+\newcommand{\regex}{{\mymacro{ \alpha}}}
+
+% strings and symbols
+\newcommand{\str}{{\mymacro{\boldsymbol{y}}}}
+\newcommand{\strt}{{\mymacro{ \str_{\tstep}}}}
+\newcommand{\strlt}{{\mymacro{ \str_{<\tstep}}}}
+\newcommand{\strlet}{{\mymacro{ \str_{\leq\tstep}}}}
+\newcommand{\strltplus}{{\mymacro{ \str_{<\tstep+1}}}}
+\newcommand{\strgt}{{\mymacro{ \str_{>\tstep}}}}
+\newcommand{\strPrime}{{\mymacro{ \str'}}}
+\newcommand{\eosstr}{{\mymacro{\overline{\str}}}}
+\newcommand{\strlen}{{\mymacro{T}}}
+\newcommand{\strs}{{\mymacro{\boldsymbol{s}}}}
+\newcommand{\strx}{{\mymacro{\boldsymbol{x}}}}
+\newcommand{\stry}{{\mymacro{\boldsymbol{y}}}}
+\newcommand{\strz}{{\mymacro{\boldsymbol{z}}}}
+\newcommand{\sym}{{\mymacro{y}}}
+\newcommand{\eossym}{{\mymacro{\overline{\sym}}}}
+\newcommand{\syma}{{\mymacro{a}}}
+\newcommand{\symb}{{\mymacro{b}}}
+\newcommand{\symc}{{\mymacro{c}}}
+\newcommand{\symd}{{\mymacro{d}}}
+\newcommand{\symx}{{\mymacro{x}}}
+\newcommand{\stacksym}{{\mymacro{\stacksymbol{\gamma}}}}
+%\newcommand{\stringsum}{\xi}
+%\newcommand{\stringsum}[1]{\xi_{1}}
+
+\newcommand{\defeq}{\mathrel{\stackrel{\textnormal{\tiny def}}{=}}}
+
+\newcommand{\NTo}[1]{{\mymacro{\left[ #1 \right]}}}
+\newcommand{\Zmod}[1]{{\mymacro{\Z_{#1}}}}
+\newcommand{\set}[1]{{\mymacro{\left\{ #1 \right\}}}}
+\newcommand{\powerset}[1]{{\mymacro{\mathcal{P}{\left(#1\right)}}}}
+\newcommand{\setcomplement}[1]{{\mymacro{#1^{\textsf{c}}}}}
+\newcommand{\binv}[1]{{\mymacro{\left(#1\right)^{-1}}}}
+
+\newcommand{\TODO}{{\color{red} TODO }}
+\newcommand{\draft}[1]{{\color{AccentOrange} #1 }}
+
+\newcommand{\justification}[1]{\text{{\color{ETHGray}(#1)}}}
+
+\newcommand{\textexample}[1]{{\mymacro{ \fontfamily{ppl}\selectfont \text{``#1''}}}}
+
+\newcommand{\rank}{{\mymacro{\text{rank}}}}
+\newcommand{\rankFun}[1]{{\mymacro{\rank\left(#1\right)}}}
+
+% Indexing, sizes
+\newcommand{\bigo}{{\mymacro{ \mathcal{O}}}}
+\newcommand{\idx}{{\mymacro{ n}}}
+\newcommand{\idxn}{{\mymacro{ n}}}
+\newcommand{\idxd}{{\mymacro{ d}}}
+\newcommand{\idxi}{{\mymacro{ i}}}
+\newcommand{\idxj}{{\mymacro{ j}}}
+\newcommand{\idxk}{{\mymacro{ k}}}
+\newcommand{\idxl}{{\mymacro{ l}}}
+\newcommand{\idxm}{{\mymacro{ m}}}
+\newcommand{\setsize}{{\mymacro{ N}}}
+\newcommand{\nsamples}{{\mymacro{ N}}}
+\newcommand{\seqlength}{{\mymacro{ L}}}
+\newcommand{\othseqlength}{{\mymacro{ M}}}
+\newcommand{\nstates}{{\mymacro{ |\states|}}}
+\newcommand{\nsymbols}{{\mymacro{ |\alphabet|}}}
+\newcommand{\eosnsymbols}{{\mymacro{ |\eosalphabet|}}}
+\newcommand{\tstep}{{\mymacro{ t}}}
+\newcommand{\finaltstep}{{\mymacro{ T}}}
+
+% NLP
+% \newcommand{\pM}{{\mymacro{ p_{\scaleto{\text{M}}{4pt}}}}}
+% \newcommand{\pLM}{{\mymacro{ p_{\scaleto{\text{LM}}{4pt}}}}}
+% \newcommand{\pLNSM}{{\mymacro{ p_{\scaleto{\text{SM}}{4pt}}}}}
+% \newcommand{\pLNSMFun}[2]{{\mymacro{ \pLNSM\left(#1\mid#2\right)}}}
+\newcommand{\pM}{\mymacro{\pdens}}
+\newcommand{\pLM}{\mymacro{\pdens}}
+\newcommand{\qLM}{\mymacro{\qdens}}
+\newcommand{\pLNSM}{\mymacro{\pdens}}
+\newcommand{\pLNSMFun}[2]{{\mymacro{\pLNSM\left(#1\mid#2\right)}}}
+\newcommand{\pPrefix}{{\mymacro{ \pi}}}
+\newcommand{\pGN}{\mymacro{\pdens}}
+\newcommand{\pLN}{\mymacro{\pdens}}
+\newcommand{\pLNbar}{{\mymacro{ \overline{p}_{\scaleto{\text{LN}}{4pt}}}}}
+\newcommand{\scoringfunc}{{\mymacro{ \widehat{p}}}}
+\newcommand{\unnormalizedpGN}{{\mymacro{ \scoringfunc_{\scaleto{\text{GN}}{4pt}}}}}
+\newcommand{\unnormalizedpLN}{{\mymacro{ \scoringfunc_{\scaleto{\text{LN}}{4pt}}}}}
+\newcommand{\unnormalizedpM}{{\mymacro{ \scoringfunc_{\scaleto{\text{M}}{4pt}}}}}
+\newcommand{\unnormalizedpLM}{{\mymacro{ \scoringfunc_{\scaleto{\text{LM}}{4pt}}}}}
+\newcommand{\pSM}{{\mymacro{ p_{\scaleto{\text{SM}}{4pt}}}}}
+\newcommand{\pMLM}{{\mymacro{ p_{\scaleto{\texttt{MLM}}{4pt}}}}}
+\newcommand{\pASM}{{\mymacro{ p_{\scaleto{\text{ASM}}{4pt}}}}}
+\newcommand{\bos}{{\mymacro{\textsc{bos}}}}
+\newcommand{\eos}{{\mymacro{\textsc{eos}}}}
+\newcommand{\ngr}{{\mymacro{ \textit{n}}}}
+\newcommand{\ngram}{{\mymacro{ \textit{n}-gram}}\xspace}
+\newcommand{\nStrictLocal}{{\mymacro{ \text{SL}_\ngr}}}
+\newcommand{\strictLocal}{{\mymacro{ \text{SL}}}}
+\newcommand{\normConstant}{{\mymacro{ Z}}}
+\newcommand{\featurespacedim}{{\mymacro{ d}}}
+\newcommand{\embedDim}{{\mymacro{ R}}}
+% \newcommand{\contextEmbedDim}{{\mymacro{ \embeddim'}}}
+\newcommand{\scoref}{{\mymacro{ \func}}}
+\newcommand{\similarity}{{\mymacro{ \texttt{sim}}}}
+\newcommand{\ctxLogits}[1]{{\mymacro{ \vw\left(#1\right)}}}
+
+% Dyck languages
+\newcommand{\dyck}[1]{{\mymacro{ \mathrm{D}\!\left(#1\right)}}}
+\newcommand{\boundedDyck}[2]{{\mymacro{ \mathrm{D}\!\left(#1, #2\right)}}}
+\newcommand{\nBracketTypes}{{\mymacro{ k}}}
+\newcommand{\dyckMaxDepth}{{\mymacro{ m}}}
+\newcommand{\boundedDyckkm}{\mymacro{\boundedDyck{\nBracketTypes}{\dyckMaxDepth}}\xspace}
+\newcommand{\openBr}[1]{{\mymacro{ \langle_{#1}}}}
+\newcommand{\closeBr}[1]{{\mymacro{ \rangle_{#1}}}}
+\newcommand{\binEnc}[1]{{\mymacro{ \texttt{B}\!\left(#1\right)}}}
+\newcommand{\fullBinEnc}[1]{{\mymacro{\overline{\texttt{B}}\!\left(#1\right)}}}
+\newcommand{\hToQ}{{\mymacro{ s}}}
+\newcommand{\hToQFun}[1]{{\mymacro{ \hToQ \!\left( #1 \right)}}}
+\newcommand{\hToQinv}{{\mymacro{ \inv{s}}}}
+\newcommand{\hToQinvFun}[1]{{\mymacro{ \hToQinv\!\left( #1 \right)}}}
+\newcommand{\qToH}{{\mymacro{\chi}}}
+\newcommand{\qToHFun}[1]{{\mymacro{ \qToH \!\left( #1 \right)}}}
+\newcommand{\qToHinv}{{\mymacro{ \inv{h}}}}
+\newcommand{\qToHinvFun}[1]{{\mymacro{ \qToHinv\!\left( #1 \right)}}}
+\newcommand{\strToQ}[1]{{\mymacro{\!\left[ #1 \right]}}}
+\newcommand{\sinkState}{{\mymacro{ \textsf{R}}}}
+\newcommand{\acceptState}{{\mymacro{ \textsf{A}}}}
+
+% strings denotation, embeddings
+\newcommand{\onehot}[1]{{\mymacro{ \llbracket#1\rrbracket}}}
+% \newcommand{\onehot}[1]{{\mymacro{ \vo_{#1}}}}
+\newcommand{\embedding}[2][]{{\mymacro{ \ve_{\textsf{#1}}\!\left(#2\right)}}}
+\newcommand{\inEmbedding}{{\mymacro{ \vr}}}
+\newcommand{\inEmbeddingFun}[2][]{{\mymacro{ \inEmbedding\!\left(#2\right)}}}
+% \newcommand{\namedembedding}[2][]{{\mymacro{ \ve_{#2}\!\left(#1\right)}}}
+\newcommand{\embedSym}{{\mymacro{ \embedding{\sym}}}}
+\newcommand{\inEmbedSym}{{\mymacro{ \inEmbeddingFun{\sym}}}}
+\newcommand{\inEmbedSymt}{{\mymacro{ \inEmbeddingFun{\sym_\tstep}}}}
+\newcommand{\inEmbedSymtminus}{{\mymacro{ \inEmbeddingFun{\sym_{\tstep - 1}}}}}
+\newcommand{\embedMtx}{{\mymacro{ \mE}}}
+\newcommand{\eembedMtx}{{\mymacro{ \emE}}}
+\newcommand{\embedEOS}{{\mymacro{ \embedding{\eos}}}}
+\newcommand{\embedStr}{{\mymacro{ \embedding{\str}}}}
+\newcommand{\embedSymt}{{\mymacro{ \embedding{{\sym_\tstep}}}}}
+\newcommand{\embedSymtminus}{{\mymacro{ \embedding{{\sym_{\tstep-1}}}}}}
+\newcommand{\embedSymPrime}{{\mymacro{ \embedding{{\sym'}}}}}
+
+\newcommand{\symlt}{{\mymacro{ \sym_{<\tstep}}}}
+\newcommand{\symt}{{\mymacro{ \sym_{\tstep}}}}
+\newcommand{\symT}{{\mymacro{ \sym_{\strlen}}}}
+\newcommand{\symi}{{\mymacro{ \sym_{i}}}}
+\newcommand{\symtminus}{{\mymacro{ \sym_{\tstep-1}}}}
+\newcommand{\symtplus}{{\mymacro{ \sym_{\tstep+1}}}}
+\newcommand{\symzero}{{\mymacro{ \sym_{0}}}}
+\newcommand{\symone}{{\mymacro{ \sym_{1}}}}
+\newcommand{\symTminus}{{\mymacro{ \sym_{T-1}}}}
+\newcommand{\symPrime}{{\mymacro{ \sym'}}}
+
+\newcommand{\bias}{{\mymacro{ \vb}}}
+\newcommand{\biasSym}{{\mymacro{ b_\sym}}}
+\newcommand{\biasSymt}{{\mymacro{ b_{\sym_\tstep}}}}
+\newcommand{\biasSymtminus}{{\mymacro{ b_{\sym_{\tstep-1}}}}}
+\newcommand{\biasSymPrime}{{\mymacro{ b_{\symPrime}}}}
+\newcommand{\biasStr}{{\mymacro{ b_\str}}}
+\newcommand{\biasStrPrime}{{\mymacro{ b_{\strPrime}}}}
+\newcommand{\biasVech}{{\mymacro{ \vb}}}
+\newcommand{\biasVecy}{{\mymacro{ \vb_{y}}}}
+\newcommand{\biasVeco}{{\mymacro{ \vb_{o}}}}
+
+% output vectors
+\newcommand{\vot}{{\mymacro{ \vo_{t}}}}
+\newcommand{\votminus}{{\mymacro{ \vo_{t-1}}}}
+
+% model names
+\newcommand{\autoregmodel}{{\mymacro{ autoregressive sequence model\xspace}}}
+\newcommand{\autoregmodelAcronym}{{\mymacro{ ASM\xspace}}}
+\newcommand{\GNMAcronym}{{\mymacro{ GNM\xspace}}}
+\newcommand{\LNMAcronym}{{\mymacro{ LNM\xspace}}}
+\newcommand{\SMAcronym}{{\mymacro{ SM\xspace}}}
+
+% data structures
+\newcommand{\queue}{{\mymacro{\textsf{queue}}}}
+\newcommand{\stack}{{\mymacro{\textsf{stack}}}}
+\newcommand{\inblock}{{\mymacro{\textsf{in-block}}}}
+
+% graphs
+\newcommand{\graph}{\mymacro{ \mathcal{G}}}
+\newcommand{\scc}{\mymacro{ \mathcal{S}}}
+
+% semirings
+\newcommand{\semiring}{{\mymacro{ \mathcal{W}}}}
+\newcommand{\semiringtuple}{{\mymacro{\left(\semiringset, \oplus, \otimes, \zero, \one \right)}}}
+\newcommand{\closedsemiringtuple}{{\mymacro{ \left(\semiringset, \oplus, \otimes, \zero, \one, \kleene{} \right)}}}
+\newcommand{\semiringset}{{\mymacro{ \mathbb{K}}}}
+\newcommand{\zero}{{\mymacro{\mathbf{0}}}}
+\newcommand{\one}{{\mymacro{\mathbf{1}}}}
+\newcommand{\matrixsemiringset}{{\mymacro{ \mathbf{M}_{D}\left( \semiring \right) }}}
+\newcommand{\booleansemiring}{{\mymacro{\left(\set{0, 1}, \vee, \wedge, \textsc{true}, \textsc{false} \right)}}}
+\newcommand{\tropicalsemiring}{{\mymacro{\left(\Rplus, \min, +, \infty, 0 \right)}}}
+\newcommand{\probabilitysemiring}{{\mymacro{\left(\left[0, 1\right], +, \times, 0, 1 \right)}}}
+\newcommand{\realssemiring}{{\mymacro{\left(\R, +, \times, 0, 1 \right)}}}
+\newcommand{\positiverealssemiring}{{\mymacro{\left(\Rplus, +, \times, 0, 1 \right)}}}
+\newcommand{\nonnegativerealssemiring}{{\mymacro{\left(\Rnonnegative, +, \times, 0, 1 \right)}}}
+
+% automaton
+\newcommand{\automaton}{{\mymacro{ \mathcal{A}}}}
+\newcommand{\wfsa}{{\mymacro{ \automaton}}}
+\newcommand{\transducer}{{\mymacro{ \mathcal{T}}}}
+\newcommand{\wfst}{{\mymacro{ \transducer}}}
+\newcommand{\detautomaton}{{\mymacro{ \automaton_{\textsc{det}}}}}
+\newcommand{\pushedautomaton}{{\mymacro{ \automaton_{\textsc{push}}}}}
+\newcommand{\minautomaton}{{\mymacro{ \automaton_{\textsc{min}}}}}
+\newcommand{\epsautomaton}{{\mymacro{ \automaton_{\neg\varepsilon}}}}
+\newcommand{\trimautomaton}{{\mymacro{ \automaton_{\textsc{trim}}}}}
+\newcommand{\unionautomaton}{{\mymacro{ \automaton_{\textsc{union}}}}}
+\newcommand{\complementautomaton}{{\mymacro{ \automaton_{\textsc{c}}}}}
+\newcommand{\intersectautomaton}{{\mymacro{ \automaton_{\textsc{intersect}}}}}
+\newcommand{\epsonlyautomaton}{{\mymacro{ \automaton_{\varepsilon}}}}
+\newcommand{\closure}{{\mymacro{ \kappa}}}
+\newcommand{\stateq}{{\mymacro{ q}}}
+\newcommand{\statep}{{\mymacro{ p}}}
+\newcommand{\stater}{{\mymacro{ r}}}
+\newcommand{\states}{{\mymacro{ Q}}}
+\newcommand{\stackstates}{{\mymacro{ Z}}}
+\newcommand{\trans}{{\mymacro{ \delta}}}
+\newcommand{\transFun}[1]{{\mymacro{\trans\left(#1\right)}}}
+\newcommand{\projectstates}{{\mymacro{ \mathcal{E}_{\states}}}}
+\newcommand{\outarcs}{{\mymacro{ \mathcal{E}}}}
+\newcommand{\inarcs}{{\mymacro{ \inv{\mathcal{E}}}}}
+\newcommand{\prevq}{{\mymacro{ p }}}
+\newcommand{\nextq}{{\mymacro{ n }}}
+\newcommand{\weight}{{\mymacro{ \textnormal{w}}}}
+\newcommand{\innerweight}{{\mymacro{ \weight_{\text{I}}}}}
+\newcommand{\apath}{{\mymacro{ \boldsymbol \pi}}}
+\newcommand{\pathlen}{{\mymacro{ N}}}
+\newcommand{\paths}{{\mymacro{ \Pi}}}
+\newcommand{\initial}{{\mymacro{ I}}}
+\newcommand{\final}{{\mymacro{ F}}}
+\newcommand{\initf}{{\mymacro{ \lambda}}}
+\newcommand{\finalf}{{\mymacro{ \rho}}}
+\newcommand{\initfFun}[1]{{\mymacro{\initf\left(#1\right)}}}
+\newcommand{\finalfFun}[1]{{\mymacro{\finalf\left(#1\right)}}}
+\newcommand{\initfVect}{{\mymacro{ \overrightarrow{\initf}}}}
+\newcommand{\finalfVect}{{\mymacro{ \overrightarrow{\finalf}}}}
+\newcommand{\qinit}{{\mymacro{ q_{\iota}}}}
+\newcommand{\qfinal}{{\mymacro{ q_{\varphi}}}}
+\newcommand{\sempty}{{\mymacro{ z_{\textit{0}}}}}
+\newcommand{\strone}{{\mymacro{ \infty}}}
+\newcommand{\strsemiring}{{\mymacro{ \mathcal{S}}}}
+\newcommand{\kleenesemiring}{{\mymacro{ \mathcal{K}}}}
+\newcommand{\transMtx}{{\mymacro{ \mT}}}
+\newcommand{\allsum}{{\mymacro{ Z}}}
+\newcommand{\pathsum}{{\mymacro{ \allsum}}}
+% \newcommand{\initpowerstate}{{\mymacro{ \{I\}}}}
+\newcommand{\discover}[1]{{\mymacro{ d \left[ #1 \right]}}}
+\newcommand{\finish}[1]{{\mymacro{ f \left[ #1 \right]}}}
+\newcommand{\transitionWeight}{{\mymacro{ \omega}}}
+\newcommand{\transitionWeightFun}[1]{{\mymacro{ \transitionWeight\left(#1\right)}}}
+\newcommand{\nextStack}{{\mymacro{\phi}}}
+\newcommand{\nextStackFun}[1]{{\mymacro{ \nextStack\left(#1\right)}}}
+
+% removed alphabet from this
+\newcommand{\fsatuple}{{\mymacro{ \left( \alphabet, \states, \initial, \final, \trans \right)}}}
+\newcommand{\wfsatuple}{{\mymacro{ \left( \alphabet, \states, \trans, \initf, \finalf \right)}}}
+\newcommand{\dfatuple}{{\mymacro{ \left( \alphabet, \states, \qinit, \final, \trans \right)}}}
+% \newcommand{\fsatuple}{\left( \states, \alphabet, \initial, \final, \trans \right)}
+\newcommand{\dist}[2]{{\mymacro{ d \left[ #1, #2 \right]}}}
+\newcommand{\reverse}[1]{{\mymacro{ \overleftarrow{#1}}}}
+\newcommand{\edgenoweight}[3]{#1 \xrightarrow{#2} #3}
+\newcommand{\edge}[4]{{\mymacro{#1 \xrightarrow{#2 / #3} #4}}}
+\newcommand{\uwedge}[3]{{\mymacro{#1 \xrightarrow{#2} #3}}}
+\newcommand{\wfsttuple}{{\mymacro{ \left( \alphabet, \oalphabet, \states, \initial, \final, \trans, \initf, \finalf \right)}}}
+\newcommand{\forwardweight}[1]{{\mymacro{ \boldsymbol{\alpha}_{#1}}}}
+\newcommand{\backwardweight}[1]{{\mymacro{ \boldsymbol{\beta}_{#1}}}}
+\newcommand{\distance}{{\mymacro{ \Delta}}}
+\newcommand{\potentialfunction}{{\mymacro{ \Psi}}}
+\newcommand{\powerstate}{{\mymacro{ \mathcal{Q}}}}
+\newcommand{\initpowerstate}{{\mymacro{ \mathcal{Q}_{\initial}}}}
+\newcommand{\mitr}[3]{{\mymacro{ #1_{#3}^{\left(#2\right)}}}}
+
+% \NewDocumentCommand{\resid}{gm}{
+%     \ensuremath{{\mymacro{ r_{\IfNoValueTF{#1}{}{#1}} \left( #2 \right)}}}
+% }
+\newcommand{\yield}{{\mymacro{\textbf{s}}}}
+\newcommand{\arity}{{\mymacro{\textsf{arity}}}}
+\newcommand{\topo}{{\mymacro{\textsf{topo}}}}
+\newcommand{\rtopo}{{\mymacro{\textsf{rtopo}}}}
+\newcommand{\copycmd}{{\mymacro{\textsf{copy}}}}
+\newcommand{\tablefill}{{\mymacro{\textsf{table-filling}}}}
+
+\newcommand{\partitionP}{{\mymacro{ \mathbf{\mathcal{P}}}}}
+\newcommand{\partitionQ}{{\mymacro{ \mathbf{\mathcal{Q}}}}}
+\newcommand{\partitionR}{{\mymacro{ \mathbf{\mathcal{R}}}}}
+\newcommand{\partitionX}{{\mymacro{ \mathbf{\mathcal{X}}}}}
+\newcommand{\refinementof}{{\mymacro{\preccurlyeq}}}
+\newcommand{\refinementoff}{{\mymacro{ \preccurlyeq_f}}}
+\newcommand{\refinementoffplus}{{\mymacro{ \preccurlyeq_f^+}}}
+\newcommand{\splitpart}{{\mymacro{ \textsf{split}}}}
+\newcommand{\splitpartfaster}{{\mymacro{ \textsf{split-modified}}}}
+\newcommand{\finv}{{\mymacro{ f^{-1}}}}
+\newcommand{\Requivalence}{{\mymacro{ R_{\lang}}}}
+\newcommand{\prefix}[1]{{\mymacro{ P_{#1}}}}
+\newcommand{\eqclass}[1]{{\mymacro{ \left[#1\right]}}}
+% \newcommand{\eqclass}[1]{{\mymacro{ \bar{#1}}}}
+\newcommand{\nerodeeq}{{\mymacro{ \sim_{\lang}}}}
+\newcommand{\stateeq}{{\mymacro{ \sim_{\trans}}}}
+
+% formal power series
+\newcommand{\fps}{{\mymacro{ r}}}
+% \newcommand{\fpscoef}[2]{{\mymacro{ \left( #1, #2 \right)}}}
+\newcommand{\fpscoef}[2]{{\mymacro{ #1_{#2}}}}
+\newcommand{\fpss}{{\mymacro{ \semiring \langle \langle \kleene{\alphabet} \rangle \rangle}}}
+\newcommand{\finitefpss}{{\mymacro{ \semiring \langle \kleene{\alphabet} \rangle}}}
+
+% Turing machines
+\newcommand{\tm}{{\mymacro{ \mathcal{M}}}}
+\newcommand{\ptmtuple}{\left(\states, \alphabet, \tapealphabet, \trans, \qinit, \qfinal \right)}
+\newcommand{\ptmtupletwo}{\left(\states, \alphabet, \tapealphabet, \trans_1, \trans_2, \qinit, \qfinal \right)} % alternative definition with two transition functions
+\newcommand{\tapealphabet}{\mymacro{ \Gamma}}
+\newcommand{\tmleft}{\mymacro{ L}}
+\newcommand{\tmright}{\mymacro{ R}}
+\newcommand{\blanksym}{\boldsymbol{\hash}}
+
+% RNNs
+\newcommand{\tsystem}{{\mymacro{ \mathcal{T}}}}
+% \newcommand{\tsystemtuple}{{\mymacro{ \left(\alphabet, \states, \trans, \observations, \observationmap\right)}}}
+\newcommand{\tsystemstates}{{\mymacro{ S}}}
+\newcommand{\tstate}{{\mymacro{ s}}}
+\newcommand{\tstateInit}{{\mymacro{ \tstate_{\text{I}}}}}
+\newcommand{\tstateu}{{\mymacro{ u}}}
+\newcommand{\tsystemtuple}{{\mymacro{ \left(\alphabet, \tsystemstates, \dyMap, \tstateInit\right)}}}
+\newcommand{\wtsystemtuple}{{\mymacro{ \left(\alphabet, \tsystemstates, \dyMap, \tstateInit\right)}}}
+\newcommand{\observations}{{\mymacro{ \sO}}}
+\newcommand{\observationmap}{{\mymacro{ o}}}
+\newcommand{\dyMap}{{\mymacro{ \vfunc}}}
+\newcommand{\generalrnntuple}{{\mymacro{ \left( \alphabet, \hiddDim, \dyMap, \hiddStateZero\right)}}}
+\newcommand{\rnntuple}{{\mymacro{ \left( \alphabet, \hiddDim, \dyMap, \outMtx, \hiddStateZero\right)}}}
+\newcommand{\elmanrnntuple}{{\mymacro{ \left( \alphabet, \sigmoid, \hiddDim, \recMtx, \inMtx, \biasVech, \hiddStateZero\right)}}}
+\newcommand{\elmanUpdate}[2]{{\mymacro{ \sigmoid\left(\recMtx #1 + \inMtx \onehot{#2} + \biasVech\right)}}}
+\newcommand{\rnn}{{\mymacro{ \mathcal{R}}}}
+\newcommand{\rnnlm}{{\mymacro{\left(\rnn, \outMtx\right)}}}
+\newcommand{\ernnAcr}{{\mymacro{ERNN}}\xspace}
+% \newcommand{\hernnAcr}{{\mymacro{ HERNN}}}
+\newcommand{\hernnAcr}{{\mymacro{HRNN}}\xspace}
+\newcommand{\fsaAcr}{{\mymacro{FSA}}\xspace}
+\newcommand{\dfsaAcr}{{\mymacro{DFSA}}\xspace}
+\newcommand{\pfsaAcr}{{\mymacro{PFSA}}\xspace}
+\newcommand{\ppdaAcr}{{\mymacro{PPDA}}\xspace}
+\newcommand{\dpfsaAcr}{{\mymacro{DPFSA}}\xspace}
+\newcommand{\bpdaAcr}{{\mymacro{BPDA}}\xspace}
+\newcommand{\recMtx}{{\mymacro{ \mU}}}
+\newcommand{\inMtx}{{\mymacro{ \mV}}}
+% \newcommand{\outMtx}{{\mymacro{ \mW}}}
+\newcommand{\outMtx}{{\mymacro{ \mE}}}
+\newcommand{\eOutMtx}{{\mymacro{ \eembedMtx}}}
+\newcommand{\eRecMtx}{{\mymacro{ \emU}}}
+\newcommand{\eInMtx}{{\mymacro{ \emV}}}
+\newcommand{\hiddDim}{{\mymacro{ D}}}
+\newcommand{\Rhid}{{\mymacro{ \R^\hiddDim}}}
+\newcommand{\Rhidd}{\Rhid}
+\newcommand{\gate}{{\mymacro{ \vg}}}
+\newcommand{\gatet}{{\mymacro{ \gate_\tstep}}}
+
+% named functions / activation functions
+\newcommand{\loss}{{\mymacro{ \ell}}}
+\newcommand{\softmax}{{\mymacro{ \mathrm{softmax}}}}
+\newcommand{\sparsemax}{{\mymacro{ \mathrm{sparsemax}}}}
+\newcommand{\ReLU}{{\mymacro{ \mathrm{ReLU}}}}
+\newcommand{\softmaxfunc}[2]{{\mymacro{ \mathrm{softmax}\!\left(#1\right)_{#2}}}} % vector, index}
+\newcommand{\softmaxFun}[2]{\softmaxfunc{#1}{#2}} % vector, index}
+\newcommand{\sparsemaxfunc}[2]{{\mymacro{ \mathrm{sparsemax}\!\left(#1\right)_{#2}}}} % vector, index}
+\newcommand{\ReLUfunc}[1]{{\mymacro{\ReLU\left(#1\right)}}} % vector, index}
+\newcommand{\ReLUFun}[1]{{\mymacro{\ReLU\left(#1\right)}}} % vector, index}
+\newcommand{\determinant}[1]{{\mymacro{ \mathrm{det}\!\left(#1\right)}}}
+
+\newcommand{\heaviside}{{\mymacro{ H}}}
+\newcommand{\heavisideFun}[1]{{\mymacro{ \heaviside\left(#1\right)}}}
+\newcommand{\sigmoid}{{\mymacro{ \sigma}}}
+\newcommand{\sigmoidFun}[1]{{\mymacro{ \sigmoid\left(#1\right)}}}
+\newcommand{\sigmoidVecPrime}[1]{{\mymacro{ \boldsymbol{\sigmoid}^\prime_{#1}}}}
+\newcommand{\thrSigmoid}{{\mymacro{ \sigmoid_{\scaleto{\textnormal{T}}{4pt}}}}}
+\newcommand{\softplus}{{\mymacro{ \zeta}}}
+\newcommand{\clipping}{{\mymacro{ \mathrm{clip}}}}
+\newcommand{\gradnorm}{{\mymacro{ \mathrm{gradnorm}}}}
+
+% hidden states
+\newcommand{\hiddState}{{\mymacro{ \vh}}}
+\newcommand{\hiddStatet}{{\mymacro{ \hiddState_\tstep}}}
+\newcommand{\hiddStateT}{{\mymacro{ \hiddState_\strlen}}}
+\newcommand{\hiddStateTminus}{{\mymacro{ \hiddState_{\strlen - 1}}}}
+\newcommand{\hiddStatetplus}{{\mymacro{ \hiddState_{\tstep + 1}}}}
+\newcommand{\hiddStatetminus}{{\mymacro{ \hiddState_{\tstep - 1}}}}
+\newcommand{\context}{{\mymacro{ \vc}}}
+\newcommand{\contextt}{{\mymacro{ \context_\tstep}}}
+\newcommand{\vhzero}{{\mymacro{ \vh_0}}}
+\newcommand{\vhone}{{\mymacro{ \vh_1}}}
+\newcommand{\hiddStateZero}{{\mymacro{ \vhzero}}}
+\newcommand{\hiddStateOne}{{\mymacro{ \vhone}}}
+\newcommand{\vht}{{\mymacro{ \vh_t}}}
+\newcommand{\vhZero}{{\mymacro{ \vh_0}}}
+\newcommand{\vhi}{{\mymacro{ \vh_i}}}
+\newcommand{\vhiminus}{{\mymacro{ \vh_{i-1}}}}
+\newcommand{\vhT}{{\mymacro{ \vh_T}}}
+\newcommand{\vhtminus}{{\mymacro{ \vh_{t-1}}}}
+\newcommand{\vhTminus}{{\mymacro{ \vh_{T-1}}}}
+
+% Minsky Construction
+\newcommand{\symordering}{{\mymacro{ m}}}
+\newcommand{\eossymordering}{{\mymacro{\overline{\symordering}}}}
+\newcommand{\stateordering}{{\mymacro{ r}}}
+\newcommand{\anOrdering}{{\mymacro{ s}}}
+\newcommand{\BtoQS}{{\mymacro{ \B^{|\states||\eosalphabet|}}}}
+\newcommand{\BtoQSeos}{{\mymacro{ \B^{|\states||\eosalphabet|}}}}
+
+% Bounded Stack 
+\newcommand{\stackBound}{{\mymacro{m}}}
+\newcommand{\nOps}{{\mymacro{r}}}
+\newcommand{\relurnnAcr}{{\mymacro{$\ReLU$-RNN}}\xspace}
+\newcommand{\bPDAAcr}{{\mymacro{$\stackBound$-PDA}}\xspace}
+\newcommand{\qToStack}{{\mymacro{\psi}}}
+\newcommand{\qToStackFun}[1]{{\qToStack\left(#1\right)}}
+\newcommand{\stackMod}{{\mymacro{\mu}}}
+\newcommand{\stackModFun}[1]{{\stackMod\left(#1\right)}}
+% \newcommand{\stackModFun}[1]{{\stackMod_{#1}}}
+\newcommand{\confMod}{{\mymacro{\mu}}}
+\newcommand{\confModFun}[1]{{\confMod\left(#1\right)}}
+\newcommand{\stackActionWeight}{{\mymacro{\omega}}}
+\newcommand{\stackActionWeightFun}[1]{{\stackActionWeight\left(#1\right)}}
+\newcommand{\stackFsaAcr}{{\mymacro{$\stackBound$-\fsaAcr}}\xspace}
+\newcommand{\stackDfsaAcr}{{\mymacro{$\stackBound$-\dfsaAcr}}\xspace}
+\newcommand{\stackPfsaAcr}{{\mymacro{$\stackBound$-\pfsaAcr}}\xspace}
+\newcommand{\stackDpfsaAcr}{{\mymacro{$\stackBound$-\dpfsaAcr}}\xspace}
+% \newcommand{\stackTop}{{\mymacro{\texttt{top}}}}
+\newcommand{\stackTop}{{\mymacro{\tau}}}
+\newcommand{\stackTopFun}[1]{{\stackTop\left(#1\right)}}
+\newcommand{\thrPar}{{\mymacro{\alpha}}}
+\newcommand{\popAlphabet}{{\mymacro{\alphabet_{\popOp}}}}
+\newcommand{\pushAlphabet}{{\mymacro{\alphabet_{\pushOp}}}}
+\newcommand{\pushAlphabetOK}{{\mymacro{\alphabet_{\pushOp+}}}}
+\newcommand{\pushAlphabetNOK}{{\mymacro{\alphabet_{\pushOp-}}}}
+\newcommand{\shiftAlphabet}{{\mymacro{\alphabet_{\shiftOp}}}}
+\newcommand{\shiftAlphabetOK}{{\mymacro{\alphabet_{\shiftOp+}}}}
+\newcommand{\shiftAlphabetNOK}{{\mymacro{\alphabet_{\shiftOp-}}}}
+\newcommand{\parity}{{\mymacro{\textsf{Parity}}}}
+
+% Indyk & Dewdney constructions
+\newcommand{\phiCoor}{{\mymacro{ \vvarphi}}}
+\newcommand{\phitwo}{{\mymacro{ \phi_2}}}
+\newcommand{\phifour}{{\mymacro{ \phi_4}}}
+\newcommand{\phitwoFun}[1]{{\mymacro{ \phitwo\left(#1\right)}}}
+\newcommand{\phifourFun}[1]{{\mymacro{ \phifour\left(#1\right)}}}
+\newcommand{\phitwoInv}{{\mymacro{ \inv{\phi_2}}}}
+\newcommand{\phifourInv}{{\mymacro{ \inv{\phi_4}}}}
+\newcommand{\phitwoInvFun}[1]{{\mymacro{ \phitwoInv\left(#1\right)}}}
+\newcommand{\phifourInvFun}[1]{{\mymacro{ \phifourInv\left(#1\right)}}}
+\newcommand{\project}[1]{{\mymacro{ \pi_{#1}}}}
+\newcommand{\nfs}{{\mymacro{ C}}}
+\newcommand{\srNstates}{{\mymacro{ s}}}
+\newcommand{\frNstates}{{\mymacro{ r}}}
+\newcommand{\BQQ}{{\mymacro{ \B^{\nstates \times \nstates}}}}
+\newcommand{\BtwoQ}{{\mymacro{ \B^{2 \nstates}}}}
+\newcommand{\Bss}{{\mymacro{ \B^{\srNstates \times \srNstates}}}}
+\newcommand{\Btwos}{{\mymacro{ \B^{2 \srNstates}}}}
+\newcommand{\qvectv}[1]{{\mymacro{ \vv\left(#1\right)}}}
+\newcommand{\qvectu}[1]{{\mymacro{ \vu\left(#1\right)}}}
+\newcommand{\qMtx}[1]{{\mymacro{ \mB\left(#1\right)}}}
+\newcommand{\qBs}[1]{{\mymacro{ \sB\left(#1\right)}}}
+\newcommand{\stateSet}{{\mymacro{ \mathcal{Q}}}}
+\newcommand{\qPreds}[1]{{\mymacro{ \texttt{Par}\left(#1\right)}}}
+\newcommand{\qt}{{\mymacro{ \stateq_\tstep}}}
+\newcommand{\qT}{{\mymacro{ \stateq_\strlen}}}
+\newcommand{\qTminus}{{\mymacro{ \stateq_\strlen}}}
+\newcommand{\qtminus}{{\mymacro{ \stateq_{\tstep - 1}}}}
+\newcommand{\qtplus}{{\mymacro{ \stateq_{\tstep + 1}}}}
+\newcommand{\balpha}{{\mymacro{ \boldsymbol{\alpha}}}}
+\newcommand{\nLines}[1]{{\mymacro{ L\left(#1\right)}}}
+\newcommand{\compMtx}[2]{{\mymacro{ \Phi_{#1, #2}}}}
+\newcommand{\sepwfsa}{{\mymacro{ \wfsa_{\alphabet}}}}
+
+% RNN Compression
+\newcommand{\dppdaAcr}{{\mymacro{DPPDA}}\xspace}
+% \newcommand{\popPart}[1]{\mymacro{{#1}^{\scaleto{\blacktriangle}{4pt}}}}
+\newcommand{\popPart}[1]{\mymacro{{#1}^{\uparrow}}}
+% \newcommand{\pushPart}[1]{\mymacro{{#1}^{\scaleto{\blacktriangledown}{5pt}}}}
+\newcommand{\pushPart}[1]{\mymacro{{#1}^{\downarrow}}}
+\newcommand{\shiftPart}[1]{\mymacro{{#1}^{\downarrow}}}
+\newcommand{\popMtx}{\mymacro{\popPart{\recMtx}}}
+\newcommand{\pushMtx}{\mymacro{\pushPart{\recMtx}}}
+\newcommand{\shiftMtx}{\mymacro{\shiftPart{\recMtx}}}
+\newcommand{\popInMtx}{\mymacro{\popPart{\inMtx}}}
+\newcommand{\pushInMtx}{\mymacro{\pushPart{\inMtx}}}
+\newcommand{\shiftInMtx}{\mymacro{\shiftPart{\inMtx}}}
+% \newcommand{\hHiddState}{\mymacro{\widetilde{\hiddState}}}
+% \newcommand{\hHiddStatet}{\mymacro{\widetilde{\hiddState}_\tstep}}
+\newcommand{\hHiddState}{\mymacro{\hiddState^\circ}}
+\newcommand{\hHiddStatet}{\mymacro{\hiddState^\circ}}
+\newcommand{\dHiddState}{\mymacro{\hiddState}}
+
+
+% grammars
+\newcommand{\grammar}{{\mymacro{ \mathcal{G}}}}
+\newcommand{\nonterm}{{\mymacro{ \mathcal{N}}}}
+\newcommand{\rules}{{\mymacro{ \mathcal{P}}}}
+\newcommand{\arule}{{\mymacro{ p}}}
+\newcommand{\cfgstr}{{\mymacro{ \valpha}}} % string of terminals and nonterminals}
+\newcommand{\start}{{\mymacro{ \NT{S}}}}
+\newcommand{\cfgtuple}{{\mymacro{ \left(\alphabet, \nonterm, \start, \rules \right)}}}
+\newcommand{\derivationset}[2]{{\mymacro{ \mathcal{D}_{#1}(#2)}}}
+\newcommand{\grammarDerivationset}[1]{{\mymacro{ \mathcal{D}_{#1}}}}
+% \newcommand{\strDerivationset}[2]{{\mymacro{ \mathcal{D}_{#1}\left(#2\right)}}}
+\newcommand{\tree}{{\mymacro{\boldsymbol{d}}}}
+\newcommand{\treeyield}[1]{{\mymacro{ \str(#1)}}}
+\newcommand{\production}[2]{{\mymacro{ #1 \rightarrow #2}}}
+\newcommand{\wproduction}[3]{{\mymacro{ #1 \xrightarrow {#3} #2}}}
+\newcommand{\derives}{{\mymacro{ \overset{*}{\Rightarrow}}}}
+\newcommand{\derivesbase}{{\mymacro{ \Rightarrow}}}
+\newcommand{\wcfgtuple}{(\alphabet, \nonterm, \start, \rules, \productionWeight)}
+\newcommand{\desc}[1]{\textsf{descendant}(#1)}
+\newcommand{\children}[1]{\textsf{children}(#1)}
+\newcommand{\depth}[1]{\textsf{depth}(#1)}
+\newcommand{\height}[1]{\textsf{height}(#1)}
+\newcommand{\property}{{\mymacro{ P}}}
+\newcommand{\class}{{\mymacro{ \mathcal C}}}
+\newcommand{\treeroot}{{\mymacro{ \rho}}}
+\newcommand{\NT}[1]{{\mymacro{ \mathrm{#1}}}}
+\newcommand{\NTA}{\NT{A}}
+\newcommand{\NTB}{\NT{B}}
+\newcommand{\NTC}{\NT{C}}
+\newcommand{\NTX}{\NT{X}}
+\newcommand{\NTY}{\NT{Y}}
+\newcommand{\NTZ}{\NT{Z}}
+\newcommand{\transform}{{\mymacro{ \mathcal{T}}}}
+\newcommand{\productionWeight}{{\mymacro{ \mathcal{W}}}}
+\newcommand{\genFunc}{{\mymacro{ G}}}
+
+% NNs
+\newcommand{\emb}{{\mymacro{ {\small \mathsf{emb}}}}}
+\newcommand{\embfunc}[1]{{\mymacro{ {\small \mathsf{emb}}} (#1)}}
+\newcommand{\enc}{{\mymacro{ {\small \mathsf{enc}}}}}
+\newcommand{\encfunc}[1]{{\mymacro{ {\small \mathsf{enc}}} (#1)}}
+\newcommand{\encRNN}{\mymacro{ {\small \mathsf{enc}_{\rnn}}}}
+\newcommand{\encRNNfunc}[1]{\mymacro{ \encRNN\!\left(#1\right)}}
+\newcommand{\mlp}{{\mymacro{ {\small \mathsf{MLP}}}}}
+\newcommand{\Simplexd}{{\mymacro{ \boldsymbol{\Delta}^D}}}
+\newcommand{\Simplexdminus}{{\mymacro{ \boldsymbol{\Delta}^{D-1}}}}
+\newcommand{\Simplexalphabetminus}{{\mymacro{ \boldsymbol{\Delta}^{|\eosalphabet|-1}}}}
+\newcommand{\SimplexEosalphabetminus}{{\mymacro{ \boldsymbol{\Delta}^{|\eosalphabet|-1}}}}
+\newcommand{\ent}{{\mymacro{\mathrm{H}}}}
+
+
+\newcommand{\mtxDim}{{\mymacro{ N}}}
+\newcommand{\spectRad}{{\mymacro{ \rho_{\text{s}}}}}
+
+
+\let\rfb\reflectbox
+\newcommand{\uglyfrac}[2]{\rfb{\nicefrac{\rfb{#1}}{\ \rfb{#2}}}}
+%\def\uglyfrac#1#2{\leavevmode\hbox{${}_{\rm#2}{\mkern-2mu\backslash\mkern-2mu}^{\rm#1}$}}
+%\def\uglyfrac#1#2{\leavevmode\lower.4ex\hbox{\fontsize{7}{7}\selectfont #2}\kern-.2em
+%   $\backslash$\kern-.2em\raise.9ex\hbox{\fontsize{7}{7}\selectfont #1}}
+%\newcommand{\muglyfrac}[2]{\uglyfrac{\ensuremath{#1}}{\ensuremath{#2}}}
+%\newcommand{\lc}[2]{{\mymacro{ \nicefrac{#1}{#2}}}}
+%\newcommand{\lc}[2]{{\mymacro{ \left( \underset{#2}{\phantom{}} {\smallsetminus} \overset{#1}{\phantom{.}} \right)}}}
+%\newcommand{\lc}[2]{{\mymacro{ \uglyfrac{#2}{#1} }}}
+\newcommand{\lc}[2]{{\mymacro{ #1\mathtosmaller{\setminus}#2 }}}
+\newcommand{\negterm}[1]{{\mymacro{ {\raise.17ex\hbox{$\scriptstyle\sim$}} #1}}}
+\newcommand{\lcrules}{{\mymacro{ \rules_{\mathtosmaller{\setminus}}}}}
+\newcommand{\lcnonterm}{{\mymacro{ \nonterm_{\mathtosmaller{\setminus}}}}}
+\newcommand{\lcmap}{{\mymacro{ \mu}}}
+
+% algorithm names
+\newcommand{\ifcondition}{\textbf{if }}
+\newcommand{\otherwisecondition}{\textbf{otherwise }}
+\newcommand{\algoName}[1]{{\mymacro{\textsc{#1}}}}
+\newcommand{\forward}{{\mymacro{ \text{forward}}}}
+\newcommand{\backward}{{\mymacro{ \text{backward}}}}
+\newcommand{\pathsumAlg}{{\mymacro{ \text{pathsum}}}}
+\newcommand{\viterbi}{{\mymacro{ \text{Viterbi}}}}
+\newcommand{\dijkstra}{{\mymacro{ \text{Dijkstra}}}}
+\newcommand{\fixedpoint}{{\mymacro{ \text{FixedPoint}}}}
+\newcommand{\gaussjordan}{{\mymacro{ \text{GaussJordan}}}}
+\newcommand{\floydwarshall}{{\mymacro{ \text{FloydWarshall}}}}
+\newcommand{\bellmanford}{{\mymacro{ \text{BellmanFord}}}}
+\newcommand{\gaussjordandiff}{{\mymacro{ \text{GaussJordanDifference}}}}
+\newcommand{\determinization}{{\mymacro{ \text{Determinize}}}}
+\newcommand{\moore}{{\mymacro{ \text{Moore}}}}
+\newcommand{\minconstruction}{{\mymacro{ \text{BlockFSAConstruction}}}}
+\newcommand{\partitionrefinement}{{\mymacro{ \text{PartitionRefinement}}}}
+\newcommand{\naivepartitionrefinement}{{\mymacro{ \text{Na{\"i}vePartitionRefinement}}}}
+\newcommand{\moorepartition}{{\mymacro{ \text{MoorePartition}}}}
+\newcommand{\hopcroft}{{\mymacro{ \text{Hopcroft}}}}
+\newcommand{\hopcroftfast}{{\mymacro{ \text{FastHopcroft}}}}
+\newcommand{\partitionminimization}{{\mymacro{ \text{PartitionRefinementMinimization}}}}
+\newcommand{\weighteddeterminization}{{\mymacro{ \text{WeightedDeterminize}}}}
+\newcommand{\naiveintersection}{{\mymacro{ \text{Na{\"i}veIntersect}}}}
+\newcommand{\filteredintersection}{{\mymacro{ \text{$\epsilon$-filterIntersect}}}}
+\newcommand{\intersection}{{\mymacro{ \text{Intersect}}}}
+\newcommand{\lehmann}{{\mymacro{ \text{Lehmann}}}}
+\newcommand{\decomposedlehmann}{{\mymacro{ \text{DecomposedLehmann}}}}
+\newcommand{\sccfsa}{{\mymacro{ \text{SccFsa}}}}
+\newcommand{\dfs}{{\mymacro{ \text{DepthFirstSearch}}}}
+\newcommand{\toposort}{{\mymacro{ \text{TopologicalSort}}}}
+\newcommand{\dfsrec}{{\mymacro{ \text{DepthFirstSearchRecursion}}}}
+\newcommand{\kosaraju}{{\mymacro{ \text{Kosaraju}}}}
+\newcommand{\accessibility}{{\mymacro{ \text{Accessible}}}}
+\newcommand{\trim}{{\mymacro{ \text{Trim}}}}
+\newcommand{\testtwins}{{\mymacro{ \text{TestTwinsProperty}}}}
+\newcommand{\acyclicwcfg}{{\mymacro{ \text{AcyclicTreesum}}}}
+\newcommand{\fixedpointcfg}{{\mymacro{ \text{FixedPointGrammar}}}}
+\newcommand{\cycleidentity}{{\mymacro{ \text{CycleIdentity}}}}
+\newcommand{\acceptance}{{\mymacro{ \text{Acceptance}}}}
+\newcommand{\epsremoval}{{\mymacro{ \varepsilon\text{-}\text{removal}}}}
+\newcommand{\weightpushing}{{\mymacro{ WeightPush}}}
+\newcommand{\unweightedminimization}{{\mymacro{ \text{UnweightedMinimization}}}}
+\newcommand{\separateterminals}{{\mymacro{ \text{SeparateTerminals}}}}
+\newcommand{\nullaryremoval}{{\mymacro{ \text{RemoveNullary}}}}
+\newcommand{\makeunarywfsa}{{\mymacro{ \text{MakeUnaryWFSA}}}}
+\newcommand{\wfsatowcfg}{{\mymacro{ \text{WeightedAutomatonConversion}}}}
+\newcommand{\unaryremoval}{{\mymacro{ \text{RemoveUnary}}}}
+\newcommand{\trimcfg}{{\mymacro{ \text{TrimCFG}}}}
+\newcommand{\weightedunfold}{{\mymacro{ \text{WeightedUnfold}}}}
+\newcommand{\weightedfold}{{\mymacro{ \text{WeightedFold}}}}
+\newcommand{\binarize}{{\mymacro{ \text{Binarize}}}}
+\newcommand{\union}{{\mymacro{ \text{Union}}}}
+\newcommand{\complementation}{{\mymacro{ \text{Complementation}}}}
+\newcommand{\separationAlgoName}{{\algoName{Separate}}}
+
+
+
+
+% pushdown
+\newcommand{\bpdatuple}{\left(\alphabet, \stackBound, \stackMod\right)}
+\newcommand{\pdatuple}{\left(\states, \alphabet,  \stackalphabet, \trans, \pdaconfig{\initstack}{\qinit}, \pdaconfig{\finalstack}{\qfinal}\right)}
+\newcommand{\wpdatuple}{\left(\states, \alphabet, \stackalphabet, \trans, \pdaconfig{\initstack}{\qinit}, \pdaconfig{\finalstack}{\qfinal} \right)}
+\newcommand{\twostackpdatuple}{\left(\states, \alphabet, \stackalphabet, \trans, \pdaconfig{\initstack,\initstacktwo}{\qinit}, \pdaconfig{\finalstack,\finalstacktwo}{\qfinal}\right)}
+\newcommand{\twostackwpdatuple}{\left(\states, \alphabet, \stackalphabet, \trans , \pdaconfig{\initstack,\initstacktwo}{\qinit}, \pdaconfig{\finalstack,\finalstacktwo}{\qfinal} \right)}
+\newcommand{\twostackgppdatuple}{\left(\states, \alphabet, \stackalphabet, \trans_1, \trans_2, \qinit, \qfinal \right)} % generative probabilistic 2-pda where init stacks are empty
+\newcommand{\pdatupleNorm}{\left( \states, \alphabet, \stackalphabet, \qinit, \sempty, \qfinal, \trans  \right)}
+% \newcommand{\stack}{\mymacro{ \boldsymbol{\sigma}}}
+\newcommand{\pushdown}{\mymacro{ \mathcal{P}}}
+\newcommand{\pda}{\mymacro{ \pushdown}}
+\newcommand{\bottomup}{\mymacro{ \textsf{bottomup}}}
+\newcommand{\topdown}{\mymacro{ \textsf{topdown}}}
+\newcommand{\shift}{\textsc{shift}}
+\newcommand{\reduce}{\textsc{reduce}}
+\newcommand{\pdaEdge}[6]{\mymacro{ \edge{#2}{#3, #5 \rightarrow #6}{#1}{#4}}}
+\newcommand{\twoPdaEdge}[8]{\mymacro{ \edge{#2}{#3, #5 \rightarrow #6, #7 \rightarrow #8}{#1}{#4}}}
+\newcommand{\pdaEdgenoweight}[5]{{\mymacro{ \edgenoweight{#1}{#2, #4 \rightarrow #5}{#3}}}}
+\newcommand{\arun}{{\mymacro{ \apath}}}
+\newcommand{\runs}{{\mymacro{ \paths}}}
+\newcommand{\stackseq}{{\mymacro{ {\boldsymbol{\gamma}}}}}
+\newcommand{\stackstr}{{\mymacro{\stackseq}}}
+\newcommand{\stackseqtwo}{{\mymacro{ {\boldsymbol{\sigma}}}}}
+\newcommand{\emptystack}{{\mymacro{ {\emptyset}}}}
+\newcommand{\stackbot}{{\mymacro{\bot}}}
+\newcommand{\placeholderSym}{{\mymacro{\iota}}}
+\newcommand{\initstack}{{\mymacro{ {\stackseq_{\initial}}}}}
+\newcommand{\finalstack}{{\mymacro{ {\stackseq_{\final}}}}}
+\newcommand{\initstacktwo}{{\mymacro{ {\stackseqtwo_{\initial}}}}}
+\newcommand{\finalstacktwo}{{\mymacro{ {\stackseqtwo_{\final}}}}}
+% \newcommand{\startstate}{{\mymacro{ \iota}}}
+% \newcommand{\finalstate}{{\mymacro{ f}}}
+\newcommand{\pdaconfig}[2]{{\mymacro{ \left(#2, #1\right)}}}
+\newcommand{\twoPdaconfig}[3]{{\mymacro{ \left(#3, #1, #2\right)}}}
+\newcommand{\prevs}[1]{{\mymacro{ W_q \left( #1 \right) }}}
+\newcommand{\nexts}[1]{{\mymacro{ W_n \left( #1 \right) }}}
+\newcommand{\stacksymbol}[1]{{\mymacro{ #1 }}}
+\newcommand{\transweight}[5]{
+    {\mymacro{ \trans(#1,\stacksymbol{#4}\xrightarrow{#2}#3,\stacksymbol{#5})}}}
+\newcommand{\atrans}{{\mymacro{ \tau}}}
+\newcommand{\pdaAction}{{\mymacro{ a}}}
+\newcommand{\pushOp}{{\mymacro{ \texttt{PUSH}}}}
+\newcommand{\pushOpFun}[1]{{\pushOp\left(#1\right)}}
+\newcommand{\shiftOp}{{\mymacro{ \texttt{SHIFT}}}}
+\newcommand{\shiftOpFun}[1]{{\shiftOp\left(#1\right)}}
+\newcommand{\popOp}{{\mymacro{ \texttt{POP}}}}
+\newcommand{\popOpFun}[1]{{\mymacro{\popOp\left(#1\right)}}}
+\newcommand{\noOp}{{\mymacro{ \texttt{NO-OP}}}}
+\newcommand{\rejectState}{{\mymacro{\texttt{R}}}}
+
+% Siegelmann & Sontag construction
+\newcommand{\stackCell}{{\mymacro{ \texttt{STACK}}}}
+\newcommand{\rnnPhase}[1]{{\mymacro{ \texttt{PHASE}_{#1}}}}
+\newcommand{\bufferCell}[1]{{\mymacro{ \texttt{BUFF}_{#1}}}}
+\newcommand{\acceptCell}{{\mymacro{ \texttt{ACCEPT}}}}
+\newcommand{\stackTopCell}[1]{{\mymacro{ \texttt{STACK}_{#1}}}}
+% \newcommand{\stackTopCellEmpty}{{\mymacro{ \texttt{STACK}_{\emptystack}}}}
+\newcommand{\stackTopCellEmpty}{{\mymacro{ \texttt{STACK}_{\eps}}}}
+\newcommand{\stackTopCellZero}{{\mymacro{ \texttt{STACK}_{0}}}}
+\newcommand{\stackTopCellOne}{{\mymacro{ \texttt{STACK}_{1}}}}
+\newcommand{\stackInputConfig}[2]{{\mymacro{ \texttt{CONF}_{#1, #2}}}}
+\newcommand{\stackComp}[2]{{\mymacro{ \texttt{OP}_{#1, #2}}}}
+\newcommand{\stackCompNoOp}{{\mymacro{ \texttt{OP}_{\noOp}}}}
+\newcommand{\stackToNumeric}[1]{{\mymacro{ \texttt{rep}\left(#1\right)}}}
+\newcommand{\stackSymToDigit}[1]{{\mymacro{ \texttt{digit}\left(#1\right)}}}
+
+% tree automata
+% \newcommand{\fstatuple}{\left( \states, \alphabet, \initial, \final, \trans)  \right}
+% % \newcommand{\wfstatuple}{\left( \states, \alphabet, \initial, \final, \trans, \initf, \finalf)  \right}
+% \NewDocumentCommand\fstatuple{g}{%
+%     {\mymacro{ \IfNoValueTF{#1}{\left( \alphabet, \states, \initial, \final, \trans \right)}{\left( \alphabet{#1}, \states{#1}, \initial{#1}, \final{#1}, \trans{#1} \right)}}%}
+% }
+% \NewDocumentCommand\wfstatuple{g}{%
+%     {\mymacro{ \IfNoValueTF{#1}{\left( \alphabet, \states, \initial, \final, \trans, \initf, \finalf \right)}{\left( \alphabet, \states{#1}, \initial{#1}, \final{#1}, \trans{#1}, \lambda{#1}, \rho{#1} \right)}}%}
+% }
+
+\newcommand{\curlyarrow}{{\mymacro{ \mathrel{\leadsto}}}}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\expandLater}[1]{}
+
+% Transformers
+\newcommand{\tfslen}{{\mymacro{ \ell}}}
+\newcommand{\tfheadnum}{{\mymacro{ H}}}
+
+\newcommand{\qTransf}{{\mymacro{ Q}}}
+\newcommand{\kTransf}{{\mymacro{ K}}}
+\newcommand{\vTransf}{{\mymacro{ V}}}
+
+\newcommand{\tfheadCombine}{{\mymacro{ \vfunc_{\textnormal{H}}}}}
+
+\newcommand{\transformernetwork}{{\mymacro{ \mathcal{T}}}}
+\newcommand{\tfencfun}{\mymacro{ {\small \mathsf{enc}_{\transformernetwork}}}}
+\newcommand{\transformertuple}{{\mymacro{ (\alphabet, \hiddDim, \tfencfun)}}}
+\newcommand{\tfseqmodel}{{\mymacro{ (\alphabet, \hiddDim, \tfencfun, \embedMtx)}}}
+
+\newcommand{\tfscorefun}{{\mymacro{ f_{\mathrm{sc}}}}}
+\newcommand{\tfembfun}{{\mymacro{ f_{\mathrm{emb}}}}}
+\newcommand{\hardmax}{{\mymacro{ \mathrm{hardmax}}}}
+\newcommand{\hardmaxAvg}{{\mymacro{ \hardmax_\textnormal{avg}}}}
+\newcommand{\hardmaxUni}{{\mymacro{ \hardmax_\textnormal{uni}}}}
+
+\newcommand{\tflayer}{{\mymacro{ T}}}
+\newcommand{\tflayerinputmat}{{\mymacro{ \mX}}}
+\newcommand{\tflayerinputsy}{{\mymacro{ \vx}}}
+\newcommand{\tflayerinputseq}{{\mymacro{ (\tflayerinputsy_1^{\top}, \tflayerinputsy_2^{\top}, \dots, \tflayerinputsy_i^{\top})}}}
+\newcommand{\tflayeroutputmat}{{\mymacro{ \mZ}}}
+\newcommand{\tflayeroutputsy}{{\mymacro{ \vz}}}
+\newcommand{\tflayeroutputseq}{{\mymacro{ (\tflayeroutputsy_1^{\top}, \tflayeroutputsy_2^{\top}, \dots, \tflayeroutputsy_i^{\top})}}}
+\newcommand{\tflayeridx}{{\mymacro{ l}}}
+\newcommand{\tfnumlayer}{{\mymacro{ L}}}
+\newcommand{\tfencnumlayer}{{\mymacro{ \tfnumlayer_{\mathrm{enc}}}}}
+\newcommand{\tfdecnumlayer}{{\mymacro{ \tfnumlayer_{\mathrm{dec}}}}}
+
+
+\newcommand{\headqkvparams}{{\mymacro{\boldsymbol{\mathcal{W}}_{qkv}}}}
+\newcommand{\ffnparams}{{\mymacro{\boldsymbol{\mathcal{W}}^{\textnormal{FFN}}}}}
+\newcommand{\multiheadparams}{{\mymacro{\boldsymbol{\mathcal{W}}^{\textnormal{MH}}}}}
+\newcommand{\actfn}[1]{{\mymacro{ \boldsymbol{\phi}(#1)}}}
+
+
+% Transformers Turing completeness
+\newcommand{\posEnc}{{\mymacro{ \vu}}}
+\newcommand{\posEncFun}[1]{{\mymacro{ \posEnc\left(#1\right)}}}
+\newcommand{\extAlphabet}{{\mymacro{ \Delta}}}
+\newcommand{\actionToNum}[1]{{\mymacro{ \texttt{d}\left(#1\right)}}}
+
+% Transformers assignment
+\newcommand{\kernel}[2]{{\mymacro{ K(#1, #2)}}}
+\newcommand{\gkernel}[2]{{\mymacro{ K_{\mathrm{G}}(#1, #2)}}}
+\newcommand{\smkernel}[2]{{\mymacro{ K_{\mathrm{SM}}(#1, #2)}}}
+
+
+
+% Bolded characters
+
+% \def\ba{{{\mymacro{ \textbf{a}}}}}
+% \def\bb{{{\mymacro{ \textbf{b}}}}}
+% \def\bc{{{\mymacro{ \textbf{c}}}}}
+% \def\bd{{{\mymacro{ \textbf{d}}}}}
+% \def\be{{{\mymacro{ \textbf{e}}}}}
+% \def\bf{{{\mymacro{ \textbf{f}}}}}
+% \def\bg{{{\mymacro{ \textbf{g}}}}}
+% \def\bh{{{\mymacro{ \textbf{h}}}}}
+% \def\bu{{{\mymacro{ \textbf{i}}}}}
+% \def\bj{{{\mymacro{ \textbf{j}}}}}
+% \def\bk{{{\mymacro{ \textbf{k}}}}}
+% \def\bl{{{\mymacro{ \textbf{l}}}}}
+% \def\bm{{{\mymacro{ \textbf{m}}}}}
+% \def\bn{{{\mymacro{ \textbf{n}}}}}
+% \def\bo{{{\mymacro{ \textbf{o}}}}}
+% \def\bp{{{\mymacro{ \textbf{p}}}}}
+% \def\bq{{{\mymacro{ \textbf{q}}}}}
+% \def\br{{{\mymacro{ \textbf{r}}}}}
+% \def\bs{{{\mymacro{ \textbf{s}}}}}
+% \def\bt{{{\mymacro{ \textbf{t}}}}}
+% \def\bu{{{\mymacro{ \textbf{u}}}}}
+% \def\bv{{{\mymacro{ \textbf{v}}}}}
+% \def\bw{{{\mymacro{ \textbf{w}}}}}
+% \def\bx{{{\mymacro{ \textbf{x}}}}}
+% \def\by{{{\mymacro{ \textbf{y}}}}}
+% \def\bz{{{\mymacro{ \textbf{z}}}}}
+
+
+%%%% ICML template
+\def\1{\mathbf{1}}
+\newcommand{\dataset}{{\mymacro{\sD}}}
+\newcommand{\datasetSize}{{\mymacro{N}}}
+\newcommand{\train}{{\mymacro{\mathcal{D_{\mathrm{valid}}}}}}
+\newcommand{\valid}{{\mymacro{\mathcal{D_{\mathrm{valid}}}}}}
+\newcommand{\test}{{\mymacro{\mathcal{D_{\mathrm{test}}}}}}
+
+\def\eps{{\mymacro{ \varepsilon}}}
+
+
+% Random variables
+\def\reta{{{\mymacro{ \textnormal{\eta}}}}}
+\def\ra{{{\mymacro{ \textnormal{a}}}}}
+\def\rb{{{\mymacro{ \textnormal{b}}}}}
+\def\rc{{{\mymacro{ \textnormal{c}}}}}
+\def\rd{{{\mymacro{ \textnormal{d}}}}}
+\def\re{{{\mymacro{ \textnormal{e}}}}}
+\def\rf{{{\mymacro{ \textnormal{f}}}}}
+\def\rg{{{\mymacro{ \textnormal{g}}}}}
+\def\rh{{{\mymacro{ \textnormal{h}}}}}
+\def\ri{{{\mymacro{ \textnormal{i}}}}}
+\def\rj{{{\mymacro{ \textnormal{j}}}}}
+\def\rk{{{\mymacro{ \textnormal{k}}}}}
+\def\rl{{{\mymacro{ \textnormal{l}}}}}
+% rm is already a command, just don't name any random variables m
+\def\rn{{{\mymacro{ \textnormal{n}}}}}
+\def\ro{{{\mymacro{ \textnormal{o}}}}}
+\def\rp{{{\mymacro{ \textnormal{p}}}}}
+\def\rq{{{\mymacro{ \textnormal{q}}}}}
+\def\rr{{{\mymacro{ \textnormal{r}}}}}
+\def\rs{{{\mymacro{ \textnormal{s}}}}}
+\def\rt{{{\mymacro{ \textnormal{t}}}}}
+\def\ru{{{\mymacro{ \textnormal{u}}}}}
+\def\rv{{{\mymacro{ \textnormal{v}}}}}
+\def\rw{{{\mymacro{ \textnormal{w}}}}}
+\def\rx{{{\mymacro{ \textnormal{x}}}}}
+\def\ry{{{\mymacro{ \textnormal{y}}}}}
+\def\rz{{{\mymacro{ \textnormal{z}}}}}
+\def\reps{{{\mymacro{ \eps}}}}
+
+% Random vectors
+\def\rvepsilon{{{\mymacro{ \boldsymbol{\epsilon}}}}}
+\def\rvtheta{{{\mymacro{ \boldsymbol{\theta}}}}}
+\def\rva{{{\mymacro{ \mathbf{a}}}}}
+\def\rvb{{{\mymacro{ \mathbf{b}}}}}
+\def\rvc{{{\mymacro{ \mathbf{c}}}}}
+\def\rvd{{{\mymacro{ \mathbf{d}}}}}
+\def\rve{{{\mymacro{ \mathbf{e}}}}}
+\def\rvf{{{\mymacro{ \mathbf{f}}}}}
+\def\rvg{{{\mymacro{ \mathbf{g}}}}}
+\def\rvh{{{\mymacro{ \mathbf{h}}}}}
+\def\rvu{{{\mymacro{ \mathbf{i}}}}}
+\def\rvj{{{\mymacro{ \mathbf{j}}}}}
+\def\rvk{{{\mymacro{ \mathbf{k}}}}}
+\def\rvl{{{\mymacro{ \mathbf{l}}}}}
+\def\rvm{{{\mymacro{ \mathbf{m}}}}}
+\def\rvn{{{\mymacro{ \mathbf{n}}}}}
+\def\rvo{{{\mymacro{ \mathbf{o}}}}}
+\def\rvp{{{\mymacro{ \mathbf{p}}}}}
+\def\rvq{{{\mymacro{ \mathbf{q}}}}}
+\def\rvr{{{\mymacro{ \mathbf{r}}}}}
+\def\rvs{{{\mymacro{ \mathbf{s}}}}}
+\def\rvt{{{\mymacro{ \mathbf{t}}}}}
+\def\rvu{{{\mymacro{ \mathbf{u}}}}}
+\def\rvv{{{\mymacro{ \mathbf{v}}}}}
+\def\rvw{{{\mymacro{ \mathbf{w}}}}}
+\def\rvx{{{\mymacro{ \mathbf{x}}}}}
+\def\rvy{{{\mymacro{ \mathbf{y}}}}}
+\def\rvz{{{\mymacro{ \mathbf{z}}}}}
+\def\rveps{{{\mymacro{ \boldsymbol{\reps}}}}}
+
+% Elements of random vectors
+\def\erva{{{\mymacro{ \textnormal{a}}}}}
+\def\ervb{{{\mymacro{ \textnormal{b}}}}}
+\def\ervc{{{\mymacro{ \textnormal{c}}}}}
+\def\ervd{{{\mymacro{ \textnormal{d}}}}}
+\def\erve{{{\mymacro{ \textnormal{e}}}}}
+\def\ervf{{{\mymacro{ \textnormal{f}}}}}
+\def\ervg{{{\mymacro{ \textnormal{g}}}}}
+\def\ervh{{{\mymacro{ \textnormal{h}}}}}
+\def\ervi{{{\mymacro{ \textnormal{i}}}}}
+\def\ervj{{{\mymacro{ \textnormal{j}}}}}
+\def\ervk{{{\mymacro{ \textnormal{k}}}}}
+\def\ervl{{{\mymacro{ \textnormal{l}}}}}
+\def\ervm{{{\mymacro{ \textnormal{m}}}}}
+\def\ervn{{{\mymacro{ \textnormal{n}}}}}
+\def\ervo{{{\mymacro{ \textnormal{o}}}}}
+\def\ervp{{{\mymacro{ \textnormal{p}}}}}
+\def\ervq{{{\mymacro{ \textnormal{q}}}}}
+\def\ervr{{{\mymacro{ \textnormal{r}}}}}
+\def\ervs{{{\mymacro{ \textnormal{s}}}}}
+\def\ervt{{{\mymacro{ \textnormal{t}}}}}
+\def\ervu{{{\mymacro{ \textnormal{u}}}}}
+\def\ervv{{{\mymacro{ \textnormal{v}}}}}
+\def\ervw{{{\mymacro{ \textnormal{w}}}}}
+\def\ervx{{{\mymacro{ \textnormal{x}}}}}
+\def\ervy{{{\mymacro{ \textnormal{y}}}}}
+\def\ervz{{{\mymacro{ \textnormal{z}}}}}
+
+% Random matrices
+\def\rmA{{{\mymacro{ \mathbf{A}}}}}
+\def\rmB{{{\mymacro{ \mathbf{B}}}}}
+\def\rmC{{{\mymacro{ \mathbf{C}}}}}
+\def\rmD{{{\mymacro{ \mathbf{D}}}}}
+\def\rmE{{{\mymacro{ \mathbf{E}}}}}
+\def\rmF{{{\mymacro{ \mathbf{F}}}}}
+\def\rmG{{{\mymacro{ \mathbf{G}}}}}
+\def\rmH{{{\mymacro{ \mathbf{H}}}}}
+\def\rmI{{{\mymacro{ \mathbf{I}}}}}
+\def\rmJ{{{\mymacro{ \mathbf{J}}}}}
+\def\rmK{{{\mymacro{ \mathbf{K}}}}}
+\def\rmL{{{\mymacro{ \mathbf{L}}}}}
+\def\rmM{{{\mymacro{ \mathbf{M}}}}}
+\def\rmN{{{\mymacro{ \mathbf{N}}}}}
+\def\rmO{{{\mymacro{ \mathbf{O}}}}}
+\def\rmP{{{\mymacro{ \mathbf{P}}}}}
+\def\rmQ{{{\mymacro{ \mathbf{Q}}}}}
+\def\rmR{{{\mymacro{ \mathbf{R}}}}}
+\def\rmS{{{\mymacro{ \mathbf{S}}}}}
+\def\rmT{{{\mymacro{ \mathbf{T}}}}}
+\def\rmU{{{\mymacro{ \mathbf{U}}}}}
+\def\rmV{{{\mymacro{ \mathbf{V}}}}}
+\def\rmW{{{\mymacro{ \mathbf{W}}}}}
+\def\rmX{{{\mymacro{ \mathbf{X}}}}}
+\def\rmY{{{\mymacro{ \mathbf{Y}}}}}
+\def\rmZ{{{\mymacro{ \mathbf{Z}}}}}
+
+% Elements of random matrices
+\def\ermA{{{\mymacro{ \textnormal{A}}}}}
+\def\ermB{{{\mymacro{ \textnormal{B}}}}}
+\def\ermC{{{\mymacro{ \textnormal{C}}}}}
+\def\ermD{{{\mymacro{ \textnormal{D}}}}}
+\def\ermE{{{\mymacro{ \textnormal{E}}}}}
+\def\ermF{{{\mymacro{ \textnormal{F}}}}}
+\def\ermG{{{\mymacro{ \textnormal{G}}}}}
+\def\ermH{{{\mymacro{ \textnormal{H}}}}}
+\def\ermI{{{\mymacro{ \textnormal{I}}}}}
+\def\ermJ{{{\mymacro{ \textnormal{J}}}}}
+\def\ermK{{{\mymacro{ \textnormal{K}}}}}
+\def\ermL{{{\mymacro{ \textnormal{L}}}}}
+\def\ermM{{{\mymacro{ \textnormal{M}}}}}
+\def\ermN{{{\mymacro{ \textnormal{N}}}}}
+\def\ermO{{{\mymacro{ \textnormal{O}}}}}
+\def\ermP{{{\mymacro{ \textnormal{P}}}}}
+\def\ermQ{{{\mymacro{ \textnormal{Q}}}}}
+\def\ermR{{{\mymacro{ \textnormal{R}}}}}
+\def\ermS{{{\mymacro{ \textnormal{S}}}}}
+\def\ermT{{{\mymacro{ \textnormal{T}}}}}
+\def\ermU{{{\mymacro{ \textnormal{U}}}}}
+\def\ermV{{{\mymacro{ \textnormal{V}}}}}
+\def\ermW{{{\mymacro{ \textnormal{W}}}}}
+\def\ermX{{{\mymacro{ \textnormal{X}}}}}
+\def\ermY{{{\mymacro{ \textnormal{Y}}}}}
+\def\ermZ{{{\mymacro{ \textnormal{Z}}}}}
+
+% Vectors
+\def\vzero{{{\mymacro{ \mathbf{0}}}}}
+\def\vone{{{\mymacro{ \mathbf{1}}}}}
+\def\vmu{{{\mymacro{ \boldsymbol{\mu}}}}}
+\def\vtheta{{{\mymacro{ \boldsymbol{\theta}}}}}
+\def\vphi{{{\mymacro{ \boldsymbol{\phi}}}}}
+\def\vvarphi{{{\mymacro{ \boldsymbol{\varphi}}}}}
+\def\va{{{\mymacro{ \mathbf{a}}}}}
+\def\vb{{{\mymacro{ \mathbf{b}}}}}
+\def\vc{{{\mymacro{ \mathbf{c}}}}}
+\def\vd{{{\mymacro{ \mathbf{d}}}}}
+\def\ve{{{\mymacro{ \mathbf{e}}}}}
+\def\vf{{{\mymacro{ \mathbf{f}}}}}
+\def\vg{{{\mymacro{ \mathbf{g}}}}}
+\def\vh{{{\mymacro{ \mathbf{h}}}}}
+\def\vi{{{\mymacro{ \mathbf{i}}}}}
+\def\vj{{{\mymacro{ \mathbf{j}}}}}
+\def\vk{{{\mymacro{ \mathbf{k}}}}}
+\def\vl{{{\mymacro{ \mathbf{l}}}}}
+\def\vm{{{\mymacro{ \mathbf{m}}}}}
+\def\vn{{{\mymacro{ \mathbf{n}}}}}
+\def\vo{{{\mymacro{ \mathbf{o}}}}}
+\def\vp{{{\mymacro{ \mathbf{p}}}}}
+\def\vq{{{\mymacro{ \mathbf{q}}}}}
+\def\vr{{{\mymacro{ \mathbf{r}}}}}
+\def\vs{{{\mymacro{ \mathbf{s}}}}}
+\def\vt{{{\mymacro{ \mathbf{t}}}}}
+\def\vu{{{\mymacro{ \mathbf{u}}}}}
+\def\vv{{{\mymacro{ \mathbf{v}}}}}
+\def\vw{{{\mymacro{ \mathbf{w}}}}}
+\def\vx{{{\mymacro{ \mathbf{x}}}}}
+\def\vy{{{\mymacro{ \mathbf{y}}}}}
+\def\vz{{{\mymacro{ \mathbf{z}}}}}
+
+% Elements of vectors
+\def\evalpha{{{\mymacro{ \alpha}}}}
+\def\eveta{{{\mymacro{ \eta}}}}
+\def\evlambda{{{\mymacro{ \lambda}}}}
+\def\evbeta{{{\mymacro{ \beta}}}}
+\def\evepsilon{{{\mymacro{ \epsilon}}}}
+\def\evlambda{{{\mymacro{ \lambda}}}}
+\def\evomega{{{\mymacro{ \omega}}}}
+\def\evmu{{{\mymacro{ \mu}}}}
+\def\evvarphi{{{\mymacro{ \varphi}}}}
+\def\evpsi{{{\mymacro{ \psi}}}}
+\def\evsigma{{{\mymacro{ \sigma}}}}
+\def\evtheta{{{\mymacro{ \theta}}}}
+\def\eva{{{\mymacro{ a}}}}
+\def\evb{{{\mymacro{ b}}}}
+\def\evc{{{\mymacro{ c}}}}
+\def\evd{{{\mymacro{ d}}}}
+\def\eve{{{\mymacro{ e}}}}
+\def\evf{{{\mymacro{ f}}}}
+\def\evg{{{\mymacro{ g}}}}
+\def\evh{{{\mymacro{ h}}}}
+\def\evi{{{\mymacro{ i}}}}
+\def\evj{{{\mymacro{ j}}}}
+\def\evk{{{\mymacro{ k}}}}
+\def\evl{{{\mymacro{ l}}}}
+\def\evm{{{\mymacro{ m}}}}
+\def\evn{{{\mymacro{ n}}}}
+\def\evo{{{\mymacro{ o}}}}
+\def\evp{{{\mymacro{ p}}}}
+\def\evq{{{\mymacro{ q}}}}
+\def\evr{{{\mymacro{ r}}}}
+\def\evs{{{\mymacro{ s}}}}
+\def\evt{{{\mymacro{ t}}}}
+\def\evu{{{\mymacro{ u}}}}
+\def\evv{{{\mymacro{ v}}}}
+\def\evw{{{\mymacro{ w}}}}
+\def\evx{{{\mymacro{ x}}}}
+\def\evy{{{\mymacro{ y}}}}
+\def\evz{{{\mymacro{ z}}}}
+
+% Matrix
+\def\mA{{{\mymacro{ \mathbf{A}}}}}
+\def\mB{{{\mymacro{ \mathbf{B}}}}}
+\def\mC{{{\mymacro{ \mathbf{C}}}}}
+\def\mD{{{\mymacro{ \mathbf{D}}}}}
+\def\mE{{{\mymacro{ \mathbf{E}}}}}
+\def\mF{{{\mymacro{ \mathbf{F}}}}}
+\def\mG{{{\mymacro{ \mathbf{G}}}}}
+\def\mH{{{\mymacro{ \mathbf{H}}}}}
+\def\mI{{{\mymacro{ \mathbf{I}}}}}
+\def\mJ{{{\mymacro{ \mathbf{J}}}}}
+\def\mK{{{\mymacro{ \mathbf{K}}}}}
+\def\mL{{{\mymacro{ \mathbf{L}}}}}
+\def\mM{{{\mymacro{ \mathbf{M}}}}}
+\def\mN{{{\mymacro{ \mathbf{N}}}}}
+\def\mO{{{\mymacro{ \mathbf{O}}}}}
+\def\mP{{{\mymacro{ \mathbf{P}}}}}
+\def\mQ{{{\mymacro{ \mathbf{Q}}}}}
+\def\mR{{{\mymacro{ \mathbf{R}}}}}
+\def\mS{{{\mymacro{ \mathbf{S}}}}}
+\def\mT{{{\mymacro{ \mathbf{T}}}}}
+\def\mU{{{\mymacro{ \mathbf{U}}}}}
+\def\mV{{{\mymacro{ \mathbf{V}}}}}
+\def\mW{{{\mymacro{ \mathbf{W}}}}}
+\def\mX{{{\mymacro{ \mathbf{X}}}}}
+\def\mY{{{\mymacro{ \mathbf{Y}}}}}
+\def\mZ{{{\mymacro{ \mathbf{Z}}}}}
+\def\mBeta{{{\mymacro{ \boldsymbol{\beta}}}}}
+\def\mPhi{{{\mymacro{ \boldsymbol{\Phi}}}}}
+\def\mLambda{{{\mymacro{ \boldsymbol{\Lambda}}}}}
+\def\mSigma{{{\mymacro{ \boldsymbol{\Sigma}}}}}
+
+% % Tensor
+% \DeclareMathAlphabet{\mathsfit}{\encodingdefault}{\sfdefault}{m}{sl}
+% \SetMathAlphabet{\mathsfit}{bold}{\encodingdefault}{\sfdefault}{bx}{n}
+% \newcommand{\tens}[1]{\mathbf{\mathsfit{#1}}}
+% \def\tA{{\tens{A}}}
+% \def\tB{{\tens{B}}}
+% \def\tC{{\tens{C}}}
+% \def\tD{{\tens{D}}}
+% \def\tE{{\tens{E}}}
+% \def\tF{{\tens{F}}}
+% \def\tG{{\tens{G}}}
+% \def\tH{{\tens{H}}}
+% \def\tI{{\tens{I}}}
+% \def\tJ{{\tens{J}}}
+% \def\tK{{\tens{K}}}
+% \def\tL{{\tens{L}}}
+% \def\tM{{\tens{M}}}
+% \def\tN{{\tens{N}}}
+% \def\tO{{\tens{O}}}
+% \def\tP{{\tens{P}}}
+% \def\tQ{{\tens{Q}}}
+% \def\tR{{\tens{R}}}
+% \def\tS{{\tens{S}}}
+% \def\tT{{\tens{T}}}
+% \def\tU{{\tens{U}}}
+% \def\tV{{\tens{V}}}
+% \def\tW{{\tens{W}}}
+% \def\tX{{\tens{X}}}
+% \def\tY{{\tens{Y}}}
+% \def\tZ{{\tens{Z}}}
+
+
+% Graph
+\def\gA{{{\mymacro{ \mathcal{A}}}}}
+\def\gB{{{\mymacro{ \mathcal{B}}}}}
+\def\gC{{{\mymacro{ \mathcal{C}}}}}
+\def\gD{{{\mymacro{ \mathcal{D}}}}}
+\def\gE{{{\mymacro{ \mathcal{E}}}}}
+\def\gF{{{\mymacro{ \mathcal{F}}}}}
+\def\gG{{{\mymacro{ \mathcal{G}}}}}
+\def\gH{{{\mymacro{ \mathcal{H}}}}}
+\def\gI{{{\mymacro{ \mathcal{I}}}}}
+\def\gJ{{{\mymacro{ \mathcal{J}}}}}
+\def\gK{{{\mymacro{ \mathcal{K}}}}}
+\def\gL{{{\mymacro{ \mathcal{L}}}}}
+\def\gM{{{\mymacro{ \mathcal{M}}}}}
+\def\gN{{{\mymacro{ \mathcal{N}}}}}
+\def\gO{{{\mymacro{ \mathcal{O}}}}}
+\def\gP{{{\mymacro{ \mathcal{P}}}}}
+\def\gQ{{{\mymacro{ \mathcal{Q}}}}}
+\def\gR{{{\mymacro{ \mathcal{R}}}}}
+\def\gS{{{\mymacro{ \mathcal{S}}}}}
+\def\gT{{{\mymacro{ \mathcal{T}}}}}
+\def\gU{{{\mymacro{ \mathcal{U}}}}}
+\def\gV{{{\mymacro{ \mathcal{V}}}}}
+\def\gW{{{\mymacro{ \mathcal{W}}}}}
+\def\gX{{{\mymacro{ \mathcal{X}}}}}
+\def\gY{{{\mymacro{ \mathcal{Y}}}}}
+\def\gZ{{{\mymacro{ \mathcal{Z}}}}}
+
+% Sets
+\def\sA{{{\mymacro{ \mathcal{A}}}}}
+\def\sB{{{\mymacro{ \mathcal{B}}}}}
+\def\sC{{{\mymacro{ \mathcal{C}}}}}
+\def\sD{{{\mymacro{ \mathcal{D}}}}}
+\def\sE{{{\mymacro{ \mathcal{E}}}}}
+% Don't use a set called E, because this would be the same as our symbol
+% for expectation.
+\def\sF{{{\mymacro{ \mathcal{F}}}}}
+\def\sG{{{\mymacro{ \mathcal{G}}}}}
+\def\sH{{{\mymacro{ \mathcal{H}}}}}
+\def\sI{{{\mymacro{ \mathcal{I}}}}}
+\def\sJ{{{\mymacro{ \mathcal{J}}}}}
+\def\sK{{{\mymacro{ \mathcal{K}}}}}
+\def\sL{{{\mymacro{ \mathcal{L}}}}}
+\def\sM{{{\mymacro{ \mathcal{M}}}}}
+\def\sN{{{\mymacro{ \mathcal{N}}}}}
+\def\sO{{{\mymacro{ \mathcal{O}}}}}
+\def\sP{{{\mymacro{ \mathcal{P}}}}}
+\def\sQ{{{\mymacro{ \mathcal{Q}}}}}
+\def\sR{{{\mymacro{ \mathcal{R}}}}}
+\def\sS{{{\mymacro{ \mathcal{S}}}}}
+\def\sT{{{\mymacro{ \mathcal{T}}}}}
+\def\sU{{{\mymacro{ \mathcal{U}}}}}
+\def\sV{{{\mymacro{ \mathcal{V}}}}}
+\def\sW{{{\mymacro{ \mathcal{W}}}}}
+\def\sX{{{\mymacro{ \mathcal{X}}}}}
+\def\sY{{{\mymacro{ \mathcal{Y}}}}}
+\def\sZ{{{\mymacro{ \mathcal{Z}}}}}
+
+% Entries of a matrix
+\def\emLambda{{\Lambda}}
+\def\emA{{\mymacro{ A}}}
+\def\emB{{\mymacro{ B}}}
+\def\emC{{\mymacro{ C}}}
+\def\emD{{\mymacro{ D}}}
+\def\emE{{\mymacro{ E}}}
+\def\emF{{\mymacro{ F}}}
+\def\emG{{\mymacro{ G}}}
+\def\emH{{\mymacro{ H}}}
+\def\emI{{\mymacro{ I}}}
+\def\emJ{{\mymacro{ J}}}
+\def\emK{{\mymacro{ K}}}
+\def\emL{{\mymacro{ L}}}
+\def\emM{{\mymacro{ M}}}
+\def\emN{{\mymacro{ N}}}
+\def\emO{{\mymacro{ O}}}
+\def\emP{{\mymacro{ P}}}
+\def\emQ{{\mymacro{ Q}}}
+\def\emR{{\mymacro{ R}}}
+\def\emS{{\mymacro{ S}}}
+\def\emT{{\mymacro{ T}}}
+\def\emU{{\mymacro{ U}}}
+\def\emV{{\mymacro{ V}}}
+\def\emW{{\mymacro{ W}}}
+\def\emX{{\mymacro{ X}}}
+\def\emY{{\mymacro{ Y}}}
+\def\emZ{{\mymacro{ Z}}}
+\def\emSigma{{\mymacro{ \Sigma}}}
+
+% entries of a tensor
+% Same font as tensor, without \mathbf wrapper
+\newcommand{\etens}[1]{\mathsfit{#1}}
+\def\etLambda{{\etens{\Lambda}}}
+\def\etA{{\etens{A}}}
+\def\etB{{\etens{B}}}
+\def\etC{{\etens{C}}}
+\def\etD{{\etens{D}}}
+\def\etE{{\etens{E}}}
+\def\etF{{\etens{F}}}
+\def\etG{{\etens{G}}}
+\def\etH{{\etens{H}}}
+\def\etI{{\etens{I}}}
+\def\etJ{{\etens{J}}}
+\def\etK{{\etens{K}}}
+\def\etL{{\etens{L}}}
+\def\etM{{\etens{M}}}
+\def\etN{{\etens{N}}}
+\def\etO{{\etens{O}}}
+\def\etP{{\etens{P}}}
+\def\etQ{{\etens{Q}}}
+\def\etR{{\etens{R}}}
+\def\etS{{\etens{S}}}
+\def\etT{{\etens{T}}}
+\def\etU{{\etens{U}}}
+\def\etV{{\etens{V}}}
+\def\etW{{\etens{W}}}
+\def\etX{{\etens{X}}}
+\def\etY{{\etens{Y}}}
+\def\etZ{{\etens{Z}}}
+
+% The true underlying data generating distribution
+\newcommand{\pdata}{{\mymacro{ p_{\mathrm{data}}}}}
+% The empirical distribution defined by the training set
+\newcommand{\ptrain}{{\mymacro{ \hat{p}_{\mathrm{data}}}}}
+\newcommand{\Ptrain}{{\mymacro{ \hat{P}_{\mathrm{data}}}}}
+% The model distribution
+\newcommand{\pmodel}{{\mymacro{ p_{\rm{model}}}}}
+\newcommand{\Pmodel}{{\mymacro{ P_{\rm{model}}}}}
+\newcommand{\ptildemodel}{{\mymacro{ \tilde{p}_{\rm{model}}}}}
+% Stochastic autoencoder distributions
+\newcommand{\encoder}{{\mymacro{ \text{Enc}}}}
+\newcommand{\decoder}{{\mymacro{ \text{Dec}}}}
+\newcommand{\pencode}{{\mymacro{ p_{\rm{encoder}}}}}
+\newcommand{\pdecode}{{\mymacro{ p_{\rm{decoder}}}}}
+\newcommand{\precons}{{\mymacro{ p_{\rm{reconstruct}}}}}
+
+\newcommand{\laplace}{\mathrm{Laplace}} % Laplace distribution
+
+\newcommand{\E}{{\mymacro{ \mathbb{E}}}}
+\newcommand{\Ls}{{\mymacro{ \mathcal{L}}}}
+\newcommand{\N}{{\mymacro{ \mathbb{N}}}}
+\newcommand{\Nzero}{{\mymacro{ \mathbb{N}_{\geq 0}}}}
+\newcommand{\emp}{{\mymacro{ \tilde{p}}}}
+\newcommand{\lr}{{\mymacro{ \alpha}}}
+\newcommand{\reg}{{\mymacro{ \lambda}}}
+\newcommand{\rect}{{\mymacro{ \mathrm{rectifier}}}}
+\newcommand{\projfunc}{{\mymacro{\vfunc}}}
+\newcommand{\projfuncEosalphabetminus}{{\mymacro{\vfunc}}}
+\newcommand{\projfuncEosalphabetminusFunc}[1]{{\mymacro{\vfunc\left(#1\right)}}}
+\newcommand{\tempParam}{{\mymacro{ \tau}}}
+\newcommand{\KL}{{\mymacro{ D_{\mathrm{KL}}}}}
+\newcommand{\Var}{{\mymacro{ \mathrm{Var}}}}
+\newcommand{\standarderror}{{\mymacro{ \mathrm{SE}}}}
+\newcommand{\Cov}{{\mymacro{ \mathrm{Cov}}}}
+
+
+\newcommand{\constbound}{{\mymacro{ M}}}
+% named floating-point
+\newcommand*{\fpfull}{{\mymacro{ \texttt{float32}}}}
+% Wolfram Mathworld says L^2 is for function spaces and \ell^2 is for vectors
+% But then they seem to use L^2 for vectors throughout the site, and so does
+% wikipedia.
+\newcommand{\normlzero}{{\mymacro{L^0}}}
+\newcommand{\normlone}{{\mymacro{L^1}}}
+\newcommand{\normltwo}{{\mymacro{L^2}}}
+\newcommand{\normlp}{{\mymacro{L^p}}}
+\newcommand{\normmax}{{\mymacro{L^\infty}}}
+
+\newcommand{\matNormOne}[1]{{\mymacro{\norm{#1}_{1}}}}
+\newcommand{\matNormTwo}[1]{{\mymacro{\norm{#1}_{2}}}}
+\newcommand{\matNormP}[1]{{\mymacro{\norm{#1}_{p}}}}
+
+\newcommand{\parents}{{\mymacro{Pa}}} % See usage in notation.tex. Chosen to match Daphne's book.}
+
+\DeclareMathOperator*{\argmax}{{\mymacro{ argmax}}}
+\DeclareMathOperator*{\argmin}{{\mymacro{ argmin}}}
+
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Tr}{Tr}
+
+% Tokenization macros
+% \newcommand{\mergeemph}[1]{\colorbox{gray!30}{#1}}
+% \DeclareCaptionType{myexamplef}[Example][List of Examples]
+% \crefname{myexamplef}{Example}{}
+% \DeclareCaptionType{codef}[Snippet][List of Snippets]
+% \crefname{codef}{Snippet}{}
+
+\newcommand{\mop}[2]{[#1,#2]}
+\newcommand{\mopt}[2]{[#1,#2]}
+\newcommand{\mergetree}{{\mymacro{ \tau}}}
+\newcommand{\mergetrees}{{\mymacro{ \ensuremath{\bm{\tau}}}}}
+\newcommand{\amerge}{{\mymacro{ \mu}}}
+\newcommand{\merges}{{\mymacro{ \boldsymbol{\merge}}}}
+\newcommand{\validmerges}{{\mymacro{ \mathcal{M}_{\alphabetmerge} }}}
+\newcommand{\encmerge}{{\mymacro{ \small \textsf{apply}}}}
+\newcommand{\singleencmerge}{{\mymacro{ \small \textsf{singleapply}}}}
+\newcommand{\yieldmerge}{{\mymacro{ \small \textsf{yield}}}}
+\newcommand{\treemerge}{{\mymacro{ \tau}}}
+\newcommand{\treesmerge}{{\mymacro{ \ensuremath{\bm{\tau}}}}}
+\newcommand{\bigO}{{\mymacro{\mathcal{O}}}}
+\newcommand{\bigOFun}[1]{{\mymacro{\bigO\left(#1\right)}}}
+\newcommand{\bigOmega}[1]{{\mymacro{ \Omega\left(#1\right)}}}
+\newcommand{\mergesgreedy}{{\mymacro{ \merges^{\dagger}}}}
+\newcommand{\mergesopt}{{\mymacro{ \merges^\star}}}
+\newcommand{\computil}{{\mymacro{ \kappa}}}
+\newcommand{\vnu}{{\mymacro{ \boldsymbol{\nu}}}}
+\newcommand{\greedynu}{{\mymacro{ \nu^{\dagger}}}}
+\newcommand{\optnu}{{\mymacro{ \nu^{\star}}}}
+\newcommand{\prooftext}[1]{\text{\color{black!50}#1}}
+
+% name of jacobian matrix
+\newcommand{\Jacobianhzero}{{\mymacro{ \frac{\partial \vhT}{\partial \vhzero}}}}
+\newcommand{\Jacobianhtminus}{{\mymacro{ \frac{\partial \vht}{\partial \vhtminus}}}}
+\newcommand{\activprimet}{{\mymacro{ \sigmoid'_{\tstep}}}}
+
+
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``} %math left quote
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'} %math right quote
+
