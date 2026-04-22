@@ -2,14 +2,223 @@
 
 \begin{subquestion}
 
+\subsubsection*{The Expected String Length}
+
+To compute the expected string length $\mu$, we must translate the probability distribution over strings into matrix operations. $\mu \triangleq \sum_{\str \in \kleene{\alphabet}} \pLM(\str) |\str|$.
+
+In a probabilistic finite-state automaton (PFSA) $\automaton = \wfsatuple$, we can group all strings by their length $k$. The probability of the model generating \emph{any} string of length $k$ is given by the sum of the weights of all paths of length $k$. Using the transition matrix $\transMtx$, the initial state probabilities $\initf$, and the stopping probabilities $\finalf$, the total probability for all strings of length $k$ is given by $\initf^\top \transMtx^k \finalf$.
+
+\begin{equation}
+    \mu = \sum_{k=0}^{\infty} k \left(\initf^\top \transMtx^k \finalf\right) = \initf^\top \left( \sum_{k=0}^{\infty} k\, \transMtx^k \right) \finalf
+\end{equation}
+
+To compute this in $\bigo(|\states|^3)$, we can call the \texttt{allsum} algorithm as a black box. The \texttt{allsum} algorithm evaluates the sum of weights for all possible paths, computing $\sum_{k=0}^{\infty} \mathbf{W}^k = (\mathbf{I} - \mathbf{W})^{-1}$ for a given weight matrix $\mathbf{W}$.
+
+To make our equation match the \texttt{allsum} formulation, we can construct a new augmented automaton using a block matrix structure.
+
+We define a modified PFSA over an expanded state space $\states'$ where each original state is duplicated, meaning $|\states'| = 2|\states|$. This allows the transition matrix to accumulate the path length $k$ as it is raised to higher powers.
+
+We define a new transition block matrix $\mathbf{M} \in \R^{2|\states| \times 2|\states|}$, a new initial state vector $\initf' \in \R^{2|\states|}$, and a new stopping vector $\finalf' \in \R^{2|\states|}$ as follows:
+\begin{equation}
+    \mathbf{M} = \begin{pmatrix} \transMtx & \transMtx \\ \mathbf{0} & \transMtx \end{pmatrix}, \quad
+    \initf' = \begin{pmatrix} \initf \\ \mathbf{0} \end{pmatrix}, \quad
+    \finalf' = \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix}
+\end{equation}
+
+When we raise the block matrix $\mathbf{M}$ to the power of $k$, the diagonal blocks remain $\transMtx^k$, while the upper-right block accumulates the sum of the products. For any integer $k \ge 0$, we have:
+\begin{equation}
+    \mathbf{M}^k = \begin{pmatrix} \transMtx^k & k\,\transMtx^k \\ \mathbf{0} & \transMtx^k \end{pmatrix}
+\end{equation}
+
+If we apply the \texttt{allsum} algorithm to this new augmented automaton, it computes the sum of the weights over all paths of all lengths:
+\begin{equation}
+    \texttt{allsum}(\mathbf{M}, \initf', \finalf') = \sum_{k=0}^{\infty} {\initf'}^\top \mathbf{M}^k \finalf'
+\end{equation}
+
+Substituting block definitions into this equation shows the length coefficient:
+\begin{align}
+    {\initf'}^\top \mathbf{M}^k \finalf'
+    &= \begin{pmatrix} \initf^\top & \mathbf{0}^\top \end{pmatrix}
+       \begin{pmatrix} \transMtx^k & k\,\transMtx^k \\ \mathbf{0} & \transMtx^k \end{pmatrix}
+       \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix} \\
+    &= \begin{pmatrix} \initf^\top \transMtx^k & \initf^\top (k\,\transMtx^k) \end{pmatrix}
+       \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix} \\
+    &= \initf^\top k\,\transMtx^k \finalf
+\end{align}
+
+Summing this extraction over all $k \in [0, \infty)$ yields the expected length $\mu$:
+\begin{equation}
+    \sum_{k=0}^{\infty} {\initf'}^\top \mathbf{M}^k \finalf' = \sum_{k=0}^{\infty} \initf^\top k\,\transMtx^k \finalf = \mu
+\end{equation}
+
+\textbf{The Algorithm}
+\begin{enumerate}
+    \item Construct the block matrix $\mathbf{M}$ alongside vectors $\initf'$ and $\finalf'$.
+    \item Call the standard \texttt{allsum} function, passing $(\mathbf{M}, \initf', \finalf')$ as the arguments.
+    \item Return the scalar output as $\mu$.
+\end{enumerate}
+
+\paragraph{Proof of Time Complexity}
+
+\begin{itemize}
+    \item Constructing the augmented matrix $\mathbf{M}$ and the vectors involves allocating memory and copying the elements of $\transMtx$, which takes $\bigo(|\states|^2)$ time.
+    \item The \texttt{allsum} algorithm evaluates the infinite sum by calculating the inverse $(\mathbf{I} - \mathbf{M})^{-1}$, or by utilizing Gaussian elimination to solve the equivalent linear system. Matrix inversion and solving linear systems both inherently have a cubic time complexity relative to the size of the matrix.
+    \item Since our augmented matrix $\mathbf{M}$ has dimensions $2|\states| \times 2|\states|$, the \texttt{allsum} algorithm will execute in $\bigo((2|\states|)^3)$ time.
+    \item Because constants can be dropped in Big-O notation, $\bigo(8|\states|^3)$ simplifies directly to $\bigo(|\states|^3)$.
+\end{itemize}
+The $\bigo(|\states|^2)$ setup time is strictly bounded and dominated by the $\bigo(|\states|^3)$ \texttt{allsum} operation. Thus, the total overall runtime of the algorithm is proven to be $\bigo(|\states|^3)$.
+
+\paragraph{Alternative Implementation}
+
+To elaborate further on the inherent properties of finite-state language models, we can also bypass the block matrix construction to yield a slightly more memory-efficient algorithm that still meets the $\bigo(|\states|^3)$ requirement. We know from geometric series properties of matrices that $\sum_{k=0}^{\infty} \transMtx^k = (\mathbf{I} - \transMtx)^{-1}$. If we evaluate the infinite sum $\sum_{k=0}^{\infty} k\, \transMtx^k$ by factoring out $\transMtx$ and rewriting it as a matrix derivative, we arrive at:
+\begin{equation}
+    \sum_{k=0}^{\infty} k\, \transMtx^k = \transMtx (\mathbf{I} - \transMtx)^{-2} = (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1}
+\end{equation}
+
+This means the mean string length can also be written purely algebraically as $\mu = \initf^\top (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1} \finalf$. We can compute this directly using a sequence of linear algebraic operations:
+\begin{enumerate}
+    \item \textbf{Solve} the linear system $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \finalf$ to find $\mathbf{v}_1$. Time complexity: $\bigo(|\states|^3)$.
+    \item \textbf{Multiply} the transition matrix to find $\mathbf{v}_2 = \transMtx \mathbf{v}_1$. Time complexity: $\bigo(|\states|^2)$.
+    \item \textbf{Solve} the second linear system $(\mathbf{I} - \transMtx) \mathbf{v}_3 = \mathbf{v}_2$ to find $\mathbf{v}_3$. Time complexity: $\bigo(|\states|^3)$.
+    \item \textbf{Compute} the final dot product $\mu = \initf^\top \mathbf{v}_3$. Time complexity: $\bigo(|\states|)$.
+\end{enumerate}
+
+The sum of these sequential execution times is $\bigo(|\states|^3) + \bigo(|\states|^2) + \bigo(|\states|^3) + \bigo(|\states|)$, which perfectly asymptotes to the required $\bigo(|\states|^3)$ runtime. Both methods are formally correct, though the block matrix approach directly fulfills the hint to deploy the existing \texttt{allsum} operation as an undisturbed black box.
+
 \end{subquestion}
 
 \begin{subquestion}
 
+\subsubsection*{The Variance of String Lengths}
+
+The variance of the string length is defined as $\sigma^2 = \sum_{\str \in \kleene{\alphabet}} \pLM(\str) (|\str| - \mu)^2$. Using the linearity of expectation:
+\begin{equation}
+    \sigma^2 = \expectation[|\str|^2] - \mu^2
+\end{equation}
+
+Sum over all path lengths $k$ to compute the second moment $\expectation[|\str|^2]$:
+\begin{equation}
+    \expectation[|\str|^2] = \sum_{k=0}^{\infty} k^2 \left(\initf^\top \transMtx^k \finalf\right) = \initf^\top \left( \sum_{k=0}^{\infty} k^2 \transMtx^k \right) \finalf
+\end{equation}
+
+Decompose the $k^2$ into $k(k-1) + k$ to separate the sum:
+\begin{equation}
+    \sum_{k=0}^{\infty} k^2 \transMtx^k = \sum_{k=0}^{\infty} k(k-1) \transMtx^k + \sum_{k=0}^{\infty} k\, \transMtx^k
+\end{equation}
+
+These sums map to the derivatives of the geometric matrix series $\sum_{k=0}^{\infty} \transMtx^k = (\mathbf{I} - \transMtx)^{-1}$:
+\begin{enumerate}
+    \item The first gives the sum for $k$: $\sum_{k=0}^{\infty} k\, \transMtx^k = \transMtx (\mathbf{I} - \transMtx)^{-2}$.
+    \item The second gives the sum for $k(k-1)$: $\sum_{k=0}^{\infty} k(k-1) \transMtx^k = 2\transMtx^2 (\mathbf{I} - \transMtx)^{-3}$.
+\end{enumerate}
+
+\begin{align}
+    \sum_{k=0}^{\infty} k^2 \transMtx^k &= 2\transMtx^2(\mathbf{I} - \transMtx)^{-3} + \transMtx(\mathbf{I} - \transMtx)^{-2} \\
+    &= (\mathbf{I} - \transMtx)^{-3} \left(2\transMtx^2 + \transMtx(\mathbf{I} - \transMtx)\right) = (\mathbf{I} - \transMtx)^{-3} \left(\transMtx^2 + \transMtx\right)
+\end{align}
+
+Thus, the second moment is $\expectation[|\str|^2] = \initf^\top (\transMtx^2 + \transMtx) (\mathbf{I} - \transMtx)^{-3} \finalf$.
+Finally, the variance is $\sigma^2 =  \initf^\top (\transMtx^2 + \transMtx) (\mathbf{I} - \transMtx)^{-3} \finalf - \mu^2$.
+
+\subsubsection*{Algorithm}
+\begin{enumerate}
+    \item \textbf{Compute $\mu$}: Use the algorithm in (a) to find the mean string length.
+    \item \textbf{Initialize}: Define the base vector $\mathbf{v}_0 = \finalf$.
+    \item \textbf{Solve First System}: $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \mathbf{v}_0$ for $\mathbf{v}_1$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-1}\finalf$)}.
+    \item \textbf{Solve Second System}: $(\mathbf{I} - \transMtx) \mathbf{v}_2 = \mathbf{v}_1$ for $\mathbf{v}_2$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-2}\finalf$)}.
+    \item \textbf{Solve Third System}: $(\mathbf{I} - \transMtx) \mathbf{v}_3 = \mathbf{v}_2$ for $\mathbf{v}_3$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-3}\finalf$)}.
+    \item \textbf{Compute Polynomial Matrix}: Calculate the matrix $\mathbf{U} = \transMtx^2 + \transMtx$.
+    \item \textbf{Compute Vector}: Calculate the product $\mathbf{w} = \mathbf{U}\, \mathbf{v}_3$.
+    \item \textbf{Compute Second Moment}: Calculate the dot product $\expectation[|\str|^2] = \initf^\top \mathbf{w}$.
+    \item \textbf{Compute Variance}: Return the variance as $\sigma^2 = \expectation[|\str|^2] - \mu^2$.
+\end{enumerate}
+
+\subsubsection*{Proof of Time Complexity}
+
+\begin{itemize}
+    \item \textbf{Step 1:} Computing the expected length $\mu$ was proven in (a) to take $\bigo(|\states|^3)$.
+    \item \textbf{Steps 3, 4, 5:} Solving a linear system of size $|\states| \times |\states|$ has a worst-case time complexity of $\bigo(|\states|^3)$. We solve three linear systems sequentially making the time taken is $3 \times \bigo(|\states|^3)$, which asymptotically is $\bigo(|\states|^3)$.
+    \item \textbf{Step 6:} Multiplying two square matrices of size $|\states| \times |\states|$ to calculate $\transMtx^2$ requires $\bigo(|\states|^3)$ time. Adding $\transMtx$ requires $\bigo(|\states|^2)$ additions.
+    \item \textbf{Step 7:} Multiplying the $|\states| \times |\states|$ matrix $\mathbf{U}$ by the $|\states| \times 1$ vector $\mathbf{v}_3$ takes $\bigo(|\states|^2)$.
+    \item \textbf{Step 8:} The dot product of two vectors of size $|\states|$ executes in $\bigo(|\states|)$.
+    \item \textbf{Step 9:} A single scalar subtraction operation happens in $\bigo(1)$ time.
+\end{itemize}
+
+Total sum of the time complexity:
+\begin{equation}
+    \bigo(|\states|^3) + \bigo(|\states|^3) + \bigo(|\states|^3) + \bigo(|\states|^2) + \bigo(|\states|) + \bigo(1)
+\end{equation}
+
+The highest order term dominates the growth rate, so the algorithm runs in time $\bigo(|\states|^3)$.
+
 \end{subquestion}
 
 \begin{subquestion}
 
+\subsubsection*{Entropy of a Deterministic Finite-State Language Model}
+
+Because the automaton $\automaton$ is deterministic, any string $\str$ corresponds to one unique path of transitions through the automaton from a given starting state.
+\begin{itemize}
+    \item Let $\Pi_\stateq$ be a random variable representing the paths in $\automaton$ starting in state $\stateq$.
+    \item Let $\ent(\Pi_\stateq)$ denote the entropy of the distribution of paths originating from state $\stateq$.
+\end{itemize}
+
+Decompose a path $\Pi_\stateq$ into its first step and the remainder of the path.
+\begin{itemize}
+    \item Let $\tau_\stateq$ be a random variable representing the outgoing transition from $\stateq$ or its termination.
+    \item The relationship between the full path entropy $\ent(\Pi_\stateq)$ and the joint entropy of the first step and the remaining path $\ent(\tau_\stateq, \Pi_{\stateq'})$ can be established using the chain rule of entropy.
+    \item By the chain rule, $\ent(x, y) = \ent(x) + \ent(y \mid x)$. Applying this to our variables yields:
+\end{itemize}
+\begin{equation}
+    \ent(\Pi_\stateq) = \ent(\tau_\stateq) + \ent(\Pi_{\stateq'} \mid \tau_\stateq)
+\end{equation}
+
+Evaluate the entropy of the first step, $\ent(\tau_\stateq)$. The probability distribution for $\tau_\stateq$ is defined taking the transition $\stateq \xrightarrow{\sym/w} \stateq'$ with $w$, and taking the termination with $\finalf_\stateq$. The entropy of this single step is the negative sum of $p \log p$ for all possible outcomes:
+\begin{equation}
+    \ent(\tau_\stateq) = -\sum_{\stateq \xrightarrow{\sym/w} \stateq'} w \log w - \finalf_\stateq \log \finalf_\stateq = \boldsymbol{\xi}_\stateq
+\end{equation}
+
+Evaluate the conditional entropy of the remaining path, $\ent(\Pi_{\stateq'} \mid \tau_\stateq)$ represents the expected entropy of the rest of the path, given the first step $\tau_\stateq$.
+If $\tau_\stateq$ is termination with probability $\finalf_\stateq$, the sequence ends, and the entropy of the remaining empty path is 0.
+If $\tau_\stateq$ is a transition to state $\stateq'$ with probability $w$, the remaining path originates from $\stateq'$, so its entropy is $\ent(\Pi_{\stateq'})$.
+Summing these expectations over all outgoing transitions gives:
+\begin{equation}
+    \ent(\Pi_{\stateq'} \mid \tau_\stateq) = \sum_{\stateq \xrightarrow{\sym/w} \stateq'} w\, \ent(\Pi_{\stateq'})
+\end{equation}
+We can group this sum by the destination state $\stateq'$. By definition, the transition matrix entry $\transMtx_{\stateq, \stateq'}$ is the sum of the weights $w$ of all transitions from $\stateq$ to $\stateq'$. Therefore:
+\begin{equation}
+    \ent(\Pi_{\stateq'} \mid \tau_\stateq) = \sum_{\stateq' \in \states} \transMtx_{\stateq, \stateq'}\, \ent(\Pi_{\stateq'})
+\end{equation}
+
+Construct the matrix equation by substituting the results:
+\begin{equation}
+    \ent(\Pi_\stateq) = \boldsymbol{\xi}_\stateq + \sum_{\stateq' \in \states} \transMtx_{\stateq, \stateq'}\, \ent(\Pi_{\stateq'})
+\end{equation}
+
+To solve, let $\mathbf{H} \in \R^{|\states|}$ be a column vector where the $\stateq$-th entry is $\ent(\Pi_\stateq)$. We can represent the system of equations for all states as a single matrix equation:
+\begin{equation}
+    \mathbf{H} = \boldsymbol{\xi} + \transMtx\,\mathbf{H}
+\end{equation}
+
+Solve for the path entropy vector $\mathbf{H}$ by isolating $\mathbf{H}$ using algebraic matrix operations:
+\begin{align}
+    \mathbf{H} - \transMtx\,\mathbf{H} &= \boldsymbol{\xi} = (\mathbf{I} - \transMtx)\mathbf{H}
+\end{align}
+
+Because all eigenvalues of the transition matrix $\transMtx$ have a magnitude less than 1, the matrix $(\mathbf{I} - \transMtx)$ is guaranteed to be invertible:
+\begin{equation}
+    \mathbf{H} = (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
+\end{equation}
+
+The overall entropy of the language model $\ent(\pLM)$ is the expected path entropy weighted by the initial state probabilities. By definition, the initial state probabilities are represented by the vector $\initf$. Therefore, the total entropy is the dot product of the initial state distribution and the path entropy vector:
+\begin{equation}
+    \ent(\pLM) = \initf^\top \mathbf{H}
+\end{equation}
+
+Substitute the solved vector $\mathbf{H}$ into final equation:
+\begin{equation}
+    \ent(\pLM) = \initf^\top (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
+\end{equation}
 \end{subquestion}
 
 \end{question}
