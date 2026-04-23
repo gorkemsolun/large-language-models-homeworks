@@ -2,9 +2,63 @@
 
 \begin{subquestion}
 
+\subsubsection*{Linear Guarding vs.\ Arbitrary Classifiers}
+
+No. By Definition 2, the statement that $\mathbf{X}$ \emph{linearly guards} $Z$ only guarantees that the trivially attainable loss $L_\tau$ is optimal over the set of all \textbf{affine transformations} (linear predictors). 
+Mathematically, it ensures that $\expectation\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau$ holds for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$.
+However, the classifier $c : \mathbf{x} \mapsto c(\mathbf{x}) \in \mathcal{Z}$ proposed in the question is an \emph{arbitrary} classifier, meaning it is not restricted to being linear.
+Because linear guarding only constrains linear probes, a more complex, non-linear classifier such as a multi-layer perceptron could potentially draw non-linear decision boundaries to extract the concept information $Z$ still embedded within $\mathbf{X}$.
+Consequently, such a non-linear classifier could successfully achieve a loss lower than the trivially attainable loss $L_\tau$.
+
 \end{subquestion}
 
 \begin{subquestion}
+
+\subsubsection*{Class-Conditional Mean Equality Implies Linear Guarding}
+
+If each class-conditional mean satisfies $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$, then $\mathbf{X}$ linearly guards $Z$ with respect to the cross-entropy loss $\mathcal{L}$. 
+To prove that $\mathbf{X}$ linearly guards $Z$, we must show that for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$ (where $\mathbf{A} \in \R^{k \times d}$ and $\mathbf{b} \in \R^k$), the expected loss is bounded by the trivially attainable loss $L_\tau$:
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq L_\tau
+\end{equation}
+
+We can rewrite the expected loss by conditioning on the class $Z$:
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_Z \Big[ \expectation_{\mathbf{X} \mid Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z) \mid Z\right] \Big]
+\end{equation}
+
+The cross-entropy loss $\mathcal{L}(\mathbf{y}, Z = i) = -\ln \frac{\exp(y_i)}{\sum_{j=1}^k \exp(y_j)}$ is convex with respect to its input logits $\mathbf{y}$. 
+Because $\mathbf{y} = \mathbf{A}\mathbf{x} + \mathbf{b}$ is an affine, the composition $\mathcal{L}(\mathbf{A}\mathbf{x} + \mathbf{b}, Z=i)$ remains convex with respect to $\mathbf{x}$.
+Applying Jensen's inequality gives:
+\begin{equation}
+    \expectation_{\mathbf{X} \mid Z=i}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, i)\right] \geq \mathcal{L}\Big(\expectation_{\mathbf{X} \mid Z=i}\left[\mathbf{A}\mathbf{X} + \mathbf{b}\right], i\Big) = \mathcal{L}\Big(\mathbf{A}\,\expectation[\mathbf{X} \mid Z=i] + \mathbf{b}, i\Big)
+\end{equation}
+
+Use the fact that class-conditional means equal the global mean, $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$.
+\begin{equation}
+    \expectation_{\mathbf{X} \mid Z=i}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, i)\right] \geq \mathcal{L}\Big(\mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}, i\Big)
+\end{equation}
+
+Substituting this lower bound back into the outer expectation over $Z$ gives:
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq \expectation_Z \Big[\mathcal{L}(\mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}, Z)\Big]
+\end{equation}
+Notice that $\mathbf{b}' \triangleq \mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}$ is simply a constant vector in $\R^k$, independent of $\mathbf{X}$. Thus, the right side of the inequality evaluates the loss of a \emph{constant} predictor $f(\mathbf{x}) = \mathbf{b}'$.
+
+The trivially attainable loss $L_\tau$ is the infimum of the expected loss over all constant predictors:
+\begin{equation}
+    L_\tau = \inf_{\mathbf{c} \in \R^k} \expectation_Z\left[\mathcal{L}(\mathbf{c}, Z)\right]
+\end{equation}
+Since $\mathbf{b}'$ is a constant in $\R^k$, its expected loss must be greater than or equal to the infimum:
+\begin{equation}
+    \expectation_Z \Big[\mathcal{L}(\mathbf{b}', Z)\Big] \geq L_\tau
+\end{equation}
+
+Combining the inequalities, we have shown that for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$:
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau
+\end{equation}
+Therefore, by Definition 2, $\mathbf{X}$ linearly guards $Z$ with respect to the cross-entropy loss $\mathcal{L}$.
 
 \end{subquestion}
 

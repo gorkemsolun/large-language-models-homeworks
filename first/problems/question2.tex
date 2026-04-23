@@ -166,11 +166,11 @@ Because the automaton $\automaton$ is deterministic, any string $\str$ correspon
 Decompose a path $\Pi_\stateq$ into its first step and the remainder of the path.
 \begin{itemize}
     \item Let $\tau_\stateq$ be a random variable representing the outgoing transition from $\stateq$ or its termination.
-    \item The relationship between the full path entropy $\ent(\Pi_\stateq)$ and the joint entropy of the first step and the remaining path $\ent(\tau_\stateq, \Pi_{\stateq'})$ can be established using the chain rule of entropy.
-    \item By the chain rule, $\ent(x, y) = \ent(x) + \ent(y \mid x)$. Applying this to our variables yields:
+    \item Because $\automaton$ is deterministic, the destination state $\stateq'$ is uniquely determined by $\tau_\stateq$. Consequently, the path $\Pi_\stateq$ is in bijection with the pair $(\tau_\stateq, \Pi_{\stateq'})$, so their entropies coincide: $\ent(\Pi_\stateq) = \ent(\tau_\stateq, \Pi_{\stateq'})$.
+    \item By the chain rule of entropy, $\ent(x, y) = \ent(x) + \ent(y \mid x)$. Applying this to the joint variable $(\tau_\stateq, \Pi_{\stateq'})$ yields:
 \end{itemize}
 \begin{equation}
-    \ent(\Pi_\stateq) = \ent(\tau_\stateq) + \ent(\Pi_{\stateq'} \mid \tau_\stateq)
+    \ent(\Pi_\stateq) = \ent(\tau_\stateq, \Pi_{\stateq'}) = \ent(\tau_\stateq) + \ent(\Pi_{\stateq'} \mid \tau_\stateq)
 \end{equation}
 
 Evaluate the entropy of the first step, $\ent(\tau_\stateq)$. The probability distribution for $\tau_\stateq$ is defined taking the transition $\stateq \xrightarrow{\sym/w} \stateq'$ with $w$, and taking the termination with $\finalf_\stateq$. The entropy of this single step is the negative sum of $p \log p$ for all possible outcomes:
@@ -210,12 +210,12 @@ Because all eigenvalues of the transition matrix $\transMtx$ have a magnitude le
     \mathbf{H} = (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
 \end{equation}
 
-The overall entropy of the language model $\ent(\pLM)$ is the expected path entropy weighted by the initial state probabilities. By definition, the initial state probabilities are represented by the vector $\initf$. Therefore, the total entropy is the dot product of the initial state distribution and the path entropy vector:
+The overall entropy of the language model $\ent(\pLM)$ is the expected path entropy weighted by the initial state probabilities. Since $\automaton$ is deterministic with a unique initial state (so $\ent(\initf) = 0$), every string $\str \in \kleene{\alphabet}$ corresponds to exactly one complete path. The distribution over strings therefore coincides with the distribution over paths, giving $\ent(\pLM) = \ent(\Pi) = \sum_{\stateq \in \states} \initf_\stateq\, \ent(\Pi_\stateq)$. Written as the dot product of the initial state distribution and the path entropy vector:
 \begin{equation}
     \ent(\pLM) = \initf^\top \mathbf{H}
 \end{equation}
 
-Substitute the solved vector $\mathbf{H}$ into final equation:
+Substitute the solved vector $\mathbf{H}$ into the final equation:
 \begin{equation}
     \ent(\pLM) = \initf^\top (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
 \end{equation}
