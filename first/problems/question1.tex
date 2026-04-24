@@ -16,7 +16,7 @@ Consequently, such a non-linear classifier could successfully achieve a loss low
 
 \subsubsection*{Class-Conditional Mean Equality Implies Linear Guarding}
 
-If each class-conditional mean satisfies $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$, then $\mathbf{X}$ linearly guards $Z$ with respect to the cross-entropy loss $\mathcal{L}$. 
+If each class-conditional mean satisfies $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$, then $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross-entropy loss $\mathcal{L}$. 
 To prove that $\mathbf{X}$ linearly guards $Z$, we must show that for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$ (where $\mathbf{A} \in \R^{k \times d}$ and $\mathbf{b} \in \R^k$), the expected loss is bounded by the trivially attainable loss $L_\tau$:
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq L_\tau
@@ -27,8 +27,8 @@ We can rewrite the expected loss by conditioning on the class $Z$:
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_Z \Big[ \expectation_{\mathbf{X} \mid Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z) \mid Z\right] \Big]
 \end{equation}
 
-The cross-entropy loss $\mathcal{L}(\mathbf{y}, Z = i) = -\ln \frac{\exp(y_i)}{\sum_{j=1}^k \exp(y_j)}$ is convex with respect to its input logits $\mathbf{y}$. 
-Because $\mathbf{y} = \mathbf{A}\mathbf{x} + \mathbf{b}$ is an affine, the composition $\mathcal{L}(\mathbf{A}\mathbf{x} + \mathbf{b}, Z=i)$ remains convex with respect to $\mathbf{x}$.
+The cross-entropy loss $\mathcal{L}(\mathbf{y}, Z = i) = -\ln \frac{\exp(y_i)}{\sum_{j=1}^k \exp(y_j)}$ is convex w.r.t. its input logits $\mathbf{y}$. 
+Because $\mathbf{y} = \mathbf{A}\mathbf{x} + \mathbf{b}$ is an affine, the composition $\mathcal{L}(\mathbf{A}\mathbf{x} + \mathbf{b}, Z=i)$ remains convex w.r.t. $\mathbf{x}$.
 Applying Jensen's inequality gives:
 \begin{equation}
     \expectation_{\mathbf{X} \mid Z=i}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, i)\right] \geq \mathcal{L}\Big(\expectation_{\mathbf{X} \mid Z=i}\left[\mathbf{A}\mathbf{X} + \mathbf{b}\right], i\Big) = \mathcal{L}\Big(\mathbf{A}\,\expectation[\mathbf{X} \mid Z=i] + \mathbf{b}, i\Big)
@@ -58,19 +58,151 @@ Combining the inequalities, we have shown that for any affine predictor $f(\math
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau
 \end{equation}
-Therefore, by Definition 2, $\mathbf{X}$ linearly guards $Z$ with respect to the cross-entropy loss $\mathcal{L}$.
+Therefore, by Definition 2, $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross-entropy loss $\mathcal{L}$.
 
 \end{subquestion}
 
 \begin{subquestion}
 
+\subsubsection*{Boundedness and Symmetry of the Cross-Entropy Gradient}
+
+Let $\mathbf{x}$ be an observed representation, and $\mathbf{y} \triangleq \mathbf{A}\mathbf{x} + \mathbf{b}$.
+
+\paragraph{All partial derivatives of the cross-entropy loss w.r.t. $\mathbf{y}$ are bounded.}
+
+Recall the definition of the cross-entropy loss for logit vector $\mathbf{y}$ and true concept class $Z = c$:
+\begin{equation}
+    \mathcal{L}(\mathbf{y}, Z = c) = -\ln\left(\frac{\exp(y_c)}{\sum_{j=1}^k \exp(y_j)}\right) = -y_c + \ln\left(\sum_{j=1}^k \exp(y_j)\right)
+\end{equation}
+
+We compute the partial derivative of the loss w.r.t. an arbitrary logit $y_m$.
+\textbf{Case 1 ($m = c$):}
+\begin{align}
+    \frac{\partial}{\partial y_c}\mathcal{L}(\mathbf{y}, Z = c)
+    &= -1 + \frac{\frac{\partial}{\partial y_c}\sum_{j=1}^k \exp(y_j)}{\sum_{j=1}^k \exp(y_j)} \\
+    &= -1 + \frac{\exp(y_c)}{\sum_{j=1}^k \exp(y_j)} = -1 + \mathrm{softmax}(\mathbf{y})_c
+\end{align}
+Since the softmax output lies in $(0, 1)$ for any $\mathbf{y}$, we have $-1 < \frac{\partial}{\partial y_c}\mathcal{L}(\mathbf{y}, Z = c) < 0$.
+
+\textbf{Case 2 ($m \neq c$):}
+\begin{align}
+    \frac{\partial}{\partial y_m}\mathcal{L}(\mathbf{y}, Z = c)
+    &= 0 + \frac{\frac{\partial}{\partial y_m}\sum_{j=1}^k \exp(y_j)}{\sum_{j=1}^k \exp(y_j)} \\
+    &= \frac{\exp(y_m)}{\sum_{j=1}^k \exp(y_j)} = \mathrm{softmax}(\mathbf{y})_m
+\end{align}
+We have $0 < \frac{\partial}{\partial y_m}\mathcal{L}(\mathbf{y}, Z = c) < 1$. Because partial derivatives fall within the interval $(-1, 1)$, they are uniformly bounded.
+
+\paragraph{For any $j_1, j_2 \neq i$, we have $\dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) \neq 0$.}
+We find the partial derivative of the loss w.r.t. $y_i$ when the true class is $Z = j$ with $j \neq i$. 
+Using the derivation from above, the partial derivatives are the $i$-th component of the softmax output:
+\begin{equation}
+    \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) = \frac{\exp(y_i)}{\sum_{l=1}^k \exp(y_l)}
+\end{equation}
+
+Both expressions are equal. Furthermore, because the exponential function $e^x$ is positive for any real $x$, we have $\exp(y_i) > 0$. The denominator is a sum of positive exponentials, so it is greater than zero. Therefore:
+\begin{equation}
+    \frac{\exp(y_i)}{\sum_{l=1}^k \exp(y_l)} > 0
+\end{equation}
+
+Thus, we have shown that:
+\begin{equation}
+    \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) \neq 0
+\end{equation}
+
 \end{subquestion}
 
 \begin{subquestion}
 
+\subsubsection*{Linear Guarding Implies Equal Class-Conditional Means}
+
+Because $\mathbf{X}$ linearly guards $Z$, the expected loss for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$ is bounded by the trivially attainable loss $L_\tau$ achieved by the constant predictor $\mathbf{b}^\ast$.
+Thus,
+\begin{equation}
+    J(\mathbf{A}, \mathbf{b}) \triangleq \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right]
+\end{equation}
+attains its minimum at $\mathbf{A} = \mathbf{0}$ and $\mathbf{b} = \mathbf{b}^\ast$.
+By the first-order optimality, the gradient of $J$ w.r.t. $\mathbf{A}$, evaluated at $\mathbf{A} = \mathbf{0}, \mathbf{b} = \mathbf{b}^\ast$:
+\begin{equation}
+    \nabla_{\mathbf{A}}\, \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right]\Big|_{\mathbf{A} = \mathbf{0}, \mathbf{b} = \mathbf{b}^\ast} = \mathbf{0}
+\end{equation}
+
+Move the derivative inside the expectation to evaluate the gradient. Let $\mathbf{y} = \mathbf{A}\mathbf{X} + \mathbf{b}$.
+\begin{equation}
+    \frac{\partial \mathcal{L}}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, \frac{\partial y_i}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, X_j.
+\end{equation}
+In part c we proved that the partial derivatives of the cross-entropy loss w.r.t. $\mathbf{y}$ are bounded between $-1$ and $1$.
+Because the gradient w.r.t $\mathbf{y}$ is uniformly bounded, the Dominated Convergence Theorem allows us to interchange expectation and differentiation:
+\begin{equation}
+    \nabla_{\mathbf{A}} J(\mathbf{A}, \mathbf{b}) = \expectation_{\mathbf{X}, Z}\left[\nabla_{\mathbf{A}}\, \mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_{\mathbf{X}, Z}\left[\nabla_{\mathbf{y}}\, \mathcal{L}(\mathbf{y}, Z)\, \mathbf{X}^\top\right]
+\end{equation}
+
+From part c, for any logit $y_m$ the partial derivative of the loss is $\frac{\partial \mathcal{L}}{\partial y_m} = \mathrm{softmax}(\mathbf{y})_m - \mathbb{1}(Z = m)$.
+Let $\mathbf{p}(\mathbf{y})$ be the vector of softmax probabilities and let $\widetilde{\mathbf{Z}}$ be the one-hot encoding of $Z$.
+\begin{equation}
+    \nabla_{\mathbf{y}}\, \mathcal{L}(\mathbf{y}, Z) = \mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}}.
+\end{equation}
+Evaluating the gradient w.r.t. $\mathbf{A}$ at the optimum $\mathbf{A} = \mathbf{0}, \mathbf{b} = \mathbf{b}^\ast$ so $\mathbf{y} = \mathbf{b}^\ast$ yields:
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[(\mathbf{p}(\mathbf{b}^\ast) - \widetilde{\mathbf{Z}})\, \mathbf{X}^\top\right] = \mathbf{0}
+\end{equation}
+Restricting to a single class $i$, this implies
+\begin{equation}
+    \expectation_{\mathbf{X}, Z}\left[(p_i(\mathbf{b}^\ast) - \mathbb{1}(Z = i))\, \mathbf{X}\right] = \mathbf{0}.
+\end{equation}
+By linearity of expectation,
+\begin{equation}
+    p_i(\mathbf{b}^\ast)\, \expectation[\mathbf{X}] = \expectation\left[\mathbf{X}\, \mathbb{1}(Z = i)\right]
+\end{equation}
+
+To determine $p_i(\mathbf{b}^\ast)$, recall that $\mathbf{b}^\ast$ minimizes the trivially attainable loss $L_\tau = \expectation_Z[\mathcal{L}(\mathbf{b}, Z)]$. First-order optimality w.r.t. $\mathbf{b}$ gives:
+\begin{equation}
+    \nabla_{\mathbf{b}}\, \expectation_Z\left[\mathcal{L}(\mathbf{b}, Z)\right] = \expectation_Z\left[\nabla_{\mathbf{b}}\, \mathcal{L}(\mathbf{b}, Z)\right] = \expectation_Z\left[\mathbf{p}(\mathbf{b}) - \widetilde{\mathbf{Z}}\right] = \mathbf{0}
+\end{equation}
+Hence, at the optimum $\mathbf{b}^\ast$, the softmax probabilities must match the marginal class probabilities:
+\begin{equation}
+    \mathbf{p}(\mathbf{b}^\ast) = \expectation_Z[\widetilde{\mathbf{Z}}], \qquad\text{and thus}\qquad p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i).
+\end{equation}
+
+Substituting $p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i)$ back into $(24)$:
+\begin{equation}
+    \mathbb{P}(Z = i)\, \expectation[\mathbf{X}] = \expectation\left[\mathbf{X}\, \mathbb{1}(Z = i)\right]
+\end{equation}
+By the definition of conditional expectation, $\expectation[\mathbf{X}\, \mathbb{1}(Z = i)] = \expectation[\mathbf{X} \mid Z = i]\, \mathbb{P}(Z = i)$, so
+\begin{equation}
+    \mathbb{P}(Z = i)\, \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i]\, \mathbb{P}(Z = i).
+\end{equation}
+Since $\mathbb{P}(Z = i) \neq 0$ by assumption, we can divide both sides by $\mathbb{P}(Z = i)$ to obtain
+\begin{equation}
+    \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i].
+\end{equation}
+This holds for every class $i$.
+
 \end{subquestion}
 
 \begin{subquestion}
+
+\subsubsection*{Zero Cross-Covariance Characterizes Equal Class-Conditional Means}
+
+The cross-covariance between $\mathbf{X}$ and $\widetilde{\mathbf{Z}}$ is
+\begin{equation}
+    \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \expectation\left[\mathbf{X}\, \widetilde{\mathbf{Z}}^\top\right] - \expectation[\mathbf{X}]\, \expectation[\widetilde{\mathbf{Z}}]^\top.
+\end{equation}
+Its $j^\text{th}$ column is the covariance of the vector $\mathbf{X}$ with the scalar $\widetilde{Z}_j$:
+\begin{equation}
+    \mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \expectation[\mathbf{X}\, \widetilde{Z}_j] - \expectation[\mathbf{X}]\, \expectation[\widetilde{Z}_j].
+\end{equation}
+Since $\widetilde{Z}_j = \mathbb{1}(Z = j)$, we have $\expectation[\widetilde{Z}_j] = \mathbb{P}(Z = j)$ and, by the definition of conditional expectation, $\expectation[\mathbf{X}\, \widetilde{Z}_j] = \expectation[\mathbf{X} \mid Z = j]\, \mathbb{P}(Z = j)$. Substituting gives:
+\begin{equation}
+    \mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \Big(\expectation[\mathbf{X} \mid Z = j] - \expectation[\mathbf{X}]\Big)\, \mathbb{P}(Z = j)
+\end{equation}
+
+\textbf{Forward direction} Assume $\expectation[\mathbf{X} \mid Z = j] = \expectation[\mathbf{X}]$ for every $j$. Then the parenthesised term vanishes, so $\mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \mathbf{0}$ for every column $j$, and therefore $\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$.
+
+\textbf{Backward direction} Assume $\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$. Every column must then be zero, so for each $j$:
+\begin{equation}
+    \Big(\expectation[\mathbf{X} \mid Z = j] - \expectation[\mathbf{X}]\Big)\, \mathbb{P}(Z = j) = \mathbf{0}.
+\end{equation}
+Since $\mathbb{P}(Z = j) \neq 0$ by assumption, the directions give $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}] \iff \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$.
 
 \end{subquestion}
 
