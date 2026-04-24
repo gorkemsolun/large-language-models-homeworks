@@ -310,6 +310,43 @@ so the optimum is found by independently projecting each $\mathbf{e}_i$ onto $V^
 
 \begin{subquestion}
 
+\subsubsection*{Extension to Arbitrary Mean and Covariance via Whitening}
+
+Drop the simplifying assumptions and allow $\expectation[\mathbf{X}] \neq \mathbf{0}$ and $\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} \neq \mathbf{I}$. Define the whitening matrix $\mathbf{W} \triangleq \left(\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}\right)^+$.
+
+\paragraph{Whitening the representation.}
+
+Let $\mathbf{Y} \triangleq \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}])$. Then
+\begin{equation}
+    \expectation[\mathbf{Y}] = \mathbf{W}(\expectation[\mathbf{X}] - \expectation[\mathbf{X}]) = \mathbf{0}, \qquad \boldsymbol{\Sigma}_{\mathbf{Y}, \mathbf{Y}} = \mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}\, \mathbf{W}^\top = \mathbf{I}
+\end{equation}
+on the support of $\mathbf{X} - \expectation[\mathbf{X}]$. By translation invariance and linearity of covariance in its first argument:
+\begin{equation}
+    \boldsymbol{\Sigma}_{\mathbf{Y}, \widetilde{\mathbf{Z}}} = \mathrm{Cov}(\mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]), \widetilde{\mathbf{Z}}) = \mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+\end{equation}
+
+\paragraph{Applying part (h) in the whitened space.}
+
+Since $\mathbf{Y}$ now satisfies the assumptions of part~(h), the optimal guarding projection in whitened coordinates is
+\begin{equation}
+    \mathbf{P}_{\mathbf{Y}}^\ast = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{Y}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{Y}, \widetilde{\mathbf{Z}}}^+ = \mathbf{I} - \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}},
+\end{equation}
+so the guarded whitened representation is $\widehat{\mathbf{Y}} = \mathbf{P}_{\mathbf{Y}}^\ast \mathbf{Y}$.
+
+\paragraph{Mapping back to the original space.}
+
+Undo the whitening and centering by applying $\mathbf{W}^+ = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}$ and adding back $\expectation[\mathbf{X}]$:
+\begin{align}
+    r(\mathbf{X}) &= \mathbf{W}^+ \widehat{\mathbf{Y}} + \expectation[\mathbf{X}] \\
+    &= \mathbf{W}^+\!\left(\mathbf{I} - \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}}\right) \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) + \expectation[\mathbf{X}] \\
+    &= \mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) + \expectation[\mathbf{X}].
+\end{align}
+The product $\mathbf{W}^+ \mathbf{W} = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}\, (\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})^+$ is the orthogonal projection onto $\mathrm{colsp}(\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})$, which contains $\mathbf{X} - \expectation[\mathbf{X}]$ almost surely, so $\mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) = \mathbf{X} - \expectation[\mathbf{X}]$. The means cancel, giving the final form:
+\begin{equation}
+    r(\mathbf{X}) = \mathbf{X} - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]),
+\end{equation}
+where $\Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} = (\mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})(\mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})^+$ is the orthogonal projection in the whitened space onto the subspace encoding concept information.
+
 \end{subquestion}
 
 \end{question}
