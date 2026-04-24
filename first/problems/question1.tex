@@ -208,13 +208,103 @@ Since $\mathbb{P}(Z = j) \neq 0$ by assumption, the directions give $\expectatio
 
 \begin{subquestion}
 
+\subsubsection*{Linear Guarding under an Affine Map}
+
+A representation linearly guards $Z$ if and only if its cross-covariance with the one-hot encoded concept vector $\widetilde{\mathbf{Z}}$ is zero. 
+Applied to the transformed representation $r(\mathbf{X}) = \mathbf{P}\mathbf{X} + \mathbf{b}$:
+\begin{equation}
+    r(\mathbf{X}) \text{ linearly guards } Z \iff \boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{0}.
+\end{equation}
+
+Adding the constant vector $\mathbf{b}$ only shifts the mean and does not change covariance, so
+\begin{equation}
+    \mathrm{Cov}(\mathbf{P}\mathbf{X} + \mathbf{b}, \widetilde{\mathbf{Z}}) = \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}}).
+\end{equation}
+For any constant matrix $\mathbf{P}$ and random vectors $\mathbf{X}, \mathbf{Y}$, $\mathrm{Cov}(\mathbf{P}\mathbf{X}, \mathbf{Y}) = \mathbf{P}\, \mathrm{Cov}(\mathbf{X}, \mathbf{Y})$.
+\begin{equation}
+    \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \mathrm{Cov}(\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+\end{equation}
+Hence $\boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$. Combining with the guarding characterisation above yields:
+\begin{equation}
+    r(\mathbf{X}) \text{ linearly guards } Z \iff \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}.
+\end{equation}
+
 \end{subquestion}
 
 \begin{subquestion}
 
+\subsubsection*{Decoupling the Distortion under a Centered Representation}
+
+Define the distortion induced by the affine map $r(\mathbf{X}) = \mathbf{P}\mathbf{X} + \mathbf{b}$ as $D(\mathbf{P}, \mathbf{b}) \triangleq \expectation\left[\|\mathbf{P}\mathbf{X} + \mathbf{b} - \mathbf{X}\|^2\right]$.
+
+\paragraph{Part 1: If $\expectation[\mathbf{X}] = \mathbf{0}$, then $D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2$.}
+
+Group the terms with $\mathbf{X}$:
+\begin{equation}
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|(\mathbf{P}\mathbf{X} - \mathbf{X}) + \mathbf{b}\|^2\right].
+\end{equation}
+Use $\|\mathbf{u} + \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 + 2\langle \mathbf{u}, \mathbf{v}\rangle$ with $\mathbf{u} = \mathbf{P}\mathbf{X} - \mathbf{X}$ and $\mathbf{v} = \mathbf{b}$, and expectation linearity:
+\begin{equation}
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2 + 2\, \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right].
+\end{equation}
+Since $\mathbf{b}$ is deterministic, $\expectation[\|\mathbf{b}\|^2] = \|\mathbf{b}\|^2$. Linearity of the inner product and of expectation gives:
+\begin{equation}
+    \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right] = \langle \expectation[\mathbf{P}\mathbf{X} - \mathbf{X}], \mathbf{b}\rangle = \langle (\mathbf{P} - \mathbf{I})\, \expectation[\mathbf{X}], \mathbf{b}\rangle.
+\end{equation}
+Since $\expectation[\mathbf{X}] = \mathbf{0}$, this reduces to $\langle \mathbf{0}, \mathbf{b}\rangle = 0$, and the cross term vanishes, leaving:
+\begin{equation}
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2.
+\end{equation}
+
+\paragraph{Part 2: Minimizing $D(\mathbf{P}, \mathbf{b})$ subject to a constraint on $\mathbf{P}$ is equivalent to minimizing $D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]$.}
+
+From part~1, when $\expectation[\mathbf{X}] = \mathbf{0}$ the distortion decouples into two non-negative terms:
+\begin{equation}
+    D(\mathbf{P}, \mathbf{b}) = \underbrace{\expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]}_{\text{depends only on }\mathbf{P}} + \underbrace{\|\mathbf{b}\|^2}_{\text{depends only on }\mathbf{b}}.
+\end{equation}
+The constraint is only on $\mathbf{P}$, so $\mathbf{b}$ can be chosen freely. Since $\|\mathbf{b}\|^2 \geq 0$, the unconstrained optimum is $\mathbf{b}^\ast = \mathbf{0}$. Substituting back, the minimization reduces to
+\begin{equation}
+    D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right].
+\end{equation}
+
 \end{subquestion}
 
 \begin{subquestion}
+
+\subsubsection*{Optimal Guarding Projection under Whitened Representations}
+
+Assume $\expectation[\mathbf{X}] = \mathbf{0}$ and $\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} = \mathbf{I}$. Show the following satisfies Eq.~(7) and minimizes Eq.~(8).
+\begin{equation}
+    \mathbf{P}^\ast = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+
+\end{equation}
+
+\paragraph{Part 1: $\mathbf{P}^\ast$ satisfies the guarding constraint.}
+
+Substitute $\mathbf{P}^\ast$ into the constraint:
+\begin{equation}
+    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+\end{equation}
+By the property of the pseudoinverse, $\mathbf{A}\mathbf{A}^+\mathbf{A} = \mathbf{A}$ for any matrix $\mathbf{A}$, so
+\begin{equation}
+    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}.
+\end{equation}
+
+\paragraph{Part 2: $\mathbf{P}^\ast$ minimizes the distortion.}
+
+From part (g), we minimize $D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] = \expectation\left[\|(\mathbf{P} - \mathbf{I})\mathbf{X}\|^2\right]$ subject to $\mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$. Applying Hint~1 together with $\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} = \mathbf{I}$:
+\begin{equation}
+    D(\mathbf{P}) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})\, \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} (\mathbf{P} - \mathbf{I})^\top\right) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})(\mathbf{P} - \mathbf{I})^\top\right) = \|\mathbf{P} - \mathbf{I}\|_F^2.
+\end{equation}
+The problem reduces to minimizing $\|\mathbf{P} - \mathbf{I}\|_F^2$ subject to constraint $\mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$.
+Writing $\mathbf{P}$ by its rows $\mathbf{p}_i^\top$, the constraint forces each row to satisfy $\mathbf{p}_i^\top\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}^\top$, each $\mathbf{p}_i$ lies in the orthogonal complement of $V \triangleq \mathrm{colsp}(\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})$. 
+The Frobenius objective decouples row-wise:
+\begin{equation}
+    \|\mathbf{P} - \mathbf{I}\|_F^2 = \sum_i \|\mathbf{p}_i - \mathbf{e}_i\|^2,
+\end{equation}
+so the optimum is found by independently projecting each $\mathbf{e}_i$ onto $V^\perp$: $\mathbf{p}_i^\ast = \Pi_{V^\perp} \mathbf{e}_i$. Stacking the rows using $\Pi_{V^\perp}^\top = \Pi_{V^\perp}$ yields $\mathbf{P}^\ast = \Pi_{V^\perp}$. By Hint~2 applied to $\mathbf{A} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$:
+\begin{equation}
+    \mathbf{P}^\ast = \Pi_{V^\perp} = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+.
+\end{equation}
 
 \end{subquestion}
 
