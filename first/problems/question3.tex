@@ -34,7 +34,8 @@
     
     \textbf{Alphabet:} $\alphabet = \openBr{} \cup \closeBr{}$, so $\nsymbols = 2k$.
     
-    \textbf{States:} $\states = \{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\} \cup \{\rejectState\}$, where $[\stackseq]$ corresponds to the stack of unclosed brackets $\stackseq$ with $|\stackseq| \le m$, and $\rejectState$ is an absorbing rejecting state. $\acceptState \defeq [\emptystack]$ for the empty-stack state.
+    \textbf{States:} $\states = \{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\} \cup \{\rejectState\}$, where $[\stackseq]$ corresponds to the stack of unclosed 
+    brackets $\stackseq$ with $|\stackseq| \le m$, and $\rejectState$ is an absorbing rejecting state. $\acceptState \defeq [\emptystack]$ for the empty-stack state.
     
     \textbf{Initial states:} $\initial = \{\acceptState\}$ (start with an empty stack).
     
@@ -53,12 +54,14 @@
     These cases specify $\trans$ on every $(\states \setminus \{\rejectState\}) \times \alphabet$ pair as well as on $\{\rejectState\} \times \alphabet$, so $\trans$ is deterministic.
 
     \paragraph{Correctness.} A string $\str$ is in $D(k, m)$ iff (i) the brackets are balanced and (ii) the running depth $d(\str_{\le t}) \le m$.
-    The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset \emph{and order} of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. The transitions enforce the two conditions:
+    The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset \emph{and order} of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. 
+    The transitions enforce the two conditions:
     \begin{itemize}
         \item Any depth violation triggers rule (3), sending $\mathcal{A}$ into the absorbing $\rejectState$.
         \item Any mismatched close (rule 4) or underflow (rule 5) likewise sends $\mathcal{A}$ to $\rejectState$.
     \end{itemize}
-    Conversely, while $\str_{\le t} \in D(k, m)$ at every prefix, only rules (1) and (2) fire and the automaton stays inside $\{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\}$. Since $\final = \{\acceptState\}$, the run accepts iff after reading the whole string the stack is empty, i.e.\ all opens were correctly matched. Hence $\mathcal{L}(\mathcal{A}) = D(k, m)$.
+    Conversely, while $\str_{\le t} \in D(k, m)$ at every prefix, only rules (1) and (2) fire and the automaton stays inside $\{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\}$. 
+    Since $\final = \{\acceptState\}$, the run accepts iff after reading the whole string the stack is empty, i.e.\ all opens were correctly matched. Hence $\mathcal{L}(\mathcal{A}) = D(k, m)$.
 
     \paragraph{Complexity.}
     \[
@@ -175,11 +178,79 @@
     In either case $\mathbf{h}_t$ no longer encodes valid stack. The dynamics map alone cannot detect this. 
     It is the recognition module of part~(f) that assigns probability~$<\eta$ to such continuations, so in the locally $\eta$-truncated support these strings are rejected.
 
-    Hence, on every \emph{valid} prefix, the RNN's hidden states are in one-to-one correspondence with the states $\mathcal{A}$ visits, and the recurrence $\mathbf{h}_t = \mathbf{U}(y_t)\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t}$ implements $\trans$ exactly.
+    Hence, on every \emph{valid} prefix, the RNN's hidden states are in one-to-one correspondence with the states $\mathcal{A}$ visits, and the recurrence $\mathbf{h}_t = \mathbf{U}(y_t)\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t}$ implements $\trans$.
 \end{subquestion}
 
 \begin{subquestion}
+    Since $\mathbf{U}$ is now fixed, it can't depend on whether $y_t$ should push or pop. 
+    Following the hint, double the hidden state to $\mathbb{R}^{2km}$ and perform \emph{both} operations simultaneously in each half:
+    \[
+        \mathbf{h}_t \;=\; \begin{pmatrix} \mathbf{h}_t^{(\text{p})} \\ \mathbf{h}_t^{(\text{q})} \end{pmatrix} \in \mathbb{R}^{2km},
+    \]
+    where the top half $\mathbf{h}_t^{(\text{p})}$ holds the result of a push and the bottom half $\mathbf{h}_t^{(\text{q})}$ holds the result of a pop. 
+    The Heaviside activation $H$ together with large negative entries in $\mathbf{V}$ then gates off whichever half does not match the input. 
+    We maintain the invariant that one half is non-zero and equals the correct stack encoding $h([\stackseq])$ from Eq.~(27). 
+    The true stack is recovered as $\mathbf{s}_t \defeq \mathbf{h}_t^{(\text{p})} + \mathbf{h}_t^{(\text{q})}$.
 
+    Let $\mathbf{U}_{\text{push}}, \mathbf{U}_{\text{pop}} \in \mathbb{R}^{km\times km}$ be the shift matrices from part~(d) and let $\mathbf{V}_{\text{ins}} \in \mathbb{R}^{km \times k}$ be the matrix that places $\mathbf{e}_i$ into block~1 when its input is $\openBr{i}$, i.e.\ $\mathbf{V}_{\text{ins}} = (\mathbf{I}_k, \mathbf{0}_k, \dots, \mathbf{0}_k)^\top$ (the first $k$ columns of the $\mathbf{V}$ from part~(d)).
+    Define
+    \[
+        \mathbf{U} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}} & \mathbf{U}_{\text{push}} \\ \mathbf{U}_{\text{pop}} & \mathbf{U}_{\text{pop}} \end{pmatrix} \in \mathbb{R}^{2km \times 2km},
+        \qquad
+        \mathbf{b} \;=\; -\tfrac{1}{2}\,\mathbf{1}_{2km} \in \mathbb{R}^{2km},
+    \]
+    \[
+        \mathbf{V} \;=\;
+        \begin{pmatrix}
+            \mathbf{V}_{\text{ins}} & -2\,\mathbf{1}_{km \times k} & -2\,\mathbf{1}_{km \times 1} \\[2pt]
+            -2\,\mathbf{1}_{km \times k} & \mathbf{0}_{km \times k} & -2\,\mathbf{1}_{km \times 1}
+        \end{pmatrix} \in \mathbb{R}^{2km \times (2k+1)},
+    \]
+    where the $2k+1$ columns are ordered as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$.
+
+    \paragraph{Why $\mathbf{U}$ is correct.} Multiplying out,
+    \[
+        \mathbf{U}\mathbf{h}_{t-1} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \\ \mathbf{U}_{\text{pop}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \end{pmatrix} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} \\ \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} \end{pmatrix},
+    \]
+    so we recover both candidate next-stacks from the true stack $\mathbf{s}_{t-1}$. 
+    One of $\mathbf{h}_{t-1}^{(\text{p})}, \mathbf{h}_{t-1}^{(\text{q})}$ is $\mathbf{0}$ and the other is a $0/1$ encoding, hence $\mathbf{s}_{t-1} \in \{0, 1\}^{km}$ and the entries of $\mathbf{U}\mathbf{h}_{t-1}$ lie in $\{0, 1\}$.
+
+    \paragraph{Correspondence with $\mathcal{A}$.} Suppose $\mathbf{s}_{t-1} = h(q)$ for some non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$.
+    
+    
+    \emph{Valid push} ($y_t = \openBr{i}$, $m' < m$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$). 
+    The one-hot $\mathbf{o}_{y_t}$ selects column $i$ of $\mathbf{V}$:
+    \[
+        \mathbf{V}\mathbf{o}_{\openBr{i}} \;=\; \begin{pmatrix} \mathbf{V}_{\text{ins}}\,\mathbf{e}_i \\ -2\,\mathbf{1}_{km} \end{pmatrix} \;=\; \begin{pmatrix} (\mathbf{e}_i, \mathbf{0}_{(m-1)k})^\top \\ -2\,\mathbf{1}_{km} \end{pmatrix} \;\Rightarrow\; \mathbf{z}_t \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} + (\mathbf{e}_i, \mathbf{0})^\top - \tfrac{1}{2}\mathbf{1} \\[2pt] \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} - \tfrac{5}{2}\mathbf{1} \end{pmatrix}.
+    \]
+    The top half: $\mathbf{U}_{\text{push}}\mathbf{s}_{t-1}$ has its block~1 zeroed out, so adding $(\mathbf{e}_i, \mathbf{0})^\top$ never causes a collision.
+    Every entry is $0$ or $1$, and after subtracting $\tfrac{1}{2}$ they sit at $\pm\tfrac{1}{2}$. 
+    The Heaviside yields $h(q')$. 
+    The bottom half: each entry is $\le 1 - \tfrac{5}{2} = -\tfrac{3}{2} < 0$, so $H$ makes it $\mathbf{0}$. 
+    Thus $\mathbf{h}_t^{(\text{p})} = h(q')$, $\mathbf{h}_t^{(\text{q})} = \mathbf{0}$, and $\mathbf{s}_t = h(q')$.
+    
+    
+    \emph{Valid pop} ($y_t = \closeBr{i}$, $i = i_{m'}$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$). 
+    The one-hot picks column $k+i$:
+    \[
+        \mathbf{V}\mathbf{o}_{\closeBr{i}} \;=\; \begin{pmatrix} -2\,\mathbf{1}_{km} \\ \mathbf{0}_{km} \end{pmatrix} \;\Rightarrow\; \mathbf{z}_t \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} - \tfrac{5}{2}\mathbf{1} \\[2pt] \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} - \tfrac{1}{2}\mathbf{1} \end{pmatrix}.
+    \]
+    The top half is $\le -\tfrac{3}{2} < 0$, so $H$ zeros it. 
+    The bottom half has entries in $\{-\tfrac{1}{2}, +\tfrac{1}{2}\}$ and $H$ recovers $\mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} = h(q')$. 
+    Hence $\mathbf{h}_t^{(\text{p})} = \mathbf{0}$, $\mathbf{h}_t^{(\text{q})} = h(q')$, and $\mathbf{s}_t = h(q')$.
+    
+    
+    \emph{$\eos$.} The last column of $\mathbf{V}$ is $-2\,\mathbf{1}_{2km}$, so both halves of $\mathbf{z}_t$ are $\le -\tfrac{3}{2}\mathbf{1}$ and $\mathbf{h}_t = \mathbf{0}_{2km}$. 
+    Since the recognition module of part~(f) reads $\mathbf{h}_{t-1}$ to compute the probability of $y_t = \eos$, this loss of information at $t = T$ does not affect recognition.
+
+
+    \paragraph{Invalid transitions.} A push on a full stack ($m' = m$) shifts the bottom block of $\mathbf{s}_{t-1}$ off the top half (annihilated by $\mathbf{U}_{\text{push}}$), 
+    so $\mathbf{h}_t^{(\text{p})}$ encodes a \emph{different} length-$m$ stack instead of the rejecting state of $\mathcal{A}$. 
+    Similarly, a mismatched or empty pop produces a top half that does not equal $h(q')$ for the true continuation. 
+    The dynamics of part~(e) cannot detect these failures by themselves. 
+    This is the role of the output layer constructed in part~(f), which assigns probability~$<\eta$ to such invalid continuations and
+    thus excludes them from the locally $\eta$-truncated support. 
+    On every valid prefix, however, the recurrence $\mathbf{h}_t = H(\mathbf{U}\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t} + \mathbf{b})$ tracks the transitions of $\mathcal{A}$ exactly via $\mathbf{s}_t$.
 \end{subquestion}
 
 \begin{subquestion}
