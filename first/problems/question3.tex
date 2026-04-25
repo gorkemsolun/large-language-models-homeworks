@@ -1,6 +1,13 @@
 \begin{question}{Efficiently Simulating Bounded Stacks with RNNs}
 
 \begin{subquestion}
+    The language $D(2, 3)$ consists of brackets of $k = 2$ types with maximum nesting depth $m = 3$. 
+    We encode the unclosed opening brackets using a stack whose \emph{rightmost} symbol is the top of the stack.
+    $[\openBr{1}\openBr{2}]$ transitions to $[\openBr{1}]$ after reading $\closeBr{2}$.
+    \begin{itemize}
+        \item Reading a closing bracket $\closeBr{i}$: pop the top of the stack if it equals $\openBr{i}$; otherwise (mismatch or empty stack), reject.
+        \item Reading an opening bracket $\openBr{i}$: push it on top, unless the stack already has $m = 3$ symbols, in which case the depth bound is exceeded and we reject.
+    \end{itemize}
     \begin{table}[H]
     \centering
         \begin{tabular}{cccc}
@@ -9,11 +16,11 @@
             $\stackseq_2 = \openBr{1} \openBr{1} \openBr{1}$ &
             $\stackseq_3 = \openBr{2} \openBr{1} \openBr{2}$ \\
             \midrule
-            $\closeBr{2}$ & & &\\
+            $\closeBr{2}$ & $\emptystack$ & reject & $\openBr{2}\openBr{1}$ \\
             % \midrule
-            $\closeBr{1}$ & & & \\
+            $\closeBr{1}$ & reject & $\openBr{1}\openBr{1}$ & reject \\
             % \midrule
-            $\openBr{2}$ & & & \\
+            $\openBr{2}$ & $\openBr{2}\openBr{2}$ & reject & reject \\
             \bottomrule
         \end{tabular}
         \caption{The first row of the table represents different stack configurations, while the first column lists the newly read symbols.}
@@ -22,7 +29,45 @@
 \end{subquestion}
 
 \begin{subquestion}
+    We construct a DFA $\mathcal{A} = \fsatuple$ that recognizes $D(k, m)$ by encoding every legal stack configuration as a state. 
+    Let $\openBr{} = \{\openBr{1}, \dots, \openBr{k}\}$ and $\closeBr{} = \{\closeBr{1}, \dots, \closeBr{k}\}$.
+    
+    \textbf{Alphabet:} $\alphabet = \openBr{} \cup \closeBr{}$, so $\nsymbols = 2k$.
+    
+    \textbf{States:} $\states = \{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\} \cup \{\rejectState\}$, where $[\stackseq]$ corresponds to the stack of unclosed brackets $\stackseq$ with $|\stackseq| \le m$, and $\rejectState$ is an absorbing rejecting state. $\acceptState \defeq [\emptystack]$ for the empty-stack state.
+    
+    \textbf{Initial states:} $\initial = \{\acceptState\}$ (start with an empty stack).
+    
+    \textbf{Final states:} $\final = \{\acceptState\}$ (only the empty stack accepts).
+    
+    \textbf{Transition $\trans : \states \times \alphabet \to \states$:} For valid prefix $\stackseq \in \openBr{}^{*}$ with $[\stackseq] \in \states$ and $i, j \in \{1, \dots, k\}$:
+    
+    \begin{enumerate}
+        \item \emph{Valid push} (if $|\stackseq| < m$): $\trans([\stackseq], \openBr{i}) = [\stackseq\, \openBr{i}]$.
+        \item \emph{Valid pop}: $\trans([\stackseq\, \openBr{i}], \closeBr{i}) = [\stackseq]$.
+        \item \emph{Depth overflow} (if $|\stackseq| = m$): $\trans([\stackseq], \openBr{i}) = \rejectState$.
+        \item \emph{Mismatched close} (if $i \ne j$): $\trans([\stackseq\, \openBr{j}], \closeBr{i}) = \rejectState$.
+        \item \emph{Underflow}: $\trans(\acceptState, \closeBr{i}) = \rejectState$.
+        \item \emph{Sink}: $\trans(\rejectState, s) = \rejectState$ for every $s \in \alphabet$.
+    \end{enumerate}
+    These cases specify $\trans$ on every $(\states \setminus \{\rejectState\}) \times \alphabet$ pair as well as on $\{\rejectState\} \times \alphabet$, so $\trans$ is deterministic.
 
+    \paragraph{Correctness.} A string $\str$ is in $D(k, m)$ iff (i) the brackets are balanced and (ii) the running depth $d(\str_{\le t}) \le m$.
+    The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset \emph{and order} of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. The transitions enforce the two conditions:
+    \begin{itemize}
+        \item Any depth violation triggers rule (3), sending $\mathcal{A}$ into the absorbing $\rejectState$.
+        \item Any mismatched close (rule 4) or underflow (rule 5) likewise sends $\mathcal{A}$ to $\rejectState$.
+    \end{itemize}
+    Conversely, while $\str_{\le t} \in D(k, m)$ at every prefix, only rules (1) and (2) fire and the automaton stays inside $\{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\}$. Since $\final = \{\acceptState\}$, the run accepts iff after reading the whole string the stack is empty, i.e.\ all opens were correctly matched. Hence $\mathcal{L}(\mathcal{A}) = D(k, m)$.
+
+    \paragraph{Complexity.}
+    \[
+        |\states| \;=\; 1 + \sum_{j=0}^{m} k^{j} \;=\; 1 + \frac{k^{m+1} - 1}{k - 1} \;=\; \mathcal{O}(k^{m}).
+    \]
+    Because $\mathcal{A}$ is a DFA, the number of transitions is
+    \[
+        |\trans| \;=\; |\states| \cdot |\alphabet| \;=\; \mathcal{O}(k^{m}) \cdot 2k \;=\; \mathcal{O}(k^{m+1}).
+    \]
 \end{subquestion}
 
 \begin{subquestion}
