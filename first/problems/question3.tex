@@ -71,28 +71,111 @@
 \end{subquestion}
 
 \begin{subquestion}
+    For $D(2, 3)$ we have $k = 2$ and $m = 3$, so each hidden state lives in $\mathbb{R}^{k \cdot m} = \mathbb{R}^{6}$.
+    Writing $\mathbf{e}_1 = (1, 0)^\top$ and $\mathbf{e}_2 = (0, 1)^\top$ for the canonical basis vectors of $\mathbb{R}^{2}$ associated with $\openBr{1}$ and $\openBr{2}$, Eq.~(27) places the top of the stack in the first $k$-block and pads unused bottom blocks with zeros.
+    The empty stack maps to $h([\emptystack]) = \mathbf{0}_{6}$, and the initial embeddings of $\stackseq_1, \stackseq_2, \stackseq_3$ are
+    \begin{align*}
+        h(\stackseq_1) &= h([\openBr{2}]) = \begin{pmatrix} \mathbf{e}_2 \\ \mathbf{0}_2 \\ \mathbf{0}_2 \end{pmatrix} = (0, 1, 0, 0, 0, 0)^\top, \\
+        h(\stackseq_2) &= h([\openBr{1}\openBr{1}\openBr{1}]) = \begin{pmatrix} \mathbf{e}_1 \\ \mathbf{e}_1 \\ \mathbf{e}_1 \end{pmatrix} = (1, 0, 1, 0, 1, 0)^\top, \\
+        h(\stackseq_3) &= h([\openBr{2}\openBr{1}\openBr{2}]) = \begin{pmatrix} \mathbf{e}_2 \\ \mathbf{e}_1 \\ \mathbf{e}_2 \end{pmatrix} = (0, 1, 1, 0, 0, 1)^\top.
+    \end{align*}
+    Re-encoding the resulting stacks from part~(a) via Eq.~(27) yields the embeddings:
     \begin{table}[H]
     \centering
+    \small
         \begin{tabular}{cccc}
             \toprule
             & $\stackseq_1 = \openBr{2}$ &
             $\stackseq_2 = \openBr{1} \openBr{1} \openBr{1}$ &
             $\stackseq_3 = \openBr{2} \openBr{1} \openBr{2}$ \\
             \midrule
-            $\closeBr{2}$ & & &\\
+            $\closeBr{2}$ & $(0, 0, 0, 0, 0, 0)^\top$ & reject & $(1, 0, 0, 1, 0, 0)^\top$ \\
             % \midrule
-            $\closeBr{1}$ & & & \\
+            $\closeBr{1}$ & reject & $(1, 0, 1, 0, 0, 0)^\top$ & reject \\
             % \midrule
-            $\openBr{2}$ & & & \\
+            $\openBr{2}$ & $(0, 1, 0, 1, 0, 0)^\top$ & reject & reject \\
             \bottomrule
         \end{tabular}
         \caption{The first row of the table represents different stack configurations, while the first column lists the newly read symbols.}
-        \label{tab:stackconfigs}
+        \label{tab:stackembeddings}
     \end{table}
 \end{subquestion}
 
 \begin{subquestion}
+    Let $\mathbf{I}_k$ and $\mathbf{0}_k$ denote the $k\times k$ identity and zero matrices, and write $\mathbf{h}$ as $m$ stacked $k$-blocks where block~$j$ is the $j$-th symbol from the top of the stack. 
+    Block~1 is the top, blocks beyond the stack depth are zero.
+    Pushing onto the stack means \emph{shifting all $k$-blocks one position down} and writing the new symbol into block~1. 
+    Popping means \emph{shifting all $k$-blocks one position up} and zeroing block~$m$. 
+    Realize this with two block-banded $km \times km$ matrices,
+    \[
+        \mathbf{U}_{\text{push}} \;=\;
+        \begin{pmatrix}
+            \mathbf{0}_k & \mathbf{0}_k & \cdots & \mathbf{0}_k & \mathbf{0}_k \\
+            \mathbf{I}_k & \mathbf{0}_k & \cdots & \mathbf{0}_k & \mathbf{0}_k \\
+            \mathbf{0}_k & \mathbf{I}_k & \cdots & \mathbf{0}_k & \mathbf{0}_k \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            \mathbf{0}_k & \mathbf{0}_k & \cdots & \mathbf{I}_k & \mathbf{0}_k
+        \end{pmatrix},
+        \qquad
+        \mathbf{U}_{\text{pop}} \;=\;
+        \begin{pmatrix}
+            \mathbf{0}_k & \mathbf{I}_k & \mathbf{0}_k & \cdots & \mathbf{0}_k \\
+            \mathbf{0}_k & \mathbf{0}_k & \mathbf{I}_k & \cdots & \mathbf{0}_k \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            \mathbf{0}_k & \mathbf{0}_k & \mathbf{0}_k & \cdots & \mathbf{I}_k \\
+            \mathbf{0}_k & \mathbf{0}_k & \mathbf{0}_k & \cdots & \mathbf{0}_k
+        \end{pmatrix},
+    \]
+    and define the recurrence-matrix function $\mathbf{U} : \overline{\alphabet} \to \mathbb{R}^{km \times km}$ by
+    \[
+        \mathbf{U}(y_t) \;=\;
+        \begin{cases}
+            \mathbf{U}_{\text{push}} & \text{if } y_t \in \{\openBr{1}, \dots, \openBr{k}\}, \\
+            \mathbf{U}_{\text{pop}}  & \text{if } y_t \in \{\closeBr{1}, \dots, \closeBr{k}\}, \\
+            \mathbf{I}_{km}          & \text{if } y_t = \eos.
+        \end{cases}
+    \]
+    The choice $\mathbf{U}(\eos) = \mathbf{I}_{km}$ keeps the stack representation intact at termination, since $\eos$ is not a stack operation. 
+    The input matrix $\mathbf{V} \in \mathbb{R}^{km \times (2k+1)}$ injects the new opening bracket into block~1 only when $y_t$ is an opening bracket, so we set
+    \[
+        \mathbf{V} \;=\;
+        \begin{pmatrix}
+            \mathbf{I}_k \\
+            \mathbf{0}_k \\
+            \vdots \\
+            \mathbf{0}_k
+        \end{pmatrix}
+        \begin{pmatrix} \mathbf{I}_k & \mathbf{0}_k & \mathbf{0}_{k\times 1} \end{pmatrix}
+        \;=\;
+        \begin{pmatrix}
+            \mathbf{I}_k & \mathbf{0}_k & \mathbf{0}_{k\times 1} \\
+            \mathbf{0}_k & \mathbf{0}_k & \mathbf{0}_{k\times 1} \\
+            \vdots & \vdots & \vdots \\
+            \mathbf{0}_k & \mathbf{0}_k & \mathbf{0}_{k\times 1}
+        \end{pmatrix},
+    \]
+    where the columns are ordered as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$. 
+    With this $\mathbf{V}$, $\mathbf{V}\mathbf{o}_{\openBr{i}} = (\mathbf{e}_i, \mathbf{0}_{(m-1)k})^\top$ and $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}_{km}$.
 
+    \paragraph{Correspondence with $\mathcal{A}$.} Suppose $\mathbf{h}_{t-1}$ encodes a non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$ via Eq.~(27). We check the three transition kinds.
+
+    \emph{Valid push.} If $y_t = \openBr{i}$ and $m' < m$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$. 
+    Multiplying out, $\mathbf{U}_{\text{push}}\mathbf{h}_{t-1}$ takes block~$j$ of $\mathbf{h}_{t-1}$ into block~$j{+}1$ for $j = 1, \dots, m{-}1$ and zeros block~1. 
+    Adding $\mathbf{V}\mathbf{o}_{\openBr{i}}$ writes $\mathbf{e}_i$ into block~1. 
+    The resulting blocks are $(\mathbf{e}_i, \mathbf{e}_{i_{m'}}, \dots, \mathbf{e}_{i_1}, \mathbf{0}, \dots, \mathbf{0})$, exactly $h(q')$.
+
+    \emph{Valid pop.} If $y_t = \closeBr{i}$ with $i = i_{m'}$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$. 
+    Now $\mathbf{U}_{\text{pop}}\mathbf{h}_{t-1}$ takes block~$j$ into block~$j{-}1$ for $j = 2, \dots, m$ and zeros block~$m$, while $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{0}$. 
+    The resulting blocks are $(\mathbf{e}_{i_{m'-1}}, \dots, \mathbf{e}_{i_1}, \mathbf{0}, \dots, \mathbf{0})$, exactly $h(q')$.
+
+    \emph{$\eos$.} The DFA does not consume $\eos$ (cf.\ part (b)).
+    We simply preserve the stack via $\mathbf{U}(\eos) = \mathbf{I}_{km}$ and $\mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}$, so $\mathbf{h}_t = \mathbf{h}_{t-1}$.
+
+    \emph{Invalid transitions.} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
+    In either case $\mathbf{h}_t$ no longer encodes valid stack. The dynamics map alone cannot detect this. 
+    It is the recognition module of part~(f) that assigns probability~$<\eta$ to such continuations, so in the locally $\eta$-truncated support these strings are rejected.
+
+    Hence, on every \emph{valid} prefix, the RNN's hidden states are in one-to-one correspondence with the states $\mathcal{A}$ visits, and the recurrence $\mathbf{h}_t = \mathbf{U}(y_t)\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t}$ implements $\trans$ exactly.
 \end{subquestion}
 
 \begin{subquestion}
