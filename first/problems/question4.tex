@@ -1,11 +1,77 @@
 \begin{question}{Limitations of Transformers on Simple Languages}
 
 \begin{subquestion}
+    Absorb the value projection $\mathbf{W}_V^{(\ell)}$ into the MLP $\mathbf{f}$ by exhibiting a function $\mathbf{f}'$ such that
+    \begin{equation*}
+        \mathbf{x}_t^{(\ell+1)} \;=\; \mathbf{f}'\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right) \;=\; \mathbf{f}\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{v}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right).
+    \end{equation*}
 
+    \paragraph{Express $\mathbf{v}_{t'}^{(\ell)}$ in terms of $\mathbf{x}_{t'}^{(\ell)}$}
+    From Eq.~(39c), $\mathbf{V}^{(\ell)} = \mathbf{X}^{(\ell)} \mathbf{W}_V^{(\ell)}$. Reading off the $t'$-th row (where the rows of $\mathbf{V}^{(\ell)}$ and $\mathbf{X}^{(\ell)}$ are $\mathbf{v}_{t'}^{(\ell)\top}$ and $\mathbf{x}_{t'}^{(\ell)\top}$ respectively), we get
+    \begin{equation*}
+        \mathbf{v}_{t'}^{(\ell)\top} \;=\; \mathbf{x}_{t'}^{(\ell)\top}\, \mathbf{W}_V^{(\ell)}
+        \quad\Longleftrightarrow\quad
+        \mathbf{v}_{t'}^{(\ell)} \;=\; \mathbf{W}_V^{(\ell)\top}\, \mathbf{x}_{t'}^{(\ell)}.
+    \end{equation*}
+
+    \paragraph{Pull $\mathbf{W}_V^{(\ell)\top}$ out of the attention sum}
+    Substituting into Eq.~(39e), and using that $s_{t,t'}^{(\ell)} \in \mathbb{R}$ is a scalar and matrix multiplication is linear,
+    \begin{equation*}
+        \mathbf{z}_t^{(\ell)} \;=\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{v}_{t'}^{(\ell)}
+        \;=\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{W}_V^{(\ell)\top}\, \mathbf{x}_{t'}^{(\ell)}
+        \;=\; \mathbf{W}_V^{(\ell)\top} \!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)}\right).
+    \end{equation*}
+
+    \paragraph{Define $\mathbf{f}'$}
+    Plugging this into Eq.~(39f), $\mathbf{x}_t^{(\ell+1)} = \mathbf{f}\!\left(\mathbf{W}_V^{(\ell)\top} \sum_{t'} s_{t,t'}^{(\ell)} \mathbf{x}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right)$. 
+    Hence
+    \begin{equation*}
+        \mathbf{f}'(\mathbf{a}, \mathbf{b}) \;\defeq\; \mathbf{f}\!\left(\mathbf{W}_V^{(\ell)\top}\, \mathbf{a},\; \mathbf{b}\right) \qquad \text{for } \mathbf{a}, \mathbf{b} \in \mathbb{R}^{D}
+    \end{equation*}
+    satisfies Eq.~(44), absorbing the linear projection $\mathbf{W}_V^{(\ell)}$ into the first argument of the MLP.
 \end{subquestion}
 
 \begin{subquestion}
+    Prove $\|\mathbf{x}_t^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$ by induction on $\ell$. 
+    After part~(a), take the layer update as
+    \begin{equation*}
+        \mathbf{x}_t^{(\ell+1)} \;=\; \mathbf{f}\!\left(\mathbf{z}_t^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right), \qquad \mathbf{z}_t^{(\ell)} \;=\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)}.
+    \end{equation*}
 
+    \paragraph{Base case ($\ell = 0$)}
+    By Definition~10, $\|\mathbf{X}^{(0)}\|_{2,\infty} = \max_{t'} \|\mathbf{x}_{t'}^{(0)}\|$, so for every $t$
+    \begin{equation*}
+        \|\mathbf{x}_t^{(0)}\| \;\le\; \|\mathbf{X}^{(0)}\|_{2,\infty} \;=\; (2L_{\mathbf{f}})^{0}\,\|\mathbf{X}^{(0)}\|_{2,\infty}.
+    \end{equation*}
+
+    \paragraph{Inductive hypothesis}
+    Assume that for some $\ell \ge 0$ and \emph{every} $t' \in \{1, \dots, T\}$,
+    \begin{equation*}
+        \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}.
+    \end{equation*}
+
+    \paragraph{Inductive step ($\ell \to \ell+1$)}
+    \emph{(i) Bound on $\|\mathbf{z}_t^{(\ell)}\|$} 
+    The weights $s_{t,t'}^{(\ell)}$ are softmax outputs, hence $s_{t,t'}^{(\ell)} \ge 0$ and $\sum_{t'=1}^{T} s_{t,t'}^{(\ell)} = 1$. 
+    By the triangle inequality and the inductive hypothesis,
+    \begin{equation*}
+        \|\mathbf{z}_t^{(\ell)}\| \;=\; \Bigg\|\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)}\Bigg\| \;\le\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}.
+    \end{equation*}
+
+    \emph{(ii) Lipschitz step} Using $\mathbf{f}(\mathbf{0}, \mathbf{0}) = \mathbf{0}$ and the Lipschitz property (Definition~9) of $\mathbf{f}: \mathbb{R}^{D} \times \mathbb{R}^{D} \to \mathbb{R}^{D}$ with the standard product-space norm $\|(\mathbf{a}, \mathbf{b})\| = \sqrt{\|\mathbf{a}\|^{2} + \|\mathbf{b}\|^{2}}$,
+    \begin{equation*}
+        \|\mathbf{f}(\mathbf{z}, \mathbf{x})\| \;=\; \|\mathbf{f}(\mathbf{z}, \mathbf{x}) - \mathbf{f}(\mathbf{0}, \mathbf{0})\| \;\le\; L_{\mathbf{f}}\sqrt{\|\mathbf{z}\|^{2} + \|\mathbf{x}\|^{2}} \;\le\; L_{\mathbf{f}}\bigl(\|\mathbf{z}\| + \|\mathbf{x}\|\bigr),
+    \end{equation*}
+    where the last inequality follows from $\|\mathbf{z}\|^{2} + \|\mathbf{x}\|^{2} \le \bigl(\|\mathbf{z}\| + \|\mathbf{x}\|\bigr)^{2}$.
+
+    \emph{(iii) Combine} Applying this to $\mathbf{x}_t^{(\ell+1)} = \mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)})$ and substituting both bounds,
+    \begin{align*}
+        \|\mathbf{x}_t^{(\ell+1)}\|
+        &\;\le\; L_{\mathbf{f}}\bigl(\|\mathbf{z}_t^{(\ell)}\| + \|\mathbf{x}_t^{(\ell)}\|\bigr) \\
+        &\;\le\; L_{\mathbf{f}}\bigl((2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty} + (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}\bigr) \\
+        &\;=\; (2L_{\mathbf{f}})^{\ell+1}\,\|\mathbf{X}^{(0)}\|_{2,\infty}.
+    \end{align*}
+    By induction, $\|\mathbf{x}_t^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$ for every $\ell \ge 0$ and every $t \in \{1, \dots, T\}$. \qed
 \end{subquestion}
 
 \begin{subquestion}
