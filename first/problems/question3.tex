@@ -254,7 +254,72 @@
 \end{subquestion}
 
 \begin{subquestion}
+    Recall that one of the two halves of $\mathbf{h}_{t-1}$ is $\mathbf{0}$ and the other equals the encoding $\mathbf{s}_{t-1} = h(q)$ of the current automaton state $q$ via Eq.~(27). 
+    Thus $\mathbf{s}_{t-1}$ is composed of $m$ blocks of size $k$, with the top of the stack in block $j = 1$ and the bottom in block $j = m$ (zero-padded above the stack depth). 
+    For brevity, we work with $\mathbf{s}_{t-1}$ as a stand-in for $\mathbf{h}_{t-1}$ below. 
+    The same logits are obtained by feeding either half (the all-zero half contributes nothing). 
+    Write $\mathbf{s}^{(j)} \in \mathbb{R}^{k}$ for the $j$-th block. 
+    Three indicators are linear in $\mathbf{s}_{t-1}$ and take values in $\{0, 1\}$ on every valid encoding:
+    \[
+        \mathbb{I}_{\text{full}} = \mathbf{1}_k^\top \mathbf{s}^{(m)}, \qquad \mathbb{I}_{\text{empty}} = 1 - \mathbf{1}_k^\top \mathbf{s}^{(1)}, \qquad \mathbb{I}_{\text{top}=i} = \mathbf{s}^{(1)}_i.
+    \]
 
+    Design $\mathbf{E}\mathbf{s}_{t-1} + \mathbf{b}'$ so that valid continuations yield a logit of $0$ and invalid ones $-\alpha$. 
+    Order the rows of $\mathbf{E}$ and $\mathbf{b}'$ as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$. 
+    Let $\mathbf{J}_k = \mathbf{1}_k\mathbf{1}_k^\top$ be the $k \times k$ ones matrix.
+    \[
+        \mathbf{E} \;=\;
+        \begin{pmatrix}
+            \mathbf{0}_{k\times k} & \mathbf{0}_{k\times k} & \cdots & \mathbf{0}_{k\times k} & -\alpha\,\mathbf{J}_k \\[2pt]
+            \alpha\,\mathbf{I}_k   & \mathbf{0}_{k\times k} & \cdots & \mathbf{0}_{k\times k} & \mathbf{0}_{k\times k} \\[2pt]
+            -\alpha\,\mathbf{1}_k^\top & \mathbf{0}_{1\times k} & \cdots & \mathbf{0}_{1\times k} & \mathbf{0}_{1\times k}
+        \end{pmatrix} \in \mathbb{R}^{(2k+1) \times km},
+        \qquad
+        \mathbf{b}' \;=\;
+        \begin{pmatrix} \mathbf{0}_{k} \\ -\alpha\,\mathbf{1}_{k} \\ 0 \end{pmatrix}.
+    \]
+    \begin{align*}
+        z_{\openBr{i}} \;&=\; -\alpha\,\mathbf{1}_k^\top \mathbf{s}^{(m)} \;=\; -\alpha\,\mathbb{I}_{\text{full}}, \\
+        z_{\closeBr{i}} \;&=\; \alpha\,\mathbf{s}^{(1)}_i - \alpha \;=\; -\alpha\,(1 - \mathbb{I}_{\text{top}=i}), \\
+        z_{\eos} \;&=\; -\alpha\,\mathbf{1}_k^\top \mathbf{s}^{(1)} \;=\; -\alpha\,(1 - \mathbb{I}_{\text{empty}}).
+    \end{align*}
+    These are $0$ exactly when the corresponding symbol is an acceptable continuation under $\trans$ (push allowed when not full, pop allowed when its bracket matches the top, $\eos$ allowed when the stack is empty), and $-\alpha$ otherwise.
+
+    Because the logit of \emph{every} valid continuation is $0$ and that of \emph{every} invalid one is $-\alpha$, the partition function $Z = \sum_{y \in \overline{\alphabet}} \exp(z_y)$ depends only on how many continuations are valid. There are exactly three cases.
+    \begin{enumerate}
+        \item \emph{Empty stack} ($m' = 0$): the $k$ pushes and $\eos$ are valid, the $k$ pops are invalid;
+        $Z_{\text{empty}} = (k+1) + k e^{-\alpha}$.
+        \item \emph{Partially full stack} ($0 < m' < m$): the $k$ pushes and the unique matching pop are valid; the $k-1$ mismatched pops and $\eos$ are invalid;
+        $Z_{\text{partial}} = (k+1) + k e^{-\alpha}$.
+        \item \emph{Full stack} ($m' = m$): only the matching pop is valid; the $k$ pushes, $k-1$ mismatched pops, and $\eos$ are all invalid;
+        $Z_{\text{full}} = 1 + 2k e^{-\alpha}$.
+    \end{enumerate}
+
+    \paragraph{Choosing $\alpha$.} Let $N_{\text{val}} \in \{k+1, 1\}$ denote the number of valid continuations in the current case. 
+    Valid and invalid probabilities are $1/Z$ and $e^{-\alpha}/Z$ respectively, and the locally $\eta$-truncated support condition $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$ requires
+    \[
+        \frac{1}{Z} \;\ge\; \eta \;\;\text{(valid)}, \qquad \frac{e^{-\alpha}}{Z} \;<\; \eta \;\;\text{(invalid)}.
+    \]
+    As $\alpha \to \infty$, $e^{-\alpha} \to 0$, so $Z \to N_{\text{val}}$, the valid probability tends to $1/N_{\text{val}} \in \{\tfrac{1}{k+1}, 1\}$, and the invalid probability tends to $0$. 
+    Since the assignment guarantees $\eta < \tfrac{1}{k+1} \le 1/N_{\text{val}}$, the limit valid probability exceeds $\eta$ in every case, and the limit invalid probability is below $\eta$. 
+    By continuity, there exists $\alpha^{*}(\eta) > 0$ such that both inequalities hold in all three cases simultaneously for every $\alpha \ge \alpha^{*}(\eta)$, so the construction goes through for sufficiently large $\alpha$ (cf.\ the footnote in the assignment).
+    Two conditions translate into upper bounds on $e^{-\alpha}$:
+
+    \emph{Valid condition} ($1/Z \ge \eta$, i.e.\ $Z \le 1/\eta$):
+    \[
+        e^{-\alpha} \;\le\; \tfrac{1/\eta - (k+1)}{k} \quad \text{(Cases 1, 2)},
+        \qquad
+        e^{-\alpha} \;\le\; \tfrac{1/\eta - 1}{2k} \quad \text{(Case 3)}.
+    \]
+
+    \emph{Invalid condition} ($e^{-\alpha}/Z < \eta$, i.e.\ $e^{-\alpha} < \eta\, Z$):
+    \[
+        e^{-\alpha} \;<\; \tfrac{\eta(k+1)}{1 - k\eta} \quad \text{(Cases 1, 2; \;$\eta < \tfrac{1}{k+1} < \tfrac{1}{k}$ ensures $1 - k\eta > 0$)},
+    \]
+    \[
+        e^{-\alpha} \;<\; \tfrac{\eta}{1 - 2k\eta} \quad \text{(Case 3; automatic when $\eta \ge \tfrac{1}{2k}$)}.
+    \]
+    Taking $\alpha$ at least the maximum of the four logarithmic thresholds with strict inequality where required suffices to guarantee $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$.
 \end{subquestion}
 
 \begin{subquestion}
