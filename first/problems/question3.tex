@@ -53,7 +53,7 @@
     \end{enumerate}
     These cases specify $\trans$ on every $(\states \setminus \{\rejectState\}) \times \alphabet$ pair as well as on $\{\rejectState\} \times \alphabet$, so $\trans$ is deterministic.
 
-    \paragraph{Correctness.} A string $\str$ is in $D(k, m)$ iff (i) the brackets are balanced and (ii) the running depth $d(\str_{\le t}) \le m$.
+    \paragraph{Correctness} A string $\str$ is in $D(k, m)$ iff (i) the brackets are balanced and (ii) the running depth $d(\str_{\le t}) \le m$.
     The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset \emph{and order} of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. 
     The transitions enforce the two conditions:
     \begin{itemize}
@@ -63,7 +63,7 @@
     Conversely, while $\str_{\le t} \in D(k, m)$ at every prefix, only rules (1) and (2) fire and the automaton stays inside $\{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\}$. 
     Since $\final = \{\acceptState\}$, the run accepts iff after reading the whole string the stack is empty, i.e.\ all opens were correctly matched. Hence $\mathcal{L}(\mathcal{A}) = D(k, m)$.
 
-    \paragraph{Complexity.}
+    \paragraph{Complexity}
     \[
         |\states| \;=\; 1 + \sum_{j=0}^{m} k^{j} \;=\; 1 + \frac{k^{m+1} - 1}{k - 1} \;=\; \mathcal{O}(k^{m}).
     \]
@@ -160,7 +160,7 @@
     where the columns are ordered as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$. 
     With this $\mathbf{V}$, $\mathbf{V}\mathbf{o}_{\openBr{i}} = (\mathbf{e}_i, \mathbf{0}_{(m-1)k})^\top$ and $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}_{km}$.
 
-    \paragraph{Correspondence with $\mathcal{A}$.} Suppose $\mathbf{h}_{t-1}$ encodes a non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$ via Eq.~(27). We check the three transition kinds.
+    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{h}_{t-1}$ encodes a non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$ via Eq.~(27). We check the three transition kinds.
 
     \emph{Valid push.} If $y_t = \openBr{i}$ and $m' < m$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$. 
     Multiplying out, $\mathbf{U}_{\text{push}}\mathbf{h}_{t-1}$ takes block~$j$ of $\mathbf{h}_{t-1}$ into block~$j{+}1$ for $j = 1, \dots, m{-}1$ and zeros block~1. 
@@ -174,7 +174,7 @@
     \emph{$\eos$.} The DFA does not consume $\eos$ (cf.\ part (b)).
     We simply preserve the stack via $\mathbf{U}(\eos) = \mathbf{I}_{km}$ and $\mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}$, so $\mathbf{h}_t = \mathbf{h}_{t-1}$.
 
-    \emph{Invalid transitions.} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
+    \emph{Invalid transitions} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
     In either case $\mathbf{h}_t$ no longer encodes valid stack. The dynamics map alone cannot detect this. 
     It is the recognition module of part~(f) that assigns probability~$<\eta$ to such continuations, so in the locally $\eta$-truncated support these strings are rejected.
 
@@ -208,14 +208,14 @@
     \]
     where the $2k+1$ columns are ordered as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$.
 
-    \paragraph{Why $\mathbf{U}$ is correct.} Multiplying out,
+    \paragraph{Why $\mathbf{U}$ is correct} Multiplying out,
     \[
         \mathbf{U}\mathbf{h}_{t-1} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \\ \mathbf{U}_{\text{pop}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \end{pmatrix} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} \\ \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} \end{pmatrix},
     \]
     so we recover both candidate next-stacks from the true stack $\mathbf{s}_{t-1}$. 
     One of $\mathbf{h}_{t-1}^{(\text{p})}, \mathbf{h}_{t-1}^{(\text{q})}$ is $\mathbf{0}$ and the other is a $0/1$ encoding, hence $\mathbf{s}_{t-1} \in \{0, 1\}^{km}$ and the entries of $\mathbf{U}\mathbf{h}_{t-1}$ lie in $\{0, 1\}$.
 
-    \paragraph{Correspondence with $\mathcal{A}$.} Suppose $\mathbf{s}_{t-1} = h(q)$ for some non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$.
+    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{s}_{t-1} = h(q)$ for some non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$.
     
     
     \emph{Valid push} ($y_t = \openBr{i}$, $m' < m$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$). 
@@ -244,7 +244,7 @@
     Since the recognition module of part~(f) reads $\mathbf{h}_{t-1}$ to compute the probability of $y_t = \eos$, this loss of information at $t = T$ does not affect recognition.
 
 
-    \paragraph{Invalid transitions.} A push on a full stack ($m' = m$) shifts the bottom block of $\mathbf{s}_{t-1}$ off the top half (annihilated by $\mathbf{U}_{\text{push}}$), 
+    \paragraph{Invalid transitions} A push on a full stack ($m' = m$) shifts the bottom block of $\mathbf{s}_{t-1}$ off the top half (annihilated by $\mathbf{U}_{\text{push}}$), 
     so $\mathbf{h}_t^{(\text{p})}$ encodes a \emph{different} length-$m$ stack instead of the rejecting state of $\mathcal{A}$. 
     Similarly, a mismatched or empty pop produces a top half that does not equal $h(q')$ for the true continuation. 
     The dynamics of part~(e) cannot detect these failures by themselves. 
@@ -295,7 +295,7 @@
         $Z_{\text{full}} = 1 + 2k e^{-\alpha}$.
     \end{enumerate}
 
-    \paragraph{Choosing $\alpha$.} Let $N_{\text{val}} \in \{k+1, 1\}$ denote the number of valid continuations in the current case. 
+    \paragraph{Choosing $\alpha$} Let $N_{\text{val}} \in \{k+1, 1\}$ denote the number of valid continuations in the current case. 
     Valid and invalid probabilities are $1/Z$ and $e^{-\alpha}/Z$ respectively, and the locally $\eta$-truncated support condition $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$ requires
     \[
         \frac{1}{Z} \;\ge\; \eta \;\;\text{(valid)}, \qquad \frac{e^{-\alpha}}{Z} \;<\; \eta \;\;\text{(invalid)}.
@@ -364,13 +364,13 @@
     \]
     The number of input columns of $\mathbf{V}$ is unchanged at $2k+1$, since $\mathbf{o}_{y_t}$ is still the one-hot encoding of $y_t \in \overline{\alphabet}$.
 
-    \textbf{Recurrence matrix $\mathbf{U}$.} The block layout is identical to part~(e),
+    \textbf{Recurrence matrix $\mathbf{U}$} The block layout is identical to part~(e),
     \[
         \mathbf{U} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}} & \mathbf{U}_{\text{push}} \\ \mathbf{U}_{\text{pop}} & \mathbf{U}_{\text{pop}} \end{pmatrix},
     \]
     and $\mathbf{U}_{\text{push}}, \mathbf{U}_{\text{pop}} \in \mathbb{R}^{mB \times mB}$ are still block-banded shift matrices. The only difference is the block size: the identity blocks $\mathbf{I}_k$ used in part~(e) are replaced by $\mathbf{I}_B$, so the shift now moves $B$-bit segments (rather than $k$-bit one-hots) up or down the stack.
 
-    \textbf{Input matrix $\mathbf{V}$.} The block structure mirrors part~(e),
+    \textbf{Input matrix $\mathbf{V}$} The block structure mirrors part~(e),
     \[
         \mathbf{V} \;=\;
         \begin{pmatrix}
@@ -388,16 +388,58 @@
     \]
     With this change, $\mathbf{V}\mathbf{o}_{\openBr{i}}$ deposits the $B$-bit code of $\openBr{i}$ into block~1 of the push half and $-2\,\mathbf{1}$ into the pop half, as in part~(e).
 
-    \textbf{Bias vector $\mathbf{b}$.} The role of $\mathbf{b}$ is unchanged. 
+    \textbf{Bias vector $\mathbf{b}$} The role of $\mathbf{b}$ is unchanged. 
     It still sets the Heaviside threshold above zero so that the post-bias entries land at $\pm\tfrac{1}{2}$. 
     We keep $\mathbf{b} = -\tfrac{1}{2}\,\mathbf{1}_{2mB}$, just shorter than before.
 
-    \paragraph{The part-(e) correctness argument still goes through.} Binary codes are $\{0, 1\}$-vectors, so $\mathbf{s}_{t-1}$ is still binary, $\mathbf{U}_{\text{push}}\mathbf{s}_{t-1}$ has block~1 equal to $\mathbf{0}_B$, and adding the binary code in block~1 cannot cause an entry to exceed $1$. 
+    \paragraph{The part-(e) correctness argument still goes through} Binary codes are $\{0, 1\}$-vectors, so $\mathbf{s}_{t-1}$ is still binary, $\mathbf{U}_{\text{push}}\mathbf{s}_{t-1}$ has block~1 equal to $\mathbf{0}_B$, and adding the binary code in block~1 cannot cause an entry to exceed $1$. 
     Hence the post-activation entries continue to lie in $\{-\tfrac{1}{2}, +\tfrac{1}{2}\}$ on the active half and at most $-\tfrac{3}{2}$ on the gated half, matching the part-(e).
 \end{subquestion}
 
 \begin{subquestion}
+    Write $B = \lceil \log_2 k \rceil + 1$ and let $\mathbf{s}_{t-1} = \mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})} \in \{0, 1\}^{mB}$ be the true binary-encoded stack from part~(h). Write $\mathbf{s}^{(j)} \in \{0, 1\}^{B}$ for the $j$-th $B$-bit block, so $\mathbf{s}^{(1)}$ is the top of the stack and $\mathbf{s}^{(m)}$ is the bottom.
 
+    \paragraph{Extending the encoding (bipolar transform)} Unlike the one-hot case in part~(f), a single dot product $\mathbf{s}^{(1)\top}\mathbf{e}_i$ cannot decide whether two $B$-bit codes are equal: it counts only matching $1$'s. 
+    We extend each binary code to its \emph{bipolar} form $\bar{\mathbf{e}}_i \defeq 2\mathbf{e}_i - \mathbf{1}_B \in \{-1, +1\}^{B}$.
+    \[
+        \mathbf{s}^\top \bar{\mathbf{e}}_i - \mathbf{1}_B^\top \mathbf{e}_i \;=\; 2\mathbf{s}^\top\mathbf{e}_i - \mathbf{1}_B^\top\mathbf{s} - \mathbf{1}_B^\top\mathbf{e}_i \;=\; -\,d_H(\mathbf{s}, \mathbf{e}_i),
+    \]
+    i.e.\ the negative Hamming distance between $\mathbf{s}$ and $\mathbf{e}_i$. 
+    This is $0$ exactly when $\mathbf{s} = \mathbf{e}_i$ and at most $-1$ otherwise. 
+    Note that the empty-stack code $\mathbf{0}_B$ has $d_H(\mathbf{0}, \mathbf{e}_i) = \|\mathbf{e}_i\|_1 \ge 1$ for every $i \in \{1, \dots, k\}$, since the $+1$ in $B$ guarantees that no valid code is the all-zero vector.
+
+    \paragraph{Output matrix} Stack the codes row-wise into $\mathbf{C} \in \{0, 1\}^{k \times B}$ with $\mathbf{C}_{i,:} = \mathbf{e}_i^\top$, and let $\mathbf{J}_{k \times B} = \mathbf{1}_k\mathbf{1}_B^\top$ be the all-ones matrix. 
+    Build the per-stack output matrix $\tilde{\mathbf{E}} \in \mathbb{R}^{(2k+1) \times mB}$ with three row blocks (pushes, pops, $\eos$) and $m$ column blocks of size $B$:
+    \[
+        \tilde{\mathbf{E}} \;=\;
+        \begin{pmatrix}
+            \mathbf{0}_{k\times B} & \mathbf{0}_{k\times B} & \cdots & \mathbf{0}_{k\times B} & -\alpha\,\mathbf{J}_{k\times B} \\[2pt]
+            \alpha(2\mathbf{C} - \mathbf{J}_{k\times B}) & \mathbf{0}_{k\times B} & \cdots & \mathbf{0}_{k\times B} & \mathbf{0}_{k\times B} \\[2pt]
+            -\alpha\,\mathbf{1}_B^\top & \mathbf{0}_{1\times B} & \cdots & \mathbf{0}_{1\times B} & \mathbf{0}_{1\times B}
+        \end{pmatrix}.
+    \]
+    Because $\mathbf{h}_{t-1} = (\mathbf{h}_{t-1}^{(\text{p})}, \mathbf{h}_{t-1}^{(\text{q})})^\top$, horizontal duplication recovers $\mathbf{s}_{t-1}$:
+    \[
+        \mathbf{E} \;\defeq\; \begin{pmatrix} \tilde{\mathbf{E}} & \tilde{\mathbf{E}} \end{pmatrix} \in \mathbb{R}^{(2k+1) \times 2mB}, \qquad \mathbf{E}\,\mathbf{h}_{t-1} \;=\; \tilde{\mathbf{E}}\,\mathbf{s}_{t-1}.
+    \]
+    The bias compensates the $-\mathbf{1}_B^\top \mathbf{e}_i$ term that completes the negative-Hamming-distance identity for each pop:
+    \[
+        \mathbf{b}' \;=\; \begin{pmatrix} \mathbf{0}_{k} \\ -\alpha\,\mathbf{C}\,\mathbf{1}_B \\ 0 \end{pmatrix} \in \mathbb{R}^{2k+1},
+        \qquad (\mathbf{C}\mathbf{1}_B)_i = \|\mathbf{e}_i\|_1.
+    \]
+
+    \paragraph{Logits for valid and invalid continuations} Reading off the three blocks:
+    \begin{align*}
+        z_{\openBr{i}} \;&=\; -\alpha\,\mathbf{1}_B^\top\,\mathbf{s}^{(m)} \;=\;
+            \begin{cases} 0 & \text{if } \mathbf{s}^{(m)} = \mathbf{0}_B \;(\text{stack not full, push valid}) \\ -\alpha\,\|\mathbf{e}_j\|_1 \le -\alpha & \text{if } \mathbf{s}^{(m)} = \mathbf{e}_j \;(\text{stack full, push invalid}) \end{cases} \\[4pt]
+        z_{\closeBr{i}} \;&=\; \alpha\,\bigl(2\mathbf{e}_i^\top \mathbf{s}^{(1)} - \mathbf{1}_B^\top \mathbf{s}^{(1)}\bigr) - \alpha\,\|\mathbf{e}_i\|_1 \;=\; -\alpha\, d_H\!\bigl(\mathbf{s}^{(1)}, \mathbf{e}_i\bigr) \\
+            &\quad\;\;= \begin{cases} 0 & \text{if } \mathbf{s}^{(1)} = \mathbf{e}_i \;(\text{matching pop, valid}) \\ -\alpha\, d \le -\alpha & \text{otherwise (mismatched pop or underflow, invalid)} \end{cases} \\[4pt]
+        z_{\eos} \;&=\; -\alpha\,\mathbf{1}_B^\top\,\mathbf{s}^{(1)} \;=\;
+            \begin{cases} 0 & \text{if } \mathbf{s}^{(1)} = \mathbf{0}_B \;(\text{empty stack, } \eos \text{ valid}) \\ -\alpha\,\|\mathbf{e}_j\|_1 \le -\alpha & \text{if } \mathbf{s}^{(1)} = \mathbf{e}_j \;(\text{non-empty, } \eos \text{ invalid}) \end{cases}
+    \end{align*}
+    where $d \ge 1$ in every invalid case since two distinct $B$-bit codes, or $\mathbf{0}_B$ and any code $\mathbf{e}_j$, must differ in at least one bit. 
+    Hence \emph{every} valid continuation has logit exactly $0$ and \emph{every} invalid continuation has logit $\le -\alpha$, mirroring the part-(f) split. 
+    Following the same asymptotic argument as in part~(f), for sufficiently large $\alpha$ the softmax assigns each valid continuation probability $\ge \eta$ and each invalid one probability $<\eta$, so $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$.
 \end{subquestion}
 
 \end{question}
