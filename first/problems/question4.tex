@@ -115,19 +115,95 @@
 \end{subquestion}
 
 \begin{subquestion}
+    Let $\mathbf{l} \in \mathbb{R}^{T}$ with $\|\mathbf{l}\|_{\infty} \le A$ and write $\mathbf{s} = \operatorname{softmax}(\mathbf{l})$, i.e., $s_t = \exp(l_t) / \sum_{t'=1}^{T} \exp(l_{t'})$.
 
+    \paragraph{Per-coordinate bounds on $\exp(l_t)$}
+    Since $\|\mathbf{l}\|_{\infty} \le A$, every coordinate satisfies $-A \le l_t \le A$. 
+    Because $\exp$ is monotonically increasing,
+    \begin{equation*}
+        \exp(-A) \;\le\; \exp(l_t) \;\le\; \exp(A) \qquad \text{for all } t \in \{1, \dots, T\}
+    \end{equation*}
+
+    Summing the per-coordinate bounds over $t' \in \{1, \dots, T\}$ for the softmax denominator,
+    \begin{equation*}
+        T\,\exp(-A) \;\le\; \sum_{t'=1}^{T} \exp(l_{t'}) \;\le\; T\,\exp(A)
+    \end{equation*}
+
+    \paragraph{Combine for $s_t$}
+    The fraction $s_t = \exp(l_t) / \sum_{t'} \exp(l_{t'})$ is maximized by pairing the largest numerator with the smallest denominator, and minimized by the reverse. Using the bounds,
+    \begin{equation*}
+        s_t \;\le\; \frac{\exp(A)}{T\,\exp(-A)} \;=\; \frac{\exp(2A)}{T},
+        \qquad
+        s_t \;\ge\; \frac{\exp(-A)}{T\,\exp(A)} \;=\; \frac{\exp(-2A)}{T}
+    \end{equation*}
+    Hence
+    \begin{equation*}
+        \frac{\exp(-2A)}{T} \;\le\; s_t \;\le\; \frac{\exp(2A)}{T} \qquad \text{for every } t \in \{1, \dots, T\},
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
+    Using the simplified attention from part~(a) that and $\Delta_t^{(\ell)} = \|\mathbf{z}_t^{(\ell)} - \mathbf{z}_t^{\prime(\ell)}\|$ as in Eq.~(48).
+    \begin{equation*}
+        \mathbf{z}_t^{(\ell)} \;=\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)},
+        \qquad
+        \mathbf{z}_t^{\prime(\ell)} \;=\; \sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \mathbf{x}_{t'}^{\prime(\ell)},
+    \end{equation*}
+    \paragraph{Add-and-subtract a cross term}
+    Insert $\pm \sum_{t'} s_{t,t'}^{\prime(\ell)}\, \mathbf{x}_{t'}^{(\ell)}$ inside the difference and group:
+    \begin{align*}
+        \mathbf{z}_t^{(\ell)} - \mathbf{z}_t^{\prime(\ell)}
+        &\;=\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)} \;-\; \sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \mathbf{x}_{t'}^{\prime(\ell)} \\
+        &\;=\; \sum_{t'=1}^{T} \bigl(s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr)\, \mathbf{x}_{t'}^{(\ell)}
+        \;+\; \sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \bigl(\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\bigr)
+    \end{align*}
+    The first sum isolates the change in attention weights with the original representations, the second isolates the change in representations weighted by the perturbed attention.
 
+    Taking norms, applying the triangle inequality on each outer sum and on each scalar-vector product, and using $s_{t,t'}^{\prime(\ell)} \ge 0$ (so $|s_{t,t'}^{\prime(\ell)}| = s_{t,t'}^{\prime(\ell)}$) gives Eq.~(49):
+    \begin{equation*}
+        \Delta_t^{(\ell)} \;\le\; \underbrace{\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|}_{\text{Difficult Part}}
+        \;+\; \underbrace{\sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\|}_{\text{Easy Part}}
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
+    The Difficult Part (Eq.~(50)) is $\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|$. We have a uniform bound on each $\|\mathbf{x}_{t'}^{(\ell)}\|$ and definition~10 gives $\|\mathbf{X}^{(\ell)}\|_{2,\infty} = \max_{t''} \|\mathbf{x}_{t''}^{(\ell)}\|$, so for every $t' \in \{1, \dots, T\}$,
+    \begin{equation*}
+        \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; \|\mathbf{X}^{(\ell)}\|_{2,\infty}.
+    \end{equation*}
 
+    Since $\bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr| \ge 0$, multiplying through preserves the inequality termwise. 
+    Summing over $t'$ and pulling the constant $\|\mathbf{X}^{(\ell)}\|_{2,\infty}$ out of the sum yields Eq.~(51):
+    \begin{equation*}
+        \sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|
+        \;\le\; \sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{X}^{(\ell)}\|_{2,\infty}
+        \;=\; \!\left(\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\right)\!\|\mathbf{X}^{(\ell)}\|_{2,\infty}.
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
+    We first prove the general claim and then apply it to the exponential. Let $f: \mathbb{R} \to \mathbb{R}$ be twice differentiable, and let $(a_T)_{T \in \mathbb{N}}$, $(b_T)_{T \in \mathbb{N}}$ be bounded with $|a_T - b_T| = \mathcal{O}(1/T)$. We claim $|f(a_T) - f(b_T)| = \mathcal{O}(1/T)$.
 
+    \emph{(i) Uniform bound on $|f'|$} Since both sequences are bounded, fix $M > 0$ with $a_T, b_T \in [-M, M]$ for every $T$. Twice differentiability of $f$ implies $f'$ is differentiable, hence continuous. By the Extreme Value Theorem, $f'$ attains its maximum on the compact interval $[-M, M]$:
+    \begin{equation*}
+        K \;\defeq\; \max_{x \in [-M, M]} |f'(x)| \;<\; \infty
+    \end{equation*}
+
+    \emph{(ii) Mean value theorem} For each $T$, the MVT gives some $c_T$ between $a_T$ and $b_T$ (so $c_T \in [-M, M]$) with $f(a_T) - f(b_T) = f'(c_T)\,(a_T - b_T)$. Hence
+    \begin{equation*}
+        |f(a_T) - f(b_T)| \;=\; |f'(c_T)|\, |a_T - b_T| \;\le\; K\, |a_T - b_T|
+    \end{equation*}
+
+    \emph{(iii) Asymptotic conclusion} Since $|a_T - b_T| = \mathcal{O}(1/T)$ and multiplication by the constant $K$ preserves the order,
+    \begin{equation*}
+        |f(a_T) - f(b_T)| \;\le\; K \cdot \mathcal{O}(1/T) \;=\; \mathcal{O}(1/T)
+    \end{equation*}
+
+    \paragraph{Application to $f = \exp$}
+    The function $\exp: \mathbb{R} \to \mathbb{R}$ is $C^{\infty}$, hence twice differentiable. Applying the result with $f = \exp$ to bounded $(a_T), (b_T)$ with $|a_T - b_T| = \mathcal{O}(1/T)$ gives
+    \begin{equation*}
+        |\exp(a_T) - \exp(b_T)| \;=\; \mathcal{O}(1/T)
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
