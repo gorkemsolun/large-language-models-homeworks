@@ -207,23 +207,188 @@
 \end{subquestion}
 
 \begin{subquestion}
+    Let $\mathbf{s}(\mathbf{x}) = \operatorname{softmax}(\mathbf{x})$ and write $s_t(\mathbf{x})$ for its $t$-th coordinate. 
+    The boundedness assumption gives some $A > 0$ with $\|\mathbf{a}_T\|_{\infty}, \|\mathbf{b}_T\|_{\infty} \le A$ for every $T$.
 
+    \paragraph{Mean value theorem on $s_t$}
+    Since $s_t$ is $C^{\infty}$ on $\mathbb{R}^{T}$, the multivariate MVT gives a point $\mathbf{c}_T = \lambda \mathbf{a}_T + (1-\lambda)\mathbf{b}_T$ on the segment between $\mathbf{a}_T$ and $\mathbf{b}_T$ such that
+    \begin{equation*}
+        s_t(\mathbf{a}_T) - s_t(\mathbf{b}_T) \;=\; \nabla s_t(\mathbf{c}_T)^{\!\top}\bigl(\mathbf{a}_T - \mathbf{b}_T\bigr) \;=\; \sum_{k=1}^{T} \frac{\partial s_t}{\partial x_k}(\mathbf{c}_T)\,\bigl((\mathbf{a}_T)_k - (\mathbf{b}_T)_k\bigr)
+    \end{equation*}
+    Convexity of $\|\cdot\|_{\infty}$ also gives $\|\mathbf{c}_T\|_{\infty} \le A$, so by part~(d),
+    \begin{equation*}
+        s_k(\mathbf{c}_T) \;\le\; \frac{\exp(2A)}{T} \;=\; \mathcal{O}(1/T) \qquad \text{for every } k
+    \end{equation*}
+
+    \paragraph{Softmax Jacobian}
+    The standard formula is $\partial s_t / \partial x_k = s_t\,\delta_{tk} - s_t s_k$, i.e., $s_t(1-s_t)$ on the diagonal and $-s_t s_k$ off-diagonal. 
+    Splitting the sum at $k = t$,
+    \begin{equation*}
+        s_t(\mathbf{a}_T) - s_t(\mathbf{b}_T)
+        \;=\; \underbrace{s_t(\mathbf{c}_T)\bigl(1 - s_t(\mathbf{c}_T)\bigr)\bigl((\mathbf{a}_T)_t - (\mathbf{b}_T)_t\bigr)}_{\text{Term 1}}
+        \;-\; \underbrace{\sum_{k \ne t} s_t(\mathbf{c}_T)\, s_k(\mathbf{c}_T)\,\bigl((\mathbf{a}_T)_k - (\mathbf{b}_T)_k\bigr)}_{\text{Term 2}}
+    \end{equation*}
+
+    Using $0 \le 1 - s_t(\mathbf{c}_T) \le 1$, the part~(d) bound on $s_t(\mathbf{c}_T)$, and the hypothesis on the difference,
+    \begin{equation*}
+        |\text{Term 1}| \;\le\; s_t(\mathbf{c}_T)\,\bigl|(\mathbf{a}_T)_t - (\mathbf{b}_T)_t\bigr|
+        \;=\; \mathcal{O}(1/T) \cdot \mathcal{O}(1/T) \;=\; \mathcal{O}(1/T^{2})
+    \end{equation*}
+
+    Pull $s_t(\mathbf{c}_T)$ outside the sum, bound the differences uniformly by $\max_k |(\mathbf{a}_T)_k - (\mathbf{b}_T)_k| = \mathcal{O}(1/T)$, and use $\sum_{k \ne t} s_k(\mathbf{c}_T) \le \sum_k s_k(\mathbf{c}_T) = 1$:
+    \begin{equation*}
+        |\text{Term 2}| \;\le\; s_t(\mathbf{c}_T)\,\Bigl(\max_k \bigl|(\mathbf{a}_T)_k - (\mathbf{b}_T)_k\bigr|\Bigr)\sum_{k \ne t} s_k(\mathbf{c}_T)
+        \;\le\; \mathcal{O}(1/T) \cdot \mathcal{O}(1/T) \cdot 1 \;=\; \mathcal{O}(1/T^{2})
+    \end{equation*}
+
+    \paragraph{Combine}
+    By the triangle inequality the following equals to Eq.~(52):
+    \begin{equation*}
+        |\operatorname{softmax}(\mathbf{a}_T)_t - \operatorname{softmax}(\mathbf{b}_T)_t| \;\le\; |\text{Term 1}| + |\text{Term 2}| \;=\; \mathcal{O}(1/T^{2}),
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
+    Let's translate the hypothesis to vector norms.
+    The assumption $\|\mathbf{w}_{T,d}^{(\ell)}\|_{\infty} = \mathcal{O}(1/T)$ for every $d \in [D]$ means $|(\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)})_d| = \mathcal{O}(1/T)$ for every $d \in [D]$ and every $t' \ne t^*$. 
+    Since $D$ is a model constant, summing the $D$ squared bounds and taking the square root gives:
+    \begin{equation*}
+        \|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| \;\le\; \sqrt{D}\, \max_d \|\mathbf{w}_{T,d}^{(\ell)}\|_{\infty} \;=\; \mathcal{O}(1/T) \qquad \text{for every } t' \ne t^*
+    \end{equation*}
 
+    \paragraph{Bound the softmax differences via part~(h)}
+    The attention logits $\mathbf{l}_t^{(\ell)} = \mathbf{K}^{(\ell)} \mathbf{q}_t^{(\ell)}$ are bounded by part~(c). 
+    Propagating $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ through the bilinear logit structure $l_{t,t'} = \mathbf{x}_t^{(\ell)\top}\mathbf{W}_K^{(\ell)}\mathbf{W}_Q^{(\ell)\top}\mathbf{x}_{t'}^{(\ell)}$ gives $|l_{t,t'}^{(\ell)} - l_{t,t'}^{\prime(\ell)}| = \mathcal{O}(1/T)$ for $t' \ne t^*$. 
+    Applying part~(h) to the resulting softmax outputs yields
+    \begin{equation*}
+        \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr| \;=\; \mathcal{O}(1/T^{2}) \qquad \text{for every } t' \ne t^*
+    \end{equation*}
+
+    \paragraph{Bound the representations via part~(b)}
+    Part~(b) gives $\|\mathbf{x}_{t'}^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$. 
+    Since $L$ is fixed, this is $\mathcal{O}(1)$ uniformly in $T$ and $t'$.
+
+    \paragraph{Combine}
+    Substituting the two bounds into the truncated Difficult Part and using that the sum has exactly $T - 1$ terms, we get Eq.~(53):
+    \begin{equation*}
+        \sum_{\substack{t'=1 \\ t' \ne t^*}}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|
+        \;\le\; (T-1) \cdot \mathcal{O}(1/T^{2}) \cdot \mathcal{O}(1)
+        \;=\; \mathcal{O}(1/T),
+    \end{equation*}
 \end{subquestion}
 
 \begin{subquestion}
+    We prove Eqs.~(55) and (56) jointly by induction on $\ell$, then apply the bound to $\mathbf{h}(\mathbf{y})$.
 
+    \paragraph{Base case ($\ell = 0$)}
+    By Eq.~(38), $\mathbf{x}_t^{(0)} = (\mathbf{r}(y_t),\, \mathbf{u}(t))$. Since $\mathbf{y}$ and $\mathbf{y}'$ differ only at $t^*$:
+    \begin{itemize}
+        \item if $t \ne t^*$: $\mathbf{x}_t^{(0)} = \mathbf{x}_t^{\prime(0)}$, so $\|\mathbf{x}_t^{(0)} - \mathbf{x}_t^{\prime(0)}\| = 0 = \mathcal{O}(1/T)$
+        \item if $t = t^*$: $\|\mathbf{x}_{t^*}^{(0)} - \mathbf{x}_{t^*}^{\prime(0)}\| = \delta = \mathcal{O}(1)$ (a constant in $T$, since $\mathbf{r}$ ranges over finitely many bounded embeddings).
+    \end{itemize}
+    So Eq.~(56) holds at $\ell = 0$.
+
+    \paragraph{Inductive hypothesis}
+    Assume Eq.~(56) holds at layer $\ell$:
+    \begin{equation*}
+        \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\| \;=\;
+        \begin{cases} \mathcal{O}(1) & \text{if } t = t^*, \\ \mathcal{O}(1/T) & \text{otherwise.} \end{cases}
+    \end{equation*}
+
+    \paragraph{Inductive step: bounding $\Delta_t^{(\ell)}$, Eq.~(55)}
+    Take Eq.~(54b)'s four terms and bound each:
+    \begin{itemize}
+        \item \emph{Term 1} ($\sum_{t' \ne t^*} |s - s'|\,\|\mathbf{x}_{t'}^{(\ell)}\|$): the inductive hypothesis says $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ for $t' \ne t^*$, so $\|\mathbf{w}_{T,d}^{(\ell)}\|_{\infty} = \mathcal{O}(1/T)$ for every $d \in [D]$. Part~(i) directly gives $\mathcal{O}(1/T)$.
+        \item \emph{Term 2} ($|s_{t,t^*}^{(\ell)} - s_{t,t^*}^{\prime(\ell)}|\,\|\mathbf{x}_{t^*}^{(\ell)}\|$): part~(d) gives $|s_{t,t^*}^{(\ell)}|, |s_{t,t^*}^{\prime(\ell)}| \le \exp(2A)/T$, so the difference is $\mathcal{O}(1/T)$, and part~(b) gives $\|\mathbf{x}_{t^*}^{(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
+        \item \emph{Term 3} ($\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)}\,\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\|$): the inductive hypothesis bounds each $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$, so we can pull it out and use $\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)} \le 1$. Product: $\mathcal{O}(1/T)$.
+        \item \emph{Term 4} ($s_{t,t^*}^{\prime(\ell)}\,\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\|$): part~(d) gives $s_{t,t^*}^{\prime(\ell)} = \mathcal{O}(1/T)$ and the inductive hypothesis gives $\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
+    \end{itemize}
+    Summing the four $\mathcal{O}(1/T)$ contributions yields $\Delta_t^{(\ell)} = \mathcal{O}(1/T)$, which is Eq.~(55).
+
+    \paragraph{Inductive step: bounding $\|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|$ (Eq.~(56))}
+    By the Lipschitz step from part~(b) applied to differences (rather than to $\mathbf{f}(\mathbf{0},\mathbf{0})$),
+    \begin{equation*}
+        \|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|
+        \;=\; \|\mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)}) - \mathbf{f}(\mathbf{z}_t^{\prime(\ell)}, \mathbf{x}_t^{\prime(\ell)})\|
+        \;\le\; L_{\mathbf{f}}\bigl(\Delta_t^{(\ell)} + \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\|\bigr)
+    \end{equation*}
+    Splitting on the value of $t$ and using Eq.~(55) together with the inductive hypothesis,
+    \begin{equation*}
+        \|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|
+        \;\le\; L_{\mathbf{f}}\bigl(\mathcal{O}(1/T) + \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\|\bigr)
+        \;=\;
+        \begin{cases} \mathcal{O}(1) & \text{if } t = t^*, \\ \mathcal{O}(1/T) & \text{otherwise,} \end{cases}
+    \end{equation*}
+    closing the induction and giving Eq.~(56) at $\ell+1$.
+
+    \paragraph{Implication for $\mathbf{h}(\mathbf{y})$}
+    By definition, $\mathbf{h}(\mathbf{y}) = \mathbf{x}_T^{(L)}$. The hypothesis $t^* < T$ means $T \ne t^*$, so the "otherwise" case of Eq.~(56) applies:
+    \begin{equation*}
+        \|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \;=\; \|\mathbf{x}_T^{(L)} - \mathbf{x}_T^{\prime(L)}\| \;=\; \mathcal{O}(1/T)
+    \end{equation*}
+    The final \textsc{eos} representations of a string and any one-bit-flipped variant become indistinguishable at rate $1/T$ as the sequence length grows, this is Lemma~1.
 \end{subquestion}
 
 \begin{subquestion}
+    We now apply Lemma~1 to the \texttt{Odd-1} acceptor and draw out its consequences.
 
+    \paragraph{(i) Parity of $\mathbf{y}'$}
+    Suppose $\mathbf{y} \in \texttt{Odd-1}$, so $\mathbf{y}$ contains $2k+1$ ones for some $k \in \mathbb{N}$. Flipping a single bit at position $t^*$ either turns a $0$ into a $1$ (giving $2k+2$ ones) or a $1$ into a $0$ (giving $2k$ ones). Either way, the count's parity flips from odd to even, so
+    \begin{equation*}
+        \mathbf{y}' \;\notin\; \texttt{Odd-1}
+    \end{equation*}
+    The correct labels of $\mathbf{y}$ and $\mathbf{y}'$ are therefore opposite.
+
+    \paragraph{(ii) Implication for $\hat{p}'$}
+    From part~(j), $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| = \mathcal{O}(1/T)$. Since the readout vector $\mathbf{w}$ is fixed (independent of $T$), Cauchy--Schwarz gives
+    \begin{equation*}
+        |\mathbf{h}(\mathbf{y})^{\top} \mathbf{w} - \mathbf{h}(\mathbf{y}')^{\top} \mathbf{w}| \;\le\; \|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \cdot \|\mathbf{w}\| \;=\; \mathcal{O}(1/T)
+    \end{equation*}
+    The two scalar logits $\mathbf{h}(\mathbf{y})^{\top}\mathbf{w}$ and $\mathbf{h}(\mathbf{y}')^{\top}\mathbf{w}$ are bounded sequences in $T$ (since $\|\mathbf{h}\|$ is bounded by part~(b) and $\|\mathbf{w}\|$ is fixed), and they differ by $\mathcal{O}(1/T)$. 
+    The sigmoid $\sigma$ is $C^{\infty}$ on $\mathbb{R}$, so part~(g) applies and
+    \begin{equation*}
+        |\hat{p} - \hat{p}'| \;=\; |\sigma(\mathbf{h}(\mathbf{y})^{\top}\mathbf{w}) - \sigma(\mathbf{h}(\mathbf{y}')^{\top}\mathbf{w})| \;=\; \mathcal{O}(1/T)
+    \end{equation*}
+    Concretely: if the model is correct on $\mathbf{y}$, i.e., $\hat{p} > 0.5$, then for sufficiently large $T$ the gap $|\hat{p} - \hat{p}'|$ is below the margin $\hat{p} - 0.5$, forcing $\hat{p}' > 0.5$ as well. 
+    By Eqs.~(41a) and (41b), the model then accepts $\mathbf{y}'$ too, but $\mathbf{y}' \notin \texttt{Odd-1}$, so the model misclassifies $\mathbf{y}'$.
+
+    \paragraph{(iii) Limit $|\mathbf{y}| \to \infty$}
+    Taking $T = |\mathbf{y}| \to \infty$ in the bound from (ii),
+    \begin{equation*}
+        \lim_{T \to \infty} |\hat{p} - \hat{p}'| \;=\; 0
+    \end{equation*}
+    The transformer assigns asymptotically same probabilities to $\mathbf{y}$ and to its one-bit-flipped variant $\mathbf{y}'$ that has opposite parity. 
+    Hence soft-attention transformers cannot recognize \texttt{Odd-1} for long inputs and any decision boundary is eventually breached by a single-bit perturbation.
 \end{subquestion}
 
 \begin{subquestion}
+    How layer normalization affects the chain of bounds, and what the asymptotic nature of the result actually rules out.
 
+    \paragraph{(i) Adding layer normalization}
+    Layer normalization, applied per token, has the form
+    \begin{equation*}
+        \operatorname{LN}(\mathbf{x}) \;=\; \frac{\mathbf{x} - \mu(\mathbf{x})\,\mathbf{1}}{\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon}} \odot \boldsymbol{\gamma} + \boldsymbol{\beta},
+    \end{equation*}
+    with $\mu, \sigma^{2}$ the empirical mean and variance of the entries of $\mathbf{x}$, and learnable $\boldsymbol{\gamma}, \boldsymbol{\beta}$. 
+    The key question is whether $\operatorname{LN}$ is Lipschitz continuous, since the entire proof in parts~(b)--(j) depended on a finite Lipschitz constant for $\mathbf{f}$.
+
+    \emph{Case $\epsilon > 0$.} The denominator $\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon} \ge \sqrt{\epsilon} > 0$ is bounded away from zero, so $\operatorname{LN}$ is smooth with a bounded gradient on $\mathbb{R}^{D}$, hence Lipschitz with some constant $L_{\operatorname{LN}}$. 
+    The composition $\mathbf{f} \circ \operatorname{LN}$ (or $\operatorname{LN} \circ \mathbf{f}$) is then Lipschitz with constant $L_{\mathbf{f}} \cdot L_{\operatorname{LN}}$. 
+    Replacing $L_{\mathbf{f}}$ by this product throughout, every bound from (b) onward goes through unchanged and the asymptotic $\mathcal{O}(1/T)$ conclusion of Lemma~1 is preserved.
+
+    \emph{Case $\epsilon = 0$.} The denominator $\sigma(\mathbf{x})$ vanishes whenever the entries of $\mathbf{x}$ are equal (constant inputs), and the gradient of $\operatorname{LN}$ blows up near that set. So $\operatorname{LN}$ is \emph{not} globally Lipschitz, and there is no finite $L_{\operatorname{LN}}$ to absorb. 
+    The Lipschitz step in part~(j) breaks: a perturbation of size $\mathcal{O}(1/T)$ to the pre-normalization activations can be amplified arbitrarily after $\operatorname{LN}$, so we cannot conclude $\Delta_t^{(\ell+1)} = \mathcal{O}(1/T)$. 
+    The $\mathcal{O}(1/T)$ guarantee is lost.
+
+    \paragraph{(ii) Implication for fixed-length classification}
+    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic: the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely \emph{small}, not zero. 
+    Concretely, $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \ge c/T^{*}$ for some constant $c > 0$, so the representations of $\mathbf{y}$ and $\mathbf{y}'$ remain distinct for every $|\mathbf{y}| \le T^{*}$.
+
+    Hence a soft-attention transformer can in principle classify all strings of length up to $T^{*}$ correctly: choose the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
+    The lemma does \emph{not} say transformers fail at parity for short strings.
+
+    What it \emph{does} say is that no fixed parameter setting recognizes \texttt{Odd-1} for \emph{all} lengths simultaneously: as $|\mathbf{y}|$ grows beyond $T^{*}$, the same readout no longer separates $\mathbf{y}$ from $\mathbf{y}'$, and the classifier eventually agrees on inputs of opposite parity. 
+    Recognition of \texttt{Odd-1} is therefore length-uniformly impossible, even though it is achievable on any bounded-length subset.
 \end{subquestion}
 
 \end{question}
