@@ -16,9 +16,10 @@ To compute this in $\bigo(|\states|^3)$, we can call the \texttt{allsum} algorit
 
 To make our equation match the \texttt{allsum} formulation, we can construct a new augmented automaton using a block matrix structure.
 
-We define a modified PFSA over an expanded state space $\states'$ where each original state is duplicated, meaning $|\states'| = 2|\states|$. This allows the transition matrix to accumulate the path length $k$ as it is raised to higher powers.
+Define a modified PFSA over an expanded state space $\states'$ where each original state is duplicated, meaning $|\states'| = 2|\states|$. 
+This allows the transition matrix to accumulate the path length $k$ as it is raised to higher powers.
 
-We define a new transition block matrix $\mathbf{M} \in \R^{2|\states| \times 2|\states|}$, a new initial state vector $\initf' \in \R^{2|\states|}$, and a new stopping vector $\finalf' \in \R^{2|\states|}$ as follows:
+Define a new transition block matrix $\mathbf{M} \in \R^{2|\states| \times 2|\states|}$, a new initial state vector $\initf' \in \R^{2|\states|}$, and a new stopping vector $\finalf' \in \R^{2|\states|}$ as follows:
 \begin{equation}
     \mathbf{M} = \begin{pmatrix} \transMtx & \transMtx \\ \mathbf{0} & \transMtx \end{pmatrix}, \quad
     \initf' = \begin{pmatrix} \initf \\ \mathbf{0} \end{pmatrix}, \quad
@@ -70,12 +71,15 @@ The $\bigo(|\states|^2)$ setup time is strictly bounded and dominated by the $\b
 
 \paragraph{Alternative Implementation}
 
-To elaborate further on the inherent properties of finite-state language models, we can also bypass the block matrix construction to yield a slightly more memory-efficient algorithm that still meets the $\bigo(|\states|^3)$ requirement. We know from geometric series properties of matrices that $\sum_{k=0}^{\infty} \transMtx^k = (\mathbf{I} - \transMtx)^{-1}$. If we evaluate the infinite sum $\sum_{k=0}^{\infty} k\, \transMtx^k$ by factoring out $\transMtx$ and rewriting it as a matrix derivative, we arrive at:
+To elaborate further on the inherent properties of finite-state language models, we can also bypass the block matrix construction to yield a slightly more memory-efficient algorithm that still meets the $\bigo(|\states|^3)$ requirement. 
+We know from geometric series properties of matrices that $\sum_{k=0}^{\infty} \transMtx^k = (\mathbf{I} - \transMtx)^{-1}$. 
+If we evaluate the infinite sum $\sum_{k=0}^{\infty} k\, \transMtx^k$ by factoring out $\transMtx$ and rewriting it as a matrix derivative, we arrive at:
 \begin{equation}
     \sum_{k=0}^{\infty} k\, \transMtx^k = \transMtx (\mathbf{I} - \transMtx)^{-2} = (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1}
 \end{equation}
 
-This means the mean string length can also be written purely algebraically as $\mu = \initf^\top (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1} \finalf$. We can compute this directly using a sequence of linear algebraic operations:
+This means the mean string length can also be written purely algebraically as $\mu = \initf^\top (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1} \finalf$. 
+We can compute this directly using a sequence of linear algebraic operations:
 \begin{enumerate}
     \item \textbf{Solve} the linear system $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \finalf$ to find $\mathbf{v}_1$. Time complexity: $\bigo(|\states|^3)$.
     \item \textbf{Multiply} the transition matrix to find $\mathbf{v}_2 = \transMtx \mathbf{v}_1$. Time complexity: $\bigo(|\states|^2)$.
@@ -185,7 +189,9 @@ Summing these expectations over all outgoing transitions gives:
 \begin{equation}
     \ent(\Pi_{\stateq'} \mid \tau_\stateq) = \sum_{\stateq \xrightarrow{\sym/w} \stateq'} w\, \ent(\Pi_{\stateq'})
 \end{equation}
-We can group this sum by the destination state $\stateq'$. By definition, the transition matrix entry $\transMtx_{\stateq, \stateq'}$ is the sum of the weights $w$ of all transitions from $\stateq$ to $\stateq'$. Therefore:
+Group this sum by the destination state $\stateq'$. 
+By definition, the transition matrix entry $\transMtx_{\stateq, \stateq'}$ is the sum of the weights $w$ of all transitions from $\stateq$ to $\stateq'$. 
+Therefore:
 \begin{equation}
     \ent(\Pi_{\stateq'} \mid \tau_\stateq) = \sum_{\stateq' \in \states} \transMtx_{\stateq, \stateq'}\, \ent(\Pi_{\stateq'})
 \end{equation}
@@ -195,7 +201,8 @@ Construct the matrix equation by substituting the results:
     \ent(\Pi_\stateq) = \boldsymbol{\xi}_\stateq + \sum_{\stateq' \in \states} \transMtx_{\stateq, \stateq'}\, \ent(\Pi_{\stateq'})
 \end{equation}
 
-To solve, let $\mathbf{H} \in \R^{|\states|}$ be a column vector where the $\stateq$-th entry is $\ent(\Pi_\stateq)$. We can represent the system of equations for all states as a single matrix equation:
+To solve, let $\mathbf{H} \in \R^{|\states|}$ be a column vector where the $\stateq$-th entry is $\ent(\Pi_\stateq)$. 
+Represent the system of equations for all states as a single matrix equation:
 \begin{equation}
     \mathbf{H} = \boldsymbol{\xi} + \transMtx\,\mathbf{H}
 \end{equation}
@@ -210,15 +217,19 @@ Because all eigenvalues of the transition matrix $\transMtx$ have a magnitude le
     \mathbf{H} = (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
 \end{equation}
 
-The overall entropy of the language model $\ent(\pLM)$ is the expected path entropy weighted by the initial state probabilities. Since $\automaton$ is deterministic with a unique initial state (so $\ent(\initf) = 0$), every string $\str \in \kleene{\alphabet}$ corresponds to exactly one complete path. The distribution over strings therefore coincides with the distribution over paths, giving $\ent(\pLM) = \ent(\Pi) = \sum_{\stateq \in \states} \initf_\stateq\, \ent(\Pi_\stateq)$. Written as the dot product of the initial state distribution and the path entropy vector:
+The overall entropy of the language model is the entropy of the path distribution. 
+Since $\automaton$ is deterministic, distinct paths produce distinct strings, so $\ent(\pLM) = \ent(\Pi)$. 
+Decompose a path into its starting state $\stateq_0$ and the remainder; by the chain rule of entropy,
 \begin{equation}
-    \ent(\pLM) = \initf^\top \mathbf{H}
+    \ent(\Pi) = \ent(\stateq_0) + \ent(\Pi \mid \stateq_0) = \ent(\initf) + \expectation_{\stateq_0 \sim \initf}\!\big[\ent(\Pi_{\stateq_0})\big] = \ent(\initf) + \initf^\top \mathbf{H}
 \end{equation}
+where $\ent(\initf) = -\sum_{\stateq \in \states} \initf_\stateq \log \initf_\stateq$ is the entropy of the initial-state distribution.
 
 Substitute the solved vector $\mathbf{H}$ into the final equation:
 \begin{equation}
-    \ent(\pLM) = \initf^\top (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
+    \ent(\pLM) = \ent(\initf) + \initf^\top (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}
 \end{equation}
+In the special case where $\automaton$ has a unique initial state, $\initf$ is a point mass and $\ent(\initf) = 0$, recovering $\ent(\pLM) = \initf^\top (\mathbf{I} - \transMtx)^{-1}\,\boldsymbol{\xi}$.
 \end{subquestion}
 
 \end{question}

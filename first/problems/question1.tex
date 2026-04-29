@@ -4,10 +4,10 @@
 
 \subsubsection*{Linear Guarding vs.\ Arbitrary Classifiers}
 
-No. By Definition 2, the statement that $\mathbf{X}$ \emph{linearly guards} $Z$ only guarantees that the trivially attainable loss $L_\tau$ is optimal over the set of all \textbf{affine transformations} (linear predictors). 
+No. By Definition 2, the statement that $\mathbf{X}$ \emph{linearly guards} $Z$ only guarantees that the trivially attainable loss $L_\tau$ is optimal over the set of all affine transformations and linear predictors. 
 Mathematically, it ensures that $\expectation\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau$ holds for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$.
 However, the classifier $c : \mathbf{x} \mapsto c(\mathbf{x}) \in \mathcal{Z}$ proposed in the question is an \emph{arbitrary} classifier, meaning it is not restricted to being linear.
-Because linear guarding only constrains linear probes, a more complex, non-linear classifier such as a multi-layer perceptron could potentially draw non-linear decision boundaries to extract the concept information $Z$ still embedded within $\mathbf{X}$.
+Because linear guarding only constrains linear probes, a non-linear classifier such as a multi-layer perceptron could draw non-linear decision boundaries to extract the concept information $Z$ still embedded within $\mathbf{X}$.
 Consequently, such a non-linear classifier could successfully achieve a loss lower than the trivially attainable loss $L_\tau$.
 
 \end{subquestion}
@@ -22,7 +22,7 @@ To prove that $\mathbf{X}$ linearly guards $Z$, we must show that for any affine
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq L_\tau
 \end{equation}
 
-We can rewrite the expected loss by conditioning on the class $Z$:
+Rewrite the expected loss by conditioning on the class $Z$:
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_Z \Big[ \expectation_{\mathbf{X} \mid Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z) \mid Z\right] \Big]
 \end{equation}
@@ -75,7 +75,7 @@ Recall the definition of the cross-entropy loss for logit vector $\mathbf{y}$ an
     \mathcal{L}(\mathbf{y}, Z = c) = -\ln\left(\frac{\exp(y_c)}{\sum_{j=1}^k \exp(y_j)}\right) = -y_c + \ln\left(\sum_{j=1}^k \exp(y_j)\right)
 \end{equation}
 
-We compute the partial derivative of the loss w.r.t. an arbitrary logit $y_m$.
+Compute the partial derivative of the loss w.r.t. an arbitrary logit $y_m$.
 \textbf{Case 1 ($m = c$):}
 \begin{align}
     \frac{\partial}{\partial y_c}\mathcal{L}(\mathbf{y}, Z = c)
@@ -93,7 +93,7 @@ Since the softmax output lies in $(0, 1)$ for any $\mathbf{y}$, we have $-1 < \f
 We have $0 < \frac{\partial}{\partial y_m}\mathcal{L}(\mathbf{y}, Z = c) < 1$. Because partial derivatives fall within the interval $(-1, 1)$, they are uniformly bounded.
 
 \paragraph{For any $j_1, j_2 \neq i$, we have $\dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) \neq 0$.}
-We find the partial derivative of the loss w.r.t. $y_i$ when the true class is $Z = j$ with $j \neq i$. 
+Find the partial derivative of the loss w.r.t. $y_i$ when the true class is $Z = j$ with $j \neq i$. 
 Using the derivation from above, the partial derivatives are the $i$-th component of the softmax output:
 \begin{equation}
     \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) = \frac{\exp(y_i)}{\sum_{l=1}^k \exp(y_l)}
@@ -346,6 +346,16 @@ The product $\mathbf{W}^+ \mathbf{W} = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{
     r(\mathbf{X}) = \mathbf{X} - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]),
 \end{equation}
 where $\Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} = (\mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})(\mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})^+$ is the orthogonal projection in the whitened space onto the subspace encoding concept information.
+
+\end{subquestion}
+
+\begin{subquestion}
+
+\subsubsection*{Colab Notebook}
+
+The printed PDF of the Colab notebook is included on the following pages.
+
+\includepdf[pages=-]{copy of LLM Assignment 1 (Coding).ipynb - Colab.pdf}
 
 \end{subquestion}
 

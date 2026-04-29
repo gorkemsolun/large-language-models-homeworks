@@ -1,7 +1,7 @@
 \begin{question}{Limitations of Transformers on Simple Languages}
 
 \begin{subquestion}
-    Absorb the value projection $\mathbf{W}_V^{(\ell)}$ into the MLP $\mathbf{f}$ by exhibiting a function $\mathbf{f}'$ such that
+    Absorb the value projection $\mathbf{W}_V^{(\ell)}$ into the MLP $\mathbf{f}$ by exhibiting a function $\mathbf{f}'$ s.t.
     \begin{equation*}
         \mathbf{x}_t^{(\ell+1)} \;=\; \mathbf{f}'\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right) \;=\; \mathbf{f}\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{v}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right)
     \end{equation*}
@@ -29,6 +29,14 @@
         \mathbf{f}'(\mathbf{a}, \mathbf{b}) \;\defeq\; \mathbf{f}\!\left(\mathbf{W}_V^{(\ell)\top}\, \mathbf{a},\; \mathbf{b}\right) \qquad \text{for } \mathbf{a}, \mathbf{b} \in \mathbb{R}^{D}
     \end{equation*}
     satisfies Eq.~(44), absorbing the linear projection $\mathbf{W}_V^{(\ell)}$ into the first argument of the MLP.
+
+    \paragraph{Lipschitz constant of $\mathbf{f}'$}
+    Since $\mathbf{f}$ is $L_{\mathbf{f}}$-Lipschitz and the linear map $(\mathbf{a}, \mathbf{b}) \mapsto (\mathbf{W}_V^{(\ell)\top}\mathbf{a}, \mathbf{b})$ is Lipschitz with constant $\le \sqrt{\|\mathbf{W}_V^{(\ell)}\|_{2}^{2} + 1}$ in the product norm, the composition of Lipschitz functions is Lipschitz. 
+    Hence $\mathbf{f}'$ is Lipschitz with constant
+    \begin{equation*}
+        L_{\mathbf{f}'} \;\le\; L_{\mathbf{f}}\,\sqrt{\|\mathbf{W}_V^{(\ell)}\|_{2}^{2} + 1},
+    \end{equation*}
+    a finite quantity depending only on $L_{\mathbf{f}}$ and the operator norm of the value projection. In the sequel we abuse notation and write $L_{\mathbf{f}}$ for $L_{\mathbf{f}'}$.
 \end{subquestion}
 
 \begin{subquestion}
@@ -182,7 +190,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    We first prove the general claim and then apply it to the exponential. Let $f: \mathbb{R} \to \mathbb{R}$ be twice differentiable, and let $(a_T)_{T \in \mathbb{N}}$, $(b_T)_{T \in \mathbb{N}}$ be bounded with $|a_T - b_T| = \mathcal{O}(1/T)$. We claim $|f(a_T) - f(b_T)| = \mathcal{O}(1/T)$.
+    First prove the general claim and then apply it to the exponential. Let $f: \mathbb{R} \to \mathbb{R}$ be twice differentiable, and let $(a_T)_{T \in \mathbb{N}}$, $(b_T)_{T \in \mathbb{N}}$ be bounded with $|a_T - b_T| = \mathcal{O}(1/T)$. We claim $|f(a_T) - f(b_T)| = \mathcal{O}(1/T)$.
 
     \emph{(i) Uniform bound on $|f'|$} Since both sequences are bounded, fix $M > 0$ with $a_T, b_T \in [-M, M]$ for every $T$. Twice differentiability of $f$ implies $f'$ is differentiable, hence continuous. By the Extreme Value Theorem, $f'$ attains its maximum on the compact interval $[-M, M]$:
     \begin{equation*}
@@ -211,7 +219,7 @@
     The boundedness assumption gives some $A > 0$ with $\|\mathbf{a}_T\|_{\infty}, \|\mathbf{b}_T\|_{\infty} \le A$ for every $T$.
 
     \paragraph{Mean value theorem on $s_t$}
-    Since $s_t$ is $C^{\infty}$ on $\mathbb{R}^{T}$, the multivariate MVT gives a point $\mathbf{c}_T = \lambda \mathbf{a}_T + (1-\lambda)\mathbf{b}_T$ on the segment between $\mathbf{a}_T$ and $\mathbf{b}_T$ such that
+    Since $s_t$ is $C^{\infty}$ on $\mathbb{R}^{T}$, the multivariate MVT gives a point $\mathbf{c}_T = \lambda \mathbf{a}_T + (1-\lambda)\mathbf{b}_T$ on the segment between $\mathbf{a}_T$ and $\mathbf{b}_T$ s.t.
     \begin{equation*}
         s_t(\mathbf{a}_T) - s_t(\mathbf{b}_T) \;=\; \nabla s_t(\mathbf{c}_T)^{\!\top}\bigl(\mathbf{a}_T - \mathbf{b}_T\bigr) \;=\; \sum_{k=1}^{T} \frac{\partial s_t}{\partial x_k}(\mathbf{c}_T)\,\bigl((\mathbf{a}_T)_k - (\mathbf{b}_T)_k\bigr)
     \end{equation*}
@@ -241,7 +249,6 @@
         \;\le\; \mathcal{O}(1/T) \cdot \mathcal{O}(1/T) \cdot 1 \;=\; \mathcal{O}(1/T^{2})
     \end{equation*}
 
-    \paragraph{Combine}
     By the triangle inequality the following equals to Eq.~(52):
     \begin{equation*}
         |\operatorname{softmax}(\mathbf{a}_T)_t - \operatorname{softmax}(\mathbf{b}_T)_t| \;\le\; |\text{Term 1}| + |\text{Term 2}| \;=\; \mathcal{O}(1/T^{2}),
@@ -257,8 +264,14 @@
     \end{equation*}
 
     \paragraph{Bound the softmax differences via part~(h)}
-    The attention logits $\mathbf{l}_t^{(\ell)} = \mathbf{K}^{(\ell)} \mathbf{q}_t^{(\ell)}$ are bounded by part~(c). 
-    Propagating $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ through the bilinear logit structure $l_{t,t'} = \mathbf{x}_t^{(\ell)\top}\mathbf{W}_K^{(\ell)}\mathbf{W}_Q^{(\ell)\top}\mathbf{x}_{t'}^{(\ell)}$ gives $|l_{t,t'}^{(\ell)} - l_{t,t'}^{\prime(\ell)}| = \mathcal{O}(1/T)$ for $t' \ne t^*$. 
+    Throughout this paragraph we assume the query position satisfies $t \ne t^*$, so $\|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\| = \mathcal{O}(1/T)$ on the query side too.
+    The $t = t^*$ case is handled by a trivial bound in part~(j).
+    The attention logits $\mathbf{l}_t^{(\ell)} = \mathbf{K}^{(\ell)} \mathbf{q}_t^{(\ell)}$ are bounded by part~(c).
+    Splitting the bilinear logit difference and using part~(b) to bound the remaining factors by $\mathcal{O}(1)$,
+    \begin{equation*}
+        l_{t,t'}^{(\ell)} - l_{t,t'}^{\prime(\ell)} \;=\; (\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)})^{\!\top}\mathbf{W}_K^{(\ell)}\mathbf{W}_Q^{(\ell)\top}\mathbf{x}_{t'}^{(\ell)} \;+\; \mathbf{x}_t^{\prime(\ell)\top}\mathbf{W}_K^{(\ell)}\mathbf{W}_Q^{(\ell)\top}(\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}),
+    \end{equation*}
+    both differences are $\mathcal{O}(1/T)$ when $t, t' \ne t^*$, hence $|l_{t,t'}^{(\ell)} - l_{t,t'}^{\prime(\ell)}| = \mathcal{O}(1/T)$ for $t' \ne t^*$.
     Applying part~(h) to the resulting softmax outputs yields
     \begin{equation*}
         \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr| \;=\; \mathcal{O}(1/T^{2}) \qquad \text{for every } t' \ne t^*
@@ -268,7 +281,6 @@
     Part~(b) gives $\|\mathbf{x}_{t'}^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$. 
     Since $L$ is fixed, this is $\mathcal{O}(1)$ uniformly in $T$ and $t'$.
 
-    \paragraph{Combine}
     Substituting the two bounds into the truncated Difficult Part and using that the sum has exactly $T - 1$ terms, we get Eq.~(53):
     \begin{equation*}
         \sum_{\substack{t'=1 \\ t' \ne t^*}}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|
@@ -278,7 +290,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    We prove Eqs.~(55) and (56) jointly by induction on $\ell$, then apply the bound to $\mathbf{h}(\mathbf{y})$.
+    Prove Eqs.~(55) and (56) jointly by induction on $\ell$, then apply the bound to $\mathbf{h}(\mathbf{y})$.
 
     \paragraph{Base case ($\ell = 0$)}
     By Eq.~(38), $\mathbf{x}_t^{(0)} = (\mathbf{r}(y_t),\, \mathbf{u}(t))$. Since $\mathbf{y}$ and $\mathbf{y}'$ differ only at $t^*$:
@@ -296,14 +308,29 @@
     \end{equation*}
 
     \paragraph{Inductive step: bounding $\Delta_t^{(\ell)}$, Eq.~(55)}
-    Take Eq.~(54b)'s four terms and bound each:
+    The bound depends on whether the query position $t$ is the flipped one, as the bilinear logit propagation in part~(i) requires the query side to also differ by $\mathcal{O}(1/T)$. 
+    Split into two cases.
+
+    \emph{Case $t \ne t^*$.} Take Eq.~(54b)'s four terms and bound each:
     \begin{itemize}
-        \item \emph{Term 1} ($\sum_{t' \ne t^*} |s - s'|\,\|\mathbf{x}_{t'}^{(\ell)}\|$): the inductive hypothesis says $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ for $t' \ne t^*$, so $\|\mathbf{w}_{T,d}^{(\ell)}\|_{\infty} = \mathcal{O}(1/T)$ for every $d \in [D]$. Part~(i) directly gives $\mathcal{O}(1/T)$.
+        \item \emph{Term 1} ($\sum_{t' \ne t^*} |s - s'|\,\|\mathbf{x}_{t'}^{(\ell)}\|$): the inductive hypothesis says $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ for $t' \ne t^*$ \emph{and} for the query $t$ itself (since $t \ne t^*$), so part~(i) applies and gives $\mathcal{O}(1/T)$.
         \item \emph{Term 2} ($|s_{t,t^*}^{(\ell)} - s_{t,t^*}^{\prime(\ell)}|\,\|\mathbf{x}_{t^*}^{(\ell)}\|$): part~(d) gives $|s_{t,t^*}^{(\ell)}|, |s_{t,t^*}^{\prime(\ell)}| \le \exp(2A)/T$, so the difference is $\mathcal{O}(1/T)$, and part~(b) gives $\|\mathbf{x}_{t^*}^{(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
         \item \emph{Term 3} ($\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)}\,\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\|$): the inductive hypothesis bounds each $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$, so we can pull it out and use $\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)} \le 1$. Product: $\mathcal{O}(1/T)$.
         \item \emph{Term 4} ($s_{t,t^*}^{\prime(\ell)}\,\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\|$): part~(d) gives $s_{t,t^*}^{\prime(\ell)} = \mathcal{O}(1/T)$ and the inductive hypothesis gives $\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
     \end{itemize}
-    Summing the four $\mathcal{O}(1/T)$ contributions yields $\Delta_t^{(\ell)} = \mathcal{O}(1/T)$, which is Eq.~(55).
+    Summing the four $\mathcal{O}(1/T)$ contributions yields $\Delta_t^{(\ell)} = \mathcal{O}(1/T)$ for $t \ne t^*$.
+
+    \emph{Case $t = t^*$.} 
+    The query side $\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}$ is only $\mathcal{O}(1)$ by the inductive hypothesis, so the bilinear logit propagation in part~(i) does \emph{not} apply at the query position and Term~1 cannot be sharpened. 
+    Using the trivial bound $\sum_{t' \ne t^*} |s_{t^*,t'}^{(\ell)} - s_{t^*,t'}^{\prime(\ell)}| \le \sum_{t' \ne t^*} (s_{t^*,t'}^{(\ell)} + s_{t^*,t'}^{\prime(\ell)}) \le 2$ together with $\|\mathbf{x}_{t'}^{(\ell)}\| \le F = \mathcal{O}(1)$ from part~(b) gives Term~1 $= \mathcal{O}(1)$. 
+    Terms~2-4 are still $\mathcal{O}(1/T)$ by the same arguments above as none of them invokes part~(h) on the query side.
+    Hence $\Delta_{t^*}^{(\ell)} = \mathcal{O}(1)$.
+
+    Combining the two cases gives Eq.~(55) in the form
+    \begin{equation*}
+        \Delta_t^{(\ell)} \;=\;
+        \begin{cases} \mathcal{O}(1) & \text{if } t = t^*, \\ \mathcal{O}(1/T) & \text{otherwise.} \end{cases}
+    \end{equation*}
 
     \paragraph{Inductive step: bounding $\|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|$ (Eq.~(56))}
     By the Lipschitz step from part~(b) applied to differences (rather than to $\mathbf{f}(\mathbf{0},\mathbf{0})$),
@@ -312,17 +339,16 @@
         \;=\; \|\mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)}) - \mathbf{f}(\mathbf{z}_t^{\prime(\ell)}, \mathbf{x}_t^{\prime(\ell)})\|
         \;\le\; L_{\mathbf{f}}\bigl(\Delta_t^{(\ell)} + \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\|\bigr)
     \end{equation*}
-    Splitting on the value of $t$ and using Eq.~(55) together with the inductive hypothesis,
+    Splitting on the value of $t$ and combining the two-case bound on $\Delta_t^{(\ell)}$ with the inductive hypothesis,
     \begin{equation*}
         \|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|
-        \;\le\; L_{\mathbf{f}}\bigl(\mathcal{O}(1/T) + \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\|\bigr)
-        \;=\;
-        \begin{cases} \mathcal{O}(1) & \text{if } t = t^*, \\ \mathcal{O}(1/T) & \text{otherwise,} \end{cases}
+        \;\le\;
+        \begin{cases} L_{\mathbf{f}}\bigl(\mathcal{O}(1) + \mathcal{O}(1)\bigr) = \mathcal{O}(1) & \text{if } t = t^*, \\ L_{\mathbf{f}}\bigl(\mathcal{O}(1/T) + \mathcal{O}(1/T)\bigr) = \mathcal{O}(1/T) & \text{otherwise,} \end{cases}
     \end{equation*}
     closing the induction and giving Eq.~(56) at $\ell+1$.
 
     \paragraph{Implication for $\mathbf{h}(\mathbf{y})$}
-    By definition, $\mathbf{h}(\mathbf{y}) = \mathbf{x}_T^{(L)}$. The hypothesis $t^* < T$ means $T \ne t^*$, so the "otherwise" case of Eq.~(56) applies:
+    By definition, $\mathbf{h}(\mathbf{y}) = \mathbf{x}_T^{(L)}$. The hypothesis $t^* < T$ means $T \ne t^*$, so the otherwise case of Eq.~(56) applies:
     \begin{equation*}
         \|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \;=\; \|\mathbf{x}_T^{(L)} - \mathbf{x}_T^{\prime(L)}\| \;=\; \mathcal{O}(1/T)
     \end{equation*}
@@ -330,7 +356,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    We now apply Lemma~1 to the \texttt{Odd-1} acceptor and draw out its consequences.
+    Apply Lemma~1 to the \texttt{Odd-1} acceptor and draw out its consequences.
 
     \paragraph{(i) Parity of $\mathbf{y}'$}
     Suppose $\mathbf{y} \in \texttt{Odd-1}$, so $\mathbf{y}$ contains $2k+1$ ones for some $k \in \mathbb{N}$. Flipping a single bit at position $t^*$ either turns a $0$ into a $1$ (giving $2k+2$ ones) or a $1$ into a $0$ (giving $2k$ ones). Either way, the count's parity flips from odd to even, so
@@ -370,24 +396,29 @@
         \operatorname{LN}(\mathbf{x}) \;=\; \frac{\mathbf{x} - \mu(\mathbf{x})\,\mathbf{1}}{\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon}} \odot \boldsymbol{\gamma} + \boldsymbol{\beta},
     \end{equation*}
     with $\mu, \sigma^{2}$ the empirical mean and variance of the entries of $\mathbf{x}$, and learnable $\boldsymbol{\gamma}, \boldsymbol{\beta}$. 
-    The key question is whether $\operatorname{LN}$ is Lipschitz continuous, since the entire proof in parts~(b)--(j) depended on a finite Lipschitz constant for $\mathbf{f}$.
+    The key question is whether $\operatorname{LN}$ is Lipschitz continuous, since the entire proof in parts~(b)-(j) depended on a finite Lipschitz constant for $\mathbf{f}$.
 
-    \emph{Case $\epsilon > 0$.} The denominator $\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon} \ge \sqrt{\epsilon} > 0$ is bounded away from zero, so $\operatorname{LN}$ is smooth with a bounded gradient on $\mathbb{R}^{D}$, hence Lipschitz with some constant $L_{\operatorname{LN}}$. 
-    The composition $\mathbf{f} \circ \operatorname{LN}$ (or $\operatorname{LN} \circ \mathbf{f}$) is then Lipschitz with constant $L_{\mathbf{f}} \cdot L_{\operatorname{LN}}$. 
-    Replacing $L_{\mathbf{f}}$ by this product throughout, every bound from (b) onward goes through unchanged and the asymptotic $\mathcal{O}(1/T)$ conclusion of Lemma~1 is preserved.
+    \emph{Case $\epsilon > 0$.} 
+    The denominator $\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon} \ge \sqrt{\epsilon} > 0$ is bounded away from zero, so $\operatorname{LN}$ is smooth with a bounded gradient on $\mathbb{R}^{D}$, hence Lipschitz with some constant $L_{\operatorname{LN}}$. 
+    The composition $\mathbf{f} \circ \operatorname{LN}$ or $\operatorname{LN} \circ \mathbf{f}$ are then Lipschitz with constant $L_{\mathbf{f}} \cdot L_{\operatorname{LN}}$. 
+    Replacing $L_{\mathbf{f}}$ by this product throughout every bound from (b) onward goes through unchanged and the asymptotic $\mathcal{O}(1/T)$ conclusion of Lemma~1 is preserved.
 
-    \emph{Case $\epsilon = 0$.} The denominator $\sigma(\mathbf{x})$ vanishes whenever the entries of $\mathbf{x}$ are equal (constant inputs), and the gradient of $\operatorname{LN}$ blows up near that set. So $\operatorname{LN}$ is \emph{not} globally Lipschitz, and there is no finite $L_{\operatorname{LN}}$ to absorb. 
-    The Lipschitz step in part~(j) breaks: a perturbation of size $\mathcal{O}(1/T)$ to the pre-normalization activations can be amplified arbitrarily after $\operatorname{LN}$, so we cannot conclude $\Delta_t^{(\ell+1)} = \mathcal{O}(1/T)$. 
+    \emph{Case $\epsilon = 0$.} 
+    The denominator $\sigma(\mathbf{x})$ vanishes whenever the entries of $\mathbf{x}$ are equal constant inputs, and the gradient of $\operatorname{LN}$ blows up near that set. 
+    So $\operatorname{LN}$ is \emph{not} globally Lipschitz, and there is no finite $L_{\operatorname{LN}}$ to absorb. 
+    The Lipschitz step in part~(j) breaks. 
+    A perturbation of size $\mathcal{O}(1/T)$ to the pre-normalization activations can be amplified arbitrarily after $\operatorname{LN}$, so we cannot conclude $\Delta_t^{(\ell+1)} = \mathcal{O}(1/T)$. 
     The $\mathcal{O}(1/T)$ guarantee is lost.
 
     \paragraph{(ii) Implication for fixed-length classification}
-    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic: the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely \emph{small}, not zero. 
-    Concretely, $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \ge c/T^{*}$ for some constant $c > 0$, so the representations of $\mathbf{y}$ and $\mathbf{y}'$ remain distinct for every $|\mathbf{y}| \le T^{*}$.
+    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic as the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely \emph{small}, not zero. 
+    $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \ge c/T^{*}$ for some constant $c > 0$, so the representations of $\mathbf{y}$ and $\mathbf{y}'$ remain distinct for every $|\mathbf{y}| \le T^{*}$.
 
-    Hence a soft-attention transformer can in principle classify all strings of length up to $T^{*}$ correctly: choose the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
+    Hence a soft-attention transformer can in principle classify all strings of length up to $T^{*}$ correctly by choosing the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
     The lemma does \emph{not} say transformers fail at parity for short strings.
 
-    What it \emph{does} say is that no fixed parameter setting recognizes \texttt{Odd-1} for \emph{all} lengths simultaneously: as $|\mathbf{y}|$ grows beyond $T^{*}$, the same readout no longer separates $\mathbf{y}$ from $\mathbf{y}'$, and the classifier eventually agrees on inputs of opposite parity. 
+    What it \emph{does} say is that no fixed parameter setting recognizes \texttt{Odd-1} for \emph{all} lengths simultaneously.
+    As $|\mathbf{y}|$ grows beyond $T^{*}$, the same readout no longer separates $\mathbf{y}$ from $\mathbf{y}'$, and the classifier eventually agrees on inputs of opposite parity. 
     Recognition of \texttt{Odd-1} is therefore length-uniformly impossible, even though it is achievable on any bounded-length subset.
 \end{subquestion}
 

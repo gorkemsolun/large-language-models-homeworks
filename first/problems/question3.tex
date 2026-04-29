@@ -2,7 +2,7 @@
 
 \begin{subquestion}
     The language $D(2, 3)$ consists of brackets of $k = 2$ types with maximum nesting depth $m = 3$. 
-    We encode the unclosed opening brackets using a stack whose \emph{rightmost} symbol is the top of the stack.
+    Encode the unclosed opening brackets using a stack whose \emph{rightmost} symbol is the top of the stack.
     $[\openBr{1}\openBr{2}]$ transitions to $[\openBr{1}]$ after reading $\closeBr{2}$.
     \begin{itemize}
         \item Reading a closing bracket $\closeBr{i}$: pop the top of the stack if it equals $\openBr{i}$; otherwise (mismatch or empty stack), reject.
@@ -29,7 +29,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    We construct a DFA $\mathcal{A} = \fsatuple$ that recognizes $D(k, m)$ by encoding every legal stack configuration as a state. 
+    Construct a DFA $\mathcal{A} = \fsatuple$ that recognizes $D(k, m)$ by encoding every legal stack configuration as a state. 
     Let $\openBr{} = \{\openBr{1}, \dots, \openBr{k}\}$ and $\closeBr{} = \{\closeBr{1}, \dots, \closeBr{k}\}$.
     
     \textbf{Alphabet:} $\alphabet = \openBr{} \cup \closeBr{}$, so $\nsymbols = 2k$.
@@ -172,7 +172,7 @@
     The resulting blocks are $(\mathbf{e}_{i_{m'-1}}, \dots, \mathbf{e}_{i_1}, \mathbf{0}, \dots, \mathbf{0})$, exactly $h(q')$.
 
     \emph{$\eos$.} The DFA does not consume $\eos$ (cf.\ part (b)).
-    We simply preserve the stack via $\mathbf{U}(\eos) = \mathbf{I}_{km}$ and $\mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}$, so $\mathbf{h}_t = \mathbf{h}_{t-1}$.
+    We preserve the stack via $\mathbf{U}(\eos) = \mathbf{I}_{km}$ and $\mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}$, so $\mathbf{h}_t = \mathbf{h}_{t-1}$.
 
     \emph{Invalid transitions} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
     In either case $\mathbf{h}_t$ no longer encodes valid stack. The dynamics map alone cannot detect this. 
@@ -302,7 +302,7 @@
     \]
     As $\alpha \to \infty$, $e^{-\alpha} \to 0$, so $Z \to N_{\text{val}}$, the valid probability tends to $1/N_{\text{val}} \in \{\tfrac{1}{k+1}, 1\}$, and the invalid probability tends to $0$. 
     Since the assignment guarantees $\eta < \tfrac{1}{k+1} \le 1/N_{\text{val}}$, the limit valid probability exceeds $\eta$ in every case, and the limit invalid probability is below $\eta$. 
-    By continuity, there exists $\alpha^{*}(\eta) > 0$ such that both inequalities hold in all three cases simultaneously for every $\alpha \ge \alpha^{*}(\eta)$, so the construction goes through for sufficiently large $\alpha$ (cf.\ the footnote in the assignment).
+    By continuity, there exists $\alpha^{*}(\eta) > 0$ s.t. both inequalities hold in all three cases simultaneously for every $\alpha \ge \alpha^{*}(\eta)$, so the construction goes through for sufficiently large $\alpha$ (cf.\ the footnote in the assignment).
     Two conditions translate into upper bounds on $e^{-\alpha}$:
 
     \emph{Valid condition} ($1/Z \ge \eta$, i.e.\ $Z \le 1/\eta$):
@@ -400,7 +400,7 @@
     Write $B = \lceil \log_2 k \rceil + 1$ and let $\mathbf{s}_{t-1} = \mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})} \in \{0, 1\}^{mB}$ be the true binary-encoded stack from part~(h). Write $\mathbf{s}^{(j)} \in \{0, 1\}^{B}$ for the $j$-th $B$-bit block, so $\mathbf{s}^{(1)}$ is the top of the stack and $\mathbf{s}^{(m)}$ is the bottom.
 
     \paragraph{Extending the encoding (bipolar transform)} Unlike the one-hot case in part~(f), a single dot product $\mathbf{s}^{(1)\top}\mathbf{e}_i$ cannot decide whether two $B$-bit codes are equal: it counts only matching $1$'s. 
-    We extend each binary code to its \emph{bipolar} form $\bar{\mathbf{e}}_i \defeq 2\mathbf{e}_i - \mathbf{1}_B \in \{-1, +1\}^{B}$.
+    Extend each binary code to its \emph{bipolar} form $\bar{\mathbf{e}}_i \defeq 2\mathbf{e}_i - \mathbf{1}_B \in \{-1, +1\}^{B}$.
     \[
         \mathbf{s}^\top \bar{\mathbf{e}}_i - \mathbf{1}_B^\top \mathbf{e}_i \;=\; 2\mathbf{s}^\top\mathbf{e}_i - \mathbf{1}_B^\top\mathbf{s} - \mathbf{1}_B^\top\mathbf{e}_i \;=\; -\,d_H(\mathbf{s}, \mathbf{e}_i),
     \]
