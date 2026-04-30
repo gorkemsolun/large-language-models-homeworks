@@ -2,11 +2,11 @@
 
 \begin{subquestion}
     The language $D(2, 3)$ consists of brackets of $k = 2$ types with maximum nesting depth $m = 3$. 
-    Encode the unclosed opening brackets using a stack whose \emph{rightmost} symbol is the top of the stack.
+    Encode the unclosed open brackets using a stack whose rightmost symbol is the top of the stack.
     $[\openBr{1}\openBr{2}]$ transitions to $[\openBr{1}]$ after reading $\closeBr{2}$.
     \begin{itemize}
-        \item Reading a closing bracket $\closeBr{i}$: pop the top of the stack if it equals $\openBr{i}$; otherwise (mismatch or empty stack), reject.
-        \item Reading an opening bracket $\openBr{i}$: push it on top, unless the stack already has $m = 3$ symbols, in which case the depth bound is exceeded and we reject.
+        \item Reading a close bracket $\closeBr{i}$: pop the top of the stack if it equals $\openBr{i}$, otherwise (mismatch or empty stack) reject.
+        \item Reading an open bracket $\openBr{i}$: push it on top, unless the stack already has $m = 3$ symbols, in which case the depth bound is exceeded, reject.
     \end{itemize}
     \begin{table}[H]
     \centering
@@ -35,7 +35,7 @@
     \textbf{Alphabet:} $\alphabet = \openBr{} \cup \closeBr{}$, so $\nsymbols = 2k$.
     
     \textbf{States:} $\states = \{[\stackseq] \mid \stackseq \in \openBr{}^{\le m}\} \cup \{\rejectState\}$, where $[\stackseq]$ corresponds to the stack of unclosed 
-    brackets $\stackseq$ with $|\stackseq| \le m$, and $\rejectState$ is an absorbing rejecting state. $\acceptState \defeq [\emptystack]$ for the empty-stack state.
+    brackets $\stackseq$ with $|\stackseq| \le m$, and $\rejectState$ is an absorbing rejecting state. $\acceptState \defeq [\emptystack]$ for the empty stack state.
     
     \textbf{Initial states:} $\initial = \{\acceptState\}$ (start with an empty stack).
     
@@ -54,7 +54,7 @@
     These cases specify $\trans$ on every $(\states \setminus \{\rejectState\}) \times \alphabet$ pair as well as on $\{\rejectState\} \times \alphabet$, so $\trans$ is deterministic.
 
     \paragraph{Correctness} A string $\str$ is in $D(k, m)$ iff (i) the brackets are balanced and (ii) the running depth $d(\str_{\le t}) \le m$.
-    The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset \emph{and order} of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. 
+    The state $[\stackseq_t]$ reached after reading $\str_{\le t}$ stores the multiset and order of currently unclosed brackets, so $|\stackseq_t| = d(\str_{\le t})$. 
     The transitions enforce the two conditions:
     \begin{itemize}
         \item Any depth violation triggers rule (3), sending $\mathcal{A}$ into the absorbing $\rejectState$.
@@ -82,7 +82,7 @@
         h(\stackseq_2) &= h([\openBr{1}\openBr{1}\openBr{1}]) = \begin{pmatrix} \mathbf{e}_1 \\ \mathbf{e}_1 \\ \mathbf{e}_1 \end{pmatrix} = (1, 0, 1, 0, 1, 0)^\top, \\
         h(\stackseq_3) &= h([\openBr{2}\openBr{1}\openBr{2}]) = \begin{pmatrix} \mathbf{e}_2 \\ \mathbf{e}_1 \\ \mathbf{e}_2 \end{pmatrix} = (0, 1, 1, 0, 0, 1)^\top.
     \end{align*}
-    Re-encoding the resulting stacks from part~(a) via Eq.~(27) yields the embeddings:
+    Reencoding the resulting stacks from part~(a) via Eq.~(27) yields the embeddings:
     \begin{table}[H]
     \centering
     \small
@@ -107,9 +107,9 @@
 \begin{subquestion}
     Let $\mathbf{I}_k$ and $\mathbf{0}_k$ denote the $k\times k$ identity and zero matrices, and write $\mathbf{h}$ as $m$ stacked $k$-blocks where block~$j$ is the $j$-th symbol from the top of the stack. 
     Block~1 is the top, blocks beyond the stack depth are zero.
-    Pushing onto the stack means \emph{shifting all $k$-blocks one position down} and writing the new symbol into block~1. 
-    Popping means \emph{shifting all $k$-blocks one position up} and zeroing block~$m$. 
-    Realize this with two block-banded $km \times km$ matrices,
+    Pushing onto the stack means shifting all $k$-blocks one position down and writing the new symbol into block~1. 
+    Popping means shifting all $k$-blocks one position up and zeroing block~$m$. 
+    Realize this with two block banded $km \times km$ matrices,
     \[
         \mathbf{U}_{\text{push}} \;=\;
         \begin{pmatrix}
@@ -129,7 +129,7 @@
             \mathbf{0}_k & \mathbf{0}_k & \mathbf{0}_k & \cdots & \mathbf{0}_k
         \end{pmatrix},
     \]
-    and define the recurrence-matrix function $\mathbf{U} : \overline{\alphabet} \to \mathbb{R}^{km \times km}$ by
+    and define the recurrence matrix function $\mathbf{U} : \overline{\alphabet} \to \mathbb{R}^{km \times km}$ by
     \[
         \mathbf{U}(y_t) \;=\;
         \begin{cases}
@@ -139,7 +139,7 @@
         \end{cases}
     \]
     The choice $\mathbf{U}(\eos) = \mathbf{I}_{km}$ keeps the stack representation intact at termination, since $\eos$ is not a stack operation. 
-    The input matrix $\mathbf{V} \in \mathbb{R}^{km \times (2k+1)}$ injects the new opening bracket into block~1 only when $y_t$ is an opening bracket, so we set
+    The input matrix $\mathbf{V} \in \mathbb{R}^{km \times (2k+1)}$ injects the new open bracket into block~1 only when $y_t$ is an open bracket, so we set
     \[
         \mathbf{V} \;=\;
         \begin{pmatrix}
@@ -160,36 +160,36 @@
     where the columns are ordered as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$. 
     With this $\mathbf{V}$, $\mathbf{V}\mathbf{o}_{\openBr{i}} = (\mathbf{e}_i, \mathbf{0}_{(m-1)k})^\top$ and $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}_{km}$.
 
-    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{h}_{t-1}$ encodes a non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$ via Eq.~(27). We check the three transition kinds.
+    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{h}_{t-1}$ encodes a nonreject state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$ via Eq.~(27). We check the three transition kinds.
 
-    \emph{Valid push.} If $y_t = \openBr{i}$ and $m' < m$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$. 
+    \textbf{Valid push} If $y_t = \openBr{i}$ and $m' < m$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$. 
     Multiplying out, $\mathbf{U}_{\text{push}}\mathbf{h}_{t-1}$ takes block~$j$ of $\mathbf{h}_{t-1}$ into block~$j{+}1$ for $j = 1, \dots, m{-}1$ and zeros block~1. 
     Adding $\mathbf{V}\mathbf{o}_{\openBr{i}}$ writes $\mathbf{e}_i$ into block~1. 
     The resulting blocks are $(\mathbf{e}_i, \mathbf{e}_{i_{m'}}, \dots, \mathbf{e}_{i_1}, \mathbf{0}, \dots, \mathbf{0})$, exactly $h(q')$.
 
-    \emph{Valid pop.} If $y_t = \closeBr{i}$ with $i = i_{m'}$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$. 
-    Now $\mathbf{U}_{\text{pop}}\mathbf{h}_{t-1}$ takes block~$j$ into block~$j{-}1$ for $j = 2, \dots, m$ and zeros block~$m$, while $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{0}$. 
+    \textbf{Valid pop} If $y_t = \closeBr{i}$ with $i = i_{m'}$, $\mathcal{A}$ moves to $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$. 
+    $\mathbf{U}_{\text{pop}}\mathbf{h}_{t-1}$ takes block~$j$ into block~$j{-}1$ for $j = 2, \dots, m$ and zeros block~$m$, while $\mathbf{V}\mathbf{o}_{\closeBr{i}} = \mathbf{0}$. 
     The resulting blocks are $(\mathbf{e}_{i_{m'-1}}, \dots, \mathbf{e}_{i_1}, \mathbf{0}, \dots, \mathbf{0})$, exactly $h(q')$.
 
-    \emph{$\eos$.} The DFA does not consume $\eos$ (cf.\ part (b)).
+    \textbf{$\mathtt{eos}$} The DFA does not consume $\eos$ (cf.\ part (b)).
     We preserve the stack via $\mathbf{U}(\eos) = \mathbf{I}_{km}$ and $\mathbf{V}\mathbf{o}_{\eos} = \mathbf{0}$, so $\mathbf{h}_t = \mathbf{h}_{t-1}$.
 
-    \emph{Invalid transitions} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
+    \textbf{Invalid transitions} Pushing on a full stack ($m' = m$) loses block~$m$ (shifted out), and popping a mismatched or empty stack discards the wrong $\mathbf{e}$ or stays at $\mathbf{0}$. 
     In either case $\mathbf{h}_t$ no longer encodes valid stack. The dynamics map alone cannot detect this. 
     It is the recognition module of part~(f) that assigns probability~$<\eta$ to such continuations, so in the locally $\eta$-truncated support these strings are rejected.
 
-    Hence, on every \emph{valid} prefix, the RNN's hidden states are in one-to-one correspondence with the states $\mathcal{A}$ visits, and the recurrence $\mathbf{h}_t = \mathbf{U}(y_t)\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t}$ implements $\trans$.
+    Hence, on every valid prefix, the RNN's hidden states are one-to-one with the states $\mathcal{A}$ visits, and the recurrence $\mathbf{h}_t = \mathbf{U}(y_t)\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t}$ implements $\trans$.
 \end{subquestion}
 
 \begin{subquestion}
     Since $\mathbf{U}$ is now fixed, it can't depend on whether $y_t$ should push or pop. 
-    Following the hint, double the hidden state to $\mathbb{R}^{2km}$ and perform \emph{both} operations simultaneously in each half:
+    Following the hint, double the hidden state to $\mathbb{R}^{2km}$ and perform both operations simultaneously in each half:
     \[
         \mathbf{h}_t \;=\; \begin{pmatrix} \mathbf{h}_t^{(\text{p})} \\ \mathbf{h}_t^{(\text{q})} \end{pmatrix} \in \mathbb{R}^{2km},
     \]
     where the top half $\mathbf{h}_t^{(\text{p})}$ holds the result of a push and the bottom half $\mathbf{h}_t^{(\text{q})}$ holds the result of a pop. 
     The Heaviside activation $H$ together with large negative entries in $\mathbf{V}$ then gates off whichever half does not match the input. 
-    We maintain the invariant that one half is non-zero and equals the correct stack encoding $h([\stackseq])$ from Eq.~(27). 
+    We maintain the invariant that one half is nonzero and equals the correct stack encoding $h([\stackseq])$ from Eq.~(27). 
     The true stack is recovered as $\mathbf{s}_t \defeq \mathbf{h}_t^{(\text{p})} + \mathbf{h}_t^{(\text{q})}$.
 
     Let $\mathbf{U}_{\text{push}}, \mathbf{U}_{\text{pop}} \in \mathbb{R}^{km\times km}$ be the shift matrices from part~(d) and let $\mathbf{V}_{\text{ins}} \in \mathbb{R}^{km \times k}$ be the matrix that places $\mathbf{e}_i$ into block~1 when its input is $\openBr{i}$, i.e.\ $\mathbf{V}_{\text{ins}} = (\mathbf{I}_k, \mathbf{0}_k, \dots, \mathbf{0}_k)^\top$ (the first $k$ columns of the $\mathbf{V}$ from part~(d)).
@@ -212,14 +212,14 @@
     \[
         \mathbf{U}\mathbf{h}_{t-1} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \\ \mathbf{U}_{\text{pop}}(\mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})}) \end{pmatrix} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} \\ \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} \end{pmatrix},
     \]
-    so we recover both candidate next-stacks from the true stack $\mathbf{s}_{t-1}$. 
+    so we recover both candidate next stacks from the true stack $\mathbf{s}_{t-1}$. 
     One of $\mathbf{h}_{t-1}^{(\text{p})}, \mathbf{h}_{t-1}^{(\text{q})}$ is $\mathbf{0}$ and the other is a $0/1$ encoding, hence $\mathbf{s}_{t-1} \in \{0, 1\}^{km}$ and the entries of $\mathbf{U}\mathbf{h}_{t-1}$ lie in $\{0, 1\}$.
 
-    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{s}_{t-1} = h(q)$ for some non-rejecting state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$.
+    \paragraph{Correspondence with $\mathcal{A}$} Suppose $\mathbf{s}_{t-1} = h(q)$ for some nonreject state $q = [\openBr{i_1}\cdots\openBr{i_{m'}}] \in \states$.
     
     
-    \emph{Valid push} ($y_t = \openBr{i}$, $m' < m$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$). 
-    The one-hot $\mathbf{o}_{y_t}$ selects column $i$ of $\mathbf{V}$:
+    \textbf{Valid push} ($y_t = \openBr{i}$, $m' < m$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'}}\openBr{i}]$). 
+    The one hot $\mathbf{o}_{y_t}$ selects column $i$ of $\mathbf{V}$:
     \[
         \mathbf{V}\mathbf{o}_{\openBr{i}} \;=\; \begin{pmatrix} \mathbf{V}_{\text{ins}}\,\mathbf{e}_i \\ -2\,\mathbf{1}_{km} \end{pmatrix} \;=\; \begin{pmatrix} (\mathbf{e}_i, \mathbf{0}_{(m-1)k})^\top \\ -2\,\mathbf{1}_{km} \end{pmatrix} \;\Rightarrow\; \mathbf{z}_t \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} + (\mathbf{e}_i, \mathbf{0})^\top - \tfrac{1}{2}\mathbf{1} \\[2pt] \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} - \tfrac{5}{2}\mathbf{1} \end{pmatrix}.
     \]
@@ -230,34 +230,34 @@
     Thus $\mathbf{h}_t^{(\text{p})} = h(q')$, $\mathbf{h}_t^{(\text{q})} = \mathbf{0}$, and $\mathbf{s}_t = h(q')$.
     
     
-    \emph{Valid pop} ($y_t = \closeBr{i}$, $i = i_{m'}$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$). 
-    The one-hot picks column $k+i$:
+    \textbf{Valid pop} ($y_t = \closeBr{i}$, $i = i_{m'}$, $q' = [\openBr{i_1}\cdots\openBr{i_{m'-1}}]$). 
+    One hot picks column $k+i$:
     \[
         \mathbf{V}\mathbf{o}_{\closeBr{i}} \;=\; \begin{pmatrix} -2\,\mathbf{1}_{km} \\ \mathbf{0}_{km} \end{pmatrix} \;\Rightarrow\; \mathbf{z}_t \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}}\mathbf{s}_{t-1} - \tfrac{5}{2}\mathbf{1} \\[2pt] \mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} - \tfrac{1}{2}\mathbf{1} \end{pmatrix}.
     \]
-    The top half is $\le -\tfrac{3}{2} < 0$, so $H$ zeros it. 
+    Top half is $\le -\tfrac{3}{2} < 0$, so $H$ zeros it. 
     The bottom half has entries in $\{-\tfrac{1}{2}, +\tfrac{1}{2}\}$ and $H$ recovers $\mathbf{U}_{\text{pop}}\mathbf{s}_{t-1} = h(q')$. 
     Hence $\mathbf{h}_t^{(\text{p})} = \mathbf{0}$, $\mathbf{h}_t^{(\text{q})} = h(q')$, and $\mathbf{s}_t = h(q')$.
     
     
-    \emph{$\eos$.} The last column of $\mathbf{V}$ is $-2\,\mathbf{1}_{2km}$, so both halves of $\mathbf{z}_t$ are $\le -\tfrac{3}{2}\mathbf{1}$ and $\mathbf{h}_t = \mathbf{0}_{2km}$. 
-    Since the recognition module of part~(f) reads $\mathbf{h}_{t-1}$ to compute the probability of $y_t = \eos$, this loss of information at $t = T$ does not affect recognition.
+    \textbf{$\mathtt{eos}$} Last column of $\mathbf{V}$ is $-2\,\mathbf{1}_{2km}$, so both halves of $\mathbf{z}_t$ are $\le -\tfrac{3}{2}\mathbf{1}$ and $\mathbf{h}_t = \mathbf{0}_{2km}$. 
+    Since recognition module of part~(f) reads $\mathbf{h}_{t-1}$ to compute the probability of $y_t = \eos$, this information loss at $t = T$ doesn't affect recognition.
 
 
     \paragraph{Invalid transitions} A push on a full stack ($m' = m$) shifts the bottom block of $\mathbf{s}_{t-1}$ off the top half (annihilated by $\mathbf{U}_{\text{push}}$), 
-    so $\mathbf{h}_t^{(\text{p})}$ encodes a \emph{different} length-$m$ stack instead of the rejecting state of $\mathcal{A}$. 
+    so $\mathbf{h}_t^{(\text{p})}$ encodes a different length-$m$ stack instead of the rejecting state of $\mathcal{A}$. 
     Similarly, a mismatched or empty pop produces a top half that does not equal $h(q')$ for the true continuation. 
     The dynamics of part~(e) cannot detect these failures by themselves. 
     This is the role of the output layer constructed in part~(f), which assigns probability~$<\eta$ to such invalid continuations and
     thus excludes them from the locally $\eta$-truncated support. 
-    On every valid prefix, however, the recurrence $\mathbf{h}_t = H(\mathbf{U}\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t} + \mathbf{b})$ tracks the transitions of $\mathcal{A}$ exactly via $\mathbf{s}_t$.
+    On every valid prefix, however, the recurrence $\mathbf{h}_t = H(\mathbf{U}\mathbf{h}_{t-1} + \mathbf{V}\mathbf{o}_{y_t} + \mathbf{b})$ tracks the transitions of $\mathcal{A}$ via $\mathbf{s}_t$.
 \end{subquestion}
 
 \begin{subquestion}
-    Recall that one of the two halves of $\mathbf{h}_{t-1}$ is $\mathbf{0}$ and the other equals the encoding $\mathbf{s}_{t-1} = h(q)$ of the current automaton state $q$ via Eq.~(27). 
-    Thus $\mathbf{s}_{t-1}$ is composed of $m$ blocks of size $k$, with the top of the stack in block $j = 1$ and the bottom in block $j = m$ (zero-padded above the stack depth). 
-    For brevity, we work with $\mathbf{s}_{t-1}$ as a stand-in for $\mathbf{h}_{t-1}$ below. 
-    The same logits are obtained by feeding either half (the all-zero half contributes nothing). 
+    Recall that one of the two halves of $\mathbf{h}_{t-1}$ is $\mathbf{0}$ and the other equals encoding $\mathbf{s}_{t-1} = h(q)$ of the current automaton state $q$ via Eq.~(27). 
+    Thus $\mathbf{s}_{t-1}$ is composed of $m$ blocks of size $k$, with the top of the stack in block $j = 1$ and the bottom in block $j = m$ (zero padded above stack depth). 
+    For brevity, we work with $\mathbf{s}_{t-1}$ as a stand in for $\mathbf{h}_{t-1}$ below. 
+    Same logits are obtained by feeding either half (all zero half contributes nothing). 
     Write $\mathbf{s}^{(j)} \in \mathbb{R}^{k}$ for the $j$-th block. 
     Three indicators are linear in $\mathbf{s}_{t-1}$ and take values in $\{0, 1\}$ on every valid encoding:
     \[
@@ -265,7 +265,7 @@
     \]
 
     Design $\mathbf{E}\mathbf{s}_{t-1} + \mathbf{b}'$ so that valid continuations yield a logit of $0$ and invalid ones $-\alpha$. 
-    Order the rows of $\mathbf{E}$ and $\mathbf{b}'$ as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$. 
+    Order the rows of $\mathbf{E}$ and $\mathbf{b}'$ as $\openBr{1}, \dots, \openBr{k}, \closeBr{1}, \dots, \closeBr{k}, \eos$.
     Let $\mathbf{J}_k = \mathbf{1}_k\mathbf{1}_k^\top$ be the $k \times k$ ones matrix.
     \[
         \mathbf{E} \;=\;
@@ -276,23 +276,21 @@
         \end{pmatrix} \in \mathbb{R}^{(2k+1) \times km},
         \qquad
         \mathbf{b}' \;=\;
-        \begin{pmatrix} \mathbf{0}_{k} \\ -\alpha\,\mathbf{1}_{k} \\ 0 \end{pmatrix}.
+        \begin{pmatrix} \mathbf{0}_{k} \\ -\alpha\,\mathbf{1}_{k} \\ 0 \end{pmatrix}
     \]
     \begin{align*}
         z_{\openBr{i}} \;&=\; -\alpha\,\mathbf{1}_k^\top \mathbf{s}^{(m)} \;=\; -\alpha\,\mathbb{I}_{\text{full}}, \\
         z_{\closeBr{i}} \;&=\; \alpha\,\mathbf{s}^{(1)}_i - \alpha \;=\; -\alpha\,(1 - \mathbb{I}_{\text{top}=i}), \\
         z_{\eos} \;&=\; -\alpha\,\mathbf{1}_k^\top \mathbf{s}^{(1)} \;=\; -\alpha\,(1 - \mathbb{I}_{\text{empty}}).
     \end{align*}
-    These are $0$ exactly when the corresponding symbol is an acceptable continuation under $\trans$ (push allowed when not full, pop allowed when its bracket matches the top, $\eos$ allowed when the stack is empty), and $-\alpha$ otherwise.
+    These are $0$ when the corresponding symbol is an acceptable continuation under $\trans$ (push allowed when not full, pop allowed when its bracket matches the top, $\eos$ allowed when the stack is empty), and $-\alpha$ otherwise.
 
-    Because the logit of \emph{every} valid continuation is $0$ and that of \emph{every} invalid one is $-\alpha$, the partition function $Z = \sum_{y \in \overline{\alphabet}} \exp(z_y)$ depends only on how many continuations are valid. There are three cases.
+    Because the logit of every valid continuation is $0$ and that of every invalid one is $-\alpha$, the partition function $Z = \sum_{y \in \overline{\alphabet}} \exp(z_y)$ depends only on how many continuations are valid. 
+    There are three cases.
     \begin{enumerate}
-        \item \emph{Empty stack} ($m' = 0$): the $k$ pushes and $\eos$ are valid, the $k$ pops are invalid;
-        $Z_{\text{empty}} = (k+1) + k e^{-\alpha}$.
-        \item \emph{Partially full stack} ($0 < m' < m$): the $k$ pushes and the unique matching pop are valid; the $k-1$ mismatched pops and $\eos$ are invalid;
-        $Z_{\text{partial}} = (k+1) + k e^{-\alpha}$.
-        \item \emph{Full stack} ($m' = m$): only the matching pop is valid; the $k$ pushes, $k-1$ mismatched pops, and $\eos$ are all invalid;
-        $Z_{\text{full}} = 1 + 2k e^{-\alpha}$.
+        \item \emph{Empty stack} ($m' = 0$): the $k$ pushes and $\eos$ are valid, the $k$ pops are invalid, $Z_{\text{empty}} = (k+1) + k e^{-\alpha}$.
+        \item \emph{Partially full stack} ($0 < m' < m$): the $k$ pushes and the unique matching pop are valid, the $k-1$ mismatched pops and $\eos$ are invalid, $Z_{\text{partial}} = (k+1) + k e^{-\alpha}$.
+        \item \emph{Full stack} ($m' = m$): only the matching pop is valid, the $k$ pushes, $k-1$ mismatched pops, and $\eos$ are all invalid, $Z_{\text{full}} = 1 + 2k e^{-\alpha}$.
     \end{enumerate}
 
     \paragraph{Choosing $\alpha$} Let $N_{\text{val}} \in \{k+1, 1\}$ denote the number of valid continuations in the current case. 
@@ -307,17 +305,17 @@
 
     \emph{Valid condition} ($1/Z \ge \eta$, i.e.\ $Z \le 1/\eta$):
     \[
-        e^{-\alpha} \;\le\; \tfrac{1/\eta - (k+1)}{k} \quad \text{(Cases 1, 2)},
+        e^{-\alpha} \;\le\; \tfrac{1/\eta - (k+1)}{k} \quad \text{(Cases 1-2)},
         \qquad
         e^{-\alpha} \;\le\; \tfrac{1/\eta - 1}{2k} \quad \text{(Case 3)}.
     \]
 
     \emph{Invalid condition} ($e^{-\alpha}/Z < \eta$, i.e.\ $e^{-\alpha} < \eta\, Z$):
     \[
-        e^{-\alpha} \;<\; \tfrac{\eta(k+1)}{1 - k\eta} \quad \text{(Cases 1, 2; \;$\eta < \tfrac{1}{k+1} < \tfrac{1}{k}$ ensures $1 - k\eta > 0$)},
+        e^{-\alpha} \;<\; \tfrac{\eta(k+1)}{1 - k\eta} \quad \text{(Cases 1-2, \;$\eta < \tfrac{1}{k+1} < \tfrac{1}{k}$ ensures $1 - k\eta > 0$)},
     \]
     \[
-        e^{-\alpha} \;<\; \tfrac{\eta}{1 - 2k\eta} \quad \text{(Case 3; automatic when $\eta \ge \tfrac{1}{2k}$)}.
+        e^{-\alpha} \;<\; \tfrac{\eta}{1 - 2k\eta} \quad \text{(Case 3, automatic when $\eta \ge \tfrac{1}{2k}$)}.
     \]
     Taking $\alpha$ at least the maximum of the four logarithmic thresholds with strict inequality where required suffices to guarantee $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$.
 \end{subquestion}
@@ -329,7 +327,7 @@
         \mathbf{e}_1 = (0, 0, 1)^\top, \quad \mathbf{e}_2 = (0, 1, 0)^\top, \quad \mathbf{e}_3 = (0, 1, 1)^\top, \quad \mathbf{e}_4 = (1, 0, 0)^\top.
     \]
     Per Eq.~(33), the top of the stack occupies the first $3$-block of $\mathbf{h}$, with subsequent blocks descending the stack and unused slots padded with $\mathbf{0}_3$. 
-    Applying the part-(a) rules with the rightmost symbol of $\stackseq$ being the top, and $m = 3$ as the depth bound and re-encoding gives:
+    Applying the part (a) rules with the rightmost symbol of $\stackseq$ being the top, and $m = 3$ as the depth bound and reencoding gives:
     \begin{table}[H]
     \centering
     \small
@@ -346,14 +344,14 @@
             $\openBr{3}$ & $(0, 1, 1, 0, 1, 0, 0, 0, 0)^\top$ & reject & reject \\
             \bottomrule
         \end{tabular}
-        \caption{The first row of the table represents different stack configurations, while the first column lists the newly read symbols. Each cell holds the binary-encoded embedding of the resulting stack via Eq.~(33), or ``reject'' when the automaton would reject.}
+        \caption{The first row of the table represents different stack configurations, while the first column lists newly read symbols. Each cell holds the binary encoded embedding of the resulting stack via Eq.~(33), or reject when automaton would reject.}
         \label{tab:binstackembeddings}
     \end{table}
 \end{subquestion}
 
 \begin{subquestion}
     Write $B \defeq \lceil \log_2 k \rceil + 1$ for the number of bits used by Eq.~(33) to encode a single bracket identity. 
-    The single-stack now lives in $\mathbb{R}^{mB}$ ($B$-bit block per stack) instead of $\mathbb{R}^{km}$. 
+    The single stack now lives in $\mathbb{R}^{mB}$ ($B$-bit block per stack) instead of $\mathbb{R}^{km}$. 
     Following the do push and pop simultaneously as in part~(e), we double the hidden state to $\mathbb{R}^{2mB}$.
     \[
         \mathbf{U} \in \mathbb{R}^{2mB \times 2mB},
@@ -362,13 +360,14 @@
         \qquad
         \mathbf{b} \in \mathbb{R}^{2mB}.
     \]
-    The number of input columns of $\mathbf{V}$ is unchanged at $2k+1$, since $\mathbf{o}_{y_t}$ is still the one-hot encoding of $y_t \in \overline{\alphabet}$.
+    The number of input columns of $\mathbf{V}$ is unchanged at $2k+1$, since $\mathbf{o}_{y_t}$ is still the one hot encoding of $y_t \in \overline{\alphabet}$.
 
     \textbf{Recurrence matrix $\mathbf{U}$} The block layout is identical to part~(e),
     \[
         \mathbf{U} \;=\; \begin{pmatrix} \mathbf{U}_{\text{push}} & \mathbf{U}_{\text{push}} \\ \mathbf{U}_{\text{pop}} & \mathbf{U}_{\text{pop}} \end{pmatrix},
     \]
-    and $\mathbf{U}_{\text{push}}, \mathbf{U}_{\text{pop}} \in \mathbb{R}^{mB \times mB}$ are still block-banded shift matrices. The only difference is the block size: the identity blocks $\mathbf{I}_k$ used in part~(e) are replaced by $\mathbf{I}_B$, so the shift now moves $B$-bit segments (rather than $k$-bit one-hots) up or down the stack.
+    and $\mathbf{U}_{\text{push}}, \mathbf{U}_{\text{pop}} \in \mathbb{R}^{mB \times mB}$ are still block banded shift matrices. 
+    The only difference is the block size: the identity blocks $\mathbf{I}_k$ used in part~(e) are replaced by $\mathbf{I}_B$, so the shift now moves $B$-bit segments (rather than $k$-bit one hots) up or down the stack.
 
     \textbf{Input matrix $\mathbf{V}$} The block structure mirrors part~(e),
     \[
@@ -379,37 +378,38 @@
         \end{pmatrix},
     \]
     but two things change. First, the row counts shrink from $km$ to $mB$, so the $-2$ gating blocks are smaller. 
-    Second, the insertion sub-matrix $\mathbf{V}_{\text{ins}} \in \mathbb{R}^{mB \times k}$ no longer just copies the one-hot input into block~1: in part~(e) the new top of the stack was already $\mathbf{e}_i \in \{0,1\}^k$, so $\mathbf{V}_{\text{ins}}$ began with $\mathbf{I}_k$. 
+    Second, the insertion submatrix $\mathbf{V}_{\text{ins}} \in \mathbb{R}^{mB \times k}$ no longer just copies the one hot input into block~1: in part~(e) the new top of the stack was already $\mathbf{e}_i \in \{0,1\}^k$, so $\mathbf{V}_{\text{ins}}$ began with $\mathbf{I}_k$. 
     Under the binary scheme the new top is the $B$-bit code of bracket $\openBr{i}$, so the leading $B \times k$ block of $\mathbf{V}_{\text{ins}}$ becomes a small lookup table $\mathbf{E}_B$ whose $i$-th column is the binary representation of $i$ (the remaining blocks of $\mathbf{V}_{\text{ins}}$ stay zero):
     \[
         \mathbf{V}_{\text{ins}} \;=\; \begin{pmatrix} \mathbf{E}_B \\ \mathbf{0}_{B \times k} \\ \vdots \\ \mathbf{0}_{B \times k} \end{pmatrix},
         \qquad
-        \mathbf{E}_B = \big(\mathbf{e}_1 \;\, \mathbf{e}_2 \;\, \cdots \;\, \mathbf{e}_k\big) \in \{0, 1\}^{B \times k}.
+        \mathbf{E}_B = \big(\mathbf{e}_1 \;\, \mathbf{e}_2 \;\, \cdots \;\, \mathbf{e}_k\big) \in \{0, 1\}^{B \times k}
     \]
     With this change, $\mathbf{V}\mathbf{o}_{\openBr{i}}$ deposits the $B$-bit code of $\openBr{i}$ into block~1 of the push half and $-2\,\mathbf{1}$ into the pop half, as in part~(e).
 
     \textbf{Bias vector $\mathbf{b}$} The role of $\mathbf{b}$ is unchanged. 
-    It still sets the Heaviside threshold above zero so that the post-bias entries land at $\pm\tfrac{1}{2}$. 
+    It still sets the Heaviside threshold above zero so that the post bias entries land at $\pm\tfrac{1}{2}$. 
     We keep $\mathbf{b} = -\tfrac{1}{2}\,\mathbf{1}_{2mB}$, just shorter than before.
 
-    \paragraph{The part-(e) correctness argument still goes through} Binary codes are $\{0, 1\}$-vectors, so $\mathbf{s}_{t-1}$ is still binary, $\mathbf{U}_{\text{push}}\mathbf{s}_{t-1}$ has block~1 equal to $\mathbf{0}_B$, and adding the binary code in block~1 cannot cause an entry to exceed $1$. 
-    Hence the post-activation entries continue to lie in $\{-\tfrac{1}{2}, +\tfrac{1}{2}\}$ on the active half and at most $-\tfrac{3}{2}$ on the gated half, matching the part-(e).
+    \paragraph{The part (e) correctness argument still goes through} Binary codes are $\{0, 1\}$-vectors, so $\mathbf{s}_{t-1}$ is still binary, $\mathbf{U}_{\text{push}}\mathbf{s}_{t-1}$ has block~1 equal to $\mathbf{0}_B$, and adding the binary code in block~1 cannot cause an entry to exceed $1$. 
+    Hence the post activation entries continue to lie in $\{-\tfrac{1}{2}, +\tfrac{1}{2}\}$ on the active half and at most $-\tfrac{3}{2}$ on the gated half, matching the part (e).
 \end{subquestion}
 
 \begin{subquestion}
-    Write $B = \lceil \log_2 k \rceil + 1$ and let $\mathbf{s}_{t-1} = \mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})} \in \{0, 1\}^{mB}$ be the true binary-encoded stack from part~(h). Write $\mathbf{s}^{(j)} \in \{0, 1\}^{B}$ for the $j$-th $B$-bit block, so $\mathbf{s}^{(1)}$ is the top of the stack and $\mathbf{s}^{(m)}$ is the bottom.
+    Write $B = \lceil \log_2 k \rceil + 1$ and let $\mathbf{s}_{t-1} = \mathbf{h}_{t-1}^{(\text{p})} + \mathbf{h}_{t-1}^{(\text{q})} \in \{0, 1\}^{mB}$ be the true binary encoded stack from part~(h). 
+    Write $\mathbf{s}^{(j)} \in \{0, 1\}^{B}$ for the $j$-th $B$-bit block, so $\mathbf{s}^{(1)}$ is the top of the stack and $\mathbf{s}^{(m)}$ is the bottom.
 
-    \paragraph{Extending the encoding (bipolar transform)} Unlike the one-hot case in part~(f), a single dot product $\mathbf{s}^{(1)\top}\mathbf{e}_i$ cannot decide whether two $B$-bit codes are equal: it counts only matching $1$'s. 
-    Extend each binary code to its \emph{bipolar} form $\bar{\mathbf{e}}_i \defeq 2\mathbf{e}_i - \mathbf{1}_B \in \{-1, +1\}^{B}$.
+    \paragraph{Extending the encoding (bipolar transform)} Unlike the one hot case in part~(f), a single dot product $\mathbf{s}^{(1)\top}\mathbf{e}_i$ cannot decide whether two $B$-bit codes are equal: it counts only matching $1$'s. 
+    Extend each binary code to its bipolar form $\bar{\mathbf{e}}_i \defeq 2\mathbf{e}_i - \mathbf{1}_B \in \{-1, +1\}^{B}$.
     \[
         \mathbf{s}^\top \bar{\mathbf{e}}_i - \mathbf{1}_B^\top \mathbf{e}_i \;=\; 2\mathbf{s}^\top\mathbf{e}_i - \mathbf{1}_B^\top\mathbf{s} - \mathbf{1}_B^\top\mathbf{e}_i \;=\; -\,d_H(\mathbf{s}, \mathbf{e}_i),
     \]
     i.e.\ the negative Hamming distance between $\mathbf{s}$ and $\mathbf{e}_i$. 
-    This is $0$ exactly when $\mathbf{s} = \mathbf{e}_i$ and at most $-1$ otherwise. 
-    Note that the empty-stack code $\mathbf{0}_B$ has $d_H(\mathbf{0}, \mathbf{e}_i) = \|\mathbf{e}_i\|_1 \ge 1$ for every $i \in \{1, \dots, k\}$, since the $+1$ in $B$ guarantees that no valid code is the all-zero vector.
+    This is $0$ when $\mathbf{s} = \mathbf{e}_i$ and at most $-1$ otherwise. 
+    Note that the empty stack code $\mathbf{0}_B$ has $d_H(\mathbf{0}, \mathbf{e}_i) = \|\mathbf{e}_i\|_1 \ge 1$ for every $i \in \{1, \dots, k\}$, since the $+1$ in $B$ guarantees that no valid code is the all zero vector.
 
-    \paragraph{Output matrix} Stack the codes row-wise into $\mathbf{C} \in \{0, 1\}^{k \times B}$ with $\mathbf{C}_{i,:} = \mathbf{e}_i^\top$, and let $\mathbf{J}_{k \times B} = \mathbf{1}_k\mathbf{1}_B^\top$ be the all-ones matrix. 
-    Build the per-stack output matrix $\tilde{\mathbf{E}} \in \mathbb{R}^{(2k+1) \times mB}$ with three row blocks (pushes, pops, $\eos$) and $m$ column blocks of size $B$:
+    \paragraph{Output matrix} Stack the codes row wise into $\mathbf{C} \in \{0, 1\}^{k \times B}$ with $\mathbf{C}_{i,:} = \mathbf{e}_i^\top$, and let $\mathbf{J}_{k \times B} = \mathbf{1}_k\mathbf{1}_B^\top$ be the all ones matrix. 
+    Build the per stack output matrix $\tilde{\mathbf{E}} \in \mathbb{R}^{(2k+1) \times mB}$ with three row blocks (pushes, pops, $\eos$) and $m$ column blocks of size $B$:
     \[
         \tilde{\mathbf{E}} \;=\;
         \begin{pmatrix}
@@ -422,7 +422,7 @@
     \[
         \mathbf{E} \;\defeq\; \begin{pmatrix} \tilde{\mathbf{E}} & \tilde{\mathbf{E}} \end{pmatrix} \in \mathbb{R}^{(2k+1) \times 2mB}, \qquad \mathbf{E}\,\mathbf{h}_{t-1} \;=\; \tilde{\mathbf{E}}\,\mathbf{s}_{t-1}.
     \]
-    The bias compensates the $-\mathbf{1}_B^\top \mathbf{e}_i$ term that completes the negative-Hamming-distance identity for each pop:
+    The bias compensates the $-\mathbf{1}_B^\top \mathbf{e}_i$ term that completes the negative Hamming distance identity for each pop:
     \[
         \mathbf{b}' \;=\; \begin{pmatrix} \mathbf{0}_{k} \\ -\alpha\,\mathbf{C}\,\mathbf{1}_B \\ 0 \end{pmatrix} \in \mathbb{R}^{2k+1},
         \qquad (\mathbf{C}\mathbf{1}_B)_i = \|\mathbf{e}_i\|_1.
@@ -435,10 +435,10 @@
         z_{\closeBr{i}} \;&=\; \alpha\,\bigl(2\mathbf{e}_i^\top \mathbf{s}^{(1)} - \mathbf{1}_B^\top \mathbf{s}^{(1)}\bigr) - \alpha\,\|\mathbf{e}_i\|_1 \;=\; -\alpha\, d_H\!\bigl(\mathbf{s}^{(1)}, \mathbf{e}_i\bigr) \\
             &\quad\;\;= \begin{cases} 0 & \text{if } \mathbf{s}^{(1)} = \mathbf{e}_i \;(\text{matching pop, valid}) \\ -\alpha\, d \le -\alpha & \text{otherwise (mismatched pop or underflow, invalid)} \end{cases} \\[4pt]
         z_{\eos} \;&=\; -\alpha\,\mathbf{1}_B^\top\,\mathbf{s}^{(1)} \;=\;
-            \begin{cases} 0 & \text{if } \mathbf{s}^{(1)} = \mathbf{0}_B \;(\text{empty stack, } \eos \text{ valid}) \\ -\alpha\,\|\mathbf{e}_j\|_1 \le -\alpha & \text{if } \mathbf{s}^{(1)} = \mathbf{e}_j \;(\text{non-empty, } \eos \text{ invalid}) \end{cases}
+            \begin{cases} 0 & \text{if } \mathbf{s}^{(1)} = \mathbf{0}_B \;(\text{empty stack, } \eos \text{ valid}) \\ -\alpha\,\|\mathbf{e}_j\|_1 \le -\alpha & \text{if } \mathbf{s}^{(1)} = \mathbf{e}_j \;(\text{nonempty, } \eos \text{ invalid}) \end{cases}
     \end{align*}
     where $d \ge 1$ in every invalid case since two distinct $B$-bit codes, or $\mathbf{0}_B$ and any code $\mathbf{e}_j$, must differ in at least one bit. 
-    Hence \emph{every} valid continuation has logit exactly $0$ and \emph{every} invalid continuation has logit $\le -\alpha$, mirroring the part-(f) split. 
+    Hence \emph{every} valid continuation has logit $0$ and every invalid continuation has logit $\le -\alpha$, mirroring the part (f) split. 
     Following the same asymptotic argument as in part~(f), for sufficiently large $\alpha$ the softmax assigns each valid continuation probability $\ge \eta$ and each invalid one probability $<\eta$, so $\mathcal{L}_{\eta}(p_{\text{SM}}) = D(k, m)$.
 \end{subquestion}
 

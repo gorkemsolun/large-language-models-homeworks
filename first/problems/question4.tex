@@ -1,13 +1,13 @@
 \begin{question}{Limitations of Transformers on Simple Languages}
 
 \begin{subquestion}
-    Absorb the value projection $\mathbf{W}_V^{(\ell)}$ into the MLP $\mathbf{f}$ by exhibiting a function $\mathbf{f}'$ s.t.
+    Absorb the value projection $\mathbf{W}_V^{(\ell)}$ into MLP $\mathbf{f}$ by exhibiting a function $\mathbf{f}'$ s.t.
     \begin{equation*}
         \mathbf{x}_t^{(\ell+1)} \;=\; \mathbf{f}'\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right) \;=\; \mathbf{f}\!\left(\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{v}_{t'}^{(\ell)},\; \mathbf{x}_t^{(\ell)}\right)
     \end{equation*}
 
     \paragraph{Express $\mathbf{v}_{t'}^{(\ell)}$ in terms of $\mathbf{x}_{t'}^{(\ell)}$}
-    From Eq.~(39c), $\mathbf{V}^{(\ell)} = \mathbf{X}^{(\ell)} \mathbf{W}_V^{(\ell)}$. Reading off the $t'$-th row (where the rows of $\mathbf{V}^{(\ell)}$ and $\mathbf{X}^{(\ell)}$ are $\mathbf{v}_{t'}^{(\ell)\top}$ and $\mathbf{x}_{t'}^{(\ell)\top}$ respectively), we get
+    From Eq.~(39c), $\mathbf{V}^{(\ell)} = \mathbf{X}^{(\ell)} \mathbf{W}_V^{(\ell)}$. Reading off the $t'$-th row (where the rows of $\mathbf{V}^{(\ell)}$ and $\mathbf{X}^{(\ell)}$ are $\mathbf{v}_{t'}^{(\ell)\top}$ and $\mathbf{x}_{t'}^{(\ell)\top}$ respectively):
     \begin{equation*}
         \mathbf{v}_{t'}^{(\ell)\top} \;=\; \mathbf{x}_{t'}^{(\ell)\top}\, \mathbf{W}_V^{(\ell)}
         \quad\Longleftrightarrow\quad
@@ -53,7 +53,7 @@
     \end{equation*}
 
     \paragraph{Inductive hypothesis}
-    Assume that for some $\ell \ge 0$ and \emph{every} $t' \in \{1, \dots, T\}$,
+    Assume that for some $\ell \ge 0$ and every $t' \in \{1, \dots, T\}$,
     \begin{equation*}
         \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}
     \end{equation*}
@@ -66,13 +66,13 @@
         \|\mathbf{z}_t^{(\ell)}\| \;=\; \Bigg\|\sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \mathbf{x}_{t'}^{(\ell)}\Bigg\| \;\le\; \sum_{t'=1}^{T} s_{t,t'}^{(\ell)}\, \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}
     \end{equation*}
 
-    \emph{(ii) Lipschitz step} Using $\mathbf{f}(\mathbf{0}, \mathbf{0}) = \mathbf{0}$ and the Lipschitz property (Definition~9) of $\mathbf{f}: \mathbb{R}^{D} \times \mathbb{R}^{D} \to \mathbb{R}^{D}$ with the standard product-space norm $\|(\mathbf{a}, \mathbf{b})\| = \sqrt{\|\mathbf{a}\|^{2} + \|\mathbf{b}\|^{2}}$,
+    \emph{(ii) Lipschitz step} Using $\mathbf{f}(\mathbf{0}, \mathbf{0}) = \mathbf{0}$ and the Lipschitz property (Definition~9) of $\mathbf{f}: \mathbb{R}^{D} \times \mathbb{R}^{D} \to \mathbb{R}^{D}$ with the product space norm $\|(\mathbf{a}, \mathbf{b})\| = \sqrt{\|\mathbf{a}\|^{2} + \|\mathbf{b}\|^{2}}$,
     \begin{equation*}
         \|\mathbf{f}(\mathbf{z}, \mathbf{x})\| \;=\; \|\mathbf{f}(\mathbf{z}, \mathbf{x}) - \mathbf{f}(\mathbf{0}, \mathbf{0})\| \;\le\; L_{\mathbf{f}}\sqrt{\|\mathbf{z}\|^{2} + \|\mathbf{x}\|^{2}} \;\le\; L_{\mathbf{f}}\bigl(\|\mathbf{z}\| + \|\mathbf{x}\|\bigr),
     \end{equation*}
     where the last inequality follows from $\|\mathbf{z}\|^{2} + \|\mathbf{x}\|^{2} \le \bigl(\|\mathbf{z}\| + \|\mathbf{x}\|\bigr)^{2}$.
 
-    \emph{(iii) Combine} Applying this to $\mathbf{x}_t^{(\ell+1)} = \mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)})$ and substituting both bounds,
+    \emph{(iii)} Applying this to $\mathbf{x}_t^{(\ell+1)} = \mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)})$ and substituting both bounds,
     \begin{align*}
         \|\mathbf{x}_t^{(\ell+1)}\|
         &\;\le\; L_{\mathbf{f}}\bigl(\|\mathbf{z}_t^{(\ell)}\| + \|\mathbf{x}_t^{(\ell)}\|\bigr) \\
@@ -83,7 +83,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    Fix a layer $\ell$ and a query position $t$. The pre-softmax logit vector is $\mathbf{l} = \mathbf{K}^{(\ell)} \mathbf{q}_t^{(\ell)} \in \mathbb{R}^{T}$, with $t'$-th entry
+    Fix a layer $\ell$ and a query position $t$. The pre softmax logit vector is $\mathbf{l} = \mathbf{K}^{(\ell)} \mathbf{q}_t^{(\ell)} \in \mathbb{R}^{T}$, with $t'$-th entry
     \begin{equation*}
         l_{t'} \;=\; \mathbf{k}_{t'}^{(\ell)\top}\, \mathbf{q}_{t}^{(\ell)}
     \end{equation*}
@@ -94,8 +94,8 @@
         l_{t'} \;=\; \bigl(\mathbf{W}_K^{(\ell)\top}\, \mathbf{x}_{t'}^{(\ell)}\bigr)^{\!\top}\bigl(\mathbf{W}_Q^{(\ell)\top}\, \mathbf{x}_{t}^{(\ell)}\bigr) \;=\; \mathbf{x}_{t'}^{(\ell)\top}\, \mathbf{W}_K^{(\ell)}\, \mathbf{W}_Q^{(\ell)\top}\, \mathbf{x}_{t}^{(\ell)}
     \end{equation*}
 
-    \paragraph{Apply Cauchy--Schwarz and the operator-norm inequality}
-    By Cauchy--Schwarz and $\|\mathbf{M}\mathbf{v}\| \le \|\mathbf{M}\|_{2}\,\|\mathbf{v}\|$ for the induced 2-norm,
+    \paragraph{Apply Cauchy-Schwarz and the operator norm inequality}
+    By Cauchy-Schwarz and $\|\mathbf{M}\mathbf{v}\| \le \|\mathbf{M}\|_{2}\,\|\mathbf{v}\|$ for the induced 2-norm,
     \begin{equation*}
         |l_{t'}| \;\le\; \|\mathbf{x}_{t'}^{(\ell)}\| \cdot \|\mathbf{W}_K^{(\ell)}\, \mathbf{W}_Q^{(\ell)\top}\, \mathbf{x}_{t}^{(\ell)}\| \;\le\; \|\mathbf{x}_{t'}^{(\ell)}\| \cdot \|\mathbf{W}_K^{(\ell)}\, \mathbf{W}_Q^{(\ell)\top}\|_{2} \cdot \|\mathbf{x}_{t}^{(\ell)}\|
     \end{equation*}
@@ -103,7 +103,7 @@
     \paragraph{Bound the representation norms uniformly by $F$}
     From part~(b), $\|\mathbf{x}_t^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$. With $F \ge \max\!\bigl(1,\, (2L_{\mathbf{f}})^{L}\bigr)\,\|\mathbf{X}^{(0)}\|_{2,\infty}$, we have for every $\ell \in \{0, \dots, L\}$:
     \begin{itemize}
-        \item if $2L_{\mathbf{f}} \ge 1$: $(2L_{\mathbf{f}})^{\ell} \le (2L_{\mathbf{f}})^{L}$, so $\|\mathbf{x}_t^{(\ell)}\| \le (2L_{\mathbf{f}})^{L}\,\|\mathbf{X}^{(0)}\|_{2,\infty} \le F$;
+        \item if $2L_{\mathbf{f}} \ge 1$: $(2L_{\mathbf{f}})^{\ell} \le (2L_{\mathbf{f}})^{L}$, so $\|\mathbf{x}_t^{(\ell)}\| \le (2L_{\mathbf{f}})^{L}\,\|\mathbf{X}^{(0)}\|_{2,\infty} \le F$
         \item if $2L_{\mathbf{f}} < 1$: $(2L_{\mathbf{f}})^{\ell} \le 1$, so $\|\mathbf{x}_t^{(\ell)}\| \le \|\mathbf{X}^{(0)}\|_{2,\infty} \le F$
     \end{itemize}
     Hence $\|\mathbf{x}_t^{(\ell)}\|, \|\mathbf{x}_{t'}^{(\ell)}\| \le F$, and
@@ -111,7 +111,7 @@
         |l_{t'}| \;\le\; F^{2}\, \|\mathbf{W}_K^{(\ell)}\, \mathbf{W}_Q^{(\ell)\top}\|_{2}
     \end{equation*}
 
-    \paragraph{Define $L_{\mathrm{att}}$ and conclude}
+    \paragraph{Define $L_{\mathrm{att}}$}
     Since the parameter matrices are fixed, the quantity
     \begin{equation*}
         L_{\mathrm{att}} \;\defeq\; \max_{\ell \in \{1, \dots, L\}}\, \|\mathbf{W}_K^{(\ell)}\, \mathbf{W}_Q^{(\ell)\top}\|_{2}
@@ -125,20 +125,21 @@
 \begin{subquestion}
     Let $\mathbf{l} \in \mathbb{R}^{T}$ with $\|\mathbf{l}\|_{\infty} \le A$ and write $\mathbf{s} = \operatorname{softmax}(\mathbf{l})$, i.e., $s_t = \exp(l_t) / \sum_{t'=1}^{T} \exp(l_{t'})$.
 
-    \paragraph{Per-coordinate bounds on $\exp(l_t)$}
+    \paragraph{Per coordinate bounds on $\exp(l_t)$}
     Since $\|\mathbf{l}\|_{\infty} \le A$, every coordinate satisfies $-A \le l_t \le A$. 
     Because $\exp$ is monotonically increasing,
     \begin{equation*}
         \exp(-A) \;\le\; \exp(l_t) \;\le\; \exp(A) \qquad \text{for all } t \in \{1, \dots, T\}
     \end{equation*}
 
-    Summing the per-coordinate bounds over $t' \in \{1, \dots, T\}$ for the softmax denominator,
+    Summing the per coordinate bounds over $t' \in \{1, \dots, T\}$ for the softmax denominator,
     \begin{equation*}
         T\,\exp(-A) \;\le\; \sum_{t'=1}^{T} \exp(l_{t'}) \;\le\; T\,\exp(A)
     \end{equation*}
 
     \paragraph{Combine for $s_t$}
-    The fraction $s_t = \exp(l_t) / \sum_{t'} \exp(l_{t'})$ is maximized by pairing the largest numerator with the smallest denominator, and minimized by the reverse. Using the bounds,
+    The fraction $s_t = \exp(l_t) / \sum_{t'} \exp(l_{t'})$ is maximized by pairing the largest numerator with the smallest denominator, and minimized by the reverse. 
+    Using the bounds,
     \begin{equation*}
         s_t \;\le\; \frac{\exp(A)}{T\,\exp(-A)} \;=\; \frac{\exp(2A)}{T},
         \qquad
@@ -157,7 +158,7 @@
         \qquad
         \mathbf{z}_t^{\prime(\ell)} \;=\; \sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \mathbf{x}_{t'}^{\prime(\ell)},
     \end{equation*}
-    \paragraph{Add-and-subtract a cross term}
+    \paragraph{Add and subtract a cross term}
     Insert $\pm \sum_{t'} s_{t,t'}^{\prime(\ell)}\, \mathbf{x}_{t'}^{(\ell)}$ inside the difference and group:
     \begin{align*}
         \mathbf{z}_t^{(\ell)} - \mathbf{z}_t^{\prime(\ell)}
@@ -167,7 +168,7 @@
     \end{align*}
     The first sum isolates the change in attention weights with the original representations, the second isolates the change in representations weighted by the perturbed attention.
 
-    Taking norms, applying the triangle inequality on each outer sum and on each scalar-vector product, and using $s_{t,t'}^{\prime(\ell)} \ge 0$ (so $|s_{t,t'}^{\prime(\ell)}| = s_{t,t'}^{\prime(\ell)}$) gives Eq.~(49):
+    Taking norms, applying the triangle inequality on each outer sum and on each scalar vector product, and using $s_{t,t'}^{\prime(\ell)} \ge 0$ (so $|s_{t,t'}^{\prime(\ell)}| = s_{t,t'}^{\prime(\ell)}$) gives Eq.~(49):
     \begin{equation*}
         \Delta_t^{(\ell)} \;\le\; \underbrace{\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|}_{\text{Difficult Part}}
         \;+\; \underbrace{\sum_{t'=1}^{T} s_{t,t'}^{\prime(\ell)}\, \|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\|}_{\text{Easy Part}}
@@ -175,9 +176,10 @@
 \end{subquestion}
 
 \begin{subquestion}
-    The Difficult Part (Eq.~(50)) is $\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|$. We have a uniform bound on each $\|\mathbf{x}_{t'}^{(\ell)}\|$ and definition~10 gives $\|\mathbf{X}^{(\ell)}\|_{2,\infty} = \max_{t''} \|\mathbf{x}_{t''}^{(\ell)}\|$, so for every $t' \in \{1, \dots, T\}$,
+    The Difficult Part (Eq.~(50)) is $\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|$. 
+    We have a uniform bound on each $\|\mathbf{x}_{t'}^{(\ell)}\|$ and definition~10 gives $\|\mathbf{X}^{(\ell)}\|_{2,\infty} = \max_{t''} \|\mathbf{x}_{t''}^{(\ell)}\|$, so for every $t' \in \{1, \dots, T\}$,
     \begin{equation*}
-        \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; \|\mathbf{X}^{(\ell)}\|_{2,\infty}.
+        \|\mathbf{x}_{t'}^{(\ell)}\| \;\le\; \|\mathbf{X}^{(\ell)}\|_{2,\infty}
     \end{equation*}
 
     Since $\bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr| \ge 0$, multiplying through preserves the inequality termwise. 
@@ -185,7 +187,7 @@
     \begin{equation*}
         \sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|
         \;\le\; \sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{X}^{(\ell)}\|_{2,\infty}
-        \;=\; \!\left(\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\right)\!\|\mathbf{X}^{(\ell)}\|_{2,\infty}.
+        \;=\; \!\left(\sum_{t'=1}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\right)\!\|\mathbf{X}^{(\ell)}\|_{2,\infty}
     \end{equation*}
 \end{subquestion}
 
@@ -229,7 +231,7 @@
     \end{equation*}
 
     \paragraph{Softmax Jacobian}
-    The standard formula is $\partial s_t / \partial x_k = s_t\,\delta_{tk} - s_t s_k$, i.e., $s_t(1-s_t)$ on the diagonal and $-s_t s_k$ off-diagonal. 
+    The standard formula is $\partial s_t / \partial x_k = s_t\,\delta_{tk} - s_t s_k$, i.e., $s_t(1-s_t)$ on the diagonal and $-s_t s_k$ off diagonal. 
     Splitting the sum at $k = t$,
     \begin{equation*}
         s_t(\mathbf{a}_T) - s_t(\mathbf{b}_T)
@@ -281,7 +283,7 @@
     Part~(b) gives $\|\mathbf{x}_{t'}^{(\ell)}\| \le (2L_{\mathbf{f}})^{\ell}\,\|\mathbf{X}^{(0)}\|_{2,\infty}$. 
     Since $L$ is fixed, this is $\mathcal{O}(1)$ uniformly in $T$ and $t'$.
 
-    Substituting the two bounds into the truncated Difficult Part and using that the sum has exactly $T - 1$ terms, we get Eq.~(53):
+    Substituting the two bounds into the truncated Difficult Part and using that the sum has $T - 1$ terms, we get Eq.~(53):
     \begin{equation*}
         \sum_{\substack{t'=1 \\ t' \ne t^*}}^{T} \bigl|s_{t,t'}^{(\ell)} - s_{t,t'}^{\prime(\ell)}\bigr|\, \|\mathbf{x}_{t'}^{(\ell)}\|
         \;\le\; (T-1) \cdot \mathcal{O}(1/T^{2}) \cdot \mathcal{O}(1)
@@ -290,7 +292,7 @@
 \end{subquestion}
 
 \begin{subquestion}
-    Prove Eqs.~(55) and (56) jointly by induction on $\ell$, then apply the bound to $\mathbf{h}(\mathbf{y})$.
+    Prove Eqs.~(55-56) jointly by induction on $\ell$, then apply the bound to $\mathbf{h}(\mathbf{y})$.
 
     \paragraph{Base case ($\ell = 0$)}
     By Eq.~(38), $\mathbf{x}_t^{(0)} = (\mathbf{r}(y_t),\, \mathbf{u}(t))$. Since $\mathbf{y}$ and $\mathbf{y}'$ differ only at $t^*$:
@@ -311,17 +313,17 @@
     The bound depends on whether the query position $t$ is the flipped one, as the bilinear logit propagation in part~(i) requires the query side to also differ by $\mathcal{O}(1/T)$. 
     Split into two cases.
 
-    \emph{Case $t \ne t^*$.} Take Eq.~(54b)'s four terms and bound each:
+    \emph{Case $t \ne t^*$} Take Eq.~(54b)'s four terms and bound each:
     \begin{itemize}
-        \item \emph{Term 1} ($\sum_{t' \ne t^*} |s - s'|\,\|\mathbf{x}_{t'}^{(\ell)}\|$): the inductive hypothesis says $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ for $t' \ne t^*$ \emph{and} for the query $t$ itself (since $t \ne t^*$), so part~(i) applies and gives $\mathcal{O}(1/T)$.
+        \item \emph{Term 1} ($\sum_{t' \ne t^*} |s - s'|\,\|\mathbf{x}_{t'}^{(\ell)}\|$): the inductive hypothesis says $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$ for $t' \ne t^*$ and for the query $t$ itself (since $t \ne t^*$), so part~(i) applies and gives $\mathcal{O}(1/T)$.
         \item \emph{Term 2} ($|s_{t,t^*}^{(\ell)} - s_{t,t^*}^{\prime(\ell)}|\,\|\mathbf{x}_{t^*}^{(\ell)}\|$): part~(d) gives $|s_{t,t^*}^{(\ell)}|, |s_{t,t^*}^{\prime(\ell)}| \le \exp(2A)/T$, so the difference is $\mathcal{O}(1/T)$, and part~(b) gives $\|\mathbf{x}_{t^*}^{(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
         \item \emph{Term 3} ($\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)}\,\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\|$): the inductive hypothesis bounds each $\|\mathbf{x}_{t'}^{(\ell)} - \mathbf{x}_{t'}^{\prime(\ell)}\| = \mathcal{O}(1/T)$, so we can pull it out and use $\sum_{t' \ne t^*} s_{t,t'}^{\prime(\ell)} \le 1$. Product: $\mathcal{O}(1/T)$.
         \item \emph{Term 4} ($s_{t,t^*}^{\prime(\ell)}\,\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\|$): part~(d) gives $s_{t,t^*}^{\prime(\ell)} = \mathcal{O}(1/T)$ and the inductive hypothesis gives $\|\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}\| = \mathcal{O}(1)$. Product: $\mathcal{O}(1/T)$.
     \end{itemize}
     Summing the four $\mathcal{O}(1/T)$ contributions yields $\Delta_t^{(\ell)} = \mathcal{O}(1/T)$ for $t \ne t^*$.
 
-    \emph{Case $t = t^*$.} 
-    The query side $\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}$ is only $\mathcal{O}(1)$ by the inductive hypothesis, so the bilinear logit propagation in part~(i) does \emph{not} apply at the query position and Term~1 cannot be sharpened. 
+    \emph{Case $t = t^*$} 
+    The query side $\mathbf{x}_{t^*}^{(\ell)} - \mathbf{x}_{t^*}^{\prime(\ell)}$ is only $\mathcal{O}(1)$ by the inductive hypothesis, so the bilinear logit propagation in part~(i) does not apply at the query position and Term~1 cannot be sharpened. 
     Using the trivial bound $\sum_{t' \ne t^*} |s_{t^*,t'}^{(\ell)} - s_{t^*,t'}^{\prime(\ell)}| \le \sum_{t' \ne t^*} (s_{t^*,t'}^{(\ell)} + s_{t^*,t'}^{\prime(\ell)}) \le 2$ together with $\|\mathbf{x}_{t'}^{(\ell)}\| \le F = \mathcal{O}(1)$ from part~(b) gives Term~1 $= \mathcal{O}(1)$. 
     Terms~2-4 are still $\mathcal{O}(1/T)$ by the same arguments above as none of them invokes part~(h) on the query side.
     Hence $\Delta_{t^*}^{(\ell)} = \mathcal{O}(1)$.
@@ -339,7 +341,7 @@
         \;=\; \|\mathbf{f}(\mathbf{z}_t^{(\ell)}, \mathbf{x}_t^{(\ell)}) - \mathbf{f}(\mathbf{z}_t^{\prime(\ell)}, \mathbf{x}_t^{\prime(\ell)})\|
         \;\le\; L_{\mathbf{f}}\bigl(\Delta_t^{(\ell)} + \|\mathbf{x}_t^{(\ell)} - \mathbf{x}_t^{\prime(\ell)}\|\bigr)
     \end{equation*}
-    Splitting on the value of $t$ and combining the two-case bound on $\Delta_t^{(\ell)}$ with the inductive hypothesis,
+    Splitting on the value of $t$ and combining the two case bound on $\Delta_t^{(\ell)}$ with the inductive hypothesis,
     \begin{equation*}
         \|\mathbf{x}_t^{(\ell+1)} - \mathbf{x}_t^{\prime(\ell+1)}\|
         \;\le\;
@@ -352,21 +354,24 @@
     \begin{equation*}
         \|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \;=\; \|\mathbf{x}_T^{(L)} - \mathbf{x}_T^{\prime(L)}\| \;=\; \mathcal{O}(1/T)
     \end{equation*}
-    The final \textsc{eos} representations of a string and any one-bit-flipped variant become indistinguishable at rate $1/T$ as the sequence length grows, this is Lemma~1.
+    The final \textsc{eos} representations of a string and any one bit flipped variant become indistinguishable at rate $1/T$ as the sequence length grows, this is Lemma~1.
 \end{subquestion}
 
 \begin{subquestion}
     Apply Lemma~1 to the \texttt{Odd-1} acceptor and draw out its consequences.
 
     \paragraph{(i) Parity of $\mathbf{y}'$}
-    Suppose $\mathbf{y} \in \texttt{Odd-1}$, so $\mathbf{y}$ contains $2k+1$ ones for some $k \in \mathbb{N}$. Flipping a single bit at position $t^*$ either turns a $0$ into a $1$ (giving $2k+2$ ones) or a $1$ into a $0$ (giving $2k$ ones). Either way, the count's parity flips from odd to even, so
+    Suppose $\mathbf{y} \in \texttt{Odd-1}$, so $\mathbf{y}$ contains $2k+1$ ones for some $k \in \mathbb{N}$. 
+    Flipping a single bit at position $t^*$ either turns a $0$ into a $1$ (giving $2k+2$ ones) or a $1$ into a $0$ (giving $2k$ ones). 
+    Either way, the count's parity flips from odd to even, so
     \begin{equation*}
         \mathbf{y}' \;\notin\; \texttt{Odd-1}
     \end{equation*}
     The correct labels of $\mathbf{y}$ and $\mathbf{y}'$ are therefore opposite.
 
     \paragraph{(ii) Implication for $\hat{p}'$}
-    From part~(j), $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| = \mathcal{O}(1/T)$. Since the readout vector $\mathbf{w}$ is fixed (independent of $T$), Cauchy--Schwarz gives
+    From part~(j), $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| = \mathcal{O}(1/T)$. 
+    Since the readout vector $\mathbf{w}$ is fixed (independent of $T$), Cauchy-Schwarz gives
     \begin{equation*}
         |\mathbf{h}(\mathbf{y})^{\top} \mathbf{w} - \mathbf{h}(\mathbf{y}')^{\top} \mathbf{w}| \;\le\; \|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \cdot \|\mathbf{w}\| \;=\; \mathcal{O}(1/T)
     \end{equation*}
@@ -383,8 +388,8 @@
     \begin{equation*}
         \lim_{T \to \infty} |\hat{p} - \hat{p}'| \;=\; 0
     \end{equation*}
-    The transformer assigns asymptotically same probabilities to $\mathbf{y}$ and to its one-bit-flipped variant $\mathbf{y}'$ that has opposite parity. 
-    Hence soft-attention transformers cannot recognize \texttt{Odd-1} for long inputs and any decision boundary is eventually breached by a single-bit perturbation.
+    The transformer assigns asymptotically same probabilities to $\mathbf{y}$ and to its one bit flipped variant $\mathbf{y}'$ that has opposite parity. 
+    Hence soft attention transformers cannot recognize \texttt{Odd-1} for long inputs and any decision boundary is eventually breached by a single bit perturbation.
 \end{subquestion}
 
 \begin{subquestion}
@@ -398,28 +403,28 @@
     with $\mu, \sigma^{2}$ the empirical mean and variance of the entries of $\mathbf{x}$, and learnable $\boldsymbol{\gamma}, \boldsymbol{\beta}$. 
     The key question is whether $\operatorname{LN}$ is Lipschitz continuous, since the entire proof in parts~(b)-(j) depended on a finite Lipschitz constant for $\mathbf{f}$.
 
-    \emph{Case $\epsilon > 0$.} 
+    \emph{Case $\epsilon > 0$} 
     The denominator $\sqrt{\sigma^{2}(\mathbf{x}) + \epsilon} \ge \sqrt{\epsilon} > 0$ is bounded away from zero, so $\operatorname{LN}$ is smooth with a bounded gradient on $\mathbb{R}^{D}$, hence Lipschitz with some constant $L_{\operatorname{LN}}$. 
     The composition $\mathbf{f} \circ \operatorname{LN}$ or $\operatorname{LN} \circ \mathbf{f}$ are then Lipschitz with constant $L_{\mathbf{f}} \cdot L_{\operatorname{LN}}$. 
     Replacing $L_{\mathbf{f}}$ by this product throughout every bound from (b) onward goes through unchanged and the asymptotic $\mathcal{O}(1/T)$ conclusion of Lemma~1 is preserved.
 
-    \emph{Case $\epsilon = 0$.} 
+    \emph{Case $\epsilon = 0$} 
     The denominator $\sigma(\mathbf{x})$ vanishes whenever the entries of $\mathbf{x}$ are equal constant inputs, and the gradient of $\operatorname{LN}$ blows up near that set. 
-    So $\operatorname{LN}$ is \emph{not} globally Lipschitz, and there is no finite $L_{\operatorname{LN}}$ to absorb. 
+    So $\operatorname{LN}$ is not globally Lipschitz, and there is no finite $L_{\operatorname{LN}}$ to absorb. 
     The Lipschitz step in part~(j) breaks. 
-    A perturbation of size $\mathcal{O}(1/T)$ to the pre-normalization activations can be amplified arbitrarily after $\operatorname{LN}$, so we cannot conclude $\Delta_t^{(\ell+1)} = \mathcal{O}(1/T)$. 
+    A perturbation of size $\mathcal{O}(1/T)$ to the pre normalization activations can be amplified arbitrarily after $\operatorname{LN}$, so we cannot conclude $\Delta_t^{(\ell+1)} = \mathcal{O}(1/T)$. 
     The $\mathcal{O}(1/T)$ guarantee is lost.
 
-    \paragraph{(ii) Implication for fixed-length classification}
-    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic as the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely \emph{small}, not zero. 
+    \paragraph{(ii) Implication for fixed length classification}
+    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic as the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely small, not zero. 
     $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \ge c/T^{*}$ for some constant $c > 0$, so the representations of $\mathbf{y}$ and $\mathbf{y}'$ remain distinct for every $|\mathbf{y}| \le T^{*}$.
 
-    Hence a soft-attention transformer can in principle classify all strings of length up to $T^{*}$ correctly by choosing the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
-    The lemma does \emph{not} say transformers fail at parity for short strings.
+    Hence a soft attention transformer can in principle classify all strings of length up to $T^{*}$ correctly by choosing the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
+    The lemma does not say transformers fail at parity for short strings.
 
-    What it \emph{does} say is that no fixed parameter setting recognizes \texttt{Odd-1} for \emph{all} lengths simultaneously.
+    What it does say is that no fixed parameter setting recognizes \texttt{Odd-1} for all lengths simultaneously.
     As $|\mathbf{y}|$ grows beyond $T^{*}$, the same readout no longer separates $\mathbf{y}$ from $\mathbf{y}'$, and the classifier eventually agrees on inputs of opposite parity. 
-    Recognition of \texttt{Odd-1} is therefore length-uniformly impossible, even though it is achievable on any bounded-length subset.
+    Recognition of \texttt{Odd-1} is therefore length uniformly impossible, even though it is achievable on any bounded length subset.
 \end{subquestion}
 
 \end{question}

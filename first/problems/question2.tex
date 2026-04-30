@@ -1,4 +1,4 @@
-\begin{question}{Properties of Finite-state Language Models}
+\begin{question}{Properties of Finite state Language Models}
 
 \begin{subquestion}
 
@@ -6,7 +6,7 @@
 
 To compute the expected string length $\mu$, we must translate the probability distribution over strings into matrix operations. $\mu \triangleq \sum_{\str \in \kleene{\alphabet}} \pLM(\str) |\str|$.
 
-In a probabilistic finite-state automaton (PFSA) $\automaton = \wfsatuple$, we can group all strings by their length $k$. The probability of the model generating \emph{any} string of length $k$ is given by the sum of the weights of all paths of length $k$. Using the transition matrix $\transMtx$, the initial state probabilities $\initf$, and the stopping probabilities $\finalf$, the total probability for all strings of length $k$ is given by $\initf^\top \transMtx^k \finalf$.
+In a probabilistic finite state automaton (PFSA) $\automaton = \wfsatuple$, we can group all strings by their length $k$. The probability of the model generating any string of length $k$ is given by the sum of the weights of all paths of length $k$. Using the transition matrix $\transMtx$, the initial state probabilities $\initf$, and the stopping probabilities $\finalf$, the total probability for all strings of length $k$ is given by $\initf^\top \transMtx^k \finalf$.
 
 \begin{equation}
     \mu = \sum_{k=0}^{\infty} k \left(\initf^\top \transMtx^k \finalf\right) = \initf^\top \left( \sum_{k=0}^{\infty} k\, \transMtx^k \right) \finalf
@@ -26,7 +26,7 @@ Define a new transition block matrix $\mathbf{M} \in \R^{2|\states| \times 2|\st
     \finalf' = \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix}
 \end{equation}
 
-When we raise the block matrix $\mathbf{M}$ to the power of $k$, the diagonal blocks remain $\transMtx^k$, while the upper-right block accumulates the sum of the products. For any integer $k \ge 0$, we have:
+When we raise the block matrix $\mathbf{M}$ to the power of $k$, the diagonal blocks remain $\transMtx^k$, while the upper right block accumulates the sum of the products. For any integer $k \ge 0$, we have:
 \begin{equation}
     \mathbf{M}^k = \begin{pmatrix} \transMtx^k & k\,\transMtx^k \\ \mathbf{0} & \transMtx^k \end{pmatrix}
 \end{equation}
@@ -43,8 +43,7 @@ Substituting block definitions into this equation shows the length coefficient:
        \begin{pmatrix} \transMtx^k & k\,\transMtx^k \\ \mathbf{0} & \transMtx^k \end{pmatrix}
        \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix} \\
     &= \begin{pmatrix} \initf^\top \transMtx^k & \initf^\top (k\,\transMtx^k) \end{pmatrix}
-       \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix} \\
-    &= \initf^\top k\,\transMtx^k \finalf
+       \begin{pmatrix} \mathbf{0} \\ \finalf \end{pmatrix} = \initf^\top k\,\transMtx^k \finalf
 \end{align}
 
 Summing this extraction over all $k \in [0, \infty)$ yields the expected length $\mu$:
@@ -63,23 +62,23 @@ Summing this extraction over all $k \in [0, \infty)$ yields the expected length 
 
 \begin{itemize}
     \item Constructing the augmented matrix $\mathbf{M}$ and the vectors involves allocating memory and copying the elements of $\transMtx$, which takes $\bigo(|\states|^2)$ time.
-    \item The \texttt{allsum} algorithm evaluates the infinite sum by calculating the inverse $(\mathbf{I} - \mathbf{M})^{-1}$, or by utilizing Gaussian elimination to solve the equivalent linear system. Matrix inversion and solving linear systems both inherently have a cubic time complexity relative to the size of the matrix.
+    \item The \texttt{allsum} algorithm evaluates the infinite sum by calculating the inverse $(\mathbf{I} - \mathbf{M})^{-1}$, or by utilizing Gaussian elimination to solve the equivalent linear system. Matrix inversion and solving linear systems both have a cubic time complexity relative to the size of the matrix.
     \item Since our augmented matrix $\mathbf{M}$ has dimensions $2|\states| \times 2|\states|$, the \texttt{allsum} algorithm will execute in $\bigo((2|\states|)^3)$ time.
-    \item Because constants can be dropped in Big-O notation, $\bigo(8|\states|^3)$ simplifies directly to $\bigo(|\states|^3)$.
+    \item Because constants can be dropped in Big-O notation, $\bigo(8|\states|^3)$ simplifies to $\bigo(|\states|^3)$.
 \end{itemize}
 The $\bigo(|\states|^2)$ setup time is strictly bounded and dominated by the $\bigo(|\states|^3)$ \texttt{allsum} operation. Thus, the total overall runtime of the algorithm is proven to be $\bigo(|\states|^3)$.
 
 \paragraph{Alternative Implementation}
 
-To elaborate further on the inherent properties of finite-state language models, we can also bypass the block matrix construction to yield a slightly more memory-efficient algorithm that still meets the $\bigo(|\states|^3)$ requirement. 
+To elaborate further on the properties of finite state language models, we can also bypass the block matrix construction to yield a slightly more memory efficient algorithm that still meets the $\bigo(|\states|^3)$ requirement. 
 We know from geometric series properties of matrices that $\sum_{k=0}^{\infty} \transMtx^k = (\mathbf{I} - \transMtx)^{-1}$. 
 If we evaluate the infinite sum $\sum_{k=0}^{\infty} k\, \transMtx^k$ by factoring out $\transMtx$ and rewriting it as a matrix derivative, we arrive at:
 \begin{equation}
     \sum_{k=0}^{\infty} k\, \transMtx^k = \transMtx (\mathbf{I} - \transMtx)^{-2} = (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1}
 \end{equation}
 
-This means the mean string length can also be written purely algebraically as $\mu = \initf^\top (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1} \finalf$. 
-We can compute this directly using a sequence of linear algebraic operations:
+This means the mean string length can also be written algebraically as $\mu = \initf^\top (\mathbf{I} - \transMtx)^{-1} \transMtx (\mathbf{I} - \transMtx)^{-1} \finalf$. 
+We can compute this using a sequence of linear algebraic operations:
 \begin{enumerate}
     \item \textbf{Solve} the linear system $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \finalf$ to find $\mathbf{v}_1$. Time complexity: $\bigo(|\states|^3)$.
     \item \textbf{Multiply} the transition matrix to find $\mathbf{v}_2 = \transMtx \mathbf{v}_1$. Time complexity: $\bigo(|\states|^2)$.
@@ -87,7 +86,7 @@ We can compute this directly using a sequence of linear algebraic operations:
     \item \textbf{Compute} the final dot product $\mu = \initf^\top \mathbf{v}_3$. Time complexity: $\bigo(|\states|)$.
 \end{enumerate}
 
-The sum of these sequential execution times is $\bigo(|\states|^3) + \bigo(|\states|^2) + \bigo(|\states|^3) + \bigo(|\states|)$, which perfectly asymptotes to the required $\bigo(|\states|^3)$ runtime. Both methods are formally correct, though the block matrix approach directly fulfills the hint to deploy the existing \texttt{allsum} operation as an undisturbed black box.
+The sum of these sequential execution times is $\bigo(|\states|^3) + \bigo(|\states|^2) + \bigo(|\states|^3) + \bigo(|\states|)$, which perfectly asymptotes to the required $\bigo(|\states|^3)$ runtime. Both methods are correct, though the block matrix approach fulfills the hint to deploy the existing \texttt{allsum} operation as a black box.
 
 \end{subquestion}
 
@@ -128,9 +127,9 @@ Finally, the variance is $\sigma^2 =  \initf^\top (\transMtx^2 + \transMtx) (\ma
 \begin{enumerate}
     \item \textbf{Compute $\mu$}: Use the algorithm in (a) to find the mean string length.
     \item \textbf{Initialize}: Define the base vector $\mathbf{v}_0 = \finalf$.
-    \item \textbf{Solve First System}: $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \mathbf{v}_0$ for $\mathbf{v}_1$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-1}\finalf$)}.
-    \item \textbf{Solve Second System}: $(\mathbf{I} - \transMtx) \mathbf{v}_2 = \mathbf{v}_1$ for $\mathbf{v}_2$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-2}\finalf$)}.
-    \item \textbf{Solve Third System}: $(\mathbf{I} - \transMtx) \mathbf{v}_3 = \mathbf{v}_2$ for $\mathbf{v}_3$. \emph{(This computes $(\mathbf{I} - \transMtx)^{-3}\finalf$)}.
+    \item \textbf{Solve First System}: $(\mathbf{I} - \transMtx) \mathbf{v}_1 = \mathbf{v}_0$ for $\mathbf{v}_1$. This computes $(\mathbf{I} - \transMtx)^{-1}\finalf$.
+    \item \textbf{Solve Second System}: $(\mathbf{I} - \transMtx) \mathbf{v}_2 = \mathbf{v}_1$ for $\mathbf{v}_2$. This computes $(\mathbf{I} - \transMtx)^{-2}\finalf$.
+    \item \textbf{Solve Third System}: $(\mathbf{I} - \transMtx) \mathbf{v}_3 = \mathbf{v}_2$ for $\mathbf{v}_3$. This computes $(\mathbf{I} - \transMtx)^{-3}\finalf$.
     \item \textbf{Compute Polynomial Matrix}: Calculate the matrix $\mathbf{U} = \transMtx^2 + \transMtx$.
     \item \textbf{Compute Vector}: Calculate the product $\mathbf{w} = \mathbf{U}\, \mathbf{v}_3$.
     \item \textbf{Compute Second Moment}: Calculate the dot product $\expectation[|\str|^2] = \initf^\top \mathbf{w}$.
@@ -141,7 +140,7 @@ Finally, the variance is $\sigma^2 =  \initf^\top (\transMtx^2 + \transMtx) (\ma
 
 \begin{itemize}
     \item \textbf{Step 1:} Computing the expected length $\mu$ was proven in (a) to take $\bigo(|\states|^3)$.
-    \item \textbf{Steps 3, 4, 5:} Solving a linear system of size $|\states| \times |\states|$ has a worst-case time complexity of $\bigo(|\states|^3)$. We solve three linear systems sequentially making the time taken is $3 \times \bigo(|\states|^3)$, which asymptotically is $\bigo(|\states|^3)$.
+    \item \textbf{Steps 3, 4, 5:} Solving a linear system of size $|\states| \times |\states|$ has a worst case time complexity of $\bigo(|\states|^3)$. We solve three linear systems sequentially making the time taken is $3 \times \bigo(|\states|^3)$, which asymptotically is $\bigo(|\states|^3)$.
     \item \textbf{Step 6:} Multiplying two square matrices of size $|\states| \times |\states|$ to calculate $\transMtx^2$ requires $\bigo(|\states|^3)$ time. Adding $\transMtx$ requires $\bigo(|\states|^2)$ additions.
     \item \textbf{Step 7:} Multiplying the $|\states| \times |\states|$ matrix $\mathbf{U}$ by the $|\states| \times 1$ vector $\mathbf{v}_3$ takes $\bigo(|\states|^2)$.
     \item \textbf{Step 8:} The dot product of two vectors of size $|\states|$ executes in $\bigo(|\states|)$.
@@ -159,7 +158,7 @@ The highest order term dominates the growth rate, so the algorithm runs in time 
 
 \begin{subquestion}
 
-\subsubsection*{Entropy of a Deterministic Finite-State Language Model}
+\subsubsection*{Entropy of a Deterministic Finite State Language Model}
 
 Because the automaton $\automaton$ is deterministic, any string $\str$ corresponds to one unique path of transitions through the automaton from a given starting state.
 \begin{itemize}
@@ -219,11 +218,11 @@ Because all eigenvalues of the transition matrix $\transMtx$ have a magnitude le
 
 The overall entropy of the language model is the entropy of the path distribution. 
 Since $\automaton$ is deterministic, distinct paths produce distinct strings, so $\ent(\pLM) = \ent(\Pi)$. 
-Decompose a path into its starting state $\stateq_0$ and the remainder; by the chain rule of entropy,
+Decompose a path into its starting state $\stateq_0$ and the remainder by the chain rule of entropy,
 \begin{equation}
     \ent(\Pi) = \ent(\stateq_0) + \ent(\Pi \mid \stateq_0) = \ent(\initf) + \expectation_{\stateq_0 \sim \initf}\!\big[\ent(\Pi_{\stateq_0})\big] = \ent(\initf) + \initf^\top \mathbf{H}
 \end{equation}
-where $\ent(\initf) = -\sum_{\stateq \in \states} \initf_\stateq \log \initf_\stateq$ is the entropy of the initial-state distribution.
+where $\ent(\initf) = -\sum_{\stateq \in \states} \initf_\stateq \log \initf_\stateq$ is the entropy of the initial state distribution.
 
 Substitute the solved vector $\mathbf{H}$ into the final equation:
 \begin{equation}

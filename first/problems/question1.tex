@@ -4,19 +4,20 @@
 
 \subsubsection*{Linear Guarding vs.\ Arbitrary Classifiers}
 
-No. By Definition 2, the statement that $\mathbf{X}$ \emph{linearly guards} $Z$ only guarantees that the trivially attainable loss $L_\tau$ is optimal over the set of all affine transformations and linear predictors. 
+No. 
+By Definition 2, the statement that $\mathbf{X}$ linearly guards $Z$ only guarantees that the trivially attainable loss $L_\tau$ is optimal over the set of all affine transformations and linear predictors. 
 Mathematically, it ensures that $\expectation\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau$ holds for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$.
-However, the classifier $c : \mathbf{x} \mapsto c(\mathbf{x}) \in \mathcal{Z}$ proposed in the question is an \emph{arbitrary} classifier, meaning it is not restricted to being linear.
-Because linear guarding only constrains linear probes, a non-linear classifier such as a multi-layer perceptron could draw non-linear decision boundaries to extract the concept information $Z$ still embedded within $\mathbf{X}$.
-Consequently, such a non-linear classifier could successfully achieve a loss lower than the trivially attainable loss $L_\tau$.
+However, the classifier $c : \mathbf{x} \mapsto c(\mathbf{x}) \in \mathcal{Z}$ proposed in the question is an arbitrary classifier, meaning it is not restricted to being linear.
+Because linear guarding only constrains linear probes, a non linear classifier such as a multi layer perceptron could draw non linear decision boundaries to extract the concept information $Z$ still embedded within $\mathbf{X}$.
+Consequently, such a non linear classifier could successfully achieve a loss lower than the trivially attainable loss $L_\tau$.
 
 \end{subquestion}
 
 \begin{subquestion}
 
-\subsubsection*{Class-Conditional Mean Equality Implies Linear Guarding}
+\subsubsection*{Class Conditional Mean Equality Implies Linear Guarding}
 
-If each class-conditional mean satisfies $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$, then $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross-entropy loss $\mathcal{L}$. 
+If each class conditional mean satisfies $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$, then $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross entropy loss $\mathcal{L}$. 
 To prove that $\mathbf{X}$ linearly guards $Z$, we must show that for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$ (where $\mathbf{A} \in \R^{k \times d}$ and $\mathbf{b} \in \R^k$), the expected loss is bounded by the trivially attainable loss $L_\tau$:
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq L_\tau
@@ -27,14 +28,14 @@ Rewrite the expected loss by conditioning on the class $Z$:
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_Z \Big[ \expectation_{\mathbf{X} \mid Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z) \mid Z\right] \Big]
 \end{equation}
 
-The cross-entropy loss $\mathcal{L}(\mathbf{y}, Z = i) = -\ln \frac{\exp(y_i)}{\sum_{j=1}^k \exp(y_j)}$ is convex w.r.t. its input logits $\mathbf{y}$. 
+The cross entropy loss $\mathcal{L}(\mathbf{y}, Z = i) = -\ln \frac{\exp(y_i)}{\sum_{j=1}^k \exp(y_j)}$ is convex w.r.t. its input logits $\mathbf{y}$. 
 Because $\mathbf{y} = \mathbf{A}\mathbf{x} + \mathbf{b}$ is an affine, the composition $\mathcal{L}(\mathbf{A}\mathbf{x} + \mathbf{b}, Z=i)$ remains convex w.r.t. $\mathbf{x}$.
 Applying Jensen's inequality gives:
 \begin{equation}
     \expectation_{\mathbf{X} \mid Z=i}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, i)\right] \geq \mathcal{L}\Big(\expectation_{\mathbf{X} \mid Z=i}\left[\mathbf{A}\mathbf{X} + \mathbf{b}\right], i\Big) = \mathcal{L}\Big(\mathbf{A}\,\expectation[\mathbf{X} \mid Z=i] + \mathbf{b}, i\Big)
 \end{equation}
 
-Use the fact that class-conditional means equal the global mean, $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$.
+Use the fact that class conditional means equal the global mean, $\expectation[\mathbf{X} \mid Z = i] = \expectation[\mathbf{X}]$.
 \begin{equation}
     \expectation_{\mathbf{X} \mid Z=i}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, i)\right] \geq \mathcal{L}\Big(\mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}, i\Big)
 \end{equation}
@@ -43,7 +44,8 @@ Substituting this lower bound back into the outer expectation over $Z$ gives:
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq \expectation_Z \Big[\mathcal{L}(\mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}, Z)\Big]
 \end{equation}
-Notice that $\mathbf{b}' \triangleq \mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}$ is simply a constant vector in $\R^k$, independent of $\mathbf{X}$. Thus, the right side of the inequality evaluates the loss of a \emph{constant} predictor $f(\mathbf{x}) = \mathbf{b}'$.
+Notice that $\mathbf{b}' \triangleq \mathbf{A}\,\expectation[\mathbf{X}] + \mathbf{b}$ is simply a constant vector in $\R^k$, independent of $\mathbf{X}$. 
+Thus, the right side of the inequality evaluates the loss of a constant predictor $f(\mathbf{x}) = \mathbf{b}'$.
 
 The trivially attainable loss $L_\tau$ is the infimum of the expected loss over all constant predictors:
 \begin{equation}
@@ -58,19 +60,19 @@ Combining the inequalities, we have shown that for any affine predictor $f(\math
 \begin{equation}
     \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(f(\mathbf{X}), Z)\right] \geq L_\tau
 \end{equation}
-Therefore, by Definition 2, $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross-entropy loss $\mathcal{L}$.
+Therefore, by Definition 2, $\mathbf{X}$ linearly guards $Z$ w.r.t. the cross entropy loss $\mathcal{L}$.
 
 \end{subquestion}
 
 \begin{subquestion}
 
-\subsubsection*{Boundedness and Symmetry of the Cross-Entropy Gradient}
+\subsubsection*{Boundedness and Symmetry of the Cross Entropy Gradient}
 
 Let $\mathbf{x}$ be an observed representation, and $\mathbf{y} \triangleq \mathbf{A}\mathbf{x} + \mathbf{b}$.
 
-\paragraph{All partial derivatives of the cross-entropy loss w.r.t. $\mathbf{y}$ are bounded.}
+\paragraph{All partial derivatives of the cross entropy loss w.r.t. $\mathbf{y}$ are bounded}
 
-Recall the definition of the cross-entropy loss for logit vector $\mathbf{y}$ and true concept class $Z = c$:
+Recall the definition of the cross entropy loss for logit vector $\mathbf{y}$ and true concept class $Z = c$:
 \begin{equation}
     \mathcal{L}(\mathbf{y}, Z = c) = -\ln\left(\frac{\exp(y_c)}{\sum_{j=1}^k \exp(y_j)}\right) = -y_c + \ln\left(\sum_{j=1}^k \exp(y_j)\right)
 \end{equation}
@@ -92,14 +94,17 @@ Since the softmax output lies in $(0, 1)$ for any $\mathbf{y}$, we have $-1 < \f
 \end{align}
 We have $0 < \frac{\partial}{\partial y_m}\mathcal{L}(\mathbf{y}, Z = c) < 1$. Because partial derivatives fall within the interval $(-1, 1)$, they are uniformly bounded.
 
-\paragraph{For any $j_1, j_2 \neq i$, we have $\dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) \neq 0$.}
+\paragraph{For any $j_1, j_2 \neq i$, we have $\dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \dfrac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) \neq 0$}
 Find the partial derivative of the loss w.r.t. $y_i$ when the true class is $Z = j$ with $j \neq i$. 
 Using the derivation from above, the partial derivatives are the $i$-th component of the softmax output:
 \begin{equation}
     \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_1) = \frac{\partial}{\partial y_i}\mathcal{L}(\mathbf{y}, Z = j_2) = \frac{\exp(y_i)}{\sum_{l=1}^k \exp(y_l)}
 \end{equation}
 
-Both expressions are equal. Furthermore, because the exponential function $e^x$ is positive for any real $x$, we have $\exp(y_i) > 0$. The denominator is a sum of positive exponentials, so it is greater than zero. Therefore:
+Both expressions are equal. 
+Furthermore, because the exponential function $e^x$ is positive for any real $x$, we have $\exp(y_i) > 0$. 
+The denominator is a sum of positive exponentials, so it is greater than zero. 
+Therefore:
 \begin{equation}
     \frac{\exp(y_i)}{\sum_{l=1}^k \exp(y_l)} > 0
 \end{equation}
@@ -113,31 +118,40 @@ Thus, we have shown that:
 
 \begin{subquestion}
 
-\subsubsection*{Linear Guarding Implies Equal Class-Conditional Means}
+\subsubsection*{Linear Guarding Implies Equal Class Conditional Means}
 
-Because $\mathbf{X}$ linearly guards $Z$, the expected loss for any affine predictor $f(\mathbf{x}) = \mathbf{A}\mathbf{x} + \mathbf{b}$ is bounded by the trivially attainable loss $L_\tau$ achieved by the constant predictor $\mathbf{b}^\ast$.
-Thus,
+Because $\mathbf{X}$ linearly guards $Z$, Definition 2 gives
 \begin{equation}
-    J(\mathbf{A}, \mathbf{b}) \triangleq \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right]
+    J(\mathbf{A}, \mathbf{b}) \triangleq \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] \geq L_\tau
 \end{equation}
-attains its minimum at $\mathbf{A} = \mathbf{0}$ and $\mathbf{b} = \mathbf{b}^\ast$.
-By the first-order optimality, the gradient of $J$ w.r.t. $\mathbf{A}$, evaluated at $\mathbf{A} = \mathbf{0}, \mathbf{b} = \mathbf{b}^\ast$:
+for every affine $(\mathbf{A}, \mathbf{b}) \in \R^{k \times d} \times \R^k$. 
+By assumption, the infimum in Eq.~(2) is attained at the constant predictor $\mathbf{b}^\ast$, so
 \begin{equation}
-    \nabla_{\mathbf{A}}\, \expectation_{\mathbf{X}, Z}\left[\mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right]\Big|_{\mathbf{A} = \mathbf{0}, \mathbf{b} = \mathbf{b}^\ast} = \mathbf{0}
+    J(\mathbf{0}, \mathbf{b}^\ast) = \expectation_Z\left[\mathcal{L}(\mathbf{b}^\ast, Z)\right] = L_\tau
+\end{equation}
+Combining the two displays, $J(\mathbf{0}, \mathbf{b}^\ast) = L_\tau \leq J(\mathbf{A}, \mathbf{b})$ for all $(\mathbf{A}, \mathbf{b})$, so $(\mathbf{0}, \mathbf{b}^\ast)$ is a global minimizer of $J$ on $\R^{k \times d} \times \R^k$. 
+Since $J$ is differentiable (justified below via DCT), the first order optimality conditions hold:
+\begin{equation}
+    \nabla_{\mathbf{A}}\, J(\mathbf{A}, \mathbf{b})\Big|_{(\mathbf{0}, \mathbf{b}^\ast)} = \mathbf{0}, \qquad \nabla_{\mathbf{b}}\, J(\mathbf{A}, \mathbf{b})\Big|_{(\mathbf{0}, \mathbf{b}^\ast)} = \mathbf{0}
 \end{equation}
 
 Move the derivative inside the expectation to evaluate the gradient. Let $\mathbf{y} = \mathbf{A}\mathbf{X} + \mathbf{b}$.
 \begin{equation}
-    \frac{\partial \mathcal{L}}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, \frac{\partial y_i}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, X_j.
+    \frac{\partial \mathcal{L}}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, \frac{\partial y_i}{\partial A_{ij}} = \frac{\partial \mathcal{L}}{\partial y_i}\, X_j
 \end{equation}
-In part c we proved that the partial derivatives of the cross-entropy loss w.r.t. $\mathbf{y}$ are bounded between $-1$ and $1$.
-Because the gradient w.r.t $\mathbf{y}$ is uniformly bounded, the Dominated Convergence Theorem allows us to interchange expectation and differentiation:
+From part (c), every entry of $\nabla_{\mathbf{y}}\, \mathcal{L}(\mathbf{y}, Z) = \mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}}$ lies in $[-1, 1]$, so $\|\mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}}\|_\infty \leq 1$ uniformly in $\mathbf{y}$ and $Z$. 
+Hence the integrand $\nabla_{\mathbf{A}}\, \mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z) = (\mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}})\, \mathbf{X}^\top$ satisfies
+\begin{equation}
+    \big\| (\mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}})\, \mathbf{X}^\top \big\|_F \leq \|\mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}}\| \cdot \|\mathbf{X}\| \leq \sqrt{k}\, \|\mathbf{X}\|,
+\end{equation}
+and $\sqrt{k}\,\|\mathbf{X}\|$ is integrable, since $\expectation[\|\mathbf{X}\|] < \infty$ is implicit in the existence of $\expectation[\mathbf{X}]$. 
+The Dominated Convergence Theorem then justifies interchanging $\nabla_{\mathbf{A}}$ and $\expectation$:
 \begin{equation}
     \nabla_{\mathbf{A}} J(\mathbf{A}, \mathbf{b}) = \expectation_{\mathbf{X}, Z}\left[\nabla_{\mathbf{A}}\, \mathcal{L}(\mathbf{A}\mathbf{X} + \mathbf{b}, Z)\right] = \expectation_{\mathbf{X}, Z}\left[\nabla_{\mathbf{y}}\, \mathcal{L}(\mathbf{y}, Z)\, \mathbf{X}^\top\right]
 \end{equation}
 
 From part c, for any logit $y_m$ the partial derivative of the loss is $\frac{\partial \mathcal{L}}{\partial y_m} = \mathrm{softmax}(\mathbf{y})_m - \mathbb{1}(Z = m)$.
-Let $\mathbf{p}(\mathbf{y})$ be the vector of softmax probabilities and let $\widetilde{\mathbf{Z}}$ be the one-hot encoding of $Z$.
+Let $\mathbf{p}(\mathbf{y})$ be the vector of softmax probabilities and let $\widetilde{\mathbf{Z}}$ be the one hot encoding of $Z$.
 \begin{equation}
     \nabla_{\mathbf{y}}\, \mathcal{L}(\mathbf{y}, Z) = \mathbf{p}(\mathbf{y}) - \widetilde{\mathbf{Z}}.
 \end{equation}
@@ -147,20 +161,21 @@ Evaluating the gradient w.r.t. $\mathbf{A}$ at the optimum $\mathbf{A} = \mathbf
 \end{equation}
 Restricting to a single class $i$, this implies
 \begin{equation}
-    \expectation_{\mathbf{X}, Z}\left[(p_i(\mathbf{b}^\ast) - \mathbb{1}(Z = i))\, \mathbf{X}\right] = \mathbf{0}.
+    \expectation_{\mathbf{X}, Z}\left[(p_i(\mathbf{b}^\ast) - \mathbb{1}(Z = i))\, \mathbf{X}\right] = \mathbf{0}
 \end{equation}
 By linearity of expectation,
 \begin{equation}
     p_i(\mathbf{b}^\ast)\, \expectation[\mathbf{X}] = \expectation\left[\mathbf{X}\, \mathbb{1}(Z = i)\right]
 \end{equation}
 
-To determine $p_i(\mathbf{b}^\ast)$, recall that $\mathbf{b}^\ast$ minimizes the trivially attainable loss $L_\tau = \expectation_Z[\mathcal{L}(\mathbf{b}, Z)]$. First-order optimality w.r.t. $\mathbf{b}$ gives:
+To determine $p_i(\mathbf{b}^\ast)$, recall that $\mathbf{b}^\ast$ minimizes the trivially attainable loss $L_\tau = \expectation_Z[\mathcal{L}(\mathbf{b}, Z)]$. 
+First order optimality w.r.t. $\mathbf{b}$ gives:
 \begin{equation}
     \nabla_{\mathbf{b}}\, \expectation_Z\left[\mathcal{L}(\mathbf{b}, Z)\right] = \expectation_Z\left[\nabla_{\mathbf{b}}\, \mathcal{L}(\mathbf{b}, Z)\right] = \expectation_Z\left[\mathbf{p}(\mathbf{b}) - \widetilde{\mathbf{Z}}\right] = \mathbf{0}
 \end{equation}
 Hence, at the optimum $\mathbf{b}^\ast$, the softmax probabilities must match the marginal class probabilities:
 \begin{equation}
-    \mathbf{p}(\mathbf{b}^\ast) = \expectation_Z[\widetilde{\mathbf{Z}}], \qquad\text{and thus}\qquad p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i).
+    \mathbf{p}(\mathbf{b}^\ast) = \expectation_Z[\widetilde{\mathbf{Z}}], \qquad\text{and thus}\qquad p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i)
 \end{equation}
 
 Substituting $p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i)$ back into $(24)$:
@@ -169,11 +184,11 @@ Substituting $p_i(\mathbf{b}^\ast) = \mathbb{P}(Z = i)$ back into $(24)$:
 \end{equation}
 By the definition of conditional expectation, $\expectation[\mathbf{X}\, \mathbb{1}(Z = i)] = \expectation[\mathbf{X} \mid Z = i]\, \mathbb{P}(Z = i)$, so
 \begin{equation}
-    \mathbb{P}(Z = i)\, \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i]\, \mathbb{P}(Z = i).
+    \mathbb{P}(Z = i)\, \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i]\, \mathbb{P}(Z = i)
 \end{equation}
 Since $\mathbb{P}(Z = i) \neq 0$ by assumption, we can divide both sides by $\mathbb{P}(Z = i)$ to obtain
 \begin{equation}
-    \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i].
+    \expectation[\mathbf{X}] = \expectation[\mathbf{X} \mid Z = i]
 \end{equation}
 This holds for every class $i$.
 
@@ -181,17 +196,18 @@ This holds for every class $i$.
 
 \begin{subquestion}
 
-\subsubsection*{Zero Cross-Covariance Characterizes Equal Class-Conditional Means}
+\subsubsection*{Zero Cross Covariance Characterizes Equal Class Conditional Means}
 
-The cross-covariance between $\mathbf{X}$ and $\widetilde{\mathbf{Z}}$ is
+The cross covariance between $\mathbf{X}$ and $\widetilde{\mathbf{Z}}$ is
 \begin{equation}
-    \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \expectation\left[\mathbf{X}\, \widetilde{\mathbf{Z}}^\top\right] - \expectation[\mathbf{X}]\, \expectation[\widetilde{\mathbf{Z}}]^\top.
+    \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \expectation\left[\mathbf{X}\, \widetilde{\mathbf{Z}}^\top\right] - \expectation[\mathbf{X}]\, \expectation[\widetilde{\mathbf{Z}}]^\top
 \end{equation}
 Its $j^\text{th}$ column is the covariance of the vector $\mathbf{X}$ with the scalar $\widetilde{Z}_j$:
 \begin{equation}
-    \mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \expectation[\mathbf{X}\, \widetilde{Z}_j] - \expectation[\mathbf{X}]\, \expectation[\widetilde{Z}_j].
+    \mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \expectation[\mathbf{X}\, \widetilde{Z}_j] - \expectation[\mathbf{X}]\, \expectation[\widetilde{Z}_j]
 \end{equation}
-Since $\widetilde{Z}_j = \mathbb{1}(Z = j)$, we have $\expectation[\widetilde{Z}_j] = \mathbb{P}(Z = j)$ and, by the definition of conditional expectation, $\expectation[\mathbf{X}\, \widetilde{Z}_j] = \expectation[\mathbf{X} \mid Z = j]\, \mathbb{P}(Z = j)$. Substituting gives:
+Since $\widetilde{Z}_j = \mathbb{1}(Z = j)$, we have $\expectation[\widetilde{Z}_j] = \mathbb{P}(Z = j)$ and, by the definition of conditional expectation, $\expectation[\mathbf{X}\, \widetilde{Z}_j] = \expectation[\mathbf{X} \mid Z = j]\, \mathbb{P}(Z = j)$. 
+Substituting gives:
 \begin{equation}
     \mathrm{Cov}(\mathbf{X}, \widetilde{Z}_j) = \Big(\expectation[\mathbf{X} \mid Z = j] - \expectation[\mathbf{X}]\Big)\, \mathbb{P}(Z = j)
 \end{equation}
@@ -210,23 +226,24 @@ Since $\mathbb{P}(Z = j) \neq 0$ by assumption, the directions give $\expectatio
 
 \subsubsection*{Linear Guarding under an Affine Map}
 
-A representation linearly guards $Z$ if and only if its cross-covariance with the one-hot encoded concept vector $\widetilde{\mathbf{Z}}$ is zero. 
+A representation linearly guards $Z$ if and only if its cross covariance with the one hot encoded concept vector $\widetilde{\mathbf{Z}}$ is zero. 
 Applied to the transformed representation $r(\mathbf{X}) = \mathbf{P}\mathbf{X} + \mathbf{b}$:
 \begin{equation}
-    r(\mathbf{X}) \text{ linearly guards } Z \iff \boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{0}.
+    r(\mathbf{X}) \text{ linearly guards } Z \iff \boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{0}
 \end{equation}
 
 Adding the constant vector $\mathbf{b}$ only shifts the mean and does not change covariance, so
 \begin{equation}
-    \mathrm{Cov}(\mathbf{P}\mathbf{X} + \mathbf{b}, \widetilde{\mathbf{Z}}) = \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}}).
+    \mathrm{Cov}(\mathbf{P}\mathbf{X} + \mathbf{b}, \widetilde{\mathbf{Z}}) = \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}})
 \end{equation}
 For any constant matrix $\mathbf{P}$ and random vectors $\mathbf{X}, \mathbf{Y}$, $\mathrm{Cov}(\mathbf{P}\mathbf{X}, \mathbf{Y}) = \mathbf{P}\, \mathrm{Cov}(\mathbf{X}, \mathbf{Y})$.
 \begin{equation}
-    \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \mathrm{Cov}(\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+    \mathrm{Cov}(\mathbf{P}\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \mathrm{Cov}(\mathbf{X}, \widetilde{\mathbf{Z}}) = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}
 \end{equation}
-Hence $\boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$. Combining with the guarding characterisation above yields:
+Hence $\boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$. 
+Combining with the guarding characterisation above yields:
 \begin{equation}
-    r(\mathbf{X}) \text{ linearly guards } Z \iff \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}.
+    r(\mathbf{X}) \text{ linearly guards } Z \iff \mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}
 \end{equation}
 
 \end{subquestion}
@@ -237,34 +254,35 @@ Hence $\boldsymbol{\Sigma}_{r(\mathbf{X}), \widetilde{\mathbf{Z}}} = \mathbf{P}\
 
 Define the distortion induced by the affine map $r(\mathbf{X}) = \mathbf{P}\mathbf{X} + \mathbf{b}$ as $D(\mathbf{P}, \mathbf{b}) \triangleq \expectation\left[\|\mathbf{P}\mathbf{X} + \mathbf{b} - \mathbf{X}\|^2\right]$.
 
-\paragraph{Part 1: If $\expectation[\mathbf{X}] = \mathbf{0}$, then $D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2$.}
+\paragraph{Part 1: If $\expectation[\mathbf{X}] = \mathbf{0}$, then $D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2$}
 
 Group the terms with $\mathbf{X}$:
 \begin{equation}
-    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|(\mathbf{P}\mathbf{X} - \mathbf{X}) + \mathbf{b}\|^2\right].
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|(\mathbf{P}\mathbf{X} - \mathbf{X}) + \mathbf{b}\|^2\right]
 \end{equation}
 Use $\|\mathbf{u} + \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 + 2\langle \mathbf{u}, \mathbf{v}\rangle$ with $\mathbf{u} = \mathbf{P}\mathbf{X} - \mathbf{X}$ and $\mathbf{v} = \mathbf{b}$, and expectation linearity:
 \begin{equation}
-    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2 + 2\, \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right].
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2 + 2\, \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right]
 \end{equation}
-Since $\mathbf{b}$ is deterministic, $\expectation[\|\mathbf{b}\|^2] = \|\mathbf{b}\|^2$. Linearity of the inner product and of expectation gives:
+Since $\mathbf{b}$ is deterministic, $\expectation[\|\mathbf{b}\|^2] = \|\mathbf{b}\|^2$. 
+Linearity of the inner product and of expectation gives:
 \begin{equation}
-    \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right] = \langle \expectation[\mathbf{P}\mathbf{X} - \mathbf{X}], \mathbf{b}\rangle = \langle (\mathbf{P} - \mathbf{I})\, \expectation[\mathbf{X}], \mathbf{b}\rangle.
+    \expectation\left[\langle \mathbf{P}\mathbf{X} - \mathbf{X}, \mathbf{b}\rangle\right] = \langle \expectation[\mathbf{P}\mathbf{X} - \mathbf{X}], \mathbf{b}\rangle = \langle (\mathbf{P} - \mathbf{I})\, \expectation[\mathbf{X}], \mathbf{b}\rangle
 \end{equation}
 Since $\expectation[\mathbf{X}] = \mathbf{0}$, this reduces to $\langle \mathbf{0}, \mathbf{b}\rangle = 0$, and the cross term vanishes, leaving:
 \begin{equation}
-    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2.
+    D(\mathbf{P}, \mathbf{b}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] + \|\mathbf{b}\|^2
 \end{equation}
 
-\paragraph{Part 2: Minimizing $D(\mathbf{P}, \mathbf{b})$ subject to a constraint on $\mathbf{P}$ is equivalent to minimizing $D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]$.}
+\paragraph{Part 2: Minimizing $D(\mathbf{P}, \mathbf{b})$ subject to a constraint on $\mathbf{P}$ is equivalent to minimizing $D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]$}
 
-From part~1, when $\expectation[\mathbf{X}] = \mathbf{0}$ the distortion decouples into two non-negative terms:
+From part~1, when $\expectation[\mathbf{X}] = \mathbf{0}$ the distortion decouples into two nonnegative terms:
 \begin{equation}
-    D(\mathbf{P}, \mathbf{b}) = \underbrace{\expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]}_{\text{depends only on }\mathbf{P}} + \underbrace{\|\mathbf{b}\|^2}_{\text{depends only on }\mathbf{b}}.
+    D(\mathbf{P}, \mathbf{b}) = \underbrace{\expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]}_{\text{depends only on }\mathbf{P}} + \underbrace{\|\mathbf{b}\|^2}_{\text{depends only on }\mathbf{b}}
 \end{equation}
 The constraint is only on $\mathbf{P}$, so $\mathbf{b}$ can be chosen freely. Since $\|\mathbf{b}\|^2 \geq 0$, the unconstrained optimum is $\mathbf{b}^\ast = \mathbf{0}$. Substituting back, the minimization reduces to
 \begin{equation}
-    D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right].
+    D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right]
 \end{equation}
 
 \end{subquestion}
@@ -278,22 +296,22 @@ Assume $\expectation[\mathbf{X}] = \mathbf{0}$ and $\boldsymbol{\Sigma}_{\mathbf
     \mathbf{P}^\ast = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+
 \end{equation}
 
-\paragraph{Part 1: $\mathbf{P}^\ast$ satisfies the guarding constraint.}
+\paragraph{Part 1: $\mathbf{P}^\ast$ satisfies the guarding constraint}
 
 Substitute $\mathbf{P}^\ast$ into the constraint:
 \begin{equation}
-    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}
 \end{equation}
 By the property of the pseudoinverse, $\mathbf{A}\mathbf{A}^+\mathbf{A} = \mathbf{A}$ for any matrix $\mathbf{A}$, so
 \begin{equation}
-    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}.
+    \mathbf{P}^\ast\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}
 \end{equation}
 
-\paragraph{Part 2: $\mathbf{P}^\ast$ minimizes the distortion.}
+\paragraph{Part 2: $\mathbf{P}^\ast$ minimizes the distortion}
 
 From part (g), we minimize $D(\mathbf{P}) = \expectation\left[\|\mathbf{P}\mathbf{X} - \mathbf{X}\|^2\right] = \expectation\left[\|(\mathbf{P} - \mathbf{I})\mathbf{X}\|^2\right]$ subject to $\mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$. Applying Hint~1 together with $\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} = \mathbf{I}$:
 \begin{equation}
-    D(\mathbf{P}) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})\, \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} (\mathbf{P} - \mathbf{I})^\top\right) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})(\mathbf{P} - \mathbf{I})^\top\right) = \|\mathbf{P} - \mathbf{I}\|_F^2.
+    D(\mathbf{P}) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})\, \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} (\mathbf{P} - \mathbf{I})^\top\right) = \mathrm{tr}\!\left((\mathbf{P} - \mathbf{I})(\mathbf{P} - \mathbf{I})^\top\right) = \|\mathbf{P} - \mathbf{I}\|_F^2
 \end{equation}
 The problem reduces to minimizing $\|\mathbf{P} - \mathbf{I}\|_F^2$ subject to constraint $\mathbf{P}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}$.
 Writing $\mathbf{P}$ by its rows $\mathbf{p}_i^\top$, the constraint forces each row to satisfy $\mathbf{p}_i^\top\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}} = \mathbf{0}^\top$, each $\mathbf{p}_i$ lies in the orthogonal complement of $V \triangleq \mathrm{colsp}(\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}})$. 
@@ -301,9 +319,17 @@ The Frobenius objective decouples row-wise:
 \begin{equation}
     \|\mathbf{P} - \mathbf{I}\|_F^2 = \sum_i \|\mathbf{p}_i - \mathbf{e}_i\|^2,
 \end{equation}
-so the optimum is found by independently projecting each $\mathbf{e}_i$ onto $V^\perp$: $\mathbf{p}_i^\ast = \Pi_{V^\perp} \mathbf{e}_i$. Stacking the rows using $\Pi_{V^\perp}^\top = \Pi_{V^\perp}$ yields $\mathbf{P}^\ast = \Pi_{V^\perp}$. By Hint~2 applied to $\mathbf{A} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$:
+so the optimum is found by independently projecting each $\mathbf{e}_i$ onto $V^\perp$: $\mathbf{p}_i^\ast = \Pi_{V^\perp} \mathbf{e}_i$. 
+The optimal $i$-th row $\mathbf{p}_i^\ast = \Pi_{V^\perp} \mathbf{e}_i$ equals the $i$-th column of $\Pi_{V^\perp}$, since multiplying by $\mathbf{e}_i$ extracts the $i$-th column. 
+Stacking these vectors as rows yields a matrix whose $(i, j)$ entry is the $j$-th coordinate of the $i$-th column of $\Pi_{V^\perp}$, $(\Pi_{V^\perp})_{j, i}$. 
+So the row stacked matrix is $\Pi_{V^\perp}^\top$. 
+Orthogonal projections are symmetric ($\Pi_{V^\perp}^\top = \Pi_{V^\perp}$), hence
 \begin{equation}
-    \mathbf{P}^\ast = \Pi_{V^\perp} = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+.
+    \mathbf{P}^\ast = \Pi_{V^\perp}
+\end{equation}
+By Hint~2 applied to $\mathbf{A} = \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}$:
+\begin{equation}
+    \mathbf{P}^\ast = \Pi_{V^\perp} = \mathbf{I} - \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}^+
 \end{equation}
 
 \end{subquestion}
@@ -314,7 +340,7 @@ so the optimum is found by independently projecting each $\mathbf{e}_i$ onto $V^
 
 Drop the simplifying assumptions and allow $\expectation[\mathbf{X}] \neq \mathbf{0}$ and $\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}} \neq \mathbf{I}$. Define the whitening matrix $\mathbf{W} \triangleq \left(\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}\right)^+$.
 
-\paragraph{Whitening the representation.}
+\paragraph{Whitening the representation}
 
 Let $\mathbf{Y} \triangleq \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}])$. Then
 \begin{equation}
@@ -322,10 +348,10 @@ Let $\mathbf{Y} \triangleq \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}])$. T
 \end{equation}
 on the support of $\mathbf{X} - \expectation[\mathbf{X}]$. By translation invariance and linearity of covariance in its first argument:
 \begin{equation}
-    \boldsymbol{\Sigma}_{\mathbf{Y}, \widetilde{\mathbf{Z}}} = \mathrm{Cov}(\mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]), \widetilde{\mathbf{Z}}) = \mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}.
+    \boldsymbol{\Sigma}_{\mathbf{Y}, \widetilde{\mathbf{Z}}} = \mathrm{Cov}(\mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]), \widetilde{\mathbf{Z}}) = \mathbf{W}\, \boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}
 \end{equation}
 
-\paragraph{Applying part (h) in the whitened space.}
+\paragraph{Applying part (h) in the whitened space}
 
 Since $\mathbf{Y}$ now satisfies the assumptions of part~(h), the optimal guarding projection in whitened coordinates is
 \begin{equation}
@@ -333,15 +359,16 @@ Since $\mathbf{Y}$ now satisfies the assumptions of part~(h), the optimal guardi
 \end{equation}
 so the guarded whitened representation is $\widehat{\mathbf{Y}} = \mathbf{P}_{\mathbf{Y}}^\ast \mathbf{Y}$.
 
-\paragraph{Mapping back to the original space.}
+\paragraph{Mapping back to the original space}
 
 Undo the whitening and centering by applying $\mathbf{W}^+ = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}$ and adding back $\expectation[\mathbf{X}]$:
 \begin{align}
     r(\mathbf{X}) &= \mathbf{W}^+ \widehat{\mathbf{Y}} + \expectation[\mathbf{X}] \\
     &= \mathbf{W}^+\!\left(\mathbf{I} - \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}}\right) \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) + \expectation[\mathbf{X}] \\
-    &= \mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) + \expectation[\mathbf{X}].
+    &= \mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) + \expectation[\mathbf{X}]
 \end{align}
-The product $\mathbf{W}^+ \mathbf{W} = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}\, (\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})^+$ is the orthogonal projection onto $\mathrm{colsp}(\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})$, which contains $\mathbf{X} - \expectation[\mathbf{X}]$ almost surely, so $\mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) = \mathbf{X} - \expectation[\mathbf{X}]$. The means cancel, giving the final form:
+The product $\mathbf{W}^+ \mathbf{W} = \boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2}\, (\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})^+$ is the orthogonal projection onto $\mathrm{colsp}(\boldsymbol{\Sigma}_{\mathbf{X}, \mathbf{X}}^{1/2})$, which contains $\mathbf{X} - \expectation[\mathbf{X}]$ almost surely, so $\mathbf{W}^+ \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]) = \mathbf{X} - \expectation[\mathbf{X}]$. 
+The means cancel, giving the final form:
 \begin{equation}
     r(\mathbf{X}) = \mathbf{X} - \mathbf{W}^+ \Pi_{\mathbf{W}\boldsymbol{\Sigma}_{\mathbf{X}, \widetilde{\mathbf{Z}}}} \mathbf{W}(\mathbf{X} - \expectation[\mathbf{X}]),
 \end{equation}
