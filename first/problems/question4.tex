@@ -416,15 +416,21 @@
     The $\mathcal{O}(1/T)$ guarantee is lost.
 
     \paragraph{(ii) Implication for fixed length classification}
-    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic as the gap shrinks as $T \to \infty$, but for any fixed length $T^{*}$ it is merely small, not zero. 
-    $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\| \ge c/T^{*}$ for some constant $c > 0$, so the representations of $\mathbf{y}$ and $\mathbf{y}'$ remain distinct for every $|\mathbf{y}| \le T^{*}$.
+    The bound $|\hat{p} - \hat{p}'| = \mathcal{O}(1/T)$ is asymptotic. 
+    For any fixed finite length $T^{*}$, the gap $\|\mathbf{h}(\mathbf{y}) - \mathbf{h}(\mathbf{y}')\|$ is merely small (at most $C/T^{*}$ for some constant $C$), not zero. 
+    Two consequences follow.
 
-    Hence a soft attention transformer can in principle classify all strings of length up to $T^{*}$ correctly by choosing the readout $\mathbf{w}$ with $\|\mathbf{w}\|$ scaling like $T^{*}$ so that the small representation gap is amplified through the sigmoid past the $0.5$ decision boundary. 
-    The lemma does not say transformers fail at parity for short strings.
+    \textbf{For inputs of length $\le T^{*}$:} there are only finitely many strings in $\{0, 1\}^{\le T^{*}}$, and the function $\mathbf{y} \mapsto \mathbb{1}[\mathbf{y} \in \texttt{Odd-1}]$ is well defined on this finite set. 
+    By the universal approximation properties of transformers with sufficient width and depth, there exist parameter settings under which the classifier correctly labels every $\mathbf{y}$ with $|\mathbf{y}| \le T^{*}$. 
+    Lemma~1 places no obstruction on this.
 
-    What it does say is that no fixed parameter setting recognizes \texttt{Odd-1} for all lengths simultaneously.
-    As $|\mathbf{y}|$ grows beyond $T^{*}$, the same readout no longer separates $\mathbf{y}$ from $\mathbf{y}'$, and the classifier eventually agrees on inputs of opposite parity. 
-    Recognition of \texttt{Odd-1} is therefore length uniformly impossible, even though it is achievable on any bounded length subset.
+    \textbf{For unbounded inputs:} Lemma~1 says no single fixed parameter setting recognizes \texttt{Odd-1} uniformly over all lengths. 
+    Concretely, fix any parameters $\theta$ and any decision threshold. 
+    Since $|\hat{p} - \hat{p}'| \to 0$ as $T \to \infty$, for sufficiently large $T$ the predictions $\hat{p}, \hat{p}'$ on a string and its single bit flip lie within any prescribed margin and in particular both fall on the same side of $0.5$. 
+    The transformer then assigns the same label to two strings of opposite parity, contradicting recognition of \texttt{Odd-1}.
+
+    The asymptotic nature of the result identifies where transformers fail (length uniform recognition) versus where they remain capable (any bounded length subset). 
+    This contrasts with formal language hierarchies based on finite state machines, which can recognize \texttt{Odd-1} at every length with the same two state automaton.
 \end{subquestion}
 
 \end{question}
