@@ -8,3 +8,4 @@
 *.idx
 *.aux
 .*
+.DS_Store
