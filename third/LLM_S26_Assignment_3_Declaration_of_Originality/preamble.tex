@@ -1,0 +1,352 @@
+\textheight24cm
+\topmargin-2.5cm
+\oddsidemargin+0cm
+\textwidth16.3cm 
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage[latin1]{inputenc}
+\usepackage{ifthen}
+\usepackage{enumerate}
+\usepackage{lastpage}
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{bm}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{nicefrac}
+\usepackage{epsfig}
+\usepackage{etoolbox}
+\usepackage{framed}
+\usepackage{hyperref}
+\usepackage{datetime}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{svg}
+
+\usepackage[noend]{algpseudocode}
+\algnewcommand{\parState}[1]{\State%
+    \parbox[t]{\dimexpr\linewidth-\algmargin}{\strut\hangindent=\algorithmicindent \hangafter=1 #1\strut}}
+
+\algrenewcommand\algorithmicindent{1.0em}%
+\renewcommand\algorithmicdo{:}
+\renewcommand\algorithmicthen{:}
+
+%\newcommand{\linetofill}{\ \\\hphantom{\hspace{0mm}}\hrulefill\ \\}
+\newcommand{\linetofill}{\ \\\hphantom{\hspace{0mm}}\dotfill\ \\}
+\newcommand{\vlinetofill}[1]{\\\rule{#1 mm}{0.1mm}\ \\}
+\newcommand{\cbox}{
+  \setlength{\unitlength}{1pt}
+  \begin{picture}(10,10)
+    \put(0,0){\line(1,0){8}} \put(0,8){\line(1,0){8}}
+    \put(0,0){\line(0,1){8}} \put(8,0){\line(0,1){8}}
+  \end{picture}
+}
+\newcommand{\bigcbox}{
+  \setlength{\unitlength}{3pt}
+  \begin{picture}(10,10)(1,1)
+    \put(0,0){\line(1,0){8}} \put(0,8){\line(1,0){8}}
+    \put(0,0){\line(0,1){8}} \put(8,0){\line(0,1){8}}
+  \end{picture}
+}
+% points and boxes on the right
+\newcommand{\points}[1]{
+\ \\[-5mm]
+\hphantom{\ }\hfill\textbf{#1 pts \bigcbox \hspace{-6mm}}
+\vspace{5mm}
+}
+% multiple choice checkboxes
+%\newcommand{\boxt}{\hspace*{2em} $[~~]$ \textsf{True}}
+%\newcommand{\boxf}{\hspace*{2em} $[~~]$ \textsf{False}}
+\newcommand{\boxt}{\hspace*{2em} $\square$ \textsf{True}}
+\newcommand{\boxf}{\hspace*{2em} $\square$ \textsf{False}}
+\newcommand{\justif}{\textsf{Justification}:  \rule{0ex}{2em}\dotfill\\\rule{0ex}{2em}\dotfill}
+\newcommand{\checkboxWithJustification}{\boxt \boxf\\ \justif\\}
+\newcommand{\checkbox}{\boxt \boxf}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{pgfplots}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+\renewcommand{\S}{{\cal S}}
+\usepackage{pgfplots}
+    \pgfplotsset{compat=newest}
+    \pgfplotsset{small, every non boxed x axis/.append style={x axis line style=-},
+every non boxed y axis/.append style={y axis line style=-}}
+
+\usepackage{bbm}
+
+\newcommand{\solution}[1]{{\color{ETHRed}{#1}}}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{llm}[2014/08/24 Example LaTeX package]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% COLORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{colortbl}
+
+% ETH colors
+\definecolor{ETHBlue}{RGB}{33,92,175}	% blue 
+\definecolor{ETHGreen}{RGB}{98,115,19}		% green
+\definecolor{ETHPurpleDark}{RGB}{140,10,89}	% purple
+\definecolor{ETHPurple}{RGB}{163,7,116}	% purple
+\definecolor{ETHGray}{RGB}{111,111,111}	% gray
+\definecolor{ETHRed}{RGB}{183,53,45}	% red
+\definecolor{ETHPetrol}{RGB}{0,120,148}	% green/blue 
+\definecolor{ETHBronze}{RGB}{142,103,19}	% bronze
+
+% ETH color aliases 
+\colorlet{ETHdarkblue}{ETHBlue!80!black}
+\colorlet{ETHdarkgreen}{ETHGreen!80!black}
+\colorlet{ETHpink}{ETHPurple}
+\colorlet{ETHgray}{ETHGray}
+\colorlet{ETHred}{ETHRed}
+\colorlet{ETHgreenblue}{ETHPetrol}
+\colorlet{ETHbrown}{ETHBronze}
+
+% Define the colors
+\definecolor{TextBlack}{RGB}{51,51,51}
+\definecolor{BackgroundWhite}{RGB}{255,255,255}
+
+% Blues
+\definecolor{AccentBlue}{RGB}{0,122,204}
+\definecolor{LightBlue}{RGB}{173,216,230}
+\definecolor{DarkBlue}{RGB}{0,51,102}
+
+% Greens
+\definecolor{AccentGreen}{RGB}{70,160,73}
+\definecolor{LightGreen}{RGB}{144,238,144}
+\definecolor{DarkGreen}{RGB}{0,100,0}
+
+% Reds
+\definecolor{AccentRed}{RGB}{255,0,0}
+\definecolor{LightRed}{RGB}{255,99,71}
+\definecolor{DarkRed}{RGB}{139,0,0}
+
+% Oranges
+\definecolor{AccentOrange}{RGB}{255,165,0}
+\definecolor{LightOrange}{RGB}{255,204,153}
+\definecolor{DarkOrange}{RGB}{255,140,0}
+
+% Neutral Colors
+\definecolor{NeutralLightGray}{RGB}{204,204,204}
+\definecolor{NeutralMediumGray}{RGB}{102,102,102}
+
+% Yellow for notes/highlights
+\definecolor{NoteYellow}{RGB}{255,255,0}
+
+% Diverse Colors
+\definecolor{DiversePurple}{RGB}{128,0,128}
+\definecolor{DiverseTeal}{RGB}{0,128,128}
+\definecolor{DiverseOlive}{RGB}{128,128,0}
+\definecolor{DiverseCyan}{RGB}{0,128,192}
+\definecolor{DiverseMagenta}{RGB}{192,0,128}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+
+% \usepackage[margin=1in]{geometry}
+\usepackage{geometry}
+
+% \usepackage{mathpazo}
+
+% math packages
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% scientific notation
+\usepackage{siunitx}
+\usepackage{etoolbox}
+
+
+\newtoggle{publish-notes}
+\iftoggle{publish-notes}{
+    \colorlet{MacroColor}{black}
+}{
+    \colorlet{MacroColor}{ETHPetrol}
+}
+\colorlet{MACROCOLOR}{MacroColor}
+
+\usepackage{natbib}
+\newcommand*{\nameadjunct}{\relax}
+\makeatletter
+\renewcommand*{\NAT@nmfmt}[1]{\NAT@up #1\nameadjunct}
+\makeatother
+\newcommand*{\citeposs}[2][]{%
+    \begingroup
+    \renewcommand*{\nameadjunct}{'s}%
+    \citet[#1]{#2}%
+    \endgroup
+}
+\usepackage{xfrac}
+\usepackage{mathtools}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{blkarray}
+\usepackage{nicefrac}
+\usepackage{xspace}
+\usepackage[makeroom]{cancel}
+
+\usepackage{datetime}
+
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{relsize}
+\usepackage{stmaryrd}
+
+\usepackage{url}
+
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage{blindtext}
+
+\usepackage{pdfpages}
+
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{scalerel}
+
+\usepackage{thmtools}
+\usepackage{thm-restate}
+
+\usepackage{array}
+\usepackage[inline]{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+
+\usepackage{mathabx}
+
+\usepackage{imakeidx}
+\makeindex[columns=2, options= -s indexstyle.ist]
+
+\usepackage{titling}
+
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% code rendering
+\usepackage[finalizecache,cachedir=.]{minted}
+%\usepackage{textgreek}
+
+% tikz packages
+\usepackage{tikz}
+\usetikzlibrary{automata, fit, positioning, matrix, arrows.meta, decorations.pathmorphing, shapes, shapes.multipart, chains,shadows.blur, shadows}
+\usetikzlibrary{shadings}
+
+% plotting packages
+\usepackage{tikz-qtree}
+
+\usepackage{tikz-dependency}
+
+%tikz FSA settings
+\tikzset{
+transition/.style={-{Latex[length=1.8mm, width=1.4mm]}},
+every loop/.append style=-{Latex[length=1.8mm, width=1.4mm]},
+initial text=$ $,
+node distance=2cm,
+every state/.style={thick, draw=gray, fill=gray!15, circular drop shadow},
+every initial by arrow/.style={text=ETHGreen,-{Latex[length=1.8mm, width=1.4mm]}},
+initial text = $ $
+}
+
+%% Cleveref settings
+\usepackage{cleveref}
+\crefname{section}{\S}{\S\S}
+\crefname{table}{Tab.}{Tabs.}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{algorithm}{Algorithm}{Algorithms}
+\crefname{equation}{Eq.}{Eqs.}
+\crefname{fact}{Fact}{Facts}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{assumption}{Assumption}{Assumptions}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{chapter}{Chapter}{Chapters}
+\crefname{line}{line}{lines}
+\crefname{principle}{Principle}{Principles}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{Exercise}{Exercise}{Exercises}
+\crefformat{section}{\S#2#1#3}
+
+% Tokenization 
+\DeclareCaptionType{myexamplef}[Example][List of Examples]
+\crefname{myexamplef}{Example}{}
+\DeclareCaptionType{codef}[Snippet][List of Snippets]
+\crefname{codef}{Snippet}{}
+
+% TODO notes
+\setlength{\marginparwidth}{2cm}
+\iftoggle{publish-notes}{
+    \usepackage[disable]{todonotes}
+}{
+    \usepackage{todonotes}
+}
+\makeatletter
+\newcommand*\iftodonotes{\if@todonotes@disabled\expandafter\@secondoftwo\else\expandafter\@firstoftwo\fi}  %
+\makeatother
+\newcommand{\noindentaftertodo}{\iftodonotes{\noindent}{}}
+\newcommand{\fixme}[2][]{\todo[color=yellow,size=\scriptsize,fancyline,caption={},#1]{#2}}
+% \renewcommand{\note}[4][]{\todo[author=#2,color=#3,size=\scriptsize,fancyline,caption={},#1]{#4}} % default note settings, used by macros below.
+\newcommand{\note}[4][]{\todo[author=#2,color=#3,size=\scriptsize,fancyline,caption={},#1]{#4}} % default note settings, used by macros below.
+
+\newcommand{\ryan}[2][]{\note[#1]{ryan}{violet!40}{#2}}
+\newcommand{\clara}[2][]{\note[#1]{clara}{orange!40}{#2}}
+\newcommand{\nik}[2][]{\note[#1]{nik}{yellow!40}{#2}}
+\newcommand{\afra}[2][]{\note[#1]{afra}{coral}{#2}}
+\newcommand{\anej}[2][]{\note[#1]{anej}{AccentGreen!80!LightGreen}{#2}}
+\newcommand{\leo}[2][]{\note[#1]{leo}{cyan}{#2}}
+\newcommand{\clemente}[2][]{\note[#1]{clemente}{green}{#2}}
+\newcommand{\tianyu}[2][]{\note[#1]{tianyu}{red!40}{#2}}
+\newcommand{\luca}[2][]{\note[#1]{luca}{magenta}{#2}}
+\newcommand{\alexandra}[2][]{\note[#1]{alexandra}{teal!40}{#2}}
+\newcommand{\franz}[2][]{\note[#1]{franz}{orange}{#2}}
+
+\newcommand{\Ryan}[2][]{\ryan[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Clara}[2][]{\clara[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Anej}[2][]{\anej[inline,#1]{#2}\noindentaftertodo}
+\renewcommand{\Leo}[2][]{\leo[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Andreas}[2][]{\andreas[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Eleanor}[2][]{\eleanor[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Alexandra}[2][]{\alexandra[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Tianyu}[2][]{\tianyu[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Timv}[2][]{\timv[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Clemente}[2][]{\clemente[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Luca}[2][]{\luca[inline,#1]{#2}\noindentaftertodo}
+\newcommand{\Franz}[2][]{\franz[inline,#1]{#2}\noindentaftertodo}
+
+\newcommand{\response}[1]{\vspace{3pt}\hrule\vspace{3pt}\textbf{#1:}}    % insert \response{myname} within someone else's todonote
+
+% algorithms stuff
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}  % do not also use algorithmic
+\algrenewcommand\algorithmicindent{1.0em}%
+\renewcommand\algorithmicdo{:}
+\renewcommand\algorithmicthen{:}
+\newcommand{\rightcomment}[1]{{\color{gray} \(\triangleright\) {\footnotesize\textit{#1}}}}
+\algrenewcommand{\algorithmiccomment}[1]{\hfill \rightcomment{#1}}  % redefines \Comment
+\algnewcommand{\LineComment}[1]{\State\rightcomment{#1}}
+\algnewcommand{\LinesComment}[1]{\State\rightcomment{\parbox[t]{.95\linewidth-\leftmargin-\widthof{\(\triangleright\) }}{#1}}}
+\renewcommand\algorithmicdo{:}
+\renewcommand\algorithmicthen{:}
+\algrenewcommand\alglinenumber[1]{{\tiny\color{black!50}#1.}\hspace{-2pt}}
+
+\newcommand{\algorithmicfunc}[1]{\textbf{def} {#1}:}
+\algdef{SE}[FUNC]{Func}{EndFunc}[1]{\algorithmicfunc{#1}}{}
+\makeatletter
+\ifthenelse{\equal{\ALG@noend}{t}}%
+{\algtext*{EndFunc}}
+{}%
+\makeatother
