@@ -1,0 +1,884 @@
+{
+  "0": [
+    {
+      "text": "weapons",
+      "score": 0.9999997019767761
+    },
+    {
+      "text": "weaponry",
+      "score": 0.902729868888855
+    },
+    {
+      "text": "weapon",
+      "score": 0.8766393065452576
+    },
+    {
+      "text": "firearms",
+      "score": 0.8552991151809692
+    },
+    {
+      "text": "knives",
+      "score": 0.8103776574134827
+    },
+    {
+      "text": "instruments",
+      "score": 0.8034653663635254
+    },
+    {
+      "text": "swords",
+      "score": 0.7963144183158875
+    },
+    {
+      "text": "handguns",
+      "score": 0.7701887488365173
+    },
+    {
+      "text": "cannons",
+      "score": 0.7671149969100952
+    },
+    {
+      "text": "knifes",
+      "score": 0.7639997601509094
+    }
+  ],
+  "1": [
+    {
+      "text": "tobacco",
+      "score": 0.9999992251396179
+    },
+    {
+      "text": "nicotine",
+      "score": 0.8084485530853271
+    },
+    {
+      "text": "cigar",
+      "score": 0.7998099327087402
+    },
+    {
+      "text": "cigarette",
+      "score": 0.7902523279190063
+    },
+    {
+      "text": "cinnamon",
+      "score": 0.786022961139679
+    },
+    {
+      "text": "fiction",
+      "score": 0.7855758666992188
+    },
+    {
+      "text": "cancer",
+      "score": 0.7840601205825806
+    },
+    {
+      "text": "breathe",
+      "score": 0.78400057554245
+    },
+    {
+      "text": "ethics",
+      "score": 0.7822777032852173
+    },
+    {
+      "text": "marketing",
+      "score": 0.7822567224502563
+    }
+  ],
+  "2": [
+    {
+      "text": "firearms",
+      "score": 0.9999996423721313
+    },
+    {
+      "text": "weapons",
+      "score": 0.8551949858665466
+    },
+    {
+      "text": "handguns",
+      "score": 0.8413985371589661
+    },
+    {
+      "text": "ammunition",
+      "score": 0.8060585260391235
+    },
+    {
+      "text": "rifles",
+      "score": 0.7992948889732361
+    },
+    {
+      "text": "weaponry",
+      "score": 0.7959101796150208
+    },
+    {
+      "text": "handgun",
+      "score": 0.7952157258987427
+    },
+    {
+      "text": "shotguns",
+      "score": 0.7849187254905701
+    },
+    {
+      "text": "instruments",
+      "score": 0.7782094478607178
+    },
+    {
+      "text": "airgun",
+      "score": 0.7666852474212646
+    }
+  ],
+  "3": [
+    {
+      "text": "poison",
+      "score": 0.9999994039535522
+    },
+    {
+      "text": "poisoning",
+      "score": 0.8386019468307495
+    },
+    {
+      "text": "poisonous",
+      "score": 0.8244372010231018
+    },
+    {
+      "text": "toxic",
+      "score": 0.8171440958976746
+    },
+    {
+      "text": "passion",
+      "score": 0.8145421147346497
+    },
+    {
+      "text": "poisons",
+      "score": 0.8102010488510132
+    },
+    {
+      "text": "potion",
+      "score": 0.8087555766105652
+    },
+    {
+      "text": "risk",
+      "score": 0.7995775938034058
+    },
+    {
+      "text": "hazardous",
+      "score": 0.7966164946556091
+    },
+    {
+      "text": "vision",
+      "score": 0.7965871095657349
+    }
+  ],
+  "4": [
+    {
+      "text": "parking garage",
+      "score": 0.9999997615814209
+    },
+    {
+      "text": "parking structure",
+      "score": 0.8979517221450806
+    },
+    {
+      "text": "parking garages",
+      "score": 0.8911644220352173
+    },
+    {
+      "text": "parking closet",
+      "score": 0.8708762526512146
+    },
+    {
+      "text": "underground parking",
+      "score": 0.8633052110671997
+    },
+    {
+      "text": "parking cellar",
+      "score": 0.8560833930969238
+    },
+    {
+      "text": "parking elevator",
+      "score": 0.8546614050865173
+    },
+    {
+      "text": "parking jail",
+      "score": 0.8384630680084229
+    },
+    {
+      "text": "parking storages",
+      "score": 0.832038938999176
+    },
+    {
+      "text": "parking garaged",
+      "score": 0.8264061212539673
+    }
+  ],
+  "5": [
+    {
+      "text": "swimming pool",
+      "score": 0.9999996423721313
+    },
+    {
+      "text": "swim pool",
+      "score": 0.9324796199798584
+    },
+    {
+      "text": "poolside pool",
+      "score": 0.860554575920105
+    },
+    {
+      "text": "swimming rink",
+      "score": 0.8570255041122437
+    },
+    {
+      "text": "swimming pools",
+      "score": 0.8462352156639099
+    },
+    {
+      "text": "swimming poolside",
+      "score": 0.8375744223594666
+    },
+    {
+      "text": "diving pool",
+      "score": 0.8304793238639832
+    },
+    {
+      "text": "aquatics pool",
+      "score": 0.8293907046318054
+    },
+    {
+      "text": "swimming pooling",
+      "score": 0.8283767104148865
+    },
+    {
+      "text": "swimming pond",
+      "score": 0.8179454207420349
+    }
+  ],
+  "6": [
+    {
+      "text": "football stadium",
+      "score": 0.9999995827674866
+    },
+    {
+      "text": "footballing stadium",
+      "score": 0.95096755027771
+    },
+    {
+      "text": "soccer stadium",
+      "score": 0.9454421997070312
+    },
+    {
+      "text": "football arena",
+      "score": 0.915391206741333
+    },
+    {
+      "text": "football stadia",
+      "score": 0.8960602879524231
+    },
+    {
+      "text": "athletic stadium",
+      "score": 0.8842930793762207
+    },
+    {
+      "text": "footballing arena",
+      "score": 0.8828352689743042
+    },
+    {
+      "text": "footfall stadium",
+      "score": 0.8809865713119507
+    },
+    {
+      "text": "stadium football",
+      "score": 0.8797488212585449
+    },
+    {
+      "text": "stadium stadia",
+      "score": 0.8791974782943726
+    }
+  ],
+  "7": [
+    {
+      "text": "post office",
+      "score": 0.9999996423721313
+    },
+    {
+      "text": "postal office",
+      "score": 0.9495318531990051
+    },
+    {
+      "text": "post offices",
+      "score": 0.9353677034378052
+    },
+    {
+      "text": "postal offices",
+      "score": 0.9004640579223633
+    },
+    {
+      "text": "postage office",
+      "score": 0.8848821520805359
+    },
+    {
+      "text": "postage offices",
+      "score": 0.8431118726730347
+    },
+    {
+      "text": "signpost office",
+      "score": 0.8427734375
+    },
+    {
+      "text": "postbox offices",
+      "score": 0.834610104560852
+    },
+    {
+      "text": "postmaster office",
+      "score": 0.8304470777511597
+    },
+    {
+      "text": "signpost offices",
+      "score": 0.8140255212783813
+    }
+  ],
+  "8": [
+    {
+      "text": "lunch box",
+      "score": 0.9999997019767761
+    },
+    {
+      "text": "lunch boxes",
+      "score": 0.9022706747055054
+    },
+    {
+      "text": "lunches box",
+      "score": 0.8752461671829224
+    },
+    {
+      "text": "lunch container",
+      "score": 0.8672842979431152
+    },
+    {
+      "text": "lunches boxes",
+      "score": 0.8533483147621155
+    },
+    {
+      "text": "lunches container",
+      "score": 0.8364553451538086
+    },
+    {
+      "text": "lunch boxed",
+      "score": 0.8341702222824097
+    },
+    {
+      "text": "lunch containers",
+      "score": 0.8284434080123901
+    },
+    {
+      "text": "lunches containers",
+      "score": 0.8091158866882324
+    },
+    {
+      "text": "lunch contain",
+      "score": 0.7904415130615234
+    }
+  ],
+  "9": [
+    {
+      "text": "speed limit",
+      "score": 0.9999997615814209
+    },
+    {
+      "text": "speed limits",
+      "score": 0.9456102252006531
+    },
+    {
+      "text": "speeded limit",
+      "score": 0.938919186592102
+    },
+    {
+      "text": "speeds limit",
+      "score": 0.8915606141090393
+    },
+    {
+      "text": "speedometer limit",
+      "score": 0.8884361386299133
+    },
+    {
+      "text": "speeding limit",
+      "score": 0.8833427429199219
+    },
+    {
+      "text": "speeded limits",
+      "score": 0.8757845163345337
+    },
+    {
+      "text": "speeds limits",
+      "score": 0.8747503757476807
+    },
+    {
+      "text": "slower limit",
+      "score": 0.8685240149497986
+    },
+    {
+      "text": "slower limits",
+      "score": 0.8485791683197021
+    }
+  ],
+  "10": [
+    {
+      "text": "ice cream",
+      "score": 0.9999996423721313
+    },
+    {
+      "text": "ice icecream",
+      "score": 0.9288042187690735
+    },
+    {
+      "text": "ice creams",
+      "score": 0.9210679531097412
+    },
+    {
+      "text": "icecream ice",
+      "score": 0.9039137959480286
+    },
+    {
+      "text": "icecream icecream",
+      "score": 0.8969104290008545
+    },
+    {
+      "text": "icecream cream",
+      "score": 0.8966432809829712
+    },
+    {
+      "text": "iced icecream",
+      "score": 0.8963707685470581
+    },
+    {
+      "text": "ices icecream",
+      "score": 0.890668511390686
+    },
+    {
+      "text": "icy icecream",
+      "score": 0.888536274433136
+    },
+    {
+      "text": "icecream ices",
+      "score": 0.8811471462249756
+    }
+  ],
+  "11": [
+    {
+      "text": "train station",
+      "score": 0.999999463558197
+    },
+    {
+      "text": "rail station",
+      "score": 0.9493398070335388
+    },
+    {
+      "text": "trains station",
+      "score": 0.9458911418914795
+    },
+    {
+      "text": "railroad station",
+      "score": 0.9417319297790527
+    },
+    {
+      "text": "railway station",
+      "score": 0.9162185788154602
+    },
+    {
+      "text": "railways station",
+      "score": 0.8923810124397278
+    },
+    {
+      "text": "station train",
+      "score": 0.8783166408538818
+    },
+    {
+      "text": "locomotive station",
+      "score": 0.8635972142219543
+    },
+    {
+      "text": "station railroad",
+      "score": 0.8451886177062988
+    },
+    {
+      "text": "tram station",
+      "score": 0.8419735431671143
+    }
+  ],
+  "12": [
+    {
+      "text": "seat belt",
+      "score": 0.9999995827674866
+    },
+    {
+      "text": "seat harness",
+      "score": 0.8562766909599304
+    },
+    {
+      "text": "seatings belt",
+      "score": 0.8491981625556946
+    },
+    {
+      "text": "seat fanbelt",
+      "score": 0.8473813533782959
+    },
+    {
+      "text": "seat lifebelt",
+      "score": 0.797788679599762
+    },
+    {
+      "text": "seat strapped",
+      "score": 0.7973897457122803
+    },
+    {
+      "text": "seat harnesses",
+      "score": 0.7845881581306458
+    },
+    {
+      "text": "adjustment belt",
+      "score": 0.7795474529266357
+    },
+    {
+      "text": "backseat belts",
+      "score": 0.7786823511123657
+    },
+    {
+      "text": "ignition belt",
+      "score": 0.7743003368377686
+    }
+  ],
+  "13": [
+    {
+      "text": "Pulp Fiction",
+      "score": 0.999999463558197
+    },
+    {
+      "text": "The Shining",
+      "score": 0.7669281363487244
+    },
+    {
+      "text": "Reservoir Dogs",
+      "score": 0.7643017172813416
+    },
+    {
+      "text": "Beverly Hills Cop",
+      "score": 0.7596463561058044
+    },
+    {
+      "text": "Kill Bill Vol 1",
+      "score": 0.7510170340538025
+    },
+    {
+      "text": "Die Hard",
+      "score": 0.7508810758590698
+    },
+    {
+      "text": "The Big Lebowski",
+      "score": 0.7495290040969849
+    },
+    {
+      "text": "Fight Club",
+      "score": 0.7486489415168762
+    },
+    {
+      "text": "Back to the Future",
+      "score": 0.7462917566299438
+    },
+    {
+      "text": "Kill Bill Vol 2",
+      "score": 0.7454627752304077
+    }
+  ],
+  "14": [
+    {
+      "text": "The Dark Knight",
+      "score": 0.9999995827674866
+    },
+    {
+      "text": "The Dark Knight Rises",
+      "score": 0.8703580498695374
+    },
+    {
+      "text": "The Batman",
+      "score": 0.8298239707946777
+    },
+    {
+      "text": "Batman Begins",
+      "score": 0.7427467703819275
+    },
+    {
+      "text": "Joker",
+      "score": 0.7360921502113342
+    },
+    {
+      "text": "Justice League",
+      "score": 0.735539436340332
+    },
+    {
+      "text": "The Godfather",
+      "score": 0.7303482890129089
+    },
+    {
+      "text": "The Matrix",
+      "score": 0.729942798614502
+    },
+    {
+      "text": "Black Panther",
+      "score": 0.7282585501670837
+    },
+    {
+      "text": "Man of Steel",
+      "score": 0.7215262651443481
+    }
+  ],
+  "15": [
+    {
+      "text": "Everything Everywhere All at Once",
+      "score": 0.9999991655349731
+    },
+    {
+      "text": "I'm Thinking of Ending Things",
+      "score": 0.5547890067100525
+    },
+    {
+      "text": "The Great Escape",
+      "score": 0.536723792552948
+    },
+    {
+      "text": "All About My Mother",
+      "score": 0.5219587683677673
+    },
+    {
+      "text": "There's Something About Mary",
+      "score": 0.5199454426765442
+    },
+    {
+      "text": "Inside Out",
+      "score": 0.517236053943634
+    },
+    {
+      "text": "Inside Job",
+      "score": 0.5137416124343872
+    },
+    {
+      "text": "Life Is Beautiful",
+      "score": 0.5103940367698669
+    },
+    {
+      "text": "Poor Things",
+      "score": 0.5098477602005005
+    },
+    {
+      "text": "Do the Right Thing",
+      "score": 0.5059521198272705
+    }
+  ],
+  "16": [
+    {
+      "text": "Margin Call",
+      "score": 0.9999990463256836
+    },
+    {
+      "text": "The Wolf of Wall Street",
+      "score": 0.6845640540122986
+    },
+    {
+      "text": "Wall Street",
+      "score": 0.6739614605903625
+    },
+    {
+      "text": "Skyfall",
+      "score": 0.6712353825569153
+    },
+    {
+      "text": "The Social Network",
+      "score": 0.6594535708427429
+    },
+    {
+      "text": "The Big Short",
+      "score": 0.6561208963394165
+    },
+    {
+      "text": "Raging Bull",
+      "score": 0.6555583477020264
+    },
+    {
+      "text": "Moneyball",
+      "score": 0.6532025933265686
+    },
+    {
+      "text": "The Irishman",
+      "score": 0.6502820253372192
+    },
+    {
+      "text": "12 Angry Men",
+      "score": 0.6393097639083862
+    }
+  ],
+  "17": [
+    {
+      "text": "Casablanca",
+      "score": 0.9999993443489075
+    },
+    {
+      "text": "Aladdin",
+      "score": 0.671994686126709
+    },
+    {
+      "text": "La La Land",
+      "score": 0.6442303657531738
+    },
+    {
+      "text": "Lawrence of Arabia",
+      "score": 0.6427587270736694
+    },
+    {
+      "text": "Annabelle",
+      "score": 0.6375560760498047
+    },
+    {
+      "text": "It's a Wonderful Life",
+      "score": 0.632561445236206
+    },
+    {
+      "text": "Double Indemnity",
+      "score": 0.6281084418296814
+    },
+    {
+      "text": "Elvis",
+      "score": 0.6278913021087646
+    },
+    {
+      "text": "Gone with the Wind",
+      "score": 0.623862087726593
+    },
+    {
+      "text": "Twilight",
+      "score": 0.6202288866043091
+    }
+  ],
+  "18": [
+    {
+      "text": "Moneyball",
+      "score": 0.9999995231628418
+    },
+    {
+      "text": "The Wolf of Wall Street",
+      "score": 0.707017719745636
+    },
+    {
+      "text": "The Big Short",
+      "score": 0.6983226537704468
+    },
+    {
+      "text": "No Country for Old Men",
+      "score": 0.6928694844245911
+    },
+    {
+      "text": "Boyhood",
+      "score": 0.687609076499939
+    },
+    {
+      "text": "American Sniper",
+      "score": 0.6862518191337585
+    },
+    {
+      "text": "The Social Network",
+      "score": 0.6845834255218506
+    },
+    {
+      "text": "American Hustle",
+      "score": 0.6777991056442261
+    },
+    {
+      "text": "Top Gun",
+      "score": 0.6772706508636475
+    },
+    {
+      "text": "Money Monster",
+      "score": 0.6769018173217773
+    }
+  ],
+  "19_neg_l2_abs_topk": [
+    {
+      "text": "privacy invasion",
+      "score": -0.0011194940889254212
+    },
+    {
+      "text": "privacy invasions",
+      "score": -0.36235472559928894
+    },
+    {
+      "text": "invasion privacy",
+      "score": -0.37941864132881165
+    },
+    {
+      "text": "privacy incarnation",
+      "score": -0.4496852159500122
+    },
+    {
+      "text": "invasions privacy",
+      "score": -0.4540713131427765
+    },
+    {
+      "text": "privacy incarnations",
+      "score": -0.4744187295436859
+    },
+    {
+      "text": "invasion snooping",
+      "score": -0.4986746907234192
+    },
+    {
+      "text": "privacy ins",
+      "score": -0.5008637309074402
+    },
+    {
+      "text": "in privacy",
+      "score": -0.5028945803642273
+    },
+    {
+      "text": "privacy miscalculations",
+      "score": -0.5205970406532288
+    }
+  ],
+  "19": [
+    {
+      "text": "privacy invasion",
+      "score": 0.9999994039535522
+    },
+    {
+      "text": "privacy invasions",
+      "score": 0.934349536895752
+    },
+    {
+      "text": "invasion privacy",
+      "score": 0.9280208349227905
+    },
+    {
+      "text": "privacy incarnation",
+      "score": 0.8988915681838989
+    },
+    {
+      "text": "invasions privacy",
+      "score": 0.8969097137451172
+    },
+    {
+      "text": "privacy incarnations",
+      "score": 0.8874635696411133
+    },
+    {
+      "text": "invasion snooping",
+      "score": 0.8756617903709412
+    },
+    {
+      "text": "privacy ins",
+      "score": 0.8745676875114441
+    },
+    {
+      "text": "in privacy",
+      "score": 0.8735485672950745
+    },
+    {
+      "text": "privacy miscalculations",
+      "score": 0.8644893765449524
+    }
+  ]
+}
