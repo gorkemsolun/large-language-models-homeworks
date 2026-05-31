@@ -98,7 +98,6 @@ for _f in ("Q2_query_cache.jsonl", "Q2_state.json", "Q2_known_pairs.jsonl", "Q2_
 
 CELLS = ["# ============",            # ATTACK_HELPERS
          "# ---------------- Solve the p-value",
-         "# ---------------- Precondition for the boolean",
          "# ---------------- Solve the boolean",
          "# Suffixes discovered",     # SET_SUFFIXES (range guard)
          "# Validate your suffixes against all 7 strings"]  # cached validation cell

@@ -607,34 +607,19 @@ log(f"all >= 0.01: {all(x >= 0.01 for x in ps)} | target <=41: {Lp <= 41} | full
 print_quota_usage(); print_known_pairs()
 '''
 
-BOOL_DIAG = r'''# ---------------- Precondition for the boolean attack -----------------------
-# The boolean attack uses all-distinct-token probes (>=51 distinct pairs), which
-# satisfy BOTH server gates (>=50 tokens AND >=50 distinct pairs). Verify here and
-# HARD-ASSERT a well-formed response, so a gate rejection fails loudly right now
-# instead of deep inside the bootstrap later.
-_probe = FREE[:53]                                     # 53 distinct tokens -> 52 distinct pairs
-_probe_str = tokens_to_string(np.array(_probe, dtype=int))
-log(f"probe: tokens = {len(_probe)} | distinct pairs = {len(unique_pairs(_probe))}")
+BOOL_SOLVE = r'''# ---------------- Solve the boolean endpoint -------------------------------
+# BOOL_BOUNDARY_OPT: the boundary-pair optimisation tries to shave ~1-2 tokens by
+# making (string_end, c1) red. It can only test the ~half of string-ends that are
+# "green-connected" to the base, so it rarely reaches full marks, AND it costs
+# 2-4x the queries (often near the 3000/day cap). Calibrated to your strings
+# (green-excess 70 from the p-value task) it changes the GRADE in ~1 of 9 trials
+# (40 vs 42). Given the 42->29 / 43->20 scoring cliff, the robust default is OFF:
+# reliably hit the minimal length (42 at G=70 = 29 pts) with far fewer queries.
+# Set True to ALSO chase 41 (30 pts), at higher query cost/risk.
+BOOL_BOUNDARY_OPT = False
+BOOL_K = 3                                            # number of start tokens to try
+_ncand = 160 if BOOL_BOUNDARY_OPT else 110            # boundary-opt needs a larger candidate pool
 
-_cached = _CACHE.get(("bool", _probe_str))
-if _cached is not None:
-    _API_STATS["cache_hits"] += 1
-    log(f"cached bool response = {_cached} (probe shape already confirmed accepted)")
-else:
-    _raw = get_bool(_probe_str)                        # single raw call -> exact response
-    log(f"raw get_bool response: {_raw}")
-    assert isinstance(_raw, dict) and "wmark_response" in _raw and _raw["wmark_response"] in (0, 1), (
-        "Boolean API did not return a valid 'wmark_response' for a 53-token / 52-distinct-pair "
-        f"probe (got: {_raw}). A gate rejection here ('at least 50 tokens' or 'at least 50 "
-        "distinct consecutive pairs') means the probe shape is wrong -- STOP before the solver.")
-    _cache_put("bool", _probe_str, _raw["wmark_response"])   # cache + reuse on re-runs
-    _API_STATS["new_bool"] += 1                              # account it in the stats
-    log(f"OK: all-distinct probes accepted (wmark_response = {_raw['wmark_response']}) "
-        "-- safe to run the boolean solver.")
-print_quota_usage()
-'''
-
-BOOL_SOLVE = r'''# ---------------- Solve the boolean endpoint (best-of-K starts) -------------
 log("==== boolean endpoint ====", echo=False)
 bool_strings = [tokens_to_array(t["tokens"]).tolist() for t in bool_token_ids]
 if "bool_suffix" in STATE:                            # resume: phase already finished
@@ -646,30 +631,35 @@ if "bool_suffix" in STATE:                            # resume: phase already fi
 else:
     if "bool_base" in STATE:                          # resume base (+ any partial candidates)
         bool_B = STATE["bool_base"]; cand_bl = STATE.get("bool_candidates", [])
-        is_red_bl, cand_bl, bool_B = make_bool_oracle(B=bool_B, gc=cand_bl, n_candidates=160)
+        is_red_bl, cand_bl, bool_B = make_bool_oracle(B=bool_B, gc=cand_bl, n_candidates=_ncand)
         log(f"resumed balanced base + {len(cand_bl)} green-connected candidates from checkpoint")
     else:
-        is_red_bl, cand_bl, bool_B = make_bool_oracle(n_candidates=160)
+        is_red_bl, cand_bl, bool_B = make_bool_oracle(n_candidates=_ncand)
     log(f"balanced base end: {bool_B[-1]} | green-connected candidates: {len(cand_bl)}")
 
-    # Boundary optimisation. The boundary pair (last_token, c1) being RED saves ~2
-    # tokens. With the balanced base we can DIRECTLY test a boundary pair (e, c1) for
-    # any string-end e that is "green-connected" (B_end->e green): is_red_bl(e, c1) is
-    # then valid. So we pick start tokens c1 that are RED after all green-connected
-    # ends (deterministic b=1 there), and also keep some plain starts so the
-    # best-of-K trim still covers any non-green-connected binding string.
-    str_ends = [s[-1] for s in bool_strings]
-    ge = [e for e in str_ends if is_green_connected(bool_B, e)]
-    log(f"green-connected string ends: {len(ge)}/{len(str_ends)} (boundary directly testable on these)")
-    bstarts = []
-    for c in cand_bl:
-        if ge and all(is_red_bl(e, c) for e in ge):      # boundary red after every testable end
-            bstarts.append(c)
-            if len(bstarts) >= 4:
-                break
-    extra = [c for c in cand_bl if c not in bstarts]
-    starts = (bstarts + extra)[:10]                       # boundary-aware first, then best-of-K
-    log(f"using {len(bstarts)} boundary-optimized + {len(starts) - len(bstarts)} fallback start token(s)")
+    if BOOL_BOUNDARY_OPT:
+        # Boundary optimisation. The boundary pair (last_token, c1) being RED saves
+        # ~2 tokens. With the balanced base we can DIRECTLY test (e, c1) for a
+        # string-end e that is "green-connected" (B_end->e green): is_red_bl(e, c1)
+        # is valid there. Pick starts RED after all green-connected ends, keep plain
+        # starts so best-of-K still covers any non-green-connected binding string.
+        str_ends = [s[-1] for s in bool_strings]
+        ge = [e for e in str_ends if is_green_connected(bool_B, e)]
+        log(f"green-connected string ends: {len(ge)}/{len(str_ends)} (boundary testable on these)")
+        bstarts = []
+        for c in cand_bl:
+            if ge and all(is_red_bl(e, c) for e in ge):  # boundary red after every testable end
+                bstarts.append(c)
+                if len(bstarts) >= 4:
+                    break
+        extra = [c for c in cand_bl if c not in bstarts]
+        starts = (bstarts + extra)[:max(BOOL_K, 10)]      # boundary-aware first, then best-of-K
+        log(f"boundary-opt ON: {len(bstarts)} boundary-optimized + "
+            f"{len(starts) - len(bstarts)} fallback start token(s)")
+    else:
+        starts = cand_bl[:BOOL_K]                          # plain starts; no boundary search
+        log(f"boundary-opt OFF: {len(starts)} plain start(s); targeting the minimal "
+            "length (reliably ~42 at green-excess 70 = 29 pts, far fewer queries)")
     YOUR_BOOL_SUFFIX_LIST, Lb = best_suffix(
         is_red_bl, cand_bl, bool_strings, bl, lambda b: b == 0, starts=starts,
         check_lengths=grading_check_lengths("bool"),
@@ -778,7 +768,7 @@ for i, c in enumerate(cells):
 # (f) insert the attack block before the "# Export your solution" markdown
 new_block = [md(ATTACK_INTRO), code(ATTACK_HELPERS),
              md("### Solve the p-value endpoint"), code(PV_SOLVE),
-             md("### Solve the boolean endpoint"), code(BOOL_DIAG), code(BOOL_SOLVE)]
+             md("### Solve the boolean endpoint"), code(BOOL_SOLVE)]
 ins = next(i for i, c in enumerate(cells)
            if c["cell_type"] == "markdown" and src_of(c).startswith("# Export your solution"))
 cells[ins:ins] = new_block
