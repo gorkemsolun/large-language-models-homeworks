@@ -1,0 +1,2 @@
+{"endpoint":"bool","tokens":"0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5","response":{"detail":"You must provide at least 50 tokens for watermark detection."}}
+{"endpoint":"bool","tokens":"0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5,0,1,2,3,4,5","token_count":54,"unique_pair_count":6,"response":{"detail":"The passage is too repetitive. You must provide a sequence with at least 50 distinct consecutive pairs of tokens."}}
