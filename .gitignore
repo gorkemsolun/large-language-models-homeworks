@@ -1,7 +1,8 @@
 *.ilg
 *.ind
 *.out
-*.log
+main.log
+decleration_originality.log
 *.synctex.gz
 *.fdb_latexmk
 *.fls

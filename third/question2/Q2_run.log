@@ -1,0 +1,1988 @@
+[2026-05-31T01:57:44] ================ run start ================
+[2026-05-31T01:57:44] query cache: loaded 0 stored results from Q2_query_cache.jsonl
+[2026-05-31T01:57:44] known pairs: loaded 0 (0 red, 0 green) from Q2_known_pairs.jsonl
+[2026-05-31T01:57:44] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T01:57:56] ==== p-value endpoint ====
+[2026-05-31T01:57:56] raw p-value strings:
+[2026-05-31T01:57:56] q  NEW#1    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:56]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:56] q  NEW#2    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:56]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:56] q  NEW#3    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:56]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:57] q  NEW#4    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:57]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:57] q  NEW#5    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:57]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:57] q  NEW#6    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:57]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:57] q  NEW#7    pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T01:57:57]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T01:57:57] ==> best achievable p-value suffix ~ 40 tokens  (<=41 reachable)
+[2026-05-31T01:57:57] binding strings: 7 (optimizing the boundary pair on these)
+[2026-05-31T01:57:57] q  NEW#8    pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T01:57:57] q  NEW#9    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:57] q  NEW#10   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T01:57:58] q  NEW#11   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:57:58] q  NEW#12   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T01:57:58] q  NEW#13   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:58] q  NEW#14   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:58] q  NEW#15   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:58] q  NEW#16   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:58] q  NEW#17   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:59] q  NEW#18   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:59] q  NEW#19   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:57:59] q  NEW#20   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:57:59] q  NEW#21   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T01:57:59] q  NEW#22   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:57:59] q  NEW#23   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T01:58:00] q  NEW#24   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:00] q  NEW#25   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T01:58:00] q  NEW#26   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:00] q  NEW#27   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T01:58:00] q  NEW#28   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:00] q  NEW#29   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:00] q  NEW#30   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:00] q  NEW#31   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:01] q  NEW#32   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:01] q  NEW#33   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:01] q  NEW#34   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:01] q  NEW#35   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:01] q  NEW#36   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:01] q  NEW#37   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:01] q  NEW#38   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:02] q  NEW#39   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:02] q  NEW#40   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:02] q  NEW#41   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:02] q  NEW#42   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:02] q  NEW#43   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:02] q  NEW#44   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:03] q  NEW#45   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:03] q  NEW#46   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:03] q  NEW#47   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:03] q  NEW#48   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:03] q  NEW#49   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:03] q  NEW#50   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:04] q  NEW#51   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:04] q  NEW#52   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:04] q  NEW#53   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:04] q  NEW#54   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:04] q  NEW#55   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:04] q  NEW#56   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:04] q  NEW#57   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:05] q  NEW#58   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:05] q  NEW#59   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:05] q  NEW#60   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:05] q  NEW#61   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:05] q  NEW#62   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:05] q  NEW#63   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:05] q  NEW#64   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:06] q  NEW#65   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:06] q  NEW#66   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:06] q  NEW#67   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:06] q  NEW#68   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:06] q  NEW#69   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:06] q  NEW#70   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:07] q  NEW#71   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:07] q  NEW#72   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:07] q  NEW#73   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:07] q  NEW#74   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:07] q  NEW#75   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:07] q  NEW#76   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:07] q  NEW#77   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:08] q  NEW#78   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:08] q  NEW#79   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:08] q  NEW#80   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:08] q  NEW#81   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:08] q  NEW#82   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:08] q  NEW#83   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:09] q  NEW#84   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:09] q  NEW#85   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:09] q  NEW#86   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:09] q  NEW#87   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:09] q  NEW#88   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:09] q  NEW#89   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:09] q  NEW#90   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#91   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#92   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#93   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#94   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#95   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:10] q  NEW#96   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:10] q  NEW#97   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T01:58:11] q  NEW#98   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:11] q  NEW#99   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T01:58:11] q  NEW#100  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T01:58:11] STOP: reached pvalue live-query cap (100). Progress is saved in Q2_query_cache.jsonl, Q2_known_pairs.jsonl, and Q2_state.json.
+[2026-05-31T02:00:05] ================ run start ================
+[2026-05-31T02:00:05] query cache: loaded 100 stored results from Q2_query_cache.jsonl
+[2026-05-31T02:00:05] known pairs: loaded 86 (50 red, 36 green) from Q2_known_pairs.jsonl
+[2026-05-31T02:00:05] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T02:00:30] ==== p-value endpoint ====
+[2026-05-31T02:00:30] raw p-value strings:
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:00:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:00:30] ==> best achievable p-value suffix ~ 40 tokens  (<=41 reachable)
+[2026-05-31T02:00:30] binding strings: 7 (optimizing the boundary pair on these)
+[2026-05-31T02:00:30] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:00:30] q  NEW#1    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:30] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:00:31] q  NEW#2    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:31] q  NEW#3    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:31] q  NEW#4    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:31] q  NEW#5    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:31] q  NEW#6    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:31] q  NEW#7    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:31] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:00:31] q  NEW#8    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:31] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:00:31] q  NEW#9    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:32] q  NEW#10   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:32] q  NEW#11   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:32] q  NEW#12   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:32] q  NEW#13   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:32] q  NEW#14   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:32] q  NEW#15   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:33] q  NEW#16   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:33] q  NEW#17   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:33] q  NEW#18   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:33] q  NEW#19   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:33] q  NEW#20   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:33] q  NEW#21   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:33] q  NEW#22   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:34] q  NEW#23   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:34] q  NEW#24   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:34] q  NEW#25   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:34] q  NEW#26   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:34] q  NEW#27   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:34] q  NEW#28   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:35] q  NEW#29   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:35] q  NEW#30   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:35] q  NEW#31   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:35] q  NEW#32   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:35] q  NEW#33   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:35] q  NEW#34   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:35] q  NEW#35   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:36] q  NEW#36   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:36] q  NEW#37   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:36] q  NEW#38   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:36] q  NEW#39   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:36] q  NEW#40   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:36] q  NEW#41   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:36] q  NEW#42   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:37] q  NEW#43   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:37] q  NEW#44   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:37] q  NEW#45   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:37] q  NEW#46   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:37] q  NEW#47   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:37] q  NEW#48   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:37] q  NEW#49   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:37] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:00:38] q  NEW#50   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:38] q  NEW#51   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:38] q  NEW#52   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:38] q  NEW#53   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:38] q  NEW#54   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:38] q  NEW#55   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:38] q  NEW#56   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:38] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:00:39] q  NEW#57   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:39] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:00:39] q  NEW#58   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:39] q  NEW#59   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:39] q  NEW#60   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:39] q  NEW#61   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:39] q  NEW#62   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:39] q  NEW#63   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:40] q  NEW#64   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:40] q  NEW#65   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:40] q  NEW#66   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:40] q  NEW#67   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:40] q  NEW#68   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:40] q  NEW#69   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:40] q  NEW#70   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:41] q  NEW#71   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:41] q  NEW#72   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:41] q  NEW#73   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:41] q  NEW#74   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:41] q  NEW#75   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:41] q  NEW#76   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:41] q  NEW#77   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:42] q  NEW#78   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:42] q  NEW#79   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:42] q  NEW#80   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:42] q  NEW#81   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:42] q  NEW#82   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:42] q  NEW#83   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:42] q  NEW#84   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:42] q  NEW#85   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:43] q  NEW#86   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:43] q  NEW#87   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:43] q  NEW#88   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:43] q  NEW#89   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:43] q  NEW#90   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:43] q  NEW#91   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:44] q  NEW#92   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:44] q  NEW#93   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:44] q  NEW#94   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:44] q  NEW#95   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:44] q  NEW#96   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:44] q  NEW#97   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:44] q  NEW#98   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:45] q  NEW#99   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:45] q  NEW#100  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:45] q  NEW#101  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:45] q  NEW#102  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:45] q  NEW#103  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:45] q  NEW#104  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:45] q  NEW#105  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#106  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#107  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#108  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#109  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#110  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#111  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:46] q  NEW#112  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:47] q  NEW#113  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:47] q  NEW#114  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:47] q  NEW#115  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:47] q  NEW#116  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:47] q  NEW#117  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:47] q  NEW#118  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:47] q  NEW#119  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:48] q  NEW#120  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:48] q  NEW#121  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:48] q  NEW#122  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:48] q  NEW#123  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:48] q  NEW#124  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:48] q  NEW#125  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:48] q  NEW#126  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#127  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#128  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:49] q  NEW#129  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:49] q  NEW#130  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#131  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#132  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#133  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:49] q  NEW#134  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:50] q  NEW#135  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:50] q  NEW#136  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:50] q  NEW#137  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:50] q  NEW#138  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:50] q  NEW#139  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:50] q  NEW#140  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:50] q  NEW#141  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:50] q  NEW#142  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:51] q  NEW#143  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:51] q  NEW#144  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:51] q  NEW#145  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:51] q  NEW#146  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:51] q  NEW#147  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:51] q  NEW#148  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:51] q  NEW#149  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:52] q  NEW#150  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:52] q  NEW#151  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:52] q  NEW#152  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:52] q  NEW#153  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:52] q  NEW#154  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:52] q  NEW#155  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:52] q  NEW#156  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#157  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#158  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#159  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#160  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#161  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:53] q  NEW#162  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:53] q  NEW#163  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:53] q  NEW#164  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:54] q  NEW#165  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:54] q  NEW#166  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:54] q  NEW#167  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:54] q  NEW#168  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:54] q  NEW#169  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:54] q  NEW#170  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:55] q  NEW#171  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:55] q  NEW#172  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:55] q  NEW#173  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:55] q  NEW#174  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:55] q  NEW#175  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:55] q  NEW#176  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:55] q  NEW#177  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:56] q  NEW#178  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:56] q  NEW#179  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:56] q  NEW#180  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:56] q  NEW#181  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:56] q  NEW#182  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:56] q  NEW#183  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:56] q  NEW#184  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:57] q  NEW#185  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:57] q  NEW#186  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:57] q  NEW#187  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:57] q  NEW#188  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:57] q  NEW#189  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:57] q  NEW#190  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:58] q  NEW#191  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:58] q  NEW#192  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:58] q  NEW#193  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:58] q  NEW#194  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:58] q  NEW#195  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:58] q  NEW#196  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:00:58] q  NEW#197  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:58] q  NEW#198  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:59] q  NEW#199  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:00:59] q  NEW#200  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:00:59] STOP: reached pvalue live-query cap (200). Progress is saved in Q2_query_cache.jsonl, Q2_known_pairs.jsonl, and Q2_state.json.
+[2026-05-31T02:09:13] ================ run start ================
+[2026-05-31T02:09:13] query cache: loaded 300 stored results from Q2_query_cache.jsonl
+[2026-05-31T02:09:13] known pairs: loaded 286 (152 red, 134 green) from Q2_known_pairs.jsonl
+[2026-05-31T02:09:13] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T02:09:41] ================ run start ================
+[2026-05-31T02:09:41] query cache: loaded 300 stored results from Q2_query_cache.jsonl
+[2026-05-31T02:09:41] known pairs: loaded 286 (152 red, 134 green) from Q2_known_pairs.jsonl
+[2026-05-31T02:09:41] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T02:10:09] ==== p-value endpoint ====
+[2026-05-31T02:10:09] raw p-value strings:
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:10:09]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:10:09] ==> best achievable p-value suffix ~ 40 tokens  (<=41 reachable)
+[2026-05-31T02:10:09] binding strings: 7 (optimizing the boundary pair on these)
+[2026-05-31T02:10:09] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:10:09] q  NEW#1    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:09] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:10:09] q  NEW#2    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:09] q  NEW#3    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:09] q  NEW#4    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:09] q  NEW#5    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:09] q  NEW#6    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:09] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:10:10] q  NEW#7    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:10] q  NEW#8    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:10] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:10:10] q  NEW#9    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:10] q  NEW#10   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:10] q  NEW#11   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:10] q  NEW#12   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:10] q  NEW#13   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:10] q  NEW#14   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:11] q  NEW#15   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:11] q  NEW#16   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:11] q  NEW#17   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:11] q  NEW#18   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:11] q  NEW#19   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:11] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:10:11] q  NEW#20   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:11] q  NEW#21   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:11] q  NEW#22   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:12] q  NEW#23   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:12] q  NEW#24   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:12] q  NEW#25   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:12] q  NEW#26   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:12] q  NEW#27   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:12] q  NEW#28   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:12] q  NEW#29   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:13] q  NEW#30   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:13] q  NEW#31   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:13] q  NEW#32   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:13] q  NEW#33   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:13] q  NEW#34   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:13] q  NEW#35   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:13] q  NEW#36   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:14] q  NEW#37   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:14] q  NEW#38   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:14] q  NEW#39   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:14] q  NEW#40   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:14] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:10:14] q  NEW#41   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:14] q  NEW#42   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:14] q  NEW#43   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:14] q  NEW#44   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#45   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#46   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#47   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#48   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#49   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#50   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:15] q  NEW#51   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:16] q  NEW#52   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:16] q  NEW#53   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:16] q  NEW#54   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:16] q  NEW#55   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:16] q  NEW#56   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:16] q  NEW#57   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:16] q  NEW#58   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:17] q  NEW#59   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:17] q  NEW#60   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:17] q  NEW#61   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:17] q  NEW#62   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:17] q  NEW#63   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:17] q  NEW#64   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:17] q  NEW#65   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:18] q  NEW#66   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:18] q  NEW#67   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:18] q  NEW#68   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:18] q  NEW#69   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:18] q  NEW#70   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:18] q  NEW#71   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:19] q  NEW#72   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:19] q  NEW#73   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:19] q  NEW#74   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:19] q  NEW#75   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:19] q  NEW#76   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:19] q  NEW#77   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:19] q  NEW#78   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:20] q  NEW#79   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:20] q  NEW#80   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:20] q  NEW#81   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:20] q  NEW#82   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:20] q  NEW#83   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:20] q  NEW#84   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:20] q  NEW#85   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:21] q  NEW#86   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:21] q  NEW#87   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:21] q  NEW#88   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:21] q  NEW#89   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:21] q  NEW#90   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:21] q  NEW#91   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:21] q  NEW#92   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:22] q  NEW#93   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:22] q  NEW#94   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:22] q  NEW#95   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:22] q  NEW#96   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:22] q  NEW#97   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:22] q  NEW#98   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#99   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#100  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#101  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#102  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#103  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:23] q  NEW#104  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:23] q  NEW#105  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:24] q  NEW#106  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:24] q  NEW#107  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:24] q  NEW#108  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:24] q  NEW#109  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:24] q  NEW#110  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:24] q  NEW#111  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:24] q  NEW#112  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:25] q  NEW#113  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:25] q  NEW#114  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:25] q  NEW#115  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:25] q  NEW#116  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:25] q  NEW#117  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:25] q  NEW#118  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:25] q  NEW#119  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:26] q  NEW#120  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:26] q  NEW#121  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:26] q  NEW#122  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:26] q  NEW#123  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:26] q  NEW#124  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:26] q  NEW#125  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:26] q  NEW#126  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:27] q  NEW#127  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:27] q  NEW#128  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:27] q  NEW#129  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:27] q  NEW#130  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:27] q  NEW#131  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:27] q  NEW#132  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:27] q  NEW#133  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:28] q  NEW#134  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:28] q  NEW#135  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:28] q  NEW#136  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:28] q  NEW#137  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:28] q  NEW#138  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:28] q  NEW#139  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:29] q  NEW#140  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:29] q  NEW#141  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:29] q  NEW#142  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:29] q  NEW#143  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:29] q  NEW#144  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:29] q  NEW#145  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:29] q  NEW#146  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:30] q  NEW#147  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:30] q  NEW#148  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:30] q  NEW#149  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:30] q  NEW#150  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:30] q  NEW#151  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:30] q  NEW#152  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:30] q  NEW#153  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:31] q  NEW#154  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:31] q  NEW#155  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:31] q  NEW#156  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:31] q  NEW#157  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:31] q  NEW#158  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:31] q  NEW#159  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:32] q  NEW#160  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:32] q  NEW#161  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:32] q  NEW#162  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:32] q  NEW#163  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:32] q  NEW#164  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:32] q  NEW#165  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:32] q  NEW#166  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:33] q  NEW#167  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:33] q  NEW#168  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:33] q  NEW#169  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:33] q  NEW#170  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:33] q  NEW#171  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:33] q  NEW#172  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:33] q  NEW#173  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:33] q  NEW#174  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:34] q  NEW#175  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:34] q  NEW#176  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:34] q  NEW#177  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:34] q  NEW#178  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:34] q  NEW#179  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:34] q  NEW#180  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#181  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:35] q  NEW#182  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#183  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#184  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#185  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#186  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:35] q  NEW#187  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:36] q  NEW#188  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:10:36] q  NEW#189  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:36] q  NEW#190  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:36] q  NEW#191  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:36] q  NEW#192  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:36] q  NEW#193  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:36] q  NEW#194  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#195  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#196  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#197  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#198  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#199  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:10:37] q  NEW#200  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:10:37] STOP: reached pvalue live-query cap (200). Progress is saved in Q2_query_cache.jsonl, Q2_known_pairs.jsonl, and Q2_state.json.
+[2026-05-31T02:10:57] ================ run start ================
+[2026-05-31T02:10:57] query cache: loaded 500 stored results from Q2_query_cache.jsonl
+[2026-05-31T02:10:57] known pairs: loaded 486 (248 red, 238 green) from Q2_known_pairs.jsonl
+[2026-05-31T02:10:57] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T02:11:06] ==== p-value endpoint ====
+[2026-05-31T02:11:06] raw p-value strings:
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T02:11:06]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T02:11:06] ==> best achievable p-value suffix ~ 40 tokens  (<=41 reachable)
+[2026-05-31T02:11:06] binding strings: 7 (optimizing the boundary pair on these)
+[2026-05-31T02:11:06] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:11:06] q  NEW#1    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:06] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:11:06] q  NEW#2    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:06] q  NEW#3    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:06] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:11:06] q  NEW#4    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:06] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:11:06] q  NEW#5    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:06] q  NEW#6    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:06] q  NEW#7    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#8    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#9    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#10   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#11   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:07] q  NEW#12   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#13   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:07] q  NEW#14   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:08] q  NEW#15   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:08] q  NEW#16   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:08] q  NEW#17   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:08] q  NEW#18   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:08] q  NEW#19   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:08] q  NEW#20   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:08] q  NEW#21   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:09] q  NEW#22   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:09] q  NEW#23   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:09] q  NEW#24   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:09] q  NEW#25   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:09] q  NEW#26   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:09] q  NEW#27   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:09] q  NEW#28   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:10] q  NEW#29   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:10] q  NEW#30   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:10] q  NEW#31   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:10] q  NEW#32   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:10] q  NEW#33   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:10] q  NEW#34   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:10] q  NEW#35   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:11] q  NEW#36   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:11] q  NEW#37   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:11] q  NEW#38   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:11] q  NEW#39   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:11] q  NEW#40   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:11] q  NEW#41   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:11] q  NEW#42   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:11] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:11:12] q  NEW#43   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:12] q  NEW#44   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:12] q  NEW#45   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:12] q  NEW#46   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:12] q  NEW#47   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:12] q  NEW#48   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:12] q  NEW#49   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#50   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#51   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#52   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:13] q  NEW#53   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#54   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#55   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#56   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:13] q  NEW#57   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:14] q  NEW#58   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:14] q  NEW#59   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:14] q  NEW#60   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:14] q  NEW#61   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:14] q  NEW#62   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:14] q  NEW#63   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:14] q  NEW#64   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:15] q  NEW#65   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:15] q  NEW#66   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:15] q  NEW#67   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:15] q  NEW#68   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:15] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T02:11:15] q  NEW#69   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:15] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T02:11:15] q  NEW#70   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:15] q  NEW#71   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:15] q  NEW#72   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:16] q  NEW#73   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:16] q  NEW#74   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:16] q  NEW#75   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:16] q  NEW#76   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:16] q  NEW#77   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:16] q  NEW#78   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:16] q  NEW#79   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:17] q  NEW#80   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:17] q  NEW#81   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:17] q  NEW#82   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:17] q  NEW#83   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:17] q  NEW#84   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:17] q  NEW#85   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:17] q  NEW#86   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:18] q  NEW#87   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:18] q  NEW#88   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:18] q  NEW#89   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:18] q  NEW#90   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:18] q  NEW#91   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:18] q  NEW#92   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:18] q  NEW#93   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:19] q  NEW#94   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:19] q  NEW#95   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:19] q  NEW#96   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:19] q  NEW#97   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:19] q  NEW#98   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:19] q  NEW#99   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:19] q  NEW#100  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:20] q  NEW#101  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:20] q  NEW#102  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:20] q  NEW#103  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:20] q  NEW#104  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:20] q  NEW#105  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:20] q  NEW#106  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:20] q  NEW#107  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:21] q  NEW#108  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:21] q  NEW#109  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:21] q  NEW#110  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:21] q  NEW#111  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:21] q  NEW#112  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:21] q  NEW#113  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:21] q  NEW#114  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:22] q  NEW#115  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:22] q  NEW#116  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:22] q  NEW#117  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:22] q  NEW#118  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:22] q  NEW#119  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:22] q  NEW#120  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:23] q  NEW#121  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:23] q  NEW#122  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:23] q  NEW#123  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:23] q  NEW#124  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:23] q  NEW#125  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:23] q  NEW#126  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:23] q  NEW#127  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:24] q  NEW#128  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:24] q  NEW#129  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:24] q  NEW#130  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:24] q  NEW#131  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:24] q  NEW#132  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:24] q  NEW#133  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:24] q  NEW#134  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#135  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#136  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#137  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#138  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#139  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:25] q  NEW#140  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:25] q  NEW#141  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:26] q  NEW#142  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:26] q  NEW#143  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:26] q  NEW#144  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:26] q  NEW#145  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:26] q  NEW#146  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:26] q  NEW#147  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:26] q  NEW#148  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:26] q  NEW#149  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:27] q  NEW#150  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:27] q  NEW#151  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:27] q  NEW#152  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:27] q  NEW#153  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:27] q  NEW#154  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:27] q  NEW#155  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:27] q  NEW#156  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:27] q  NEW#157  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:28] q  NEW#158  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:28] q  NEW#159  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:28] q  NEW#160  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:28] q  NEW#161  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:28] q  NEW#162  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:28] q  NEW#163  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:29] q  NEW#164  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:29] q  NEW#165  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:29] q  NEW#166  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:29] q  NEW#167  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:29] q  NEW#168  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:29] q  NEW#169  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:29] q  NEW#170  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:30] q  NEW#171  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:30] q  NEW#172  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:30] q  NEW#173  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:30] q  NEW#174  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:30] q  NEW#175  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:30] q  NEW#176  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:30] q  NEW#177  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:31] q  NEW#178  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:31] q  NEW#179  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:31] q  NEW#180  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:31] q  NEW#181  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:31] q  NEW#182  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:31] q  NEW#183  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:32] q  NEW#184  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:32] q  NEW#185  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:32] q  NEW#186  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:32] q  NEW#187  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:32] q  NEW#188  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:32] q  NEW#189  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:32] q  NEW#190  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:32] q  NEW#191  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:33] q  NEW#192  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:33] q  NEW#193  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:33] q  NEW#194  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:33] q  NEW#195  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:33] q  NEW#196  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:33] q  NEW#197  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:34] q  NEW#198  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T02:11:34] q  NEW#199  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T02:11:34] q  NEW#200  pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T02:11:34] STOP: reached pvalue live-query cap (200). Progress is saved in Q2_query_cache.jsonl, Q2_known_pairs.jsonl, and Q2_state.json.
+[2026-05-31T11:59:26] ================ run start ================
+[2026-05-31T11:59:26] query cache: loaded 700 stored results from Q2_query_cache.jsonl
+[2026-05-31T11:59:26] known pairs: loaded 686 (348 red, 338 green) from Q2_known_pairs.jsonl
+[2026-05-31T11:59:26] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T11:59:30] ==== p-value endpoint ====
+[2026-05-31T11:59:30] raw p-value strings:
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] q  cache pvalue ntok= 131 npairs= 130 -> 4.1415271212486005e-10
+[2026-05-31T11:59:30]   red= 30  total=130  green_excess= 70  min L (boundary red)=40
+[2026-05-31T11:59:30] ==> best achievable p-value suffix ~ 40 tokens  (<=41 reachable)
+[2026-05-31T11:59:30] binding strings: 7 (optimizing the boundary pair on these)
+[2026-05-31T11:59:30] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:30] q  NEW#1    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:30] q  NEW#2    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:30] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:30] q  NEW#3    pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:30] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:31] q  NEW#4    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:31] q  NEW#5    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:31] q  NEW#6    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:31] q  NEW#7    pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:31] q  NEW#8    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:31] q  NEW#9    pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:32] q  NEW#10   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:32] q  NEW#11   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:32] q  NEW#12   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:32] q  NEW#13   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:32] q  NEW#14   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:32] q  NEW#15   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:32] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:32] q  NEW#16   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:33] q  NEW#17   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:33] q  NEW#18   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:33] q  NEW#19   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:33] q  NEW#20   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:33] q  NEW#21   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:33] q  NEW#22   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:33] q  NEW#23   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:34] q  NEW#24   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:34] q  NEW#25   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:34] q  NEW#26   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:34] q  NEW#27   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:34] q  NEW#28   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:34] q  NEW#29   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:34] q  NEW#30   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:35] q  NEW#31   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:35] q  NEW#32   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:35] q  NEW#33   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:35] q  NEW#34   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:35] q  NEW#35   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:35] q  NEW#36   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:35] q  NEW#37   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:36] q  NEW#38   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:36] q  NEW#39   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:36] q  NEW#40   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:36] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:36] q  NEW#41   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:36] q  cache pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:36] q  NEW#42   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:36] q  cache pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:36] q  NEW#43   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:36] using 3 boundary-optimized start token(s) (full coverage of 7 binding ends)
+[2026-05-31T11:59:36] q  NEW#44   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:36] q  NEW#45   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:37] q  NEW#46   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:37] q  NEW#47   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:37] q  NEW#48   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:37] q  NEW#49   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:37] q  NEW#50   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:37] q  NEW#51   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:37] q  NEW#52   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:38] q  NEW#53   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:38] q  NEW#54   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:38] q  NEW#55   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:38] q  NEW#56   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:38] q  NEW#57   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:38] q  NEW#58   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:39] q  NEW#59   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:39] q  NEW#60   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:39] q  NEW#61   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:39] q  NEW#62   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:39] q  NEW#63   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:39] q  NEW#64   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:39] q  NEW#65   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:40] q  NEW#66   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:40] q  NEW#67   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:40] q  NEW#68   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:40] q  NEW#69   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:40] q  NEW#70   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:40] q  NEW#71   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:40] q  NEW#72   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:41] q  NEW#73   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:41] q  NEW#74   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:41] q  NEW#75   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:41] q  NEW#76   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:41] q  NEW#77   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:41] q  NEW#78   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:42] q  NEW#79   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:42] q  NEW#80   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:42] q  NEW#81   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:42] q  NEW#82   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:42] q  NEW#83   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:42] q  NEW#84   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:42] q  NEW#85   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:43] q  NEW#86   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:43] q  NEW#87   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:43] q  NEW#88   pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:43] q  NEW#89   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:43] q  NEW#90   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:43] q  NEW#91   pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:44] q  NEW#92   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:44] q  NEW#93   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:44] q  NEW#94   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:44] q  NEW#95   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:44] q  NEW#96   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:44] q  NEW#97   pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:45] q  NEW#98   pvalue ntok=  54 npairs=  53 -> 0.34013977366722514
+[2026-05-31T11:59:45] q  NEW#99   pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:45] q  NEW#100  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:45] q  NEW#101  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:45] q  NEW#102  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:45] q  NEW#103  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:45] q  NEW#104  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:45] q  NEW#105  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:46] q  NEW#106  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:46] q  NEW#107  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:46] q  NEW#108  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:46] q  NEW#109  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:46] q  NEW#110  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:46] q  NEW#111  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:46] q  NEW#112  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:47] q  NEW#113  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:47] q  NEW#114  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:47] q  NEW#115  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:47] q  NEW#116  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:47] q  NEW#117  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:47] q  NEW#118  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:47] q  NEW#119  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:48] q  NEW#120  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:48] q  NEW#121  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:48] q  NEW#122  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:48] q  NEW#123  pvalue ntok= 155 npairs= 154 -> 0.00010495323462278439
+[2026-05-31T11:59:48] q  NEW#124  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:48] q  NEW#125  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:48] q  NEW#126  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:49] q  NEW#127  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:49] q  NEW#128  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:49] q  NEW#129  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:49] q  NEW#130  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:49] q  NEW#131  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:49] q  NEW#132  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:49] q  NEW#133  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:50] q  NEW#134  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:50] q  NEW#135  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:50] q  NEW#136  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:50] q  NEW#137  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:50] q  NEW#138  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:50] q  NEW#139  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:50] q  NEW#140  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:50] q  NEW#141  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:51] q  NEW#142  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:51] q  NEW#143  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:51] q  NEW#144  pvalue ntok= 163 npairs= 162 -> 0.0014152889177300176
+[2026-05-31T11:59:51] q  NEW#145  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:51] q  NEW#146  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:51] q  NEW#147  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:51] q  NEW#148  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:52] q  NEW#149  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:52] q  NEW#150  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:52] q  NEW#151  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:52] q  NEW#152  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:52] q  NEW#153  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:52] q  NEW#154  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:52] q  NEW#155  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:53] q  NEW#156  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:53] q  NEW#157  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:53] q  NEW#158  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:53] q  NEW#159  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:53] q  NEW#160  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:53] q  NEW#161  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:53] q  NEW#162  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:54] q  NEW#163  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:54] q  NEW#164  pvalue ntok=  53 npairs=  52 -> 0.39075564749935665
+[2026-05-31T11:59:54] q  NEW#165  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:54] q  NEW#166  pvalue ntok=  53 npairs=  52 -> 0.5
+[2026-05-31T11:59:54] q  NEW#167  pvalue ntok=  54 npairs=  53 -> 0.4453729004660332
+[2026-05-31T11:59:54] q  NEW#168  pvalue ntok=  54 npairs=  53 -> 0.5546270995339668
+[2026-05-31T11:59:54] q  NEW#169  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#170  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#171  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#172  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#173  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#174  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  NEW#175  pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55]     start 1/3: built 40 -> flips at 40 (trim skipped: outside scoring slope)
+[2026-05-31T11:59:55]     full marks at length 40 (<= 40); stopping start search
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-05-31T11:59:55] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+
+[2026-05-31T11:59:55] P-VALUE SUFFIX LENGTH = 40   per-string p-values: [0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107]
+[2026-05-31T11:59:55] all >= 0.01: True | target <=41: True | full marks <=40: True
+[2026-05-31T11:59:55] this session: 175 new p-value + 0 new bool queries sent; 21 served from cache (875 total stored).
+[2026-05-31T11:59:55]   known pvalue pairs: 409 red, 404 green
+[2026-05-31T11:59:55]   known bool pairs: 0 red, 0 green
+[2026-05-31T22:58:10] ================ run start ================
+[2026-05-31T22:58:10] query cache: loaded 875 stored results from Q2_query_cache.jsonl
+[2026-05-31T22:58:10] checkpoint: resumed run state with keys ['pvalue_suffix']
+[2026-05-31T22:58:10] known pairs: loaded 813 (409 red, 404 green) from Q2_known_pairs.jsonl
+[2026-05-31T22:58:10] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T22:59:30] ================ run start ================
+[2026-05-31T22:59:30] query cache: loaded 875 stored results from Q2_query_cache.jsonl
+[2026-05-31T22:59:30] checkpoint: resumed run state with keys ['pvalue_suffix']
+[2026-05-31T22:59:30] known pairs: loaded 813 (409 red, 404 green) from Q2_known_pairs.jsonl
+[2026-05-31T22:59:30] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T22:59:38] ================ run start ================
+[2026-05-31T22:59:38] query cache: loaded 875 stored results from Q2_query_cache.jsonl
+[2026-05-31T22:59:38] checkpoint: resumed run state with keys ['pvalue_suffix']
+[2026-05-31T22:59:38] known pairs: loaded 813 (409 red, 404 green) from Q2_known_pairs.jsonl
+[2026-05-31T22:59:38] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T22:59:45] ==== boolean endpoint ====
+[2026-05-31T22:59:45] q  NEW#1    bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:46] q  NEW#2    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:46] q  NEW#3    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:46] q  NEW#4    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:46] q  NEW#5    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:47] q  NEW#6    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:47] q  NEW#7    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:47] q  NEW#8    bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:47] q  NEW#9    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:48] q  NEW#10   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:48] q  NEW#11   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:48] q  NEW#12   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:48] q  NEW#13   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:49] q  NEW#14   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:49] q  NEW#15   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:49] q  NEW#16   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:49] q  NEW#17   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:49] q  NEW#18   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:50] q  NEW#19   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:50] q  NEW#20   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:50] q  NEW#21   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:51] q  NEW#22   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:51] q  NEW#23   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:51] q  NEW#24   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:51] q  NEW#25   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:52] q  NEW#26   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:52] q  NEW#27   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:52] q  NEW#28   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:52] q  NEW#29   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:53] q  NEW#30   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:53] q  NEW#31   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:53] q  NEW#32   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:53] q  NEW#33   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:54] q  NEW#34   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:54] q  NEW#35   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:54] q  NEW#36   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:54] q  NEW#37   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:55] q  NEW#38   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:55] q  NEW#39   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:56] q  NEW#40   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:56] q  NEW#41   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:56] q  NEW#42   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:56] q  NEW#43   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:56] q  NEW#44   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:57] q  NEW#45   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:57] q  NEW#46   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:57] q  NEW#47   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:57] q  NEW#48   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:58] q  NEW#49   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:58] q  NEW#50   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T22:59:58] q  NEW#51   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:58] q  NEW#52   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:59] q  NEW#53   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:59] q  NEW#54   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:59] q  NEW#55   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:59] q  NEW#56   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T22:59:59] q  NEW#57   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:00] q  NEW#58   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:00] q  NEW#59   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:00] q  NEW#60   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:01] q  NEW#61   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:01] q  NEW#62   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:02] q  NEW#63   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:02] q  NEW#64   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:02] q  NEW#65   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:02] q  NEW#66   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:03] q  NEW#67   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:03] q  NEW#68   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:03] q  NEW#69   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:04] q  NEW#70   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:04] q  NEW#71   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:04] q  NEW#72   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:05] q  NEW#73   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:05] q  NEW#74   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:05] q  NEW#75   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:05] q  NEW#76   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:06] q  NEW#77   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:06] q  NEW#78   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:06] q  NEW#79   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:06] q  NEW#80   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:07] q  NEW#81   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:07] q  NEW#82   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:07] q  NEW#83   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:07] q  NEW#84   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:08] q  NEW#85   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:08] q  NEW#86   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:08] q  NEW#87   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:09] q  NEW#88   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:09] q  NEW#89   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:09] q  NEW#90   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:09] q  NEW#91   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:10] q  NEW#92   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:10] q  NEW#93   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:10] q  NEW#94   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:10] q  NEW#95   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:11] q  NEW#96   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:11] q  NEW#97   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:11] q  NEW#98   bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:11] q  NEW#99   bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:12] q  NEW#100  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:12] q  NEW#101  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:12] q  NEW#102  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:12] q  NEW#103  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:13] q  NEW#104  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:13] q  NEW#105  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:13] q  NEW#106  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:13] q  NEW#107  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:13] q  NEW#108  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:14] q  NEW#109  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:14] q  NEW#110  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:14] q  NEW#111  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:15] q  NEW#112  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:15] q  NEW#113  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:15] q  NEW#114  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:16] q  NEW#115  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:16] q  NEW#116  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:16] q  NEW#117  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:16] q  NEW#118  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:16] q  NEW#119  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:17] q  NEW#120  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:17] q  NEW#121  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:17] q  NEW#122  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:17] q  NEW#123  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:18] q  NEW#124  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:18] q  NEW#125  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:18] q  NEW#126  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:18] q  NEW#127  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:19] q  NEW#128  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:19] q  NEW#129  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:19] q  NEW#130  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:19] q  NEW#131  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:20] q  NEW#132  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:20] q  NEW#133  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:20] q  NEW#134  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:21] q  NEW#135  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:21] q  NEW#136  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:21] q  NEW#137  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:22] q  NEW#138  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:22] q  NEW#139  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:22] q  NEW#140  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:22] q  NEW#141  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:23] q  NEW#142  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:23] q  NEW#143  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:23] q  NEW#144  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:23] q  NEW#145  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:23] q  NEW#146  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:24] q  NEW#147  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:24] q  NEW#148  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:24] q  NEW#149  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:25] q  NEW#150  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:25] q  NEW#151  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:25] q  NEW#152  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:25] q  NEW#153  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:26] q  NEW#154  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:26] q  NEW#155  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:26] q  NEW#156  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:26] q  NEW#157  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:26] q  NEW#158  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:27] q  NEW#159  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:27] q  NEW#160  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:27] q  NEW#161  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:27] q  NEW#162  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:28] q  NEW#163  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:28] q  NEW#164  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:28] q  NEW#165  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:28] q  NEW#166  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:29] q  NEW#167  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:29] q  NEW#168  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:29] q  NEW#169  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:29] q  NEW#170  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:30] q  NEW#171  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:30] q  NEW#172  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:30] q  NEW#173  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:30] q  NEW#174  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:30] q  NEW#175  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:31] q  NEW#176  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:31] q  NEW#177  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:31] q  NEW#178  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:31] q  NEW#179  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:32] q  NEW#180  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:32] q  NEW#181  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:32] q  NEW#182  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:32] q  NEW#183  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:33] q  NEW#184  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:33] q  NEW#185  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:33] q  NEW#186  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:33] q  NEW#187  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:34] q  NEW#188  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:34] q  NEW#189  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:35] q  NEW#190  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:35] q  NEW#191  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:35] q  NEW#192  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:35] q  NEW#193  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:35] q  NEW#194  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:36] q  NEW#195  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:36] q  NEW#196  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:36] q  NEW#197  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:36] q  NEW#198  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:37] q  NEW#199  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:37] q  NEW#200  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:37] q  NEW#201  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:37] q  NEW#202  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:38] q  NEW#203  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:38] q  NEW#204  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:38] q  NEW#205  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:39] q  NEW#206  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:39] q  NEW#207  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:39] q  NEW#208  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:39] q  NEW#209  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:39] q  NEW#210  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:40] q  NEW#211  bool   ntok=  51 npairs=  50 -> 0.0
+[2026-05-31T23:00:40] q  NEW#212  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:40] q  NEW#213  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:41] q  NEW#214  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:41] q  NEW#215  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:41] q  NEW#216  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:41] q  NEW#217  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:41] q  NEW#218  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:42] q  NEW#219  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:42] q  NEW#220  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:42] q  NEW#221  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:43] q  NEW#222  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:43] q  NEW#223  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:43] q  NEW#224  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:43] q  NEW#225  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:44] q  NEW#226  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:44] q  NEW#227  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:45] q  NEW#228  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:45] q  NEW#229  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:45] q  NEW#230  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:46] q  NEW#231  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:46] q  NEW#232  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:46] q  NEW#233  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:46] q  NEW#234  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:47] q  NEW#235  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:47] q  NEW#236  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:47] q  NEW#237  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:47] q  NEW#238  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:47] q  NEW#239  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:48] q  NEW#240  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:48] q  NEW#241  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:48] q  NEW#242  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:48] q  NEW#243  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:49] q  NEW#244  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:49] q  NEW#245  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:49] q  NEW#246  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:49] q  NEW#247  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:49] q  NEW#248  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:50] q  NEW#249  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:50] q  NEW#250  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:50] q  NEW#251  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:50] q  NEW#252  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:51] q  NEW#253  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:51] q  NEW#254  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:51] q  NEW#255  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:51] q  NEW#256  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:51] q  NEW#257  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:52] q  NEW#258  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:52] q  NEW#259  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:52] q  NEW#260  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:52] q  NEW#261  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:53] q  NEW#262  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:53] q  NEW#263  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:53] q  NEW#264  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:53] q  NEW#265  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:54] q  NEW#266  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:54] q  NEW#267  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:54] q  NEW#268  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:54] q  NEW#269  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:55] q  NEW#270  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:55] q  NEW#271  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:55] q  NEW#272  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:55] q  NEW#273  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:56] q  NEW#274  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:56] q  NEW#275  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:56] q  NEW#276  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:56] q  NEW#277  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:56] q  NEW#278  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:57] q  NEW#279  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:57] q  NEW#280  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:57] q  NEW#281  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:58] q  NEW#282  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:58] q  NEW#283  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:58] q  NEW#284  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:58] q  NEW#285  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:58] q  NEW#286  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:59] q  NEW#287  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:00:59] q  NEW#288  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:00:59] q  NEW#289  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:00] q  NEW#290  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:00] q  NEW#291  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:00] q  NEW#292  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:00] q  NEW#293  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:01] q  NEW#294  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:01] q  NEW#295  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:01] q  NEW#296  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:02] q  NEW#297  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:02] q  NEW#298  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:02] q  NEW#299  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:03] q  NEW#300  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:03] q  NEW#301  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:03] q  NEW#302  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:03] q  NEW#303  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:04] q  NEW#304  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:04] q  NEW#305  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:04] q  NEW#306  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:04] q  NEW#307  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:05] q  NEW#308  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:05] q  NEW#309  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:05] q  NEW#310  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:06] q  NEW#311  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:06] q  NEW#312  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:06] q  NEW#313  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:07] q  NEW#314  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:07] q  NEW#315  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:07] q  NEW#316  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:07] q  NEW#317  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:08] q  NEW#318  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:08] q  NEW#319  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:08] q  NEW#320  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:09] q  NEW#321  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:09] q  NEW#322  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:09] q  NEW#323  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:09] q  NEW#324  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:09] q  NEW#325  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:10] q  NEW#326  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:10] q  NEW#327  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:10] q  NEW#328  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:10] q  NEW#329  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:11] q  NEW#330  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:11] q  NEW#331  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:11] q  NEW#332  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:11] q  NEW#333  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:12] q  NEW#334  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:12] q  NEW#335  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:12] q  NEW#336  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:12] q  NEW#337  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:13] q  NEW#338  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:13] q  NEW#339  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:13] q  NEW#340  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:14] q  NEW#341  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:14] q  NEW#342  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:14] q  NEW#343  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:14] q  NEW#344  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:14] q  NEW#345  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:15] q  NEW#346  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:15] q  NEW#347  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:15] q  NEW#348  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:15] q  NEW#349  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:16] q  NEW#350  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:16] q  NEW#351  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:16] q  NEW#352  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:16] q  NEW#353  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:16] q  NEW#354  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:17] q  NEW#355  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:17] q  NEW#356  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:17] q  NEW#357  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:17] q  NEW#358  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:18] q  NEW#359  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:18] q  NEW#360  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:18] q  NEW#361  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:18] q  NEW#362  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:19] q  NEW#363  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:19] q  NEW#364  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:19] q  NEW#365  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:19] q  NEW#366  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:19] q  NEW#367  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:20] q  NEW#368  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:20] q  NEW#369  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:20] q  NEW#370  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:21] q  NEW#371  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:21] q  NEW#372  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:21] q  NEW#373  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:21] q  NEW#374  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:22] q  NEW#375  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:22] q  NEW#376  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:22] q  NEW#377  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:22] q  NEW#378  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:23] q  NEW#379  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:23] q  NEW#380  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:23] q  NEW#381  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:23] q  NEW#382  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:24] q  NEW#383  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:24] q  NEW#384  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:24] q  NEW#385  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:24] q  NEW#386  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:25] q  NEW#387  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:25] q  NEW#388  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:25] q  NEW#389  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:25] q  NEW#390  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:25] q  NEW#391  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:26] q  NEW#392  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:26] q  NEW#393  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:26] q  NEW#394  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:27] q  NEW#395  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:27] q  NEW#396  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:27] q  NEW#397  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:28] q  NEW#398  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:28] q  NEW#399  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:28] q  NEW#400  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:28] q  NEW#401  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:29] q  NEW#402  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:29] q  NEW#403  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:29] q  NEW#404  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:30] q  NEW#405  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:30] q  NEW#406  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:30] q  NEW#407  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:30] q  NEW#408  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:31] q  NEW#409  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:31] q  NEW#410  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:31] q  NEW#411  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:31] q  NEW#412  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:32] q  NEW#413  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:32] q  NEW#414  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:32] q  NEW#415  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:32] q  NEW#416  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:33] q  NEW#417  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:33] q  NEW#418  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:33] q  NEW#419  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:34] q  NEW#420  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:34] q  NEW#421  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:34] q  NEW#422  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:34] q  NEW#423  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:35] q  NEW#424  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:35] q  NEW#425  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:35] q  NEW#426  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:35] q  NEW#427  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:36] q  NEW#428  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:36] q  NEW#429  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:36] q  NEW#430  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:36] q  NEW#431  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:36] q  NEW#432  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:37] q  NEW#433  bool   ntok=  52 npairs=  51 -> 0.0
+[2026-05-31T23:01:37] q  NEW#434  bool   ntok=  52 npairs=  51 -> 1.0
+[2026-05-31T23:01:37] balanced base end: 21690 | green-connected candidates: 110
+[2026-05-31T23:01:37] boundary-opt OFF: 3 plain start(s); targeting the minimal length (reliably ~42 at green-excess 70 = 29 pts, far fewer queries)
+[2026-05-31T23:01:37] q  NEW#435  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:38] q  NEW#436  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:38] q  NEW#437  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:38] q  NEW#438  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:38] q  NEW#439  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:39] q  NEW#440  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:39] q  NEW#441  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:39] q  NEW#442  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:39] q  NEW#443  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:39] q  NEW#444  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:40] q  NEW#445  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:40] q  NEW#446  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:40] q  NEW#447  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:40] q  NEW#448  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:40] q  NEW#449  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:41] q  NEW#450  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:41] q  NEW#451  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:41] q  NEW#452  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:41] q  NEW#453  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:42] q  NEW#454  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:42] q  NEW#455  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:42] q  NEW#456  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:42] q  NEW#457  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:43] q  NEW#458  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:43] q  NEW#459  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:43] q  NEW#460  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:43] q  NEW#461  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:44] q  NEW#462  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:44] q  NEW#463  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:44] q  NEW#464  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:44] q  NEW#465  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:45] q  NEW#466  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:45] q  NEW#467  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:45] q  NEW#468  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:45] q  NEW#469  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:46] q  NEW#470  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:46] q  NEW#471  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:46] q  NEW#472  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:46] q  NEW#473  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:47] q  NEW#474  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:47] q  NEW#475  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:47] q  NEW#476  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:47] q  NEW#477  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:48] q  NEW#478  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:48] q  NEW#479  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:48] q  NEW#480  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:48] q  NEW#481  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:49] q  NEW#482  bool   ntok= 155 npairs= 154 -> 1.0
+[2026-05-31T23:01:49] q  NEW#483  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:49] q  NEW#484  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:49] q  NEW#485  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:49] q  NEW#486  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:50] q  NEW#487  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:50] q  NEW#488  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:50] q  NEW#489  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:50] q  NEW#490  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:51] q  NEW#491  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:51] q  NEW#492  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:51] q  NEW#493  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:52] q  NEW#494  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:52] q  NEW#495  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:52] q  NEW#496  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:52] q  NEW#497  bool   ntok= 163 npairs= 162 -> 1.0
+[2026-05-31T23:01:52] q  NEW#498  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:53] q  NEW#499  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:01:53] q  NEW#500  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:01:53] STOP: reached bool live-query cap (500). Progress is saved in Q2_query_cache.jsonl, Q2_known_pairs.jsonl, and Q2_state.json.
+[2026-05-31T23:13:27] ================ run start ================
+[2026-05-31T23:13:27] query cache: loaded 1375 stored results from Q2_query_cache.jsonl
+[2026-05-31T23:13:27] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_partial', 'pvalue_suffix']
+[2026-05-31T23:13:27] known pairs: loaded 1100 (554 red, 546 green) from Q2_known_pairs.jsonl
+[2026-05-31T23:13:27] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-05-31T23:13:48] ==== boolean endpoint ====
+[2026-05-31T23:13:48] resumed balanced base + 110 green-connected candidates from checkpoint
+[2026-05-31T23:13:48] balanced base end: 21690 | green-connected candidates: 110
+[2026-05-31T23:13:48] boundary-opt OFF: 3 plain start(s); targeting the minimal length (reliably ~42 at green-excess 70 = 29 pts, far fewer queries)
+[2026-05-31T23:13:48]     resumed partial bool chain at length 33
+[2026-05-31T23:13:48] q  NEW#1    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:48] q  NEW#2    bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:48] q  NEW#3    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:49] q  NEW#4    bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:49] q  NEW#5    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:49] q  NEW#6    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:50] q  NEW#7    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:50] q  NEW#8    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:50] q  NEW#9    bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:50] q  NEW#10   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:50] q  NEW#11   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:51] q  NEW#12   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:51] q  NEW#13   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:51] q  NEW#14   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:51] q  NEW#15   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:52] q  NEW#16   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:52] q  NEW#17   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:52] q  NEW#18   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:52] q  NEW#19   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:53] q  NEW#20   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:53] q  NEW#21   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:53] q  NEW#22   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:53] q  NEW#23   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-05-31T23:13:54] q  NEW#24   bool   ntok= 171 npairs= 170 -> 1.0
+[2026-05-31T23:13:54] q  NEW#25   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:54] q  NEW#26   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:55] q  NEW#27   bool   ntok= 172 npairs= 171 -> 0.0
+[2026-05-31T23:13:55] q  NEW#28   bool   ntok= 172 npairs= 171 -> 1.0
+[2026-05-31T23:13:56] q  NEW#29   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:56] q  NEW#30   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:56] q  NEW#31   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:56] q  NEW#32   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:57] q  NEW#33   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:57] q  NEW#34   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:57] q  NEW#35   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:58] q  NEW#36   bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:13:58]     start 1/3: built 42 -> flips at 42 (trim skipped: outside scoring slope)
+[2026-05-31T23:13:58] q  NEW#37   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:58] q  NEW#38   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:58] q  NEW#39   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:58] q  NEW#40   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:59] q  NEW#41   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:59] q  NEW#42   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:13:59] q  NEW#43   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:13:59] q  NEW#44   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:00] q  NEW#45   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:00] q  NEW#46   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:01] q  NEW#47   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:01] q  NEW#48   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:01] q  NEW#49   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:01] q  NEW#50   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:01] q  NEW#51   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:02] q  NEW#52   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:02] q  NEW#53   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:02] q  NEW#54   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:02] q  NEW#55   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:02] q  NEW#56   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:03] q  NEW#57   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:03] q  NEW#58   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:03] q  NEW#59   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:03] q  NEW#60   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:03] q  NEW#61   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:04] q  NEW#62   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:04] q  NEW#63   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:04] q  NEW#64   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:05] q  NEW#65   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:05] q  NEW#66   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:05] q  NEW#67   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:05] q  NEW#68   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:06] q  NEW#69   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:06] q  NEW#70   bool   ntok= 155 npairs= 154 -> 1.0
+[2026-05-31T23:14:06] q  NEW#71   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:06] q  NEW#72   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:06] q  NEW#73   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:07] q  NEW#74   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:07] q  NEW#75   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:07] q  NEW#76   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:07] q  NEW#77   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:08] q  NEW#78   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:08] q  NEW#79   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:08] q  NEW#80   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:08] q  NEW#81   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:08] q  NEW#82   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:09] q  NEW#83   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:09] q  NEW#84   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:09] q  NEW#85   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:09] q  NEW#86   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:10] q  NEW#87   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:10] q  NEW#88   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:10] q  NEW#89   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:11] q  NEW#90   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:11] q  NEW#91   bool   ntok= 163 npairs= 162 -> 1.0
+[2026-05-31T23:14:11] q  NEW#92   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:11] q  NEW#93   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:11] q  NEW#94   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:12] q  NEW#95   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:12] q  NEW#96   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:12] q  NEW#97   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:13] q  NEW#98   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:13] q  NEW#99   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:13] q  NEW#100  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:13] q  NEW#101  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:14] q  NEW#102  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:14] q  NEW#103  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:14] q  NEW#104  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:14] q  NEW#105  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:15] q  NEW#106  bool   ntok= 171 npairs= 170 -> 0.0
+[2026-05-31T23:14:15] q  NEW#107  bool   ntok= 171 npairs= 170 -> 1.0
+[2026-05-31T23:14:15] q  NEW#108  bool   ntok=  53 npairs=  52 -> 1.0
+[2026-05-31T23:14:16] q  NEW#109  bool   ntok= 172 npairs= 171 -> 0.0
+[2026-05-31T23:14:16] q  NEW#110  bool   ntok= 172 npairs= 171 -> 1.0
+[2026-05-31T23:14:16] q  NEW#111  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:16] q  NEW#112  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:17] q  NEW#113  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:17] q  NEW#114  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:17] q  NEW#115  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:18] q  NEW#116  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:18] q  NEW#117  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:18] q  NEW#118  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:18]     start 2/3: built 42 -> flips at 42 (trim skipped: outside scoring slope)
+[2026-05-31T23:14:18] q  NEW#119  bool   ntok=  53 npairs=  52 -> 0.0
+[2026-05-31T23:14:19] q  NEW#120  bool   ntok= 155 npairs= 154 -> 1.0
+[2026-05-31T23:14:19] q  NEW#121  bool   ntok= 163 npairs= 162 -> 1.0
+[2026-05-31T23:14:19] q  NEW#122  bool   ntok= 171 npairs= 170 -> 1.0
+[2026-05-31T23:14:20] q  NEW#123  bool   ntok= 172 npairs= 171 -> 1.0
+[2026-05-31T23:14:20] q  NEW#124  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:20] q  NEW#125  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:21] q  NEW#126  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:21] q  NEW#127  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:21] q  NEW#128  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  NEW#129  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  NEW#130  bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22]     start 3/3: built 42 -> flips at 42 (trim skipped: outside scoring slope)
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+[2026-05-31T23:14:22] q  cache bool   ntok= 173 npairs= 172 -> 0.0
+
+[2026-05-31T23:14:22] BOOL SUFFIX LENGTH = 42   per-string bool: [0, 0, 0, 0, 0, 0, 0]
+[2026-05-31T23:14:22] all 0: True | target <=42: True | full marks <=41: False
+[2026-05-31T23:14:22] this session: 0 new p-value + 130 new bool queries sent; 7 served from cache (1505 total stored).
+[2026-05-31T23:14:22]   known pvalue pairs: 409 red, 404 green
+[2026-05-31T23:14:22]   known bool pairs: 187 red, 195 green
+[2026-06-01T18:44:28] ================ run start ================
+[2026-06-01T18:44:28] query cache: loaded 1505 stored results from Q2_query_cache.jsonl
+[2026-06-01T18:44:28] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_suffix', 'pvalue_suffix']
+[2026-06-01T18:44:28] known pairs: loaded 1195 (596 red, 599 green) from Q2_known_pairs.jsonl
+[2026-06-01T18:44:28] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-06-01T18:44:41] ==== chase 40-token bool suffix ====
+[2026-06-01T18:44:42] q  NEW#1    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-06-01T18:44:42] q  NEW#2    bool   ntok=  52 npairs=  51 -> 1.0
+[2026-06-01T18:44:42] q  NEW#3    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-06-01T18:44:42] q  NEW#4    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-06-01T18:44:42] q  NEW#5    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-06-01T18:44:42] q  NEW#6    bool   ntok=  52 npairs=  51 -> 1.0
+[2026-06-01T18:44:42] q  NEW#7    bool   ntok=  52 npairs=  51 -> 0.0
+[2026-06-01T18:44:42] green-connected ends: 2/7 (boundary verifiable on these; rest via real strings)
+[2026-06-01T18:44:43] q  NEW#8    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#9    bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#10   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#11   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#12   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#13   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:43] q  NEW#14   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:44] q  NEW#15   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:44] q  NEW#16   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:44] q  NEW#17   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:44] q  NEW#18   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:44] q  NEW#19   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:44] q  NEW#20   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:44] q  NEW#21   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:45] q  NEW#22   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:45] q  NEW#23   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:45] q  NEW#24   bool   ntok=  53 npairs=  52 -> 1.0
+[2026-06-01T18:44:45] q  NEW#25   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:45] q  NEW#26   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:45] q  NEW#27   bool   ntok=  53 npairs=  52 -> 0.0
+[2026-06-01T18:44:45] q  NEW#28   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#29   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#30   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#31   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#32   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#33   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  NEW#34   bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] FOUND a 40-token bool suffix -> bool 30/30 (Q2 45/45). 42 kept as STATE['bool_suffix_42'].
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:44:46] BOOL SUFFIX LENGTH = 40 | per-string bool: [0, 0, 0, 0, 0, 0, 0] | all 0: True | full marks <=41: True
+[2026-06-01T18:44:46] this session: 0 new p-value + 34 new bool queries sent; 7 served from cache (1539 total stored).
+[2026-06-01T18:44:46]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T18:44:46]   known bool pairs: 199 red, 210 green
+[2026-06-01T18:58:47] ================ run start ================
+[2026-06-01T18:58:47] query cache: loaded 1539 stored results from Q2_query_cache.jsonl
+[2026-06-01T18:58:47] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_suffix', 'bool_suffix_42', 'pvalue_suffix']
+[2026-06-01T18:58:47] known pairs: loaded 1222 (608 red, 614 green) from Q2_known_pairs.jsonl
+[2026-06-01T18:58:47] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-06-01T18:58:47] ==== p-value endpoint ====
+[2026-06-01T18:58:47] resumed p-value suffix from checkpoint (length 40)
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+
+[2026-06-01T18:58:47] P-VALUE SUFFIX LENGTH = 40   per-string p-values: [0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107]
+[2026-06-01T18:58:47] all >= 0.01: True | target <=41: True | full marks <=40: True
+[2026-06-01T18:58:47] this session: 0 new p-value + 0 new bool queries sent; 7 served from cache (1539 total stored).
+[2026-06-01T18:58:47]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T18:58:47]   known bool pairs: 199 red, 210 green
+[2026-06-01T18:58:47] ==== boolean endpoint ====
+[2026-06-01T18:58:47] resumed bool suffix from checkpoint (length 40)
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+
+[2026-06-01T18:58:47] BOOL SUFFIX LENGTH = 40   per-string bool: [0, 0, 0, 0, 0, 0, 0]
+[2026-06-01T18:58:47] all 0: True | target <=42: True | full marks <=41: True
+[2026-06-01T18:58:47] this session: 0 new p-value + 0 new bool queries sent; 14 served from cache (1539 total stored).
+[2026-06-01T18:58:47]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T18:58:47]   known bool pairs: 199 red, 210 green
+[2026-06-01T18:58:47] chase-40 skipped (already <=41, no bool base yet, or CHASE_40=False).
+[2026-06-01T18:58:47] saving solution files to: /Users/gorkemkadirsolun/Library/CloudStorage/GoogleDrive-gorkemkadirsolun@gmail.com/My Drive/Ders_Course/Large_Language_Models/large-language-models-homeworks/third/question2/llm_assignment_3_submission-25-936-154
+[2026-06-01T18:58:47] pvalue suffix length: 40 | bool suffix length: 40
+[2026-06-01T18:58:47] token-id range OK: pvalue [1879, 50132], bool [1595, 48046]
+[2026-06-01T18:58:47] === p-value suffix vs all 7 strings (need p >= 0.01) ===
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 1/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 2/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 3/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 4/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 5/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 6/7: p = 0.0107   OK
+[2026-06-01T18:58:47] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T18:58:47]   string 7/7: p = 0.0107   OK
+
+[2026-06-01T18:58:47] === bool suffix vs all 7 strings (need bool == 0) ===
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 1/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 2/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 3/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 4/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 5/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 6/7: bool = 0   OK
+[2026-06-01T18:58:47] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T18:58:47]   string 7/7: bool = 0   OK
+[2026-06-01T18:58:47] this session: 0 new p-value + 0 new bool queries sent; 28 served from cache (1539 total stored).
+[2026-06-01T22:33:57] ================ run start ================
+[2026-06-01T22:33:57] query cache: loaded 1539 stored results from Q2_query_cache.jsonl
+[2026-06-01T22:33:57] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_suffix', 'bool_suffix_42', 'pvalue_suffix']
+[2026-06-01T22:33:57] known pairs: loaded 1222 (608 red, 614 green) from Q2_known_pairs.jsonl
+[2026-06-01T22:33:57] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-06-01T22:33:57] ==== p-value endpoint ====
+[2026-06-01T22:33:57] resumed p-value suffix from checkpoint (length 40)
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+
+[2026-06-01T22:33:57] P-VALUE SUFFIX LENGTH = 40   per-string p-values: [0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107]
+[2026-06-01T22:33:57] all >= 0.01: True | target <=41: True | full marks <=40: True
+[2026-06-01T22:33:57] this session: 0 new p-value + 0 new bool queries sent; 7 served from cache (1539 total stored).
+[2026-06-01T22:33:57]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T22:33:57]   known bool pairs: 199 red, 210 green
+[2026-06-01T22:33:57] ==== boolean endpoint ====
+[2026-06-01T22:33:57] resumed bool suffix from checkpoint (length 40)
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+
+[2026-06-01T22:33:57] BOOL SUFFIX LENGTH = 40   per-string bool: [0, 0, 0, 0, 0, 0, 0]
+[2026-06-01T22:33:57] all 0: True | target <=42: True | full marks <=41: True
+[2026-06-01T22:33:57] this session: 0 new p-value + 0 new bool queries sent; 14 served from cache (1539 total stored).
+[2026-06-01T22:33:57]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T22:33:57]   known bool pairs: 199 red, 210 green
+[2026-06-01T22:33:57] saving solution files to: /Users/gorkemkadirsolun/Library/CloudStorage/GoogleDrive-gorkemkadirsolun@gmail.com/My Drive/Ders_Course/Large_Language_Models/large-language-models-homeworks/third/question2/llm_assignment_3_submission-25-936-154
+[2026-06-01T22:33:57] pvalue suffix length: 40 | bool suffix length: 40
+[2026-06-01T22:33:57] token-id range OK: pvalue [1879, 50132], bool [1595, 48046]
+[2026-06-01T22:33:57] === p-value suffix vs all 7 strings (need p >= 0.01) ===
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 1/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 2/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 3/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 4/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 5/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 6/7: p = 0.0107   OK
+[2026-06-01T22:33:57] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-01T22:33:57]   string 7/7: p = 0.0107   OK
+
+[2026-06-01T22:33:57] === bool suffix vs all 7 strings (need bool == 0) ===
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 1/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 2/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 3/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 4/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 5/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 6/7: bool = 0   OK
+[2026-06-01T22:33:57] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:33:57]   string 7/7: bool = 0   OK
+[2026-06-01T22:33:57] this session: 0 new p-value + 0 new bool queries sent; 28 served from cache (1539 total stored).
+[2026-06-01T22:46:22] ==== boolean endpoint ====
+[2026-06-01T22:46:22] resumed bool suffix from checkpoint (length 40)
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-01T22:46:22] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+
+[2026-06-01T22:46:22] BOOL SUFFIX LENGTH = 40   per-string bool: [0, 0, 0, 0, 0, 0, 0]
+[2026-06-01T22:46:22] all 0: True | target <=42: True | full marks <=41: True
+[2026-06-01T22:46:22] this session: 0 new p-value + 0 new bool queries sent; 35 served from cache (1539 total stored).
+[2026-06-01T22:46:22]   known pvalue pairs: 409 red, 404 green
+[2026-06-01T22:46:22]   known bool pairs: 199 red, 210 green
+[2026-06-01T23:29:23] ================ run start ================
+[2026-06-01T23:29:23] query cache: loaded 1539 stored results from Q2_query_cache.jsonl
+[2026-06-01T23:29:23] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_suffix', 'bool_suffix_42', 'pvalue_suffix']
+[2026-06-01T23:29:23] known pairs: loaded 1222 (608 red, 614 green) from Q2_known_pairs.jsonl
+[2026-06-01T23:29:23] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-06-02T00:35:51] ================ run start ================
+[2026-06-02T00:35:52] query cache: loaded 1532 stored results from Q2_query_cache.jsonl
+[2026-06-02T00:35:52] checkpoint: resumed run state with keys ['bool_base', 'bool_candidates', 'bool_suffix', 'bool_suffix_42', 'pvalue_suffix']
+[2026-06-02T00:35:52] known pairs: loaded 1222 (608 red, 614 green) from Q2_known_pairs.jsonl
+[2026-06-02T00:35:52] free token pool size = 49187 (excluded 1090 string tokens)
+[2026-06-02T00:35:52] ==== p-value endpoint ====
+[2026-06-02T00:35:52] resumed p-value suffix from checkpoint (length 40)
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:52] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+
+[2026-06-02T00:35:52] P-VALUE SUFFIX LENGTH = 40   per-string p-values: [0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107, 0.0107]
+[2026-06-02T00:35:52] all >= 0.01: True | target <=41: True | full marks <=40: True
+[2026-06-02T00:35:52] this session: 0 new p-value + 0 new bool queries sent 7 served from cache (1532 total stored).
+[2026-06-02T00:35:52]   known pvalue pairs: 409 red, 404 green
+[2026-06-02T00:35:52]   known bool pairs: 199 red, 210 green
+[2026-06-02T00:35:52] ==== boolean endpoint ====
+[2026-06-02T00:35:52] resumed bool suffix from checkpoint (length 40)
+[2026-06-02T00:35:52] q  NEW#1    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:52] q  NEW#2    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:52] q  NEW#3    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:52] q  NEW#4    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53] q  NEW#5    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53] q  NEW#6    bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53] q  NEW#7    bool   ntok= 171 npairs= 170 -> 0.0
+
+[2026-06-02T00:35:53] BOOL SUFFIX LENGTH = 40   per-string bool: [0, 0, 0, 0, 0, 0, 0]
+[2026-06-02T00:35:53] all 0: True | target <=42: True | full marks <=41: True
+[2026-06-02T00:35:53] this session: 0 new p-value + 7 new bool queries sent 7 served from cache (1539 total stored).
+[2026-06-02T00:35:53]   known pvalue pairs: 409 red, 404 green
+[2026-06-02T00:35:53]   known bool pairs: 199 red, 210 green
+[2026-06-02T00:35:53] saving solution files to: /Users/gorkemkadirsolun/Library/CloudStorage/GoogleDrive-gorkemkadirsolun@gmail.com/My Drive/Ders_Course/Large_Language_Models/large-language-models-homeworks/third/question2/llm_assignment_3_submission-25-936-154
+[2026-06-02T00:35:53] pvalue suffix length: 40 | bool suffix length: 40
+[2026-06-02T00:35:53] token-id range OK: pvalue [1879, 50132], bool [1595, 48046]
+[2026-06-02T00:35:53] === p-value suffix vs all 7 strings (need p >= 0.01) ===
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 1/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 2/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 3/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 4/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 5/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 6/7: p = 0.0107   OK
+[2026-06-02T00:35:53] q  cache pvalue ntok= 171 npairs= 170 -> 0.0106987843484595
+[2026-06-02T00:35:53]   string 7/7: p = 0.0107   OK
+
+[2026-06-02T00:35:53] === bool suffix vs all 7 strings (need bool == 0) ===
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 1/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 2/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 3/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 4/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 5/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 6/7: bool = 0   OK
+[2026-06-02T00:35:53] q  cache bool   ntok= 171 npairs= 170 -> 0.0
+[2026-06-02T00:35:53]   string 7/7: bool = 0   OK
+[2026-06-02T00:35:53] this session: 0 new p-value + 7 new bool queries sent 21 served from cache (1539 total stored).
